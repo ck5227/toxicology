@@ -1,0 +1,2154 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>臨床毒物學精要 — 中毒症候群、解毒劑與臨床陷阱快速查詢</title>
+<meta name="description" content="臨床毒物學快速參考：中毒症候群辨識、農藥／藥物／毒品／工業氣體／腐蝕性物質中毒之機轉、臨床表現、解毒劑、處置動向與臨床陷阱，附解毒劑對照、腸胃道除污流程與血液透析適應症。">
+<meta name="author" content="潘麒亘 醫師">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ck5227.github.io/toxicology/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="臨床毒物學精要">
+<meta property="og:title" content="臨床毒物學精要">
+<meta property="og:description" content="中毒症候群、解毒劑、處置動向與臨床陷阱快速查詢。">
+<meta property="og:url" content="https://ck5227.github.io/toxicology/">
+<meta property="og:locale" content="zh_TW">
+<meta name="twitter:card" content="summary">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "臨床毒物學精要",
+  "url": "https://ck5227.github.io/toxicology/",
+  "inLanguage": "zh-Hant",
+  "description": "臨床毒物學快速參考：中毒症候群辨識、各類中毒之機轉、臨床表現、解毒劑、處置動向與臨床陷阱。",
+  "dateModified": "2026-08-31",
+  "author": {
+    "@type": "Person",
+    "name": "潘麒亘",
+    "jobTitle": "毒物及急診專科醫師",
+    "affiliation": {
+      "@type": "MedicalOrganization",
+      "name": "中國醫藥大學附設醫院 急診部"
+    }
+  },
+  "audience": {
+    "@type": "MedicalAudience",
+    "audienceType": "Physician"
+  }
+}
+</script>
+
+<!-- Tailwind Play CDN：正式化後建議改為預先編譯的 assets/style.css -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!--
+  若日後要加回圖表，取消下面這行的註解（務必鎖定版本，勿用不指定版本的網址）：
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+    /* 不依賴 Tailwind 產生 .hidden：JS 會動態套用這個 class，
+       若哪天 Tailwind CDN 沒掃到它，搜尋功能會無聲失效。 */
+    .hidden { display: none !important; }
+
+    body {
+        font-family: 'Noto Sans TC', sans-serif;
+        background-color: #f0f4f8;
+    }
+    .kpi-card {
+        background-color: #264653;
+        color: #ffffff;
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .kpi-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #e9c46a;
+        line-height: 1.2;
+    }
+    .kpi-label {
+        font-size: 0.95rem;
+        margin-top: 0.5rem;
+        color: #f0f4f8;
+    }
+    .flowchart-node {
+        border: 2px solid #2a9d8f;
+        background-color: #ffffff;
+        color: #264653;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .flowchart-node:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+    .flowchart-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 4rem;
+        font-size: 2rem;
+        color: #2a9d8f;
+    }
+    .list-item-label {
+        font-weight: 600;
+        color: #4a5568;
+        margin-right: 0.5rem;
+    }
+    .modal-overlay { background-color: rgba(0, 0, 0, 0.5); }
+    .prose h4 {
+        font-size: 1.125rem;
+        font-weight: 700;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        color: #264653;
+    }
+    .prose ul { list-style-type: disc; padding-left: 1.5rem; }
+    .prose li { margin-bottom: 0.25rem; }
+    .disposition-box {
+        margin-top: 1rem;
+        padding: 0.75rem;
+        background-color: #ebf8ff;
+        border-left: 4px solid #4299e1;
+        color: #2c5282;
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .pitfall-box {
+        margin-top: 0.5rem;
+        padding: 0.75rem;
+        background-color: #fffbeb;
+        border-left: 4px solid #f59e0b;
+        color: #78350f;
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .corrosive-note {
+        margin-top: 0.5rem;
+        padding: 0.75rem;
+        background-color: #fee2e2;
+        border-left: 4px solid #ef4444;
+        color: #991b1b;
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .detail-btn {
+        margin-top: 0.75rem;
+        width: 100%;
+        padding: 0.5rem 1rem;
+        background-color: #264653;
+        color: #e9c46a;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        transition: background-color 0.2s;
+    }
+    .detail-btn:hover { background-color: #1d3a47; }
+    #backToTopBtn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: none;
+        z-index: 100;
+    }
+</style>
+</head>
+<body class="text-gray-800">
+
+<header class="bg-[#264653] text-white p-6 shadow-lg">
+    <div class="container mx-auto text-center">
+        <h1 class="text-3xl md:text-4xl font-bold text-[#e9c46a]">臨床毒物學精要</h1>
+        <p class="mt-2 text-lg text-gray-300">萬物皆有毒，毒視乎劑量 — Paracelsus</p>
+    </div>
+</header>
+
+<main class="container mx-auto p-4 md:p-8">
+
+    <div class="mb-8 p-4 bg-white rounded-lg shadow-md flex items-center">
+        <label for="searchInput" class="sr-only">搜尋毒藥物或症狀</label>
+        <input type="search" id="searchInput" autocomplete="off"
+               placeholder="搜尋毒藥物或症狀，例如：有機磷、心搏過緩、QRS寬、QTc延長、解毒劑"
+               aria-label="搜尋毒藥物或症狀"
+               class="flex-grow p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#2a9d8f] focus:border-transparent text-lg">
+        <button id="searchButton" class="ml-4 p-3 bg-[#2a9d8f] text-white rounded-md hover:bg-[#207c70] transition duration-200">搜尋</button>
+    </div>
+
+    <div id="noResults" class="hidden text-center py-16 text-gray-500">
+        <p class="text-lg">找不到符合「<span id="noResultsQuery" class="font-semibold text-gray-700"></span>」的資料</p>
+        <p class="text-sm mt-2">試試其他關鍵字，例如：有機磷、乙醯胺酚、QRS、心搏過緩、解毒劑、血液透析</p>
+    </div>
+
+    <section id="toxidromes" class="mb-12 main-content-section">
+        <h2 class="text-2xl font-bold text-center text-[#264653] mb-2">中毒症候群 (Toxidrome) 快速識別</h2>
+        <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">中毒症候群是根據生命徵象和理學檢查所呈現的一組特定症狀，能快速縮小可能的中毒物質範圍。</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#e76f51] content-card" data-keywords="抗膽鹼 anticholinergic 熱 盲 紅 狂 乾 瞳孔放大 瞻妄 曼陀羅 TCA">
+                <h3 class="font-bold text-xl text-[#e76f51] mb-2">抗膽鹼症候群</h3>
+                <p class="font-mono text-sm">熱、盲、紅、狂、乾</p>
+                <ul class="list-disc list-inside mt-2 text-gray-700">
+                    <li>心搏過速、體溫過高</li>
+                    <li>瞳孔放大、視力模糊</li>
+                    <li>皮膚潮紅、乾燥</li>
+                    <li>瞻妄、幻覺</li>
+                </ul>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#e63946] content-card" data-keywords="交感神經 sympathomimetic 安非他命 amphetamine 古柯鹼 cocaine 高血壓 高熱">
+                <h3 class="font-bold text-xl text-[#e63946] mb-2">交感神經症候群</h3>
+                <p class="font-mono text-sm">熱、狂、快、濕</p>
+                <ul class="list-disc list-inside mt-2 text-gray-700">
+                    <li>心搏過速、高血壓</li>
+                    <li>體溫過高、大量出汗</li>
+                    <li>瞳孔放大</li>
+                    <li>躁動、精神病、癲癇</li>
+                </ul>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#2a9d8f] content-card" data-keywords="膽鹼 cholinergic DUMBBELS SLUDGE 有機磷 心搏過緩 瞳孔縮小 流涎">
+                <h3 class="font-bold text-xl text-[#2a9d8f] mb-2">膽鹼症候群</h3>
+                <p class="font-mono text-sm">DUMBBELS / SLUDGE</p>
+                <ul class="list-disc list-inside mt-2 text-gray-700">
+                    <li>腹瀉、尿失禁、瞳孔縮小</li>
+                    <li>心搏過緩、支氣管痙攣/分泌物</li>
+                    <li>嘔吐、流淚、流涎</li>
+                    <li>肌肉無力、抽搐</li>
+                </ul>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#f4a261] content-card" data-keywords="鴉片 opioid 海洛因 針尖樣瞳孔 呼吸抑制 naloxone">
+                <h3 class="font-bold text-xl text-[#f4a261] mb-2">鴉片類症候群</h3>
+                <p class="font-mono text-sm">經典三聯徵</p>
+                <ul class="list-disc list-inside mt-2 text-gray-700">
+                    <li>中樞神經抑制、昏迷</li>
+                    <li>呼吸抑制</li>
+                    <li>針尖樣瞳孔</li>
+                </ul>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-[#457b9d] content-card" data-keywords="鎮靜安眠 sedative hypnotic benzodiazepine BZD barbiturate alcohol 酒精 嗜睡">
+                <h3 class="font-bold text-xl text-[#457b9d] mb-2">鎮靜安眠症候群</h3>
+                <p class="font-mono text-sm">慢、靜、呆</p>
+                <ul class="list-disc list-inside mt-2 text-gray-700">
+                    <li>中樞神經抑制、嗜睡</li>
+                    <li>言語不清、步態不穩</li>
+                    <li>呼吸抑制 (嚴重時)</li>
+                    <li>生命徵象偏低或正常</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="important-gaps" class="mb-12 main-content-section">
+        <h2 class="text-2xl font-bold text-center text-[#264653] mb-8">重要間隙概念 (Important Gaps)</h2>
+        <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">對於不明原因中毒，應常規檢測血中氣體、乳酸和電解質以評估酸鹼狀態。</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-purple-500 content-card" data-keywords="anion gap 陰離子間隙 mudpiles goldmark HAGMA 代謝性酸中毒">
+                <h3 class="font-bold text-xl text-purple-700 mb-2">陰離子間隙 (Anion Gap)</h3>
+                <p class="font-mono text-sm bg-gray-100 p-2 rounded">Na⁺ - (Cl⁻ + HCO₃⁻)</p>
+                <p class="mt-2 text-gray-700 text-sm">代表血液中未被測量的陰離子。升高時表示存在額外的酸性物質。</p>
+                <p class="mt-2 text-xs text-gray-600"><b>GOLDMARK:</b> G(glycols), O(oxoproline), L(L-lactate), D(D-lactate), M(methanol), A(aspirin), R(renal failure), K(ketoacidosis)</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-teal-500 content-card" data-keywords="osmolar gap 滲透壓間隙 toxic alcohol 甲醇 乙二醇 異丙醇">
+                <h3 class="font-bold text-xl text-teal-700 mb-2">滲透壓間隙 (Osmolar Gap)</h3>
+                <p class="font-mono text-sm bg-gray-100 p-2 rounded">測量值 - 計算值</p>
+                <p class="mt-2 text-gray-700 text-sm">代表血液中未被計算到的滲透壓活性物質。</p>
+                <p class="mt-2 text-xs text-gray-600"><b>常見原因:</b> 甲醇、乙二醇、異丙醇、乙醇、丙酮等。</p>
+                <p class="mt-2 text-red-600 font-semibold text-sm">若 &gt; 50，需高度懷疑毒性酒精中毒。</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-sky-500 content-card" data-keywords="saturation gap 飽和度間隙 CO MetHb 變性血紅素 發紺">
+                <h3 class="font-bold text-xl text-sky-700 mb-2">飽和度間隙 (Saturation Gap)</h3>
+                <p class="font-mono text-sm bg-gray-100 p-2 rounded">SaO₂ - SpO₂</p>
+                <p class="mt-2 text-gray-700 text-sm">動脈血氧飽和度(計算值)與脈衝式血氧儀(測量值)的差距。</p>
+                <p class="mt-2 text-xs text-gray-600"><b>差距 &gt; 5% 提示:</b> 優先懷疑變性血紅素血症 (MetHb)，其次為一氧化碳中毒 (COHb)。</p>
+            </div>
+        </div>
+        <div class="pitfall-box mt-6">
+            <h5 class="font-bold">臨床陷阱：酸鹼失衡判讀</h5>
+            <ul class="list-disc list-inside text-sm">
+                <li><b>高陰離子間隙代謝性酸中毒：</b>首要排除最常見的<b>乳酸 (Lactate)</b> 和<b>酮體 (Ketones)</b>，之後才優先考慮毒性酒精或水楊酸等。</li>
+                <li><b>滲透壓間隙：</b>可作為診斷毒性酒精的輔助工具，但正常值<b>無法</b>完全排除中毒可能，因其會隨毒物代謝而下降。</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="pesticide-poisoning" class="mb-12 main-content-section">
+        <h2 class="text-2xl font-bold text-center text-[#264653] mb-8">農藥中毒 (Pesticide Poisoning)</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="有機磷 OP organophosphate 膽鹼 acetylcholinesterase Atropine PAM Pralidoxime 間期症候群 IMS 巴拉松 芬普尼">
+                <div>
+                    <h3 class="text-xl font-bold text-[#264653] mb-4"><a href="https://sites.google.com/view/organophosphate/" target="_blank" rel="noopener" class="hover:underline">有機磷 (Organophosphate)</a></h3>
+                    <p class="text-gray-600 mb-4">不可逆地抑制乙醯膽鹼酯酶，導致致命的膽鹼性危象。治療需雙管齊下。</p>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="bg-gray-100 p-3 rounded-md text-center">
+                            <h4 class="font-bold text-[#2a9d8f]">Atropine (阿托品)</h4>
+                            <p class="text-sm mt-1">對抗蕈毒鹼樣 (Muscarinic) 症狀。</p>
+                        </div>
+                        <div class="bg-gray-100 p-3 rounded-md text-center">
+                            <h4 class="font-bold text-[#f4a261]">Pralidoxime (PAM)</h4>
+                            <p class="text-sm mt-1">再活化酵素，對抗菸鹼樣 (Nicotinic) 症狀。</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">所有有症狀患者皆需住院。嚴重者（呼吸衰竭、癲癇）需收入加護病房。</p></div>
+                    <div class="pitfall-box">
+                        <h5 class="font-bold">臨床陷阱</h5>
+                        <ul class="list-disc list-inside text-sm">
+                            <li>Atropine 劑量需滴定至呼吸道分泌物減少，而非僅看心率。</li>
+                            <li><b>間期症候群 (IMS)：</b>在急性膽鹼性危象緩解後 24-96 小時出現，表現為頸部、近端肢體和呼吸肌無力。早期且足量的 PAM 治療可望預防。</li>
+                        </ul>
+                    </div>
+                    <button type="button" class="detail-btn" data-detail="organophosphate">查看完整治療指引（劑量、滴定終點、致命陷阱）</button>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card border-l-4 border-[#457b9d] flex flex-col justify-between" data-keywords="胺基甲酸鹽 Carbamate 膽鹼 cholinergic Atropine 加保利">
+                <div>
+                    <h3 class="text-xl font-bold text-[#1d3557] mb-4"><a href="https://sites.google.com/view/organophosphate/" target="_blank" rel="noopener" class="hover:underline">胺基甲酸鹽 (Carbamate)</a></h3>
+                    <p class="text-gray-600 mb-4">可逆地抑制乙醯膽鹼酯酶，症狀通常較輕微且短暫。</p>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心</h4>
+                        <ul class="list-disc list-inside mt-2 text-sm text-gray-700 space-y-1">
+                            <li>使用 <b>Atropine (阿托品)</b> 對抗蕈毒鹼樣症狀。</li>
+                            <li class="font-semibold">通常不需使用 Pralidoxime (PAM)。</li>
+                        </ul>
+                    </div>
+                    <p class="text-xs text-center mt-2 text-gray-500">關鍵區別：酵素抑制是可逆的。</p>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">症狀通常較短暫，多數可在急診觀察後出院。若 Atropine 需求量大或有呼吸抑制，則需住院。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">部分胺基甲酸鹽（如：加保利）可能導致嚴重中樞神經抑制。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="巴拉刈 Paraquat 肺纖維化 脈衝療法 血液灌流 自由基">
+                <div>
+                    <h3 class="text-xl font-bold text-[#003049] mb-4">巴拉刈 (Paraquat)</h3>
+                    <p class="text-gray-600 mb-4">產生大量自由基，導致多重器官衰竭，特別是對肺部造成不可逆的纖維化。</p>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 脈衝療法、血液灌流</h4>
+                    </div>
+                    <div class="corrosive-note"><h5 class="font-bold">腐蝕性注意</h5><p class="text-sm">巴拉刈本身具腐蝕性，造成口腔及腸胃道黏膜損傷。</p></div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">死亡率極高，所有個案皆需收入加護病房，並早期啟動多重治療模式。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">高濃度氧氣會加劇肺損傷，應維持在能接受的最低血氧濃度 (SpO₂ 88-92%)。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="嘉磷塞 Glyphosate 介面活性劑 surfactant 年年春">
+                <div>
+                    <h3 class="text-xl font-bold text-[#40916c] mb-4"><a href="https://sites.google.com/view/glyphosate/" target="_blank" rel="noopener" class="hover:underline">嘉磷塞 (Glyphosate)</a></h3>
+                    <p class="text-gray-600 mb-4">本身毒性低，主要毒性來自配方中的介面活性劑 (surfactant)，導致腸胃道腐蝕及全身性影響。</p>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心</h4>
+                        <p class="text-sm mt-1 text-gray-700"><b>無特定解毒劑。</b><br><b>支持性療法:</b> 體液復甦、呼吸支持。</p>
+                    </div>
+                    <div class="corrosive-note"><h5 class="font-bold">腐蝕性注意</h5><p class="text-sm">毒性主要來自具腐蝕性的介面活性劑。</p></div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">輕微腸胃症狀者可觀察後出院。若大量攝入或出現低血壓、呼吸困難等症狀，需住院治療。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">低估介面活性劑的潛在毒性，可能導致休克和呼吸衰竭。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="克芬普 克凡派 克帆派 Chlorfenapyr 粒線體 高熱 氧化磷酸化">
+                <div>
+                    <h3 class="text-xl font-bold text-[#4a4e69] mb-4"><a href="https://sites.google.com/view/cholorfenapyr" target="_blank" rel="noopener" class="hover:underline">克芬普 / 克帆派 (Chlorfenapyr)</a></h3>
+                    <p class="text-gray-600 mb-4">破壞粒線體的氧化磷酸化過程，導致細胞能量衰竭與致命高熱。</p>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心</h4>
+                        <p class="text-sm mt-1 text-gray-700"><b>無特定解毒劑。</b><br><b>核心目標: 積極降溫。</b></p>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">預後極差，死亡率高。所有疑似個案皆應收入加護病房，積極降溫與支持治療。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">症狀可能延遲出現，誤以為是感染性敗血症。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="固殺草 Glufosinate 麩醯胺酸 血氨 延遲性神經毒性">
+                <div>
+                    <h3 class="text-xl font-bold text-[#0096b7] mb-4">固殺草 (Glufosinate)</h3>
+                    <p class="text-gray-600 mb-4">抑制麩醯胺酸合成酶，導致血氨升高，產生延遲性神經毒性。</p>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心</h4>
+                        <p class="text-sm mt-1 text-gray-700"><b>無特定解毒劑。</b><br><b>支持性療法:</b> 密切監測呼吸及神經學狀態，癲癇時給予 BZD。</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">具高死亡風險，所有個案皆應住院。出現神經學症狀或呼吸抑制者，需收入加護病房。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">神經學症狀（如癲癇、昏迷）可能在攝入後 24-48 小時才出現。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="除蟲菊精 Pyrethrin Pyrethroid 鈉離子通道 過敏 化學性肺炎">
+                <div>
+                    <h3 class="text-xl font-bold text-[#5e548e] mb-4"><a href="https://sites.google.com/view/pyrethrin1" target="_blank" rel="noopener" class="hover:underline">除蟲菊精 (Pyrethrin)</a></h3>
+                    <p class="text-gray-600 mb-4">延長鈉離子通道開啟，造成神經興奮。主要風險為過敏反應。</p>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心</h4>
+                        <p class="text-sm mt-1 text-gray-700"><b>無特定解毒劑。</b><br><b>皮膚除污</b>及<b>症狀治療</b>為主。</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">多數皮膚接觸者可居家觀察。若有全身性過敏反應或大量誤食，需至急診評估。</p></div>
+                    <div class="pitfall-box">
+                        <h5 class="font-bold">臨床陷阱</h5>
+                        <ul class="list-disc list-inside text-sm">
+                            <li>嚴重過敏性休克是罕見但致命的併發症。</li>
+                            <li>需注意配方中的有機溶劑，可能因嗆到而引起化學性肺炎、肺水腫或意識昏迷，其危害常大於除蟲菊精本身。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="因滅汀 阿巴汀 Emamectin Abamectin Avermectin GABA 昏迷 有機溶劑">
+                <div>
+                    <h3 class="text-xl font-bold text-[#7f5539] mb-4">因滅汀／阿巴汀 (Avermectins)</h3>
+                    <p class="text-gray-600 mb-4">GABA 促進劑，增強抑制性神經傳導，導致中樞神經抑制。</p>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心</h4>
+                        <p class="text-sm mt-1 text-gray-700"><b>無特定解毒劑。</b><br><b>支持性療法:</b> 維持呼吸道暢通。</p>
+                    </div>
+                    <div class="corrosive-note"><h5 class="font-bold">腐蝕性注意</h5><p class="text-sm">配方常含有機溶劑，具腐蝕性，可能造成黏膜損傷。</p></div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">若出現嗜睡以外的神經學症狀（如昏迷），應收入加護病房監測呼吸。</p></div>
+                    <div class="pitfall-box">
+                        <h5 class="font-bold">臨床陷阱</h5>
+                        <ul class="list-disc list-inside text-sm">
+                            <li>昏迷可能持續數天，需耐心給予支持性療法。</li>
+                            <li>配方中的有機溶劑若嗆入，可能引起化學性肺炎，其危害常大於主成分本身。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="因得克 Indoxacarb 變性血紅素 Methemoglobinemia MetHb Methylene Blue 發紺 G6PD">
+                <div>
+                    <h3 class="text-xl font-bold text-[#023e8a] mb-4"><a href="https://sites.google.com/view/indoxacarb" target="_blank" rel="noopener" class="hover:underline">因得克 (Indoxacarb)</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>阻斷電壓敏感性鈉離子通道。</li>
+                        <li><span class="list-item-label">表現:</span>主要毒性為<b>變性血紅素血症 (MetHb)</b>，導致發紺。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">解毒劑: Methylene Blue</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">有症狀或 MetHb &gt; 20% 者需住院治療。G6PD 缺乏者禁用 Methylene Blue。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">需與其他會造成發紺的毒物作鑑別診斷。SpO₂ 讀數不準確。</p></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="pharmaceutical-poisoning" class="mb-12 main-content-section">
+        <h2 class="text-2xl font-bold text-center text-[#264653] mb-8">藥物中毒 (Pharmaceutical Poisoning)</h2>
+        <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">藥物中毒的處置核心在於支持性療法，並在適當時機使用特定解毒劑。對於躁動或抽搐的患者，Benzodiazepines 是第一線藥物。</p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="乙醯胺酚 普拿疼 Acetaminophen Paracetamol NAC NAPQI 肝衰竭 Rumack">
+                <div>
+                    <h3 class="text-xl font-bold text-[#e76f51] mb-4"><a href="https://sites.google.com/view/acetaminophen1/" target="_blank" rel="noopener" class="hover:underline">乙醯胺酚 (Acetaminophen)</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>毒性代謝物 NAPQI 耗盡肝臟 GSH 導致肝細胞壞死。</li>
+                        <li><span class="list-item-label">表現:</span>早期腸胃症狀，後期肝衰竭。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">解毒劑: N-乙醯半胱胺酸 (NAC)</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">根據 Rumack-Matthew nomogram 及肝功能指數決定。有風險者需住院完成 NAC 療程。</p></div>
+                    <div class="pitfall-box">
+                        <h5 class="font-bold">臨床陷阱</h5>
+                        <ul class="list-disc list-inside text-sm">
+                            <li>慢性或重複過量中毒，無法使用標準 nomogram，需高度警覺。</li>
+                            <li>對於不明原因藥物過量且出現嘔吐等腸胃道症狀的患者，務必優先考慮並檢驗此中毒。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="水楊酸 Salicylates Aspirin 阿斯匹靈 耳鳴 碳酸氫鈉 血液透析 混合性酸鹼失衡">
+                <div>
+                    <h3 class="text-xl font-bold text-[#e76f51] mb-4"><a href="https://sites.google.com/view/salicylates/" target="_blank" rel="noopener" class="hover:underline">水楊酸 (Salicylates)</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>干擾氧化磷酸化，導致代謝性酸中毒。</li>
+                        <li><span class="list-item-label">表現:</span>耳鳴、呼吸急促、高熱、混合性酸鹼失衡。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 碳酸氫鈉、血液透析</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">嚴重酸中毒、意識改變或血中濃度高者，需收入加護病房並考慮緊急血液透析。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">初期呼吸性鹼中毒可能掩蓋後續的嚴重代謝性酸中毒。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl lg:col-span-2 content-card" data-keywords="三環抗憂鬱劑 TCA tricyclic 心臟 QRS QRS寬 寬QRS QRS波變寬 QRS變寬 QTc QTc延長 aVR 鈉離子通道 碳酸氫鈉 心搏過速 癲癇">
+                <h3 class="text-xl font-bold text-[#264653] mb-4"><a href="https://sites.google.com/view/tca12" target="_blank" rel="noopener" class="hover:underline">三環抗憂鬱劑 (TCA)</a></h3>
+                <ul class="list-none text-gray-700 space-y-2 mb-4">
+                    <li><span class="list-item-label">機轉:</span>阻斷鈉離子通道，具高度心臟毒性。</li>
+                    <li><span class="list-item-label">表現:</span>抗膽鹼症狀、癲癇。</li>
+                    <li><span class="list-item-label">心電圖變化:</span><br>- 竇性心搏過速 (Sinus tachycardia)<br>- QRS 波變寬 (&gt; 100ms)<br>- aVR 導極上末端 R 波 &gt; 3mm<br>- aVR 導極上 R/S 比值 &gt; 0.7<br>- QTc 延長 (QTc prolongation)</li>
+                </ul>
+                <div class="bg-gray-100 p-4 rounded-md">
+                    <h4 class="font-bold text-lg text-[#264653]">治療核心: 碳酸氫鈉 (NaHCO₃)</h4>
+                </div>
+                <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">所有具心電圖變化或症狀的患者，皆需收入加護病房嚴密監測心臟功能。</p></div>
+                <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">不應只依賴血中藥物濃度，ECG 的 QRS 波寬度是更即時的毒性指標。</p></div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="SSRI 血清素症候群 Serotonin Syndrome Cyproheptadine NMS">
+                <div>
+                    <h3 class="text-xl font-bold text-[#f77f00] mb-4"><a href="https://sites.google.com/view/ssri1/" target="_blank" rel="noopener" class="hover:underline">SSRI</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>選擇性血清素回收抑制劑。</li>
+                        <li><span class="list-item-label">表現:</span>血清素症候群（意識改變、自主神經亢進、神經肌肉異常）。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: BZD, Cyproheptadine</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">輕症可觀察。中重度血清素症候群（高熱、肌肉僵硬）需收入加護病房。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">需與抗精神藥物惡性症候群 (NMS) 作鑑別診斷。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="Bupropion 威博雋 NDRI 癲癇 seizure QRS QRS寬 QRS變寬 緩釋">
+                <div>
+                    <h3 class="text-xl font-bold text-[#e63946] mb-4"><a href="https://sites.google.com/view/bupropion1/" target="_blank" rel="noopener" class="hover:underline">Bupropion</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>正腎上腺素-多巴胺回收抑制劑 (NDRI)。</li>
+                        <li><span class="list-item-label">表現:</span>癲癇、躁動、心搏過速、QRS 變寬。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: BZD, 支持性療法</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">有癲癇風險，特別是緩釋劑型，建議延長觀察時間 (至少 24 小時)。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">癲癇是主要且可能延遲出現的嚴重毒性。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="Trazodone 美舒鬱 SARI Priapism 陰莖異常勃起 QTc QTc延長 直立性低血壓">
+                <div>
+                    <h3 class="text-xl font-bold text-[#1d3557] mb-4">Trazodone</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>血清素拮抗與回收抑制劑 (SARI)。</li>
+                        <li><span class="list-item-label">表現:</span>中樞神經抑制、直立性低血壓、QTc 延長、陰莖異常勃起。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 支持性療法</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">多數以支持治療為主。出現嚴重鎮靜或低血壓者需住院。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">陰莖異常勃起 (Priapism) 是罕見但需緊急處理的副作用。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="Quetiapine 思樂康 antipsychotics 抗精神病 QTc QTc延長 緩釋 鎮靜">
+                <div>
+                    <h3 class="text-xl font-bold text-[#6d597a] mb-4">Quetiapine</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>非典型抗精神病藥物。</li>
+                        <li><span class="list-item-label">表現:</span>鎮靜、心搏過速、直立性低血壓、抗膽鹼症狀、QTc 延長。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 支持性療法</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">有顯著心血管或中樞神經抑制者需住院監測。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">緩釋劑型可能延遲毒性發作，需延長觀察時間。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="鎮靜安眠 Sedative hypnotic Benzodiazepine BZD Zolpidem 史蒂諾斯 Flumazenil GABA">
+                <div>
+                    <h3 class="text-xl font-bold text-[#457b9d] mb-4">鎮靜安眠藥 (Sedative-hypnotics)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>增強 GABA 在 GABA-A 受體的作用。</li>
+                        <li><span class="list-item-label">表現:</span>中樞神經抑制、言語不清、運動失調、呼吸抑制。</li>
+                        <li><span class="list-item-label">常見藥物:</span>Benzodiazepines (BZD), Z-drugs (Zolpidem)。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 支持性療法, Flumazenil (慎用)</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">單純 BZD 過量預後良好。若有嚴重呼吸抑制或合併其他藥物過量，需收入加護病房。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">Flumazenil 可能在 BZD 慢性使用者或合併使用致癲癇藥物 (如 TCA) 的患者身上誘發癲癇，故不建議常規使用。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="Methotrexate MTX 葉酸 Leucovorin 骨髓抑制 黏膜炎 TEN 尿液鹼化">
+                <div>
+                    <h3 class="text-xl font-bold text-[#fb8500] mb-4"><a href="https://sites.google.com/view/mtx12/" target="_blank" rel="noopener" class="hover:underline">Methotrexate (MTX)</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>葉酸拮抗劑，抑制 DNA 合成。</li>
+                        <li><span class="list-item-label">表現:</span>黏膜炎、骨髓抑制、腎衰竭、中毒性表皮壞死溶解症 (TEN)。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: Leucovorin 救援、水份補充、尿液鹼化</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">所有症狀性患者或血中濃度高者需住院治療。</p></div>
+                    <div class="pitfall-box">
+                        <h5 class="font-bold">臨床陷阱</h5>
+                        <ul class="list-disc list-inside text-sm">
+                            <li>MTX 引起的皮膚壞死需與 SJS/TEN 鑑別，前者通常較不嚴重且組織學表現不同。</li>
+                            <li>嚴重的骨髓抑制可能導致免疫力低下及敗血症，是主要的死亡原因之一。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="Phenytoin 癲能停 Dilantin 抗癲癇 眼球震顫 運動失調 零級動力學">
+                <div>
+                    <h3 class="text-xl font-bold text-[#8338ec] mb-4"><a href="https://sites.google.com/view/dilantin/" target="_blank" rel="noopener" class="hover:underline">Phenytoin</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>阻斷鈉離子通道。</li>
+                        <li><span class="list-item-label">表現:</span>眼球震顫、運動失調、構音困難、中樞神經抑制。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 支持性療法</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">所有有症狀的患者皆需住院觀察。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">具有非線性的零級排泄動力學，微小的劑量增加可能導致血中濃度的不成比例大幅上升。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="Depakin 帝拔癲 Valproic acid VPA 腸肝循環 MDAC 高血氨 L-carnitine">
+                <div>
+                    <h3 class="text-xl font-bold text-[#3a86ff] mb-4"><a href="https://sites.google.com/view/depakin/" target="_blank" rel="noopener" class="hover:underline">Valproic Acid (Depakin)</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>增加 GABA 濃度。</li>
+                        <li><span class="list-item-label">表現:</span>中樞神經抑制、高血氨症、肝毒性。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: L-carnitine, 多次劑量活性碳 (MDAC)</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">有症狀或血中濃度高者需住院。嚴重高血氨或昏迷可考慮血液透析。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">此藥物具腸肝循環特性，可考慮使用多次劑量活性碳 (MDAC) 加速排出。即使在治療濃度範圍內也可能發生高血氨腦病變。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="Theophylline 茶鹼 PDE 低血鉀 癲癇 MDAC 血液透析 頑固性嘔吐">
+                <div>
+                    <h3 class="text-xl font-bold text-[#006d77] mb-4"><a href="https://sites.google.com/view/theophylline/" target="_blank" rel="noopener" class="hover:underline">茶鹼 (Theophylline)</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>磷酸二酯酶 (PDE) 抑制劑，增加 cAMP。</li>
+                        <li><span class="list-item-label">表現:</span>心搏過速、頑固性嘔吐、低血鉀、癲癇、低血壓。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: B-Blocker, MDAC, 血液透析</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">任何症狀性患者或血中濃度高者皆需住院。頑固性低血壓或癲癇者需入 ICU。</p></div>
+                    <div class="pitfall-box">
+                        <h5 class="font-bold">臨床陷阱</h5>
+                        <ul class="list-disc list-inside text-sm">
+                            <li>癲癇發作可能無預警出現，即使在看似穩定的病人身上。</li>
+                            <li>慢性中毒者在較低血中濃度下就可能出現嚴重毒性。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="Warfarin Superwarfarin 抗凝血劑 維他命K 老鼠藥 INR PCC FFP 出血">
+                <div>
+                    <h3 class="text-xl font-bold text-[#e63946] mb-4">Warfarin &amp; Superwarfarin</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>抑制維他命 K 依賴性凝血因子合成。</li>
+                        <li><span class="list-item-label">表現:</span>出血、INR 顯著升高。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">解毒劑: 維他命 K, PCC/FFP</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">任何重大出血皆需住院，危及生命者需入加護病房。</p></div>
+                    <div class="pitfall-box">
+                        <h5 class="font-bold">臨床陷阱</h5>
+                        <ul class="list-disc list-inside text-sm">
+                            <li>維他命 K 作用緩慢，急性大出血需立即給予 PCC 或 FFP。</li>
+                            <li><b>Superwarfarin (長效型抗凝血鼠藥)：</b>半衰期可長達數週至數月，需長期補充維他命 K 治療。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="新型口服抗凝血劑 DOAC NOAC Dabigatran Rivaroxaban Idarucizumab Andexanet 出血 PT aPTT">
+                <div>
+                    <h3 class="text-xl font-bold text-[#e63946] mb-4">新型口服抗凝血劑 (DOACs)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>直接抑制特定凝血因子 (凝血酶或 Xa 因子)。</li>
+                        <li><span class="list-item-label">表現:</span>出血，常規凝血測試可能正常。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">解毒劑: Idarucizumab, Andexanet alfa</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">同 Warfarin，根據出血嚴重程度決定。使用專屬反轉劑後仍需密切觀察。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">常規凝血測試 (PT/aPTT) 無法準確評估其藥效，正常不代表沒有出血風險。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="鋰鹽 Lithium 腎臟 神經 顫抖 共濟失調 血液透析">
+                <div>
+                    <h3 class="text-xl font-bold text-[#2a9d8f] mb-4"><a href="https://sites.google.com/view/lithium123/" target="_blank" rel="noopener" class="hover:underline">鋰鹽 (Lithium)</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>影響神經及腎臟離子通道。</li>
+                        <li><span class="list-item-label">表現:</span><br><b>急性:</b> 噁心、嘔吐等腸胃道症狀。<br><b>慢性:</b> 顫抖、共濟失調、意識改變等神經學症狀。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 支持性療法、血液透析</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">根據血中濃度和臨床症狀決定。嚴重神經學症狀或需洗腎者，應收入加護病房。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">血中濃度與中樞神經毒性不完全平行，需注意「濃度-毒性延遲」。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="Digoxin 毛地黃 夾竹桃 海檬果 高血鉀 Fab 雙向性心室頻脈 心律不整">
+                <div>
+                    <h3 class="text-xl font-bold text-[#e76f51] mb-4"><a href="https://sites.google.com/view/digoxin1/" target="_blank" rel="noopener" class="hover:underline">Digoxin</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>抑制鈉鉀幫浦，導致高血鉀。</li>
+                        <li><span class="list-item-label">表現:</span>各種心律不整、腸胃道症狀。</li>
+                        <li><span class="list-item-label">心電圖變化:</span><br>- 各種心律不整 (特別是房室傳導阻滯合併心室早期收縮)<br>- ST 段下斜式凹陷 (Dali's mustache sign)<br>- 雙向性心室頻脈 (Bidirectional VT)</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">解毒劑: Digoxin-Fab</h4>
+                    </div>
+                    <p class="text-xs text-center mt-2 text-gray-500">來源為毛地黃、夾竹桃、海檬果等植物，但臨床上視為藥物中毒處理。</p>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">所有需使用 Fab 或有嚴重症狀者，應收入加護病房。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">慢性中毒患者的血中濃度可能在「治療範圍內」，但仍有嚴重毒性。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="鈣離子通道阻斷劑 CCB calcium channel blocker 低血壓 心搏過緩 高血糖 HIDT 高劑量胰島素 緩釋">
+                <div>
+                    <h3 class="text-xl font-bold text-[#2a9d8f] mb-4"><a href="https://sites.google.com/view/ccb1234/" target="_blank" rel="noopener" class="hover:underline">鈣離子通道阻斷劑 (CCB)</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>阻斷 L-type calcium channel。</li>
+                        <li><span class="list-item-label">表現:</span>低血壓、心搏過緩、高血糖。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">核心治療: 高劑量胰島素 (HIDT)、鈣鹽</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">所有症狀性患者（低血壓、心搏過緩）皆需收入加護病房，因可能延遲惡化。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">緩釋劑型中毒反應延遲，需延長觀察時間。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="乙型阻斷劑 Beta-blocker B-Blocker 低血壓 心搏過緩 低血糖 Glucagon 升糖素 Propranolol HIDT">
+                <div>
+                    <h3 class="text-xl font-bold text-[#b8860b] mb-4"><a href="https://sites.google.com/view/bblocker/" target="_blank" rel="noopener" class="hover:underline">乙型阻斷劑 (B-Blocker)</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>競爭性拮抗 Beta 腎上腺素受體。</li>
+                        <li><span class="list-item-label">表現:</span>低血壓、心搏過緩、低血糖。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">核心治療: 升糖素 (Glucagon), 高劑量胰島素 (HIDT)</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">同 CCB，所有症狀性患者需收入加護病房監測。</p></div>
+                    <div class="pitfall-box">
+                        <h5 class="font-bold">臨床陷阱</h5>
+                        <ul class="list-disc list-inside text-sm">
+                            <li>脂溶性高的藥物 (如 Propranolol) 更易有中樞神經毒性。</li>
+                            <li>緩釋劑型中毒反應延遲，需延長觀察時間。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="局部麻醉劑 Lidocaine LAST 脂肪乳劑 ILE 口周麻木 癲癇 心律不整">
+                <div>
+                    <h3 class="text-xl font-bold text-[#0077b6] mb-4"><a href="https://sites.google.com/view/lidocain1/" target="_blank" rel="noopener" class="hover:underline">局部麻醉劑 (Lidocaine)</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>阻斷心臟及神經細胞膜上之鈉離子通道。</li>
+                        <li><span class="list-item-label">表現:</span>口舌麻木、耳鳴、癲癇、心律不整、心跳停止。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 靜脈輸注脂肪乳劑 (ILE)</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">任何全身性毒性反應皆需收入加護病房密切監測。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">早期的中樞神經症狀 (如暈眩、口周麻木) 可能很短暫或不明顯，但隨後可能快速出現嚴重的心臟毒性。</p></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="abuse-drug-poisoning" class="mb-12 main-content-section">
+        <h2 class="text-2xl font-bold text-center text-[#264653] mb-8">毒品中毒 (Drug of Abuse Poisoning)</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="鴉片類藥物 海洛因 Opioids Heroin 呼吸抑制 Naloxone 納洛酮 針尖樣瞳孔 戒斷">
+                <div>
+                    <h3 class="text-xl font-bold text-[#f4a261] mb-4">鴉片類／海洛因 (Opioids/Heroin)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>作用於 μ-鴉片類受體，抑制中樞。</li>
+                        <li><span class="list-item-label">表現:</span>呼吸抑制、意識不清、針尖樣瞳孔。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">解毒劑: Naloxone</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">Naloxone 作用時間短，需留觀至少 4-6 小時。若使用長效鴉片或症狀持續，則需住院。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">Naloxone 可能引發急性戒斷症候群，造成患者躁動不安。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="安非他命 Amphetamine 交感神經 高熱 躁動 精神病 BZD">
+                <div>
+                    <h3 class="text-xl font-bold text-[#e63946] mb-4">安非他命 (Amphetamine)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>類交感神經作用，增加多巴胺、正腎上腺素釋放。</li>
+                        <li><span class="list-item-label">表現:</span>心搏過速、高血壓、高熱、躁動、精神病。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: Benzodiazepines (BZD)</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">嚴重症狀（高熱、嚴重高血壓、癲癇）需收入加護病房。輕症者可觀察後出院。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">勿單獨使用乙型阻斷劑控制心搏過速，可能導致 α 作用加劇，惡化高血壓。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="K他命 Ketamine NMDA 解離 K-hole 眼球震顫 膀胱炎">
+                <div>
+                    <h3 class="text-xl font-bold text-[#0077b6] mb-4">K他命 (Ketamine)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>NMDA 受體拮抗劑，解離性麻醉劑。</li>
+                        <li><span class="list-item-label">表現:</span>解離狀態 ("K-hole")、眼球震顫、高血壓。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 支持性療法，BZD</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">多數可在觀察後出院。注意慢性使用者可能有嚴重膀胱炎。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">過度刺激可能加劇患者的激動與幻覺。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="搖頭丸 MDMA Ecstasy 血清素 低血鈉 高熱 血清素症候群">
+                <div>
+                    <h3 class="text-xl font-bold text-[#f77f00] mb-4">搖頭丸 (MDMA/Ecstasy)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>增加血清素釋放。</li>
+                        <li><span class="list-item-label">表現:</span>高熱、心搏過速、低血鈉、血清素症候群。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 積極降溫，BZD</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">高熱、嚴重低血鈉或血清素症候群需收入加護病房。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">急性低血鈉是致命併發症，需謹慎補充鹽水，避免過度矯正。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="笑氣 Nitrous Oxide 維他命B12 脊髓 神經病變 NMDA">
+                <div>
+                    <h3 class="text-xl font-bold text-[#495057] mb-4">笑氣 (Nitrous Oxide)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>NMDA 拮抗劑，並使維他命 B12 失活。</li>
+                        <li><span class="list-item-label">表現:</span>慢性使用導致脊髓神經病變。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 維他命 B12 補充</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">急性中毒觀察即可。神經學症狀者需住院治療。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">神經學症狀在停止使用後可能不會立即改善，甚至會惡化。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="新興毒品 NPS 浴鹽 合成大麻 高熱 橫紋肌溶解 尿液篩檢">
+                <div>
+                    <h3 class="text-xl font-bold text-[#6d597a] mb-4">新興毒品 (NPS)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">表現:</span>嚴重躁動、精神病、致命性高熱，可導致橫紋肌溶解及多重器官衰竭。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 強力鎮靜 (BZD)、積極降溫</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">風險極高，常需收入加護病房進行積極支持性療法。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">常規尿液藥物篩檢通常無法檢出，需高度臨床懷疑。</p></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="chemical-gas-poisoning" class="mb-12 main-content-section">
+        <h2 class="text-2xl font-bold text-center text-[#264653] mb-8">工業化學品與氣體中毒 (Chemical &amp; Gas Poisoning)</h2>
+        <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">當暴露史不明時，應根據症狀影響的氣道部位來評估與治療。處置原則為脫離現場、給予氧氣，並針對特定功能障礙進行支持性治療。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="一氧化碳 CO 缺氧 碳氧血紅素 COHb 高壓氧 DNS 延遲性神經">
+                <div>
+                    <h3 class="text-xl font-bold text-[#4a4e69] mb-4">一氧化碳 (CO)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>與血紅素結合，導致組織缺氧。</li>
+                        <li><span class="list-item-label">表現:</span>頭痛、噁心、昏迷、心肌缺氧。</li>
+                        <li><span class="list-item-label">檢查:</span>血中 COHb 濃度。</li>
+                    </ul>
+                    <div class="kpi-card mb-4">
+                        <div class="kpi-number">200–250×</div>
+                        <div class="kpi-label">CO 與血紅素的親和力<br>相對於氧氣</div>
+                    </div>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">核心治療: 100% 氧氣、高壓氧</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">根據 COHb 濃度、臨床症狀（特別是神經學症狀）決定。嚴重者需住院接受高壓氧治療。</p></div>
+                    <div class="pitfall-box">
+                        <h5 class="font-bold">臨床陷阱</h5>
+                        <ul class="list-disc list-inside text-sm">
+                            <li>血中 COHb 濃度會隨時間或給予氧氣後下降，無法完全反映中毒嚴重度。</li>
+                            <li>即使初期症狀改善，仍需注意延遲性神經學後遺症 (DNS) 的發生。</li>
+                            <li>標準血氧機讀數 (SpO₂) 正常，櫻桃紅皮膚是晚期罕見徵象。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="氰化物 Cyanide 缺氧 細胞色素氧化酶 乳酸中毒 Hydroxocobalamin 千面人">
+                <div>
+                    <h3 class="text-xl font-bold text-[#b8860b] mb-4"><a href="https://sites.google.com/view/cyanide1/" target="_blank" rel="noopener" class="hover:underline">氰化物 (Cyanide)</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>抑制細胞色素氧化酶，細胞無法用氧。</li>
+                        <li><span class="list-item-label">表現:</span>快速昏迷、休克、嚴重乳酸中毒。</li>
+                        <li><span class="list-item-label">檢查:</span>嚴重 HAGMA、靜脈血氧偏高。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">解毒劑: Hydroxocobalamin</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">絕對緊急！所有疑似個案皆需立即處置並收入加護病房。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">等待實驗室確認診斷是致命的延誤；聞到杏仁味不可靠。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="硫化氫 H2S rotten egg 臭雞蛋 knockdown 嗅覺疲勞 亞硝酸鈉">
+                <div>
+                    <h3 class="text-xl font-bold text-[#6c757d] mb-4"><a href="https://sites.google.com/view/h2s1/" target="_blank" rel="noopener" class="hover:underline">硫化氫 (H₂S)</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>抑制細胞色素氧化酶，類似氰化物。</li>
+                        <li><span class="list-item-label">表現:</span>立即昏迷 (knockdown)、臭雞蛋味、休克、呼吸麻痺。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 亞硝酸鈉、支持性療法</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">高死亡率，任何有症狀暴露皆需收入加護病房密切監測。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">高濃度下會發生嗅覺疲勞，聞不到臭雞蛋味不代表安全。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="局限空間 缺氧 Hypoxia Asphyxia 窒息 救援者安全">
+                <div>
+                    <h3 class="text-xl font-bold text-[#5c6672] mb-4">局限空間缺氧</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>單純窒息劑，因氧氣被其他氣體取代。</li>
+                        <li><span class="list-item-label">表現:</span>非特異性缺氧症狀：頭暈、昏迷、癲癇。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 立即脫離、100% 氧氣</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">若曾喪失意識或有任何神經學後遺症，皆需住院觀察治療。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">救援者安全第一，切勿在未確保安全下進入救援，避免成為第二位受害者。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="甲醇 Methanol 毒性酒精 甲酸 視網膜 假酒 Fomepizole 血液透析 滲透壓間隙">
+                <div>
+                    <h3 class="text-xl font-bold text-[#e76f51] mb-4"><a href="https://sites.google.com/view/methanol12/" target="_blank" rel="noopener" class="hover:underline">甲醇 (Methanol)</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>代謝物甲酸導致酸中毒及視網膜毒性。</li>
+                        <li><span class="list-item-label">表現:</span>滲透壓間隙升高、酸中毒、視力模糊。</li>
+                        <li><span class="list-item-label">常見來源:</span>假酒、工業溶劑。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">解毒劑: Fomepizole，需血液透析</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">所有疑似或確診個案皆需收入加護病房，常需緊急血液透析。</p></div>
+                    <div class="pitfall-box">
+                        <h5 class="font-bold">臨床陷阱</h5>
+                        <p class="text-sm">早期滲透壓間隙 (osmolar gap) 會上升，但隨著甲醇被代謝，滲透壓間隙會下降，同時陰離子間隙 (anion gap) 會上升，兩者會出現交叉，此時病人病情更加嚴重。<a href="https://sites.google.com/view/methanologag/" target="_blank" rel="noopener" class="underline font-semibold">（詳見 OG/AG 交叉說明）</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="乙二醇 Ethylene Glycol 毒性酒精 草酸鈣 抗凍劑 煞車油 腎衰竭 Fomepizole">
+                <div>
+                    <h3 class="text-xl font-bold text-[#f4a261] mb-4"><a href="https://sites.google.com/view/ethyleneglycol1/" target="_blank" rel="noopener" class="hover:underline">乙二醇 (Ethylene Glycol)</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>代謝物草酸鈣晶體沉積導致腎衰竭。</li>
+                        <li><span class="list-item-label">表現:</span>滲透壓間隙升高、酸中毒、腎衰竭。</li>
+                        <li><span class="list-item-label">常見來源:</span>抗凍劑、煞車油。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">解毒劑: Fomepizole，需血液透析</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">所有疑似或確診個案皆需收入加護病房，常需緊急血液透析。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">同甲醇，滲透壓間隙會消失。尿中草酸鈣晶體不一定會出現。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="葡萄催芽劑 2-Chloroethanol 二氯乙醇 代謝性酸中毒 南投 血液透析">
+                <div>
+                    <h3 class="text-xl font-bold text-[#5e548e] mb-4">葡萄催芽劑 (2-Chloroethanol)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>代謝物抑制多種酵素，導致嚴重代謝性酸中毒。</li>
+                        <li><span class="list-item-label">表現:</span>噁心、嘔吐、意識改變、嚴重高陰離子間隙代謝性酸中毒。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: Fomepizole 或乙醇，血液透析</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">死亡率極高，所有個案皆需收入加護病房，並考慮緊急血液透析。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">早期症狀不具特異性，易與其他中毒混淆，需高度懷疑。</p></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="caustic-poisoning" class="mb-12 main-content-section">
+        <h2 class="text-2xl font-bold text-center text-[#d00000] mb-8">腐蝕性物質 (Corrosives)</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="強酸 Strong Acid 腐蝕 Coagulative Necrosis 凝固性壞死 內視鏡 四禁">
+                <div>
+                    <h3 class="text-xl font-bold text-[#d00000] mb-4">強酸 (Strong Acids)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>凝固性壞死 (Coagulative necrosis)。</li>
+                        <li><span class="list-item-label">表現:</span>立即性劇痛、食道傷害相對輕、胃部傷害較重。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: <span class="text-red-600">四禁</span> (催吐／洗胃／活性碳／中和)</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">有症狀或懷疑攝入量大者需住院，並進行內視鏡檢查評估損傷。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">沒有口腔灼傷不代表沒有嚴重的下消化道損傷。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="強鹼 Strong Alkali 腐蝕 Liquefactive Necrosis 液化性壞死 食道穿孔 四禁">
+                <div>
+                    <h3 class="text-xl font-bold text-[#d00000] mb-4">強鹼 (Strong Alkalis)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>液化性壞死 (Liquefactive necrosis)，穿透力更深。</li>
+                        <li><span class="list-item-label">表現:</span>嚴重食道及口腔灼傷、吞嚥困難。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: <span class="text-red-600">四禁</span> (催吐／洗胃／活性碳／中和)</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">所有個案皆應住院評估食道損傷程度，有穿孔風險者需入 ICU。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">初期症狀可能輕微，但食道穿孔可能延遲發生。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="氫氟酸 Hydrofluoric acid HF 低血鈣 葡萄糖酸鈣 Calcium Gluconate 劇痛">
+                <div>
+                    <h3 class="text-xl font-bold text-[#e76f51] mb-4">氫氟酸 (Hydrofluoric Acid, HF)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>氟離子結合鈣／鎂離子，導致細胞壞死。</li>
+                        <li><span class="list-item-label">表現:</span>與外觀不成比例的劇痛、嚴重低血鈣。</li>
+                        <li><span class="list-item-label">檢查:</span>ECG、血鈣、血鎂。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">核心治療: 葡萄糖酸鈣 (Calcium Gluconate)</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">除極輕微暴露外，皆需住院嚴密監測心臟及電解質。</p></div>
+                    <div class="pitfall-box">
+                        <h5 class="font-bold">臨床陷阱</h5>
+                        <ul class="list-disc list-inside text-sm">
+                            <li>疼痛程度與皮膚外觀不成比例，切勿因外觀正常而輕忽。</li>
+                            <li>低濃度暴露時，症狀可能延遲出現，甚至長達 24 小時。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="漂白水 Bleach 次氯酸鈉 Sodium Hypochlorite 氯氣 氯胺 吸入">
+                <div>
+                    <h3 class="text-xl font-bold text-[#d00000] mb-4"><a href="https://nehrc.nhri.edu.tw/2021/03/26/%E6%AC%A1%E6%B0%AF%E9%85%B8%E9%88%A3%E5%92%8C%E6%AC%A1%E6%B0%AF%E9%85%B8%E9%88%89/" target="_blank" rel="noopener" class="hover:underline">漂白水 (Bleach)</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>主要成分為次氯酸鈉，具刺激性。</li>
+                        <li><span class="list-item-label">表現:</span><br><b>食入:</b> 腸胃道刺激，可少量給予牛奶或水稀釋。<br><b>吸入 (與酸/氨混合後):</b> 嚴重呼吸道刺激、咳嗽、肺水腫。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 支持性療法。<br><span class="text-red-600 font-bold">嚴禁催吐與使用活性碳。</span></h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">無症狀且為少量 (&lt;6%, &lt;120mL) 意外食入可居家觀察。故意、有症狀、吸入性、或大量／高濃度食入者需就醫。若出現吞嚥困難、流涎等症狀需考慮內視鏡檢查。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">最大的危險來自與<b>酸性清潔劑</b>（產生氯氣）或<b>氨水</b>（產生氯胺）混合，導致致命的吸入性中毒。</p></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="plant-animal-poisoning" class="mb-12 main-content-section">
+        <h2 class="text-2xl font-bold text-center text-[#264653] mb-8">植物與動物中毒 (Plant &amp; Animal Poisoning)</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="毒蛇咬傷 Snakebite 血清 龜殼花 赤尾鮐 眼鏡蛇 雨傘節 鎖鏈蛇 百步蛇">
+                <div>
+                    <h3 class="text-xl font-bold text-green-700 mb-4">台灣常見毒蛇咬傷</h3>
+                    <ul class="list-none text-gray-700 space-y-3">
+                        <li>
+                            <h4 class="font-semibold text-[#c1121f]">出血性 (Hemorrhagic)</h4>
+                            <p class="text-sm">蛇種: 龜殼花、赤尾鮐<br>表現: 局部腫脹、水泡、血泡<br>血清: 抗出血性蛇毒血清</p>
+                        </li>
+                        <li>
+                            <h4 class="font-semibold text-blue-600">神經性 (Neurotoxic)</h4>
+                            <p class="text-sm">蛇種: 眼鏡蛇、雨傘節<br>表現: 眼鏡蛇以嚴重局部腫脹壞死為主，偶有腸胃道症狀，少見神經症狀。雨傘節則以眼瞼下垂、呼吸麻痺等神經症狀為主。<br>血清: 抗神經性蛇毒血清</p>
+                        </li>
+                        <li>
+                            <h4 class="font-semibold text-purple-700">鎖鏈蛇 (Russell's Viper)</h4>
+                            <p class="text-sm">表現: 凝血功能異常、腎衰竭<br>血清: 抗鎖鏈蛇毒血清</p>
+                        </li>
+                        <li>
+                            <h4 class="font-semibold text-gray-700">百步蛇 (Hundred-pacer)</h4>
+                            <p class="text-sm">表現: 嚴重腫脹、凝血異常<br>血清: 抗百步蛇血清</p>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">所有有症狀咬傷皆需住院。神經性毒蛇咬傷建議收入 ICU 密切監測呼吸。</p></div>
+                    <div class="pitfall-box">
+                        <h5 class="font-bold">臨床陷阱</h5>
+                        <ul class="list-disc list-inside text-sm">
+                            <li>眼鏡蛇咬傷的嚴重局部壞死常與出血性毒蛇混淆。</li>
+                            <li>雨傘節咬傷初期局部症狀輕微，但仍可能快速進展至呼吸衰竭。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="蓖麻籽 Castor bean Ricin 蓖麻毒素 蛋白質合成 血便">
+                <div>
+                    <h3 class="text-xl font-bold text-[#7f5539] mb-4">蓖麻籽 (Castor Beans)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">毒素:</span>蓖麻毒素 (Ricin)，抑制蛋白質合成。</li>
+                        <li><span class="list-item-label">表現:</span>延遲性腸胃炎、血便、肝腎衰竭、休克。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 支持性療法、腸胃道除污</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">死亡率高，任何食入皆應住院觀察，有症狀者需入 ICU。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">若種子未咬碎，可能無症狀通過腸胃道，但咬碎後毒性極強。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="毒菇 Mushroom Amatoxin 鵝膏蕈 Silibinin 假性恢復期 肝衰竭">
+                <div>
+                    <h3 class="text-xl font-bold text-[#40916c] mb-4">毒菇 (鵝膏蕈類)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">毒素:</span>鵝膏蕈毒肽 (Amatoxin)，抑制 RNA 聚合酶 II。</li>
+                        <li><span class="list-item-label">表現:</span>延遲性膽汁性腹瀉，接著是假性恢復期，最後肝衰竭。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 多重藥物療法 (Silibinin, NAC, PCN)</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">死亡率高，所有疑似個案皆需住院，並考慮轉至可進行肝移植的醫學中心。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">在腸胃症狀後出現的「假性恢復期」會讓人誤以為病情好轉，但此時肝損傷仍在持續進行。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="大花曼陀羅 洋金花 Brugmansia Datura Anticholinergic 抗膽鹼 Scopolamine Physostigmine 譫妄">
+                <div>
+                    <h3 class="text-xl font-bold text-[#c9184a] mb-4">大花曼陀羅／洋金花</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">毒素:</span>Atropine, Scopolamine (抗膽鹼)。</li>
+                        <li><span class="list-item-label">表現:</span>典型的抗膽鹼症候群 (熱、盲、紅、狂、乾)。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 支持性療法, BZD。Physostigmine 主要用於幫助診斷，治療上需慎用。</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">所有症狀性患者皆需住院觀察，直到譫妄及心搏過速緩解。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">譫妄可能持續數天，需要耐心給予支持性療法。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="蜂螫 Wasp Bee 虎頭蜂 過敏性休克 橫紋肌溶解症 腎衰竭 腎上腺素">
+                <div>
+                    <h3 class="text-xl font-bold text-[#c46a00] mb-4">蜂螫 (Wasp/Bee Stings)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>直接毒性及過敏反應。</li>
+                        <li><span class="list-item-label">表現:</span>局部紅腫痛、過敏性休克、橫紋肌溶解症、急性腎衰竭 (大量蜂螫)。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 腎上腺素、抗組織胺、類固醇</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">單純局部反應可門診處理。全身性反應或大量蜂螫需住院，嚴重者入 ICU。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">大量蜂螫後的橫紋肌溶解症與腎衰竭可能延遲出現。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="河豚毒 Pufferfish Tetrodotoxin TTX 鈉離子通道 呼吸肌麻痺">
+                <div>
+                    <h3 class="text-xl font-bold text-[#0096b7] mb-4">河豚毒 (Tetrodotoxin)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>阻斷電壓敏感性鈉離子通道。</li>
+                        <li><span class="list-item-label">表現:</span>口唇舌尖麻木、四肢無力、呼吸肌麻痺。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 呼吸支持，無解毒劑</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">所有有症狀患者皆需收入 ICU 密切監測呼吸功能，直到麻痺緩解。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">病程進展極快，可能在數小時內進展至呼吸衰竭。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="藍環章魚 Blue-ringed Octopus 河豚毒素 Tetrodotoxin TTX 無痛咬傷">
+                <div>
+                    <h3 class="text-xl font-bold text-[#0077b6] mb-4">藍環章魚 (Blue-ringed Octopus)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">毒素:</span>河豚毒素 (Tetrodotoxin, TTX)。</li>
+                        <li><span class="list-item-label">機轉:</span>阻斷電壓敏感性鈉離子通道。</li>
+                        <li><span class="list-item-label">表現:</span>口唇舌尖麻木、四肢無力、呼吸肌麻痺。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 呼吸支持，無解毒劑</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">所有有症狀患者皆需收入 ICU 密切監測呼吸功能，直到麻痺緩解。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">被咬傷口極小且通常無痛，可能延誤就醫。毒液存在於唾液中，即使未感到疼痛也可能已中毒。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="烏頭鹼 Aconitine 草烏 附子 心律不整 VT VF Amiodarone">
+                <div>
+                    <h3 class="text-xl font-bold text-[#585123] mb-4"><a href="https://sites.google.com/view/aconitine/" target="_blank" rel="noopener" class="hover:underline">烏頭鹼 (Aconitine)</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>持續活化鈉離子通道，造成細胞去極化。</li>
+                        <li><span class="list-item-label">表現:</span>口舌四肢麻木、致命性心律不整 (VT/VF)。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 支持性療法，Amiodarone</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">所有個案皆需收入 ICU 嚴密監測心律。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">心律不整極度頑固，可能需要高劑量抗心律不整藥物。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="秋水仙鹼 Colchicine 嘉蘭 火焰百合 骨髓抑制 G-CSF 有絲分裂">
+                <div>
+                    <h3 class="text-xl font-bold text-[#d1495b] mb-4">秋水仙鹼 (Colchicine)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>抑制細胞有絲分裂。</li>
+                        <li><span class="list-item-label">表現:</span>嚴重腸胃炎，後續骨髓抑制、多重器官衰竭。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 支持性療法，G-CSF</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">死亡率高，所有個案皆需收入 ICU。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">在腸胃症狀後，骨髓抑制及器官衰竭會延遲出現。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="豆薯 魚藤酮 Rotenone 粒線體 電子傳遞鏈">
+                <div>
+                    <h3 class="text-xl font-bold text-[#b5838d] mb-4">豆薯 (Bean Yam)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">毒素:</span>魚藤酮 (Rotenone)。</li>
+                        <li><span class="list-item-label">機轉:</span>抑制粒線體電子傳遞鏈。</li>
+                        <li><span class="list-item-label">表現:</span>腸胃道症狀、呼吸抑制、癲癇。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 支持性療法，無解毒劑</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">有症狀者皆需住院觀察，嚴重者需入 ICU。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">塊根可食，但其豆莢、種子及成熟藤蔓均含劇毒，常因誤食而中毒。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="雪卡毒 Ciguatera Ciguatoxin 冷熱感覺顛倒 珊瑚礁魚">
+                <div>
+                    <h3 class="text-xl font-bold text-[#0096b7] mb-4"><a href="https://sites.google.com/view/ciguatera/" target="_blank" rel="noopener" class="hover:underline">雪卡毒 (Ciguatera)</a></h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">毒素:</span>雪卡毒素 (Ciguatoxin)。</li>
+                        <li><span class="list-item-label">機轉:</span>開啟電壓敏感性鈉離子通道。</li>
+                        <li><span class="list-item-label">表現:</span>腸胃道及神經學症狀，特別是<b>冷熱感覺顛倒</b>。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 支持性療法</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">有症狀者需觀察。嚴重神經或心血管症狀者需住院。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">「冷熱感覺顛倒」是其特徵，但非所有病人都會出現。需仔細詢問大型珊瑚礁魚類食用史。</p></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="marine-injuries" class="mb-12 main-content-section">
+        <h2 class="text-2xl font-bold text-center text-[#0077b6] mb-8">台灣常見海洋生物傷害處置摘要</h2>
+        <div class="bg-white p-6 rounded-lg shadow-xl content-card" data-keywords="海洋生物 水母 珊瑚 魟魚 獅子魚 海蛇 弧菌 溫水浸泡">
+            <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500 mb-6">
+                <h4 class="font-bold text-blue-800">一般原則 (General Principles)</h4>
+                <p class="text-sm mt-2 text-gray-700">穩定生命徵象為最優先。所有海洋傷口皆應視為污染傷口，採開放性照護並考慮預防性抗生素（需涵蓋弧菌）。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-[#0096b7] mb-2">刺細胞螫傷 (水母、珊瑚)</h4>
+                    <ul class="list-disc list-inside text-sm space-y-2">
+                        <li>立即用<b>海水</b>沖洗，避免搓揉。</li>
+                        <li>可見觸手可用卡片移除。</li>
+                        <li>箱水母螫傷可考慮用 5% 醋酸。</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-[#e63946] mb-2">刺傷 (魟魚、獅子魚)</h4>
+                    <ul class="list-disc list-inside text-sm space-y-2">
+                        <li>毒素多為不耐熱的蛋白質。</li>
+                        <li>以 <b>43-45℃ 溫水浸泡</b>至疼痛緩解是主要止痛方式。</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-[#40916c] mb-2">咬傷 (海蛇)</h4>
+                    <ul class="list-disc list-inside text-sm space-y-2">
+                        <li>具神經毒與肌肉毒。</li>
+                        <li>首要以<b>彈性繃帶進行加壓固定</b>。</li>
+                        <li>若出現全身性症狀，應施打多價抗蛇毒血清。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pediatric-poisoning" class="mb-12 main-content-section">
+        <h2 class="text-2xl font-bold text-center text-[#264653] mb-8">兒童中毒特點 (Pediatric Poisoning)</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card" data-keywords="兒童 生理差異 代謝率 體表面積 肝臟代謝">
+                <h3 class="text-xl font-bold text-[#2a9d8f] mb-4">生理差異</h3>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li><b>較高代謝率:</b> 毒物吸收、代謝、排除速度可能更快。</li>
+                    <li><b>較大體表面積／體重比:</b> 經皮吸收的毒物風險更高。</li>
+                    <li><b>體液組成不同:</b> 更容易發生脫水和電解質不平衡。</li>
+                    <li><b>肝臟代謝未成熟:</b> 特定藥物代謝能力較差，毒性更強。</li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card" data-keywords="兒童 常見毒物 鈕扣電池 磁力珠 洗衣膠囊 鐵劑">
+                <h3 class="text-xl font-bold text-[#e76f51] mb-4">常見中毒物質</h3>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li><b>藥物:</b> 鐵劑、普拿疼 (Acetaminophen)、降血糖藥、心血管藥物。</li>
+                    <li><b>家庭用品:</b> 清潔劑、化妝品、殺蟲劑、洗衣膠囊。</li>
+                    <li><b>特殊物品:</b> 鈕扣電池、磁力珠。</li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card" data-keywords="兒童 劑量計算 吐根糖漿 活性碳 低血糖">
+                <h3 class="text-xl font-bold text-[#f4a261] mb-4">劑量與處置原則</h3>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li><b>劑量計算至關重要:</b> 所有藥物和解毒劑均需依體重 (mg/kg) 精確計算。成人劑量對兒童可能是致命的。</li>
+                    <li><b>吐根糖漿已不推薦使用。</b></li>
+                    <li><b>活性碳需謹慎使用:</b> 需確保氣道安全，避免嗆入風險。</li>
+                    <li><b>支持性療法是基石:</b> 密切監測血糖（兒童易低血糖）、維持呼吸道、循環及電解質穩定。</li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="兒童 洗衣膠囊 laundry pod 腐蝕 化學灼傷 角膜">
+                <div>
+                    <h3 class="text-xl font-bold text-[#d00000] mb-4">洗衣膠囊 (Laundry Detergent Pods)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">性質:</span>急性化學灼傷。</li>
+                        <li><span class="list-item-label">來源:</span>誤食或眼睛接觸外觀像糖果的膠囊。</li>
+                        <li><span class="list-item-label">症狀:</span>立即、劇烈。嘔吐、咳嗽、呼吸困難、眼痛。</li>
+                    </ul>
+                    <div class="corrosive-note"><h5 class="font-bold">危險</h5><p class="text-sm">呼吸道阻塞、消化道灼傷、角膜損傷。</p></div>
+                </div>
+                <div class="disposition-box"><h5 class="font-bold">處置</h5><p class="text-sm">切勿催吐，立即送醫。重點在維持呼吸道。</p></div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="兒童 鉛中毒 lead poisoning 神經毒性 油漆 IQ">
+                <div>
+                    <h3 class="text-xl font-bold text-[#495057] mb-4">鉛中毒 (Lead Poisoning)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">性質:</span>慢性神經發育毒害。</li>
+                        <li><span class="list-item-label">來源:</span>啃食老舊油漆、吸入含鉛粉塵、接觸受污染的玩具或環境。</li>
+                        <li><span class="list-item-label">症狀:</span>沉默、隱匿。多數無症狀，或僅有學習力下降、過動等。</li>
+                    </ul>
+                    <div class="pitfall-box"><h5 class="font-bold">危險</h5><p class="text-sm">永久性智商 (IQ) 損傷、行為問題。</p></div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置</h5><p class="text-sm">需靠驗血檢測，依濃度決定是否用藥排鉛。</p></div>
+                    <div class="bg-teal-50 p-4 rounded-lg mt-4 border-l-4 border-teal-500"><h5 class="font-bold text-teal-800">預防核心</h5><p class="text-sm text-teal-700">「遠離、檢測、根除來源」。環境安全是唯一的保護。</p></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-xl mt-8 content-card" data-keywords="兒童 預防 誤食">
+            <h3 class="text-xl font-bold text-center text-[#d00000] mb-4">預防勝於治療</h3>
+            <p class="text-center text-gray-700">兒童中毒多為意外誤食。將藥品、清潔劑及化學物質存放在兒童無法觸及之處，是預防悲劇最有效的方法。</p>
+        </div>
+    </section>
+
+    <section id="other-poisonings" class="mb-12 main-content-section">
+        <h2 class="text-2xl font-bold text-center text-[#264653] mb-8">其他重要中毒 (Other Important Poisonings)</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="鉛 Lead 腹痛 貧血 垂腕症 wrist drop 螯合劑 職業">
+                <div>
+                    <h3 class="text-xl font-bold text-[#495057] mb-4">鉛 (Lead)</h3>
+                    <p class="text-gray-600 mb-4">主要為慢性中毒，抑制多種酵素。</p>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">表現:</span>腹痛、貧血、垂腕症 (wrist drop)、認知功能下降。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 螯合劑 (Chelating agents)</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">有症狀或血中鉛濃度高者需住院接受螯合治療。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">症狀非特異性，需有高度懷疑，並詢問職業與暴露史。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="汞 Mercury 朱砂 腎病變 神經精神症狀 肢端痛 螯合劑 汞蒸氣">
+                <div>
+                    <h3 class="text-xl font-bold text-[#6c757d] mb-4">汞 (Mercury)</h3>
+                    <p class="text-gray-600 mb-4">不同形態（元素、無機、有機）毒性不同。</p>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">表現:</span>腎病變、神經精神症狀（易怒、顫抖）、肢端痛。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 螯合劑 (Chelating agents)</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">根據暴露形態與症狀決定，嚴重者需住院治療。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">吸入性元素汞蒸氣毒性極強，與食入液態汞不同。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="砷 Arsenic 烏腳病 皮膚病變 周邊神經病變 癌症 螯合劑 有機砷">
+                <div>
+                    <h3 class="text-xl font-bold text-[#343a40] mb-4">砷 (Arsenic)</h3>
+                    <p class="text-gray-600 mb-4">急慢性中毒表現不同，為多系統毒物。</p>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">表現:</span>急性為腸胃炎；慢性為皮膚病變、周邊神經病變、癌症。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 螯合劑 (Chelating agents)</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">急性中毒需住院治療。慢性中毒需脫離來源並評估長期併發症。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">需區分海產中的無毒有機砷與具毒性的無機砷。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="鐵劑 Iron 暖暖包 肝臟 Deferoxamine 去鐵胺 代謝性酸中毒 潛伏期">
+                <div>
+                    <h3 class="text-xl font-bold text-[#f4a261] mb-4">鐵劑 (Iron)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>腐蝕腸胃道、破壞粒線體，導致休克及肝衰竭。</li>
+                        <li><span class="list-item-label">來源:</span>兒童維他命、孕婦補充品、<b>暖暖包 (內含鐵粉)</b>。</li>
+                        <li><span class="list-item-label">表現:</span>嘔吐、腹瀉 (可能帶血)、腹痛、代謝性酸中毒。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">解毒劑: Deferoxamine (去鐵胺)</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">有症狀、腹部 X 光可見不透光藥錠、或血清鐵濃度高者需住院接受螯合劑治療。</p></div>
+                    <div class="pitfall-box">
+                        <h5 class="font-bold">臨床陷阱</h5>
+                        <ul class="list-disc list-inside text-sm">
+                            <li>在腸胃道症狀後可能出現短暫的潛伏期，易讓人誤以為病情改善。</li>
+                            <li>誤食暖暖包是兒童及寵物常見的中毒來源。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="變性血紅素 Methemoglobinemia MetHb Methylene Blue 發紺 巧克力色 飽和度間隙 G6PD">
+                <div>
+                    <h3 class="text-xl font-bold text-[#023e8a] mb-4">變性血紅素血症 (MetHb)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">機轉:</span>血紅素鐵離子由 Fe²⁺ 氧化為 Fe³⁺，無法攜帶氧氣。</li>
+                        <li><span class="list-item-label">表現:</span>對氧氣無效的發紺、巧克力色血液、飽和度間隙。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">解毒劑: Methylene Blue</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">有症狀或 MetHb &gt; 20% 者需住院治療。G6PD 缺乏者禁用 Methylene Blue。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">標準血氧飽和度儀 (SpO₂) 讀數不準確，在 MetHb &gt; 85% 時會固定在 85% 左右。</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="乾燥劑 Desiccant 矽膠 Silica gel 生石灰 Calcium oxide 氧化鈣 熱灼傷">
+                <div>
+                    <h3 class="text-xl font-bold text-[#6c757d] mb-4">乾燥劑 (Desiccants)</h3>
+                    <ul class="list-none text-gray-700 space-y-2 mb-4">
+                        <li><span class="list-item-label">種類:</span>主要為無毒的矽膠，或具腐蝕性的生石灰（氧化鈣）。</li>
+                        <li><span class="list-item-label">表現:</span>矽膠通常無症狀；生石灰遇水會劇烈放熱，造成嚴重的化學性及熱灼傷。</li>
+                    </ul>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">治療核心: 區分種類。生石灰應避免用水稀釋。</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="disposition-box"><h5 class="font-bold">處置與動向</h5><p class="text-sm">矽膠可在家觀察。誤食生石灰且有症狀者需至急診評估。</p></div>
+                    <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">誤將生石灰當成無毒矽膠而給予大量飲水，會導致嚴重熱傷害。</p></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="case-studies" class="mb-12 main-content-section">
+        <h2 class="text-2xl font-bold text-center text-[#264653] mb-8">知名中毒案例分享</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="千面人 氰化物 cyanide 下毒 1984">
+                <div>
+                    <h3 class="text-xl font-bold text-[#e63946] mb-4">千面人下毒事件 (氰化物)</h3>
+                    <p class="text-gray-600 mb-4">1984 年，歹徒將含氰化物的飲料放置於超市貨架，造成消費者死亡，引發社會恐慌。</p>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">涉及毒物：氰化物 (Cyanide)</h4>
+                        <p class="text-sm mt-1 text-gray-700">快速作用的細胞窒息劑，抑制細胞呼吸，造成組織嚴重缺氧。</p>
+                    </div>
+                </div>
+                <div class="pitfall-box">
+                    <h5 class="font-bold">臨床教訓</h5>
+                    <p class="text-sm">對於不明原因突然昏迷、休克且合併嚴重代謝性酸中毒的患者，需將氰化物中毒列入鑑別診斷，並在高度懷疑時立即給予解毒劑。</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="南投 葡萄催芽劑 2-Chloroethanol 二氯乙醇 誤飲">
+                <div>
+                    <h3 class="text-xl font-bold text-[#5e548e] mb-4">南投葡萄催芽劑中毒案</h3>
+                    <p class="text-gray-600 mb-4">過去曾發生多起農民將劇毒的葡萄催芽劑（2-Chloroethanol）誤當成酒飲用，導致多人死亡的悲劇。</p>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">涉及毒物：2-Chloroethanol</h4>
+                        <p class="text-sm mt-1 text-gray-700">代謝後產生劇毒，抑制細胞能量代謝，導致頑固性代謝性酸中毒與多重器官衰竭。</p>
+                    </div>
+                </div>
+                <div class="pitfall-box">
+                    <h5 class="font-bold">臨床教訓</h5>
+                    <p class="text-sm">此中毒死亡率極高，對於有農藥暴露史且出現不明原因嚴重酸中毒的患者，需高度懷疑此可能性，並考慮早期血液透析。</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="小米粽 托福松 Terbufos 有機磷 台東 群聚">
+                <div>
+                    <h3 class="text-xl font-bold text-[#40916c] mb-4">台東小米粽農藥中毒事件</h3>
+                    <p class="text-gray-600 mb-4">民眾食用遭有機磷農藥污染的小米粽後，出現典型膽鹼性危象並快速惡化，造成多人死亡。</p>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">涉及毒物：有機磷農藥 (托福松 Terbufos)</h4>
+                        <p class="text-sm mt-1 text-gray-700">劇毒性有機磷農藥，具強烈蒜味，可能因誤用而污染食物。</p>
+                    </div>
+                </div>
+                <div class="pitfall-box">
+                    <h5 class="font-bold">臨床教訓</h5>
+                    <p class="text-sm">對於群聚發生的急性膽鹼症候群，需高度懷疑食物下毒或污染的可能性，並追查毒物來源。</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="屏東 枋寮 兒童 有機磷 Parathion 巴拉松 毒殺 1986">
+                <div>
+                    <h3 class="text-xl font-bold text-[#e63946] mb-4">屏東枋寮連續毒殺兒童案 (1986)</h3>
+                    <p class="text-gray-600 mb-4">嫌犯將劇毒農藥巴拉松 (Parathion) 摻入飲料，導致多名兒童死亡的重大刑案。</p>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">涉及毒物：有機磷農藥 (Parathion)</h4>
+                        <p class="text-sm mt-1 text-gray-700">高毒性的有機磷，會造成猛爆性膽鹼危象。</p>
+                    </div>
+                </div>
+                <div class="pitfall-box">
+                    <h5 class="font-bold">臨床教訓</h5>
+                    <p class="text-sm">凸顯了兒童對惡意下毒的脆弱性，以及嚴格管制高毒性農藥的重要性。</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="神經毒劑 沙林 Sarin VX 恐怖攻擊 暗殺 東京地鐵 化學武器">
+                <div>
+                    <h3 class="text-xl font-bold text-[#4a4e69] mb-4">化學武器：沙林與 VX 神經毒劑</h3>
+                    <p class="text-gray-600 mb-4">1995 年東京地鐵沙林毒氣攻擊與 2017 年金正男遭 VX 神經毒劑暗殺，是化學武器用於恐怖攻擊與暗殺的知名案例。</p>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">涉及毒物：神經毒劑 (Sarin, VX)</h4>
+                        <p class="text-sm mt-1 text-gray-700">超強效的有機磷化合物，能快速引發致命的膽鹼性危象。</p>
+                    </div>
+                </div>
+                <div class="pitfall-box">
+                    <h5 class="font-bold">臨床教訓</h5>
+                    <p class="text-sm">面對化學武器攻擊，需有大規模傷患的應變計畫，並強調快速除污、呼吸道支持及解毒劑 (Atropine, PAM) 的立即投予。</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="水俣病 Minamata 甲基汞 Methylmercury 環境 公害 神經毒性 食物鏈">
+                <div>
+                    <h3 class="text-xl font-bold text-[#0077b6] mb-4">日本水俣病 (甲基汞)</h3>
+                    <p class="text-gray-600 mb-4">因工廠排放含甲基汞的廢水，透過食物鏈累積，造成居民大規模、跨世代的慢性神經系統中毒。</p>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">涉及毒物：甲基汞 (Methylmercury)</h4>
+                        <p class="text-sm mt-1 text-gray-700">具高度神經毒性，尤其對發育中的胎兒大腦傷害極大。</p>
+                    </div>
+                </div>
+                <div class="pitfall-box">
+                    <h5 class="font-bold">臨床教訓</h5>
+                    <p class="text-sm">環境毒物學的經典案例，揭示工業污染能透過食物鏈造成深遠且不可逆的健康危害。</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="蓖麻毒素 Ricin Georgi Markov 暗殺 生物毒素 雨傘">
+                <div>
+                    <h3 class="text-xl font-bold text-[#7f5539] mb-4">雨傘尖端的謀殺 (蓖麻毒素)</h3>
+                    <p class="text-gray-600 mb-4">1978 年，保加利亞異議人士 Georgi Markov 在倫敦街頭被特製雨傘尖端射出的含蓖麻毒素微小金屬球擊中，數日後死亡。</p>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">涉及毒物：蓖麻毒素 (Ricin)</h4>
+                        <p class="text-sm mt-1 text-gray-700">高效的生物毒素，能抑制蛋白質合成，導致細胞死亡與多重器官衰竭。</p>
+                    </div>
+                </div>
+                <div class="pitfall-box">
+                    <h5 class="font-bold">臨床教訓</h5>
+                    <p class="text-sm">展示了生物毒素的極高毒性，極小劑量即可致命，且診斷上極具挑戰性，需高度懷疑非傳統的暴露途徑。</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="鉈 Thallium 王水 清大 重金屬 脫髮 alopecia 神經病變">
+                <div>
+                    <h3 class="text-xl font-bold text-[#6c757d] mb-4">清大王水案 (鉈中毒)</h3>
+                    <p class="text-gray-600 mb-4">1998 年台灣發生的高知識份子情殺案，兇嫌使用王水毀屍，並用無色無味的重金屬「鉈」毒害情敵。</p>
+                    <div class="bg-gray-100 p-4 rounded-md">
+                        <h4 class="font-bold text-lg text-[#264653]">涉及毒物：鉈 (Thallium)</h4>
+                        <p class="text-sm mt-1 text-gray-700">會模擬鉀離子干擾細胞功能，造成延遲性的嚴重神經病變與特徵性的脫髮。</p>
+                    </div>
+                </div>
+                <div class="pitfall-box">
+                    <h5 class="font-bold">臨床教訓</h5>
+                    <p class="text-sm">利用罕見毒物進行謀殺的典型案例。診斷有賴於醫師對鉈中毒的經典症狀（特別是脫髮）有所警覺。</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="antidotes-summary" class="mb-12 main-content-section">
+        <h2 class="text-2xl font-bold text-center text-[#264653] mb-4">常見中毒與其解毒劑</h2>
+        <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">並非所有中毒都有特效解毒劑，許多情況下支持性療法至關重要。然而，對於有特定解毒劑的中毒，及時給藥是改善預後的關鍵。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+            <div class="bg-white p-4 rounded-lg shadow-md flex items-center content-card" data-keywords="乙醯胺酚 Acetaminophen NAC 解毒劑">
+                <div class="flex-shrink-0 bg-[#2a9d8f] text-white rounded-full h-12 w-12 flex items-center justify-center font-bold text-lg">Ac</div>
+                <div class="ml-4">
+                    <h4 class="font-bold">乙醯胺酚 (Acetaminophen)</h4>
+                    <p class="text-sm text-gray-700">解毒劑: <span class="font-semibold text-[#2a9d8f]">N-乙醯半胱胺酸 (NAC)</span></p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-md flex items-center content-card" data-keywords="水楊酸類 Salicylates 碳酸氫鈉 尿液鹼化 解毒劑">
+                <div class="flex-shrink-0 bg-[#e76f51] text-white rounded-full h-12 w-12 flex items-center justify-center font-bold text-lg">Sa</div>
+                <div class="ml-4">
+                    <h4 class="font-bold">水楊酸類 (Salicylates)</h4>
+                    <p class="text-sm text-gray-700">主要治療: <span class="font-semibold text-[#e76f51]">碳酸氫鈉 (尿液鹼化)</span></p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-md flex items-center content-card" data-keywords="有機磷 Organophosphate Atropine Pralidoxime PAM 解毒劑">
+                <div class="flex-shrink-0 bg-[#264653] text-white rounded-full h-12 w-12 flex items-center justify-center font-bold text-lg">OP</div>
+                <div class="ml-4">
+                    <h4 class="font-bold">有機磷 (Organophosphate)</h4>
+                    <p class="text-sm text-gray-700">解毒劑: <span class="font-semibold text-[#264653]">Atropine + Pralidoxime (PAM)</span></p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-md flex items-center content-card" data-keywords="三環抗憂鬱劑 TCA 碳酸氫鈉 QRS 解毒劑">
+                <div class="flex-shrink-0 bg-[#264653] text-white rounded-full h-12 w-12 flex items-center justify-center font-bold text-lg">TCA</div>
+                <div class="ml-4">
+                    <h4 class="font-bold">三環抗憂鬱劑 (TCA)</h4>
+                    <p class="text-sm text-gray-700">主要治療: <span class="font-semibold text-[#264653]">碳酸氫鈉 (NaHCO₃)</span></p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-md flex items-center content-card" data-keywords="苯二氮平類 Benzodiazepines Flumazenil 解毒劑">
+                <div class="flex-shrink-0 bg-[#f4a261] text-white rounded-full h-12 w-12 flex items-center justify-center font-bold text-lg">Bz</div>
+                <div class="ml-4">
+                    <h4 class="font-bold">苯二氮平類 (Benzodiazepines)</h4>
+                    <p class="text-sm text-gray-700">解毒劑: <span class="font-semibold text-[#c07a2e]">Flumazenil (慎用)</span></p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-md flex items-center content-card" data-keywords="鴉片類 Opioids Naloxone 解毒劑">
+                <div class="flex-shrink-0 bg-[#f4a261] text-white rounded-full h-12 w-12 flex items-center justify-center font-bold text-lg">Op</div>
+                <div class="ml-4">
+                    <h4 class="font-bold">鴉片類 (Opioids)</h4>
+                    <p class="text-sm text-gray-700">解毒劑: <span class="font-semibold text-[#c07a2e]">Naloxone</span></p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-md flex items-center content-card" data-keywords="地高辛 Digoxin 抗體碎片 Fab 解毒劑">
+                <div class="flex-shrink-0 bg-[#2a9d8f] text-white rounded-full h-12 w-12 flex items-center justify-center font-bold text-lg">Di</div>
+                <div class="ml-4">
+                    <h4 class="font-bold">Digoxin</h4>
+                    <p class="text-sm text-gray-700">解毒劑: <span class="font-semibold text-[#2a9d8f]">Digoxin 特異性抗體碎片 (Fab)</span></p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-md flex items-center content-card" data-keywords="鐵劑 Iron Deferoxamine 去鐵胺 解毒劑">
+                <div class="flex-shrink-0 bg-[#e76f51] text-white rounded-full h-12 w-12 flex items-center justify-center font-bold text-lg">Fe</div>
+                <div class="ml-4">
+                    <h4 class="font-bold">鐵劑 (Iron)</h4>
+                    <p class="text-sm text-gray-700">解毒劑: <span class="font-semibold text-[#e76f51]">Deferoxamine (去鐵胺)</span></p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-md flex items-center content-card" data-keywords="氰化物 Cyanide 解毒劑 亞硝酸 硫代硫酸鈉 羥鈷胺素 Hydroxocobalamin">
+                <div class="flex-shrink-0 bg-[#b8860b] text-white rounded-full h-12 w-12 flex items-center justify-center font-bold text-lg">Cn</div>
+                <div class="ml-4">
+                    <h4 class="font-bold">氰化物 (Cyanide)</h4>
+                    <p class="text-sm text-gray-700">解毒劑: <span class="font-semibold text-[#b8860b]">氰化物解毒劑套組 / Hydroxocobalamin</span></p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-md flex items-center content-card" data-keywords="甲醇 乙二醇 毒性酒精 Fomepizole 解毒劑">
+                <div class="flex-shrink-0 bg-[#457b9d] text-white rounded-full h-12 w-12 flex items-center justify-center font-bold text-lg">OH</div>
+                <div class="ml-4">
+                    <h4 class="font-bold">毒性酒精 (甲醇／乙二醇)</h4>
+                    <p class="text-sm text-gray-700">解毒劑: <span class="font-semibold text-[#457b9d]">Fomepizole（併血液透析）</span></p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-md flex items-center content-card" data-keywords="變性血紅素 MetHb Methylene Blue 亞甲藍 解毒劑">
+                <div class="flex-shrink-0 bg-[#023e8a] text-white rounded-full h-12 w-12 flex items-center justify-center font-bold text-lg">Mb</div>
+                <div class="ml-4">
+                    <h4 class="font-bold">變性血紅素血症 (MetHb)</h4>
+                    <p class="text-sm text-gray-700">解毒劑: <span class="font-semibold text-[#023e8a]">Methylene Blue</span></p>
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow-md flex items-center content-card" data-keywords="鉛 汞 砷 重金屬 螯合劑 Chelating 解毒劑">
+                <div class="flex-shrink-0 bg-[#495057] text-white rounded-full h-12 w-12 flex items-center justify-center font-bold text-lg">Me</div>
+                <div class="ml-4">
+                    <h4 class="font-bold">重金屬 (鉛／汞／砷)</h4>
+                    <p class="text-sm text-gray-700">解毒劑: <span class="font-semibold text-[#495057]">螯合劑 (Chelating agents)</span></p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="decontamination" class="mb-12 main-content-section">
+        <h2 class="text-2xl font-bold text-center text-[#264653] mb-8">腸胃道除污決策流程</h2>
+        <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">活性碳是目前最常用的腸胃道除污方法，但其使用時機至關重要。洗胃已非常規使用。</p>
+        <div class="bg-white p-6 rounded-lg shadow-lg content-card" data-keywords="腸胃道除污 活性碳 洗胃 MDAC 多次劑量活性碳">
+            <div class="flex flex-col items-center">
+                <div class="flowchart-node">患者口服毒物過量</div>
+                <div class="flowchart-arrow">↓</div>
+                <div class="flowchart-node">服用時間是否在 1 小時內？</div>
+                <div class="w-full grid grid-cols-2 gap-4 mt-4">
+                    <div class="flex flex-col items-center">
+                        <div class="text-center font-bold text-green-700">是</div>
+                        <div class="flowchart-arrow">↓</div>
+                        <div class="flowchart-node">給予單劑量活性碳 (1g/kg)</div>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="text-center font-bold text-red-600">否</div>
+                        <div class="flowchart-arrow">↓</div>
+                        <div class="flowchart-node bg-gray-200 border-gray-400">通常不建議給予活性碳</div>
+                    </div>
+                </div>
+                <div class="flowchart-arrow mt-4">↓</div>
+                <div class="flowchart-node w-full md:w-3/4 bg-[#e9c46a] text-[#264653] border-[#f4a261]">
+                    <h4 class="font-bold">特別考量</h4>
+                    <p class="text-sm mt-1">對於緩釋劑型或具腸肝循環的藥物 (如 TCAs、水楊酸鹽、Valproic acid、Theophylline)，即使超過時間仍可考慮給予或使用多次劑量活性碳 (MDAC)。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="dialysis" class="mb-12 main-content-section">
+        <h2 class="text-2xl font-bold text-center text-[#264653] mb-8">血液透析（洗腎）的角色</h2>
+        <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">血液透析能有效移除特定毒物，特別是那些分佈容積小、蛋白結合率低、水溶性高的物質。</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 content-card" data-keywords="血液透析 洗腎 hemodialysis 分佈容積 蛋白結合率">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="font-bold text-xl text-green-700 mb-4 text-center">✅ 可考慮透析移除的毒物</h3>
+                <ul class="space-y-2">
+                    <li class="flex items-center"><span class="text-green-600 mr-2">✔️</span> 水楊酸類 (Salicylates)</li>
+                    <li class="flex items-center"><span class="text-green-600 mr-2">✔️</span> 有毒酒精類 (如 甲醇、乙二醇)</li>
+                    <li class="flex items-center"><span class="text-green-600 mr-2">✔️</span> 鋰鹽 (Lithium)</li>
+                    <li class="flex items-center"><span class="text-green-600 mr-2">✔️</span> 茶鹼 (Theophylline)</li>
+                </ul>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="font-bold text-xl text-red-600 mb-4 text-center">❌ 透析效果不佳的毒物</h3>
+                <ul class="space-y-2">
+                    <li class="flex items-center"><span class="text-red-500 mr-2">❌</span> 三環抗憂鬱劑 (TCAs)</li>
+                    <li class="flex items-center"><span class="text-red-500 mr-2">❌</span> 苯二氮平類 (Benzodiazepines)</li>
+                    <li class="flex items-center"><span class="text-red-500 mr-2">❌</span> 鴉片類藥物 (Opioids)</li>
+                    <li class="flex items-center"><span class="text-red-500 mr-2">❌</span> Digoxin</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="ecmo-role" class="mb-12 main-content-section">
+        <h2 class="text-2xl font-bold text-center text-[#264653] mb-8">葉克膜 (ECMO) 的角色</h2>
+        <div class="bg-white p-6 rounded-lg shadow-xl content-card" data-keywords="ECMO 葉克膜 體外維生系統 心因性休克 低體溫">
+            <p class="text-center text-gray-600 mb-4">ECMO 作為最終極的支持性療法，可在傳統治療無效時，作為恢復的橋樑 (bridge to recovery)。</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-blue-800">主要適應症</h4>
+                    <ul class="list-disc list-inside mt-2 text-sm text-gray-700">
+                        <li>心臟毒性藥物 (如 B-Blocker, CCB, TCA, Digoxin) 引起的頑固性心因性休克或心跳停止。</li>
+                    </ul>
+                </div>
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-green-800">其他潛在應用</h4>
+                    <ul class="list-disc list-inside mt-2 text-sm text-gray-700">
+                        <li>鎮靜安眠藥物引起的嚴重低體溫。</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pitfall-box">
+                <h5 class="font-bold">臨床教訓</h5>
+                <p class="text-sm">ECMO 是支持性療法，而非解毒劑。其成功關鍵在於早期啟動，為藥物代謝或後續治療 (如血液透析) 爭取時間。需有明確的退場機制。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="recommended-resources" class="mb-12 main-content-section">
+        <h2 class="text-2xl font-bold text-center text-[#264653] mb-8">推薦資源 (Recommended Resources)</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="font-bold text-xl text-[#2a9d8f] mb-4 text-center">推薦網站</h3>
+                <ul class="space-y-3">
+                    <li><a href="https://www.micromedexsolutions.com" target="_blank" rel="noopener" class="text-blue-700 hover:underline">Micromedex (Poisindex)</a></li>
+                    <li><a href="https://www.pcc-vghtpe.tw/antidote/" target="_blank" rel="noopener" class="text-blue-700 hover:underline">解毒劑儲備網</a></li>
+                    <li><a href="https://www.toxconsult.org.tw/" target="_blank" rel="noopener" class="text-blue-700 hover:underline">台灣急診醫學會毒藥物諮詢</a></li>
+                </ul>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="font-bold text-xl text-[#2a9d8f] mb-4 text-center">推薦讀物</h3>
+                <ul class="space-y-3">
+                    <li>Goldfrank's Toxicologic Emergencies</li>
+                    <li>急性中毒救命術 (AILS)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="bg-[#264653] text-white mt-12 py-10 px-6">
+    <div class="container mx-auto max-w-3xl">
+        <div class="bg-[#1d3a47] rounded-lg p-5 mb-6">
+            <p class="font-bold text-[#e9c46a] mb-2">作者</p>
+            <p class="text-lg">潘麒亘 醫師</p>
+            <p class="text-sm text-gray-300 mt-1">中國醫藥大學附設醫院 急診部｜毒物及急診專科醫師</p>
+            <p class="text-sm text-gray-400 mt-3">最後更新：2026 年 8 月 31 日</p>
+        </div>
+        <div class="text-center text-sm">
+            <p>本資訊圖表僅供學術教育參考，不得取代專業臨床判斷。所有臨床決策應基於最新文獻與治療指引。</p>
+            <p class="mt-2 text-gray-400">資料來源參考：Goldfrank's Toxicologic Emergencies、Micromedex、美國醫學毒物學會 (ACMT) 指引、台灣急診醫學會、解毒劑儲備網。</p>
+        </div>
+    </div>
+</footer>
+
+<button id="backToTopBtn" aria-label="回到頁首" class="bg-[#2a9d8f] text-white rounded-full p-3 shadow-lg hover:bg-[#207c70] transition-colors duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+    </svg>
+</button>
+
+<div id="detailModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="detailModalTitle">
+    <div class="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[85vh] flex flex-col">
+        <div class="flex justify-between items-center p-4 border-b">
+            <h3 id="detailModalTitle" class="text-xl font-bold text-[#264653]"></h3>
+            <button id="closeDetailModalButton" aria-label="關閉" class="text-gray-500 hover:text-gray-800 text-2xl font-bold leading-none">&times;</button>
+        </div>
+        <div id="detailModalContent" class="p-6 overflow-y-auto prose"></div>
+        <div class="p-4 border-t text-right">
+            <button id="closeDetailModalButton2" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">關閉</button>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    /* ------------------------------------------------------------------
+       深入內容（由卡片上的「查看完整治療指引」按鈕開啟）
+       ------------------------------------------------------------------ */
+    const treatmentDetails = {
+        organophosphate: {
+            title: '有機磷 (Organophosphate) 詳細治療指引',
+            content: `
+                <h4>處置與動向 (Disposition)</h4>
+                <ul>
+                    <li><b>輕症／無症狀者：</b>若僅為意外接觸、無症狀、或症狀極其輕微（生命徵象穩定，AChE 活性 &gt; 80%），觀察 12 小時後若無變化即可出院。<b>重點：</b>對於高脂溶性的有機磷（如：芬普尼 fenthion），中毒症狀可能延遲出現，即使初期無症狀，仍需謹慎評估暴露量並考慮延長觀察時間。</li>
+                    <li><b>中重度中毒者：</b>任何出現顯著毒蕈鹼性 (Muscarinic: DUMBELS — 腹瀉、尿失禁、瞳孔縮小、心跳過緩／支氣管痙攣、嘔吐、流淚、流涎) 或尼古丁性 (Nicotinic: MTWTF — 肌肉無力、心跳過速、抽搐、高血壓、肌束顫動) 症狀的病患，應立即收治於加護病房 (ICU)。</li>
+                </ul>
+
+                <h4>治療 (Management)</h4>
+                <ul>
+                    <li><b>呼吸道管理 (Airway Management)：</b>這是最優先且最關鍵的一步。大量的支氣管分泌物 (Bronchorrhea) 和呼吸肌無力是導致死亡的主因。
+                        <ul>
+                            <li>積極抽吸並給予高濃度氧氣。</li>
+                            <li>準備早期插管：呼吸肌無力或大量分泌物影響氣體交換時，應果斷進行氣管內插管。</li>
+                            <li><b>絕對禁忌：</b>切勿使用 Succinylcholine 進行快速誘導插管 (RSI)。因其作用會被 OP 中毒顯著延長，導致長時間的麻痺。請選用 Rocuronium 等非去極化性肌肉鬆弛劑。</li>
+                        </ul>
+                    </li>
+                    <li><b>除污 (Decontamination)：</b>
+                        <ul>
+                            <li><b>人員防護：</b>處理病患前，務必穿戴個人防護裝備 (PPE)。</li>
+                            <li><b>皮膚／衣物：</b>立即移除所有受污染的衣物，並用肥皂與清水徹底清洗皮膚。</li>
+                            <li><b>腸胃道：</b>活性碳與洗胃僅在近期（1 小時內）吞食大量且氣道已受保護（已插管）的情況下才可考慮。</li>
+                        </ul>
+                    </li>
+                    <li><b>解毒劑 (Antidote)</b>
+                        <ul>
+                            <li><b>Atropine（阿托品）</b>
+                                <ul>
+                                    <li>目標：拮抗毒蕈鹼性 (Muscarinic) 症狀。</li>
+                                    <li><b>治療終點 (Titration Endpoint)：</b>不是心跳速率恢復正常，而是肺部聽診時分泌物的囉音 (rales) 消失、氣道變得乾燥。這是最重要的臨床指標。</li>
+                                    <li>劑量：成人初始劑量 1-2 mg IV，兒童 0.02 mg/kg IV。若 5 分鐘後無效，應將劑量加倍，並每 5 分鐘重複給予，直到達到治療終點。一旦症狀穩定，可改為持續靜脈輸注（通常是總負荷劑量的 10-20% per hour）。記住，劑量可能需要非常大（數百毫克），不要因為劑量看似過高而卻步。</li>
+                                </ul>
+                            </li>
+                            <li><b>Pralidoxime (2-PAM, PAM)</b>
+                                <ul>
+                                    <li>目標：重新活化乙醯膽鹼酯酶，主要治療尼古丁性 (Nicotinic) 症狀，特別是肌肉無力與呼吸衰竭。</li>
+                                    <li>時機：中重度中毒者，應在 Atropine 之外盡快給予，最好在 48 小時內。</li>
+                                    <li>劑量：為維持穩定的血中濃度，持續靜脈輸注優於間歇性單次推注。
+                                        <ul>
+                                            <li>成人：Loading dose 30 mg/kg (max 2 g) over 30 min，接續 infusion 8-10 mg/kg/hr。</li>
+                                            <li>兒童：Loading dose 20-40 mg/kg (max 2 g) over 30-60 min，接續 infusion 10-20 mg/kg/hr。</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><b>是否需體外移除術 (Enhanced Elimination)：</b>血液灌流 (Hemoperfusion) 或血液透析 (Hemodialysis) 無臨床實證。</li>
+                    <li><b>Intravenous Fat Emulsion 是否可用：</b>作為救援療法 (Rescue therapy)。當病患因高脂溶性 OP 中毒，出現對標準治療無效的頑固性心血管毒性（如休克、心室性心律不整）時可考慮使用。</li>
+                </ul>
+
+                <h4>臨床實戰的致命陷阱 (Critical Pitfalls)</h4>
+                <ul>
+                    <li><b>Atropine 劑量不足 (Under-atropinization)：</b>這是最常見的錯誤。不要害怕使用大劑量，務必積極給藥直到達到氣道乾燥的目標。</li>
+                    <li><b>忽略皮膚除污 (Inadequate Decontamination)：</b>許多嚴重中毒案例都伴隨皮膚暴露。未徹底除污，毒物會持續吸收。</li>
+                    <li><b>過早停止治療與監測 (Premature Cessation of Therapy)：</b>停用解毒劑後，必須密切監測至少 24-48 小時，警惕膽鹼性症狀復發或中間型症候群 (Intermediate syndrome) 的出現（通常在中毒後 24-96 小時發生，表現為頸部及近端肢體肌肉無力）。</li>
+                </ul>
+            `
+        }
+    };
+
+    /* ------------------------------------------------------------------
+       搜尋
+       ------------------------------------------------------------------ */
+    const searchInput  = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    const noResults    = document.getElementById('noResults');
+    const noResultsQ   = document.getElementById('noResultsQuery');
+    const sections     = Array.from(document.querySelectorAll('.main-content-section'));
+
+    // 去掉所有空白後比對，這樣「QTc 延長」也能被「QTc延長」搜到。
+    const norm = s => (s || '').toLowerCase().replace(/\s+/g, '');
+
+    // 於載入時快取純文字。務必用 textContent 而非 innerText：
+    // innerText 對 display:none 的元素會回傳空字串，會導致卡片一旦被隱藏就再也搜不到。
+    const cards = Array.from(document.querySelectorAll('.content-card'));
+    cards.forEach(card => {
+        card.dataset.searchText = norm(card.textContent + ' ' + (card.dataset.keywords || ''));
+    });
+    sections.forEach(sec => {
+        if (!sec.querySelector('.content-card')) sec.dataset.searchText = norm(sec.textContent);
+    });
+
+    // 讓 modal 內的深入內容也能被搜尋到
+    Object.entries(treatmentDetails).forEach(([key, detail]) => {
+        const btn  = document.querySelector('[data-detail="' + key + '"]');
+        const card = btn && btn.closest('.content-card');
+        if (!card) return;
+        const tmp = document.createElement('div');
+        tmp.innerHTML = detail.content;
+        card.dataset.searchText += norm(tmp.textContent);
+    });
+
+    const performSearch = (shouldScroll) => {
+        const q = norm(searchInput.value);
+        let firstMatch = null;
+        let anyVisible = false;
+
+        sections.forEach(section => {
+            const inSection = Array.from(section.querySelectorAll('.content-card'));
+            if (inSection.length) {
+                let sectionHit = false;
+                inSection.forEach(card => {
+                    const hit = q === '' || card.dataset.searchText.indexOf(q) !== -1;
+                    card.classList.toggle('hidden', !hit);
+                    if (hit) {
+                        sectionHit = true;
+                        if (!firstMatch) firstMatch = card;
+                    }
+                });
+                section.classList.toggle('hidden', !sectionHit);
+                if (sectionHit) anyVisible = true;
+            } else {
+                const hit = q === '' || section.dataset.searchText.indexOf(q) !== -1;
+                section.classList.toggle('hidden', !hit);
+                if (hit) {
+                    anyVisible = true;
+                    if (!firstMatch) firstMatch = section;
+                }
+            }
+        });
+
+        noResults.classList.toggle('hidden', anyVisible);
+        if (!anyVisible) noResultsQ.textContent = searchInput.value.trim();
+
+        if (q === '') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
+        // 只在按下 Enter 或搜尋鈕時捲動，避免打字過程中畫面一直跳。
+        if (shouldScroll && firstMatch) {
+            firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    };
+
+    searchInput.addEventListener('input', () => performSearch(false));
+    searchButton.addEventListener('click', () => performSearch(true));
+    searchInput.addEventListener('keydown', e => {
+        if (e.key === 'Enter') { e.preventDefault(); performSearch(true); }
+    });
+
+    /* ------------------------------------------------------------------
+       深入內容 Modal
+       ------------------------------------------------------------------ */
+    const detailModal   = document.getElementById('detailModal');
+    const modalTitle    = document.getElementById('detailModalTitle');
+    const modalContent  = document.getElementById('detailModalContent');
+    const closeBtn      = document.getElementById('closeDetailModalButton');
+    const closeBtn2     = document.getElementById('closeDetailModalButton2');
+
+    const closeDetailModal = () => {
+        detailModal.classList.add('hidden');
+        document.body.style.overflow = '';
+    };
+
+    const openDetailModal = key => {
+        const detail = treatmentDetails[key];
+        if (!detail) return;
+        modalTitle.textContent = detail.title;
+        modalContent.innerHTML = detail.content;
+        modalContent.scrollTop = 0;
+        detailModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+    };
+
+    document.querySelectorAll('[data-detail]').forEach(btn => {
+        btn.addEventListener('click', () => openDetailModal(btn.dataset.detail));
+    });
+    [closeBtn, closeBtn2].forEach(b => b.addEventListener('click', closeDetailModal));
+    detailModal.addEventListener('click', e => {
+        if (e.target === detailModal) closeDetailModal();
+    });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && !detailModal.classList.contains('hidden')) closeDetailModal();
+    });
+
+    /* ------------------------------------------------------------------
+       回到頁首
+       ------------------------------------------------------------------ */
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    window.addEventListener('scroll', () => {
+        backToTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+    }, { passive: true });
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+});
+</script>
+</body>
+</html>

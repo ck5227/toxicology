@@ -1,0 +1,10 @@
+# 注意：robots.txt 只有放在網域根目錄才會被爬蟲讀取。
+# 目前站台位於 https://ck5227.github.io/toxicology/ （專案頁），
+# 爬蟲實際讀的是 https://ck5227.github.io/robots.txt，不是這一份。
+# 因此現階段請直接在 Google Search Console 手動提交 sitemap.xml。
+# 日後若接上自訂網域、站台移到根目錄，這份檔案就會自動生效。
+
+User-agent: *
+Allow: /
+
+Sitemap: https://ck5227.github.io/toxicology/sitemap.xml

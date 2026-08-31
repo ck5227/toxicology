@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://ck5227.github.io/toxicology/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!--
+    Phase 2：每搬好一個子頁，就把對應的區塊取消註解並更新 lastmod。
+    切勿列出尚未上線的網址 —— 送出 404 的 sitemap 會傷害索引評價。
+
+  <url>
+    <loc>https://ck5227.github.io/toxicology/organophosphate/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/acetaminophen/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/methanol/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/cyanide/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/lithium/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/digoxin/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <priority>0.8</priority>
+  </url>
+  -->
+
+</urlset>

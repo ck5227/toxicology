@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  Phase 2 子頁模板
+  ----------------------------------------------------------------------------
+  使用方式：
+  1. 在專案根目錄建立資料夾，例如  organophosphate/
+  2. 把這個檔案複製成          organophosphate/index.html
+  3. 搜尋並取代所有 【】 標記的欄位
+  4. 到 sitemap.xml 取消對應區塊的註解
+  5. 回到 index.html，把該毒物卡片標題的連結
+        https://sites.google.com/view/xxx/     改成    ../organophosphate/
+     並移除 target="_blank" rel="noopener"
+
+  注意：本檔案位於子資料夾內，所有站內連結都用 ../ 開頭的相對路徑，
+  這樣未來就算接上自訂網域（站台移到根目錄）也不會失效。
+  ============================================================================
+-->
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- 【標題】搜尋結果第一行。格式建議：中文名 (英文名) 診斷與治療 | 臨床毒物學精要 -->
+<title>【有機磷中毒 (Organophosphate) 診斷與治療】 | 臨床毒物學精要</title>
+
+<!-- 【描述】搜尋結果第二行，80–120 字，把最關鍵的臨床詞塞進去 -->
+<meta name="description" content="【有機磷農藥中毒的膽鹼性危象表現、Atropine 滴定終點與劑量、Pralidoxime 輸注方式、間期症候群與臨床陷阱。】">
+<meta name="author" content="潘麒亘 醫師">
+<meta name="robots" content="index, follow">
+
+<!-- 【網址】換成這一頁的實際網址 -->
+<link rel="canonical" href="https://ck5227.github.io/toxicology/【organophosphate】/">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="臨床毒物學精要">
+<meta property="og:title" content="【有機磷中毒 (Organophosphate)】">
+<meta property="og:description" content="【一句話摘要】">
+<meta property="og:url" content="https://ck5227.github.io/toxicology/【organophosphate】/">
+<meta property="og:locale" content="zh_TW">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "【有機磷中毒 (Organophosphate)】",
+  "url": "https://ck5227.github.io/toxicology/【organophosphate】/",
+  "inLanguage": "zh-Hant",
+  "description": "【一句話摘要】",
+  "dateModified": "【2026-08-31】",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "臨床毒物學精要",
+    "url": "https://ck5227.github.io/toxicology/"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "潘麒亘",
+    "jobTitle": "毒物及急診專科醫師",
+    "affiliation": {
+      "@type": "MedicalOrganization",
+      "name": "中國醫藥大學附設醫院 急診部"
+    }
+  },
+  "audience": { "@type": "MedicalAudience", "audienceType": "Physician" }
+}
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+    .hidden { display: none !important; }
+    body { font-family: 'Noto Sans TC', sans-serif; background-color: #f0f4f8; }
+    .list-item-label { font-weight: 600; color: #4a5568; margin-right: 0.5rem; }
+    .disposition-box {
+        margin-top: 1rem; padding: 0.75rem;
+        background-color: #ebf8ff; border-left: 4px solid #4299e1;
+        color: #2c5282; border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .pitfall-box {
+        margin-top: 0.5rem; padding: 0.75rem;
+        background-color: #fffbeb; border-left: 4px solid #f59e0b;
+        color: #78350f; border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .corrosive-note {
+        margin-top: 0.5rem; padding: 0.75rem;
+        background-color: #fee2e2; border-left: 4px solid #ef4444;
+        color: #991b1b; border-radius: 0 0.5rem 0.5rem 0;
+    }
+    .content-section h3 {
+        font-size: 1.25rem; font-weight: 700; color: #264653;
+        margin-top: 2rem; margin-bottom: 0.75rem;
+        padding-bottom: 0.4rem; border-bottom: 2px solid #e2e8f0;
+    }
+    .content-section h4 {
+        font-size: 1.05rem; font-weight: 700; color: #2a9d8f;
+        margin-top: 1.25rem; margin-bottom: 0.5rem;
+    }
+    .content-section ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 0.75rem; }
+    .content-section li { margin-bottom: 0.35rem; }
+    .content-section p { margin-bottom: 0.75rem; }
+</style>
+</head>
+<body class="text-gray-800">
+
+<header class="bg-[#264653] text-white p-6 shadow-lg">
+    <div class="container mx-auto max-w-4xl">
+        <a href="../" class="text-sm text-gray-300 hover:text-[#e9c46a]">← 回臨床毒物學精要總覽</a>
+        <!-- 【H1】每頁只能有一個 h1，必須包含主要關鍵字 -->
+        <h1 class="text-3xl md:text-4xl font-bold text-[#e9c46a] mt-2">【有機磷 (Organophosphate) 中毒】</h1>
+        <!-- 【副標】一句話講清楚機轉 -->
+        <p class="mt-2 text-gray-300">【不可逆抑制乙醯膽鹼酯酶，導致致命的膽鹼性危象】</p>
+    </div>
+</header>
+
+<main class="container mx-auto max-w-4xl p-4 md:p-8">
+
+    <!-- 摘要卡：讓讀者（和 Google）在 3 秒內抓到重點 -->
+    <div class="bg-white p-6 rounded-lg shadow-xl mb-8">
+        <h2 class="text-lg font-bold text-[#264653] mb-3">重點摘要</h2>
+        <ul class="list-none space-y-2 text-gray-700">
+            <li><span class="list-item-label">機轉:</span>【】</li>
+            <li><span class="list-item-label">典型表現:</span>【】</li>
+            <li><span class="list-item-label">關鍵檢查:</span>【】</li>
+            <li><span class="list-item-label">解毒劑／核心治療:</span>【】</li>
+        </ul>
+    </div>
+
+    <article class="bg-white p-6 md:p-8 rounded-lg shadow-xl content-section">
+
+        <h3>一、流行病學與暴露來源</h3>
+        <p>【】</p>
+
+        <h3>二、毒理機轉</h3>
+        <p>【】</p>
+
+        <h3>三、臨床表現</h3>
+        <h4>急性</h4>
+        <ul><li>【】</li></ul>
+        <h4>慢性／延遲性</h4>
+        <ul><li>【】</li></ul>
+
+        <h3>四、診斷與檢查</h3>
+        <ul><li>【】</li></ul>
+
+        <h3>五、治療</h3>
+        <h4>支持性療法</h4>
+        <ul><li>【】</li></ul>
+        <h4>除污</h4>
+        <ul><li>【】</li></ul>
+        <h4>解毒劑（含劑量）</h4>
+        <ul><li>【】</li></ul>
+        <h4>加強排除（透析／血液灌流／MDAC）</h4>
+        <ul><li>【】</li></ul>
+
+        <h3>六、處置與動向</h3>
+        <div class="disposition-box">
+            <h5 class="font-bold">Disposition</h5>
+            <p class="text-sm">【出院條件／留觀時數／住院／ICU 收治標準】</p>
+        </div>
+
+        <h3>七、臨床陷阱</h3>
+        <div class="pitfall-box">
+            <h5 class="font-bold">Pitfalls</h5>
+            <ul class="list-disc list-inside text-sm">
+                <li>【】</li>
+            </ul>
+        </div>
+
+        <!-- 若此毒物具腐蝕性才保留這一段，否則刪除
+        <div class="corrosive-note">
+            <h5 class="font-bold">腐蝕性注意</h5>
+            <p class="text-sm">【】</p>
+        </div>
+        -->
+
+        <h3>八、參考文獻</h3>
+        <ol class="list-decimal list-inside text-sm text-gray-600 space-y-1">
+            <li>【Goldfrank's Toxicologic Emergencies, 11th ed.】</li>
+            <li>【】</li>
+        </ol>
+
+    </article>
+
+    <!-- 相關頁面：站內互連對 SEO 很重要，每頁至少連 3 個相關主題 -->
+    <nav class="mt-8 bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-lg font-bold text-[#264653] mb-3">相關主題</h2>
+        <ul class="list-disc list-inside space-y-1 text-blue-700">
+            <li><a href="../" class="hover:underline">臨床毒物學精要（總覽）</a></li>
+            <li><a href="../【carbamate】/" class="hover:underline">【胺基甲酸鹽 (Carbamate)】</a></li>
+            <li><a href="../【另一個相關主題】/" class="hover:underline">【】</a></li>
+        </ul>
+    </nav>
+
+</main>
+
+<footer class="bg-[#264653] text-white mt-12 py-10 px-6">
+    <div class="container mx-auto max-w-3xl">
+        <div class="bg-[#1d3a47] rounded-lg p-5 mb-6">
+            <p class="font-bold text-[#e9c46a] mb-2">作者</p>
+            <p class="text-lg">潘麒亘 醫師</p>
+            <p class="text-sm text-gray-300 mt-1">中國醫藥大學附設醫院 急診部｜毒物及急診專科醫師</p>
+            <p class="text-sm text-gray-400 mt-3">最後更新：【2026 年 8 月 31 日】</p>
+        </div>
+        <div class="text-center text-sm">
+            <p>本頁僅供學術教育參考，不得取代專業臨床判斷。所有臨床決策應基於最新文獻與治療指引。</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
