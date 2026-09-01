@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Toxidrome 鑑別工具 — 中毒症候群互動式鑑別與教學</title>
+<meta name="description" content="輸入生命徵象、瞳孔、皮膚、腸蠕動、意識與肌張力，即時比對八大中毒症候群並列出支持與不支持的依據。附陰離子間隙、滲透壓間隙、飽和度間隙計算與氰化物紅旗檢核，供急診住院醫師查詢與教學使用。">
+<meta name="author" content="潘麒亘 醫師">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ck5227.github.io/toxicology/toxidrome/">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="臨床毒物學精要">
+<meta property="og:title" content="Toxidrome 鑑別工具">
+<meta property="og:description" content="互動式中毒症候群鑑別與教學工具。所有計算在瀏覽器內完成，不傳送任何資料。">
+<meta property="og:url" content="https://ck5227.github.io/toxicology/toxidrome/">
+<meta property="og:locale" content="zh_TW">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "Toxidrome 鑑別工具",
+  "url": "https://ck5227.github.io/toxicology/toxidrome/",
+  "inLanguage": "zh-Hant",
+  "description": "互動式中毒症候群鑑別與教學工具，含間隙計算與紅旗檢核。",
+  "dateModified": "2026-08-31",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "臨床毒物學精要",
+    "url": "https://ck5227.github.io/toxicology/"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "潘麒亘",
+    "jobTitle": "毒物及急診專科醫師",
+    "affiliation": { "@type": "MedicalOrganization", "name": "中國醫藥大學附設醫院 急診部" }
+  },
+  "audience": { "@type": "MedicalAudience", "audienceType": "Physician" }
+}
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+    .hidden { display: none !important; }
+    body { font-family: 'Noto Sans TC', sans-serif; background-color: #f0f4f8; }
+
+    .tab-btn {
+        padding: 0.6rem 1.1rem;
+        border-radius: 0.5rem 0.5rem 0 0;
+        font-weight: 700;
+        color: #64748b;
+        border-bottom: 3px solid transparent;
+        white-space: nowrap;
+    }
+    .tab-btn:hover { color: #264653; background-color: #e6edf5; }
+    .tab-btn.active { color: #264653; background-color: #fff; border-bottom-color: #2a9d8f; }
+
+    .field label {
+        display: block;
+        font-weight: 600;
+        color: #334155;
+        margin-bottom: 0.3rem;
+        font-size: 0.9rem;
+    }
+    .field select, .field input {
+        width: 100%;
+        padding: 0.55rem 0.6rem;
+        border: 1px solid #cbd5e1;
+        border-radius: 0.4rem;
+        background-color: #fff;
+        font-size: 0.95rem;
+        color: #1e293b;
+    }
+    .field select:focus, .field input:focus {
+        outline: none;
+        border-color: #2a9d8f;
+        box-shadow: 0 0 0 2px rgba(42,157,143,.25);
+    }
+    .field select.filled { border-color: #2a9d8f; background-color: #f0fdfa; }
+    .hint { font-size: .75rem; color: #64748b; margin-top: .2rem; }
+
+    .bar-track { background-color: #e2e8f0; border-radius: 999px; height: .55rem; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 999px; transition: width .35s ease; }
+
+    .chip {
+        display: inline-block;
+        font-size: .78rem;
+        padding: .15rem .5rem;
+        border-radius: 999px;
+        margin: .12rem .18rem .12rem 0;
+    }
+    .chip-pro { background-color: #d1fae5; color: #065f46; }
+    .chip-con { background-color: #fee2e2; color: #991b1b; }
+
+    .matrix { border-collapse: collapse; width: 100%; font-size: .82rem; }
+    .matrix th, .matrix td {
+        border: 1px solid #e2e8f0;
+        padding: .45rem .5rem;
+        text-align: center;
+        vertical-align: middle;
+    }
+    .matrix thead th {
+        background-color: #264653;
+        color: #fff;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        font-weight: 700;
+    }
+    .matrix tbody th {
+        background-color: #f8fafc;
+        text-align: left;
+        font-weight: 700;
+        color: #264653;
+        position: sticky;
+        left: 0;
+        z-index: 1;
+        min-width: 8.5rem;
+    }
+    .matrix .hallmark { background-color: #fef3c7; font-weight: 700; color: #78350f; }
+
+    .disposition-box {
+        margin-top: 1rem; padding: .75rem;
+        background-color: #ebf8ff; border-left: 4px solid #4299e1;
+        color: #2c5282; border-radius: 0 .5rem .5rem 0;
+    }
+    .pitfall-box {
+        margin-top: .5rem; padding: .75rem;
+        background-color: #fffbeb; border-left: 4px solid #f59e0b;
+        color: #78350f; border-radius: 0 .5rem .5rem 0;
+    }
+    .danger-box {
+        margin-top: .5rem; padding: .75rem;
+        background-color: #fee2e2; border-left: 4px solid #ef4444;
+        color: #991b1b; border-radius: 0 .5rem .5rem 0;
+    }
+    .teach-box {
+        margin-top: .5rem; padding: .75rem;
+        background-color: #f0fdfa; border-left: 4px solid #2a9d8f;
+        color: #134e4a; border-radius: 0 .5rem .5rem 0;
+    }
+    .scroll-x { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+</style>
+</head>
+<body class="text-gray-800">
+
+<header class="bg-[#264653] text-white px-6 py-5 shadow-lg">
+    <div class="container mx-auto max-w-6xl">
+        <a href="../" class="text-sm text-gray-300 hover:text-[#e9c46a]">← 回臨床毒物學精要總覽</a>
+        <h1 class="text-2xl md:text-3xl font-bold text-[#e9c46a] mt-2">Toxidrome 鑑別工具</h1>
+        <p class="mt-1 text-gray-300 text-sm">依生命徵象與理學檢查比對中毒症候群 ｜ 查詢與教學兩用</p>
+    </div>
+</header>
+
+<div class="bg-[#1d3a47] text-gray-200 px-6 py-2.5 text-xs">
+    <div class="container mx-auto max-w-6xl flex flex-wrap gap-x-5 gap-y-1">
+        <span>🔒 所有判讀與計算<b class="text-[#e9c46a]">完全在你的瀏覽器內完成</b>，不傳送、不儲存任何資料</span>
+        <span>👨‍⚕️ 僅供醫療專業人員教育參考，不得取代臨床判斷</span>
+        <span>🚫 請勿輸入任何可識別病人身分的資訊</span>
+    </div>
+</div>
+
+<main class="container mx-auto max-w-6xl p-4 md:p-6">
+
+    <div class="scroll-x border-b border-gray-300 mb-6">
+        <nav class="flex gap-1" id="tabNav">
+            <button class="tab-btn active" data-tab="differential">🔍 鑑別</button>
+            <button class="tab-btn" data-tab="matrix">📊 對照表</button>
+            <button class="tab-btn" data-tab="labs">🧪 實驗室線索</button>
+            <button class="tab-btn" data-tab="cases">🎓 案例練習</button>
+        </nav>
+    </div>
+
+    <!-- ============================= 鑑別 ============================= -->
+    <section id="tab-differential" class="tab-panel">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-lg shadow-xl p-5 lg:sticky lg:top-4">
+                    <div class="flex justify-between items-center mb-1">
+                        <h2 class="text-lg font-bold text-[#264653]">臨床發現</h2>
+                        <button id="resetBtn" class="text-xs px-2.5 py-1 rounded bg-gray-200 hover:bg-gray-300 text-gray-700">清除</button>
+                    </div>
+                    <p class="hint mb-4">不需要全部填寫 —— 未評估的項目不會被計分。填得越多，鑑別越可靠。</p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+
+                        <div class="field">
+                            <label for="f-hr">心跳</label>
+                            <select id="f-hr" data-param="hr">
+                                <option value="">— 未評估 —</option>
+                                <option value="brady">過緩 &lt; 60</option>
+                                <option value="normal">正常 60–100</option>
+                                <option value="tachy">過速 100–140</option>
+                                <option value="severe_tachy">極速 &gt; 140</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="f-bp">血壓（收縮壓）</label>
+                            <select id="f-bp" data-param="bp">
+                                <option value="">— 未評估 —</option>
+                                <option value="hypo">低血壓 &lt; 90</option>
+                                <option value="normal">正常 90–160</option>
+                                <option value="hyper">高血壓 &gt; 160</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="f-rr">呼吸</label>
+                            <select id="f-rr" data-param="rr">
+                                <option value="">— 未評估 —</option>
+                                <option value="depressed">抑制 &lt; 12</option>
+                                <option value="normal">正常 12–20</option>
+                                <option value="tachypnea">過速 20–30</option>
+                                <option value="severe_tachypnea">極速 &gt; 30（過度換氣）</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="f-temp">體溫</label>
+                            <select id="f-temp" data-param="temp">
+                                <option value="">— 未評估 —</option>
+                                <option value="hypothermia">低體溫 &lt; 36</option>
+                                <option value="normal">正常 36–38</option>
+                                <option value="fever">發燒 38–40</option>
+                                <option value="hyperthermia">高熱 &gt; 40</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="f-pupil">瞳孔</label>
+                            <select id="f-pupil" data-param="pupil">
+                                <option value="">— 未評估 —</option>
+                                <option value="pinpoint">針尖 &lt; 2mm</option>
+                                <option value="miosis">縮小 2–3mm</option>
+                                <option value="normal">正常 3–5mm</option>
+                                <option value="mydriasis">散大 &gt; 5mm</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="f-skin">皮膚</label>
+                            <select id="f-skin" data-param="skin">
+                                <option value="">— 未評估 —</option>
+                                <option value="dry_flushed">乾燥、潮紅</option>
+                                <option value="dry_normal">乾燥、顏色正常</option>
+                                <option value="diaphoretic_warm">多汗、溫熱</option>
+                                <option value="diaphoretic_cool">多汗、濕冷</option>
+                                <option value="cyanotic">發紺</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="f-bowel">腸蠕動音</label>
+                            <select id="f-bowel" data-param="bowel">
+                                <option value="">— 未評估 —</option>
+                                <option value="absent">消失</option>
+                                <option value="decreased">減弱</option>
+                                <option value="normal">正常</option>
+                                <option value="hyperactive">亢進</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="f-mental">意識狀態</label>
+                            <select id="f-mental" data-param="mental">
+                                <option value="">— 未評估 —</option>
+                                <option value="alert">清醒</option>
+                                <option value="drowsy">嗜睡、言語不清</option>
+                                <option value="coma">昏迷</option>
+                                <option value="agitated_delirium">躁動、譫妄</option>
+                                <option value="psychosis">幻覺、精神病症狀</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="f-urinary">排尿</label>
+                            <select id="f-urinary" data-param="urinary">
+                                <option value="">— 未評估 —</option>
+                                <option value="retention">尿滯留</option>
+                                <option value="normal">正常</option>
+                                <option value="incontinence">尿失禁</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="f-tone">肌張力／神經肌肉</label>
+                            <select id="f-tone" data-param="tone">
+                                <option value="">— 未評估 —</option>
+                                <option value="normal">正常</option>
+                                <option value="fasciculation">肌束顫動</option>
+                                <option value="clonus_hyperreflexia">陣攣、反射亢進（下肢為主）</option>
+                                <option value="lead_pipe">鉛管樣僵硬</option>
+                                <option value="flaccid">鬆軟無力</option>
+                            </select>
+                        </div>
+
+                        <div class="field sm:col-span-2">
+                            <label for="f-secretion">分泌物</label>
+                            <select id="f-secretion" data-param="secretion">
+                                <option value="">— 未評估 —</option>
+                                <option value="none">無異常</option>
+                                <option value="increased">流涎、流淚增加</option>
+                                <option value="bronchorrhea">大量支氣管分泌物</option>
+                            </select>
+                            <p class="hint">此項不在傳統五大 toxidrome 的定義中，但對膽鹼症候群的判斷極為關鍵，且是 Atropine 的滴定終點。</p>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-4 p-3 bg-gray-50 rounded-md text-sm text-gray-600" id="fillStatus">
+                        已填 <b id="fillCount">0</b> / 11 項
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-3">
+                <div id="resultsEmpty" class="bg-white rounded-lg shadow-md p-10 text-center text-gray-500">
+                    <p class="text-lg">請在左側填入臨床發現</p>
+                    <p class="text-sm mt-2">至少填 3 項才會開始比對。不確定的項目請留在「未評估」，不要用猜的。</p>
+                </div>
+                <div id="resultsArea" class="hidden space-y-4"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================= 對照表 ============================= -->
+    <section id="tab-matrix" class="tab-panel hidden">
+
+        <div class="bg-white rounded-lg shadow-xl p-5 mb-6">
+            <h2 class="text-lg font-bold text-[#264653] mb-1">八大症候群對照表</h2>
+            <p class="text-sm text-gray-600 mb-4">
+                <span class="inline-block w-3 h-3 align-middle" style="background:#fef3c7;border:1px solid #e2e8f0"></span>
+                黃底 = 該症候群的<b>決定性特徵</b>（hallmark）—— 這一格對了，鑑別方向就大致確定；這一格相反，幾乎可以排除。
+            </p>
+            <div class="scroll-x" style="max-height:70vh">
+                <table class="matrix" id="matrixTable"></table>
+            </div>
+        </div>
+
+        <h2 class="text-lg font-bold text-[#264653] mb-3">最容易混淆的四組鑑別</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+            <div class="bg-white rounded-lg shadow-md p-5">
+                <h3 class="font-bold text-[#e76f51] mb-2">抗膽鹼 vs. 交感神經</h3>
+                <p class="text-sm text-gray-700 mb-2">兩者都是「熱、快、瞳孔散大、躁動」，光看生命徵象分不出來。</p>
+                <div class="teach-box">
+                    <p class="text-sm"><b>決定性差異在三件事：</b></p>
+                    <ul class="list-disc list-inside text-sm mt-1 space-y-0.5">
+                        <li><b>皮膚</b> — 抗膽鹼是<b>乾</b>的（dry as a bone）；交感是<b>濕</b>的（大量出汗）。這一項單獨就有很高的鑑別力。</li>
+                        <li><b>腸蠕動</b> — 抗膽鹼<b>消失</b>；交感<b>正常或亢進</b>。</li>
+                        <li><b>尿滯留</b> — 抗膽鹼常見；交感沒有。</li>
+                    </ul>
+                </div>
+                <p class="text-xs text-gray-500 mt-2">實務提醒：摸腋下比摸額頭準 —— 額頭可能因環境或退燒處置而誤判。</p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-5">
+                <h3 class="font-bold text-[#f4a261] mb-2">鴉片 vs. 鎮靜安眠</h3>
+                <p class="text-sm text-gray-700 mb-2">兩者都是中樞抑制、昏迷、肌張力下降。</p>
+                <div class="teach-box">
+                    <p class="text-sm"><b>決定性差異：</b></p>
+                    <ul class="list-disc list-inside text-sm mt-1 space-y-0.5">
+                        <li><b>瞳孔</b> — 鴉片是<b>針尖</b>（&lt; 2mm）；鎮靜安眠通常正常或僅略縮，不會到針尖。</li>
+                        <li><b>呼吸抑制程度</b> — 鴉片以<b>呼吸次數顯著減少</b>為主，且常先於意識惡化；單純 BZD 過量的呼吸抑制相對輕微。</li>
+                    </ul>
+                </div>
+                <div class="pitfall-box">
+                    <p class="text-sm"><b>陷阱：</b>混合服用（鴉片 + BZD + 酒精）在急診非常常見，表現會被稀釋。針尖瞳孔 + 呼吸 &lt; 12 就值得試 Naloxone，不必等到符合完整三聯徵。</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-5">
+                <h3 class="font-bold text-[#2a9d8f] mb-2">膽鹼 vs. 鴉片</h3>
+                <p class="text-sm text-gray-700 mb-2">兩者都可以有<b>瞳孔縮小 + 意識抑制 + 心搏過緩</b>。</p>
+                <div class="teach-box">
+                    <p class="text-sm"><b>決定性差異：</b></p>
+                    <ul class="list-disc list-inside text-sm mt-1 space-y-0.5">
+                        <li><b>分泌物</b> — 膽鹼有大量支氣管分泌物、流涎、流淚；鴉片是乾的。</li>
+                        <li><b>腸蠕動</b> — 膽鹼<b>亢進</b>（常合併腹瀉、失禁）；鴉片<b>消失或減弱</b>。</li>
+                        <li><b>肌束顫動</b> — 膽鹼特有（菸鹼樣作用）。</li>
+                    </ul>
+                </div>
+                <div class="danger-box">
+                    <p class="text-sm"><b>後果不同：</b>錯把有機磷當鴉片，會漏掉 Atropine 而讓病人死於支氣管分泌物。<b>肺部聽診有濕囉音 + 針尖瞳孔，先想膽鹼。</b></p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-5">
+                <h3 class="font-bold text-[#6d597a] mb-2">血清素症候群 vs. NMS vs. 抗膽鹼</h3>
+                <p class="text-sm text-gray-700 mb-2">三者都是「高熱 + 意識改變 + 自主神經不穩」。</p>
+                <div class="teach-box">
+                    <p class="text-sm"><b>看肌張力與腸蠕動就能分：</b></p>
+                    <ul class="list-disc list-inside text-sm mt-1 space-y-0.5">
+                        <li><b>血清素症候群</b> — <b>陣攣、反射亢進（下肢明顯）</b>、腸蠕動<b>亢進</b>、瞳孔散大。發作<b>快</b>（數小時內）。</li>
+                        <li><b>NMS</b> — <b>鉛管樣僵硬</b>（全身、無陣攣）、腸蠕動<b>減弱</b>、瞳孔正常。發作<b>慢</b>（數天）。</li>
+                        <li><b>抗膽鹼</b> — 肌張力<b>正常</b>、皮膚<b>乾</b>（前兩者都會大量出汗）。</li>
+                    </ul>
+                </div>
+                <p class="text-xs text-gray-500 mt-2">用藥史通常比理學檢查更快給答案：近期加藥／換藥的是什麼？</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================= 實驗室線索 ============================= -->
+    <section id="tab-labs" class="tab-panel hidden">
+
+        <div class="bg-white rounded-lg shadow-xl p-5 mb-6">
+            <h2 class="text-lg font-bold text-[#264653] mb-2">為什麼需要這一頁</h2>
+            <p class="text-sm text-gray-700">
+                有一大類致命中毒<b>不會產生任何 toxidrome</b> —— 生命徵象可以完全正常，理學檢查可以毫無所獲，
+                但病人正在走向肝衰竭、腎衰竭或猝死。這些只能靠<b>暴露史 + 實驗室數據</b>抓出來。
+                左側的鑑別工具查不到它們，這是設計上的限制，不是遺漏。
+            </p>
+            <div class="danger-box">
+                <p class="text-sm font-bold mb-1">生命徵象正常也可能致命 —— 不要因為「看起來還好」就放心</p>
+                <p class="text-sm">乙醯胺酚、鐵劑、毒性酒精（早期）、秋水仙鹼、鵝膏蕈毒、巴拉刈、Superwarfarin、緩釋劑型的 CCB／B-blocker。
+                <b>對任何蓄意藥物過量，乙醯胺酚濃度應視為常規檢驗</b>，因為它早期完全沒有症狀。</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+            <div class="bg-white rounded-lg shadow-xl p-5">
+                <h3 class="text-lg font-bold text-purple-700 mb-1">陰離子間隙 (Anion Gap)</h3>
+                <p class="hint mb-3">AG = Na⁺ − (Cl⁻ + HCO₃⁻)　｜　參考值 8–12 mEq/L（依各院檢驗方法而異）</p>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
+                    <div class="field"><label for="ag-na">Na⁺ (mEq/L)</label><input type="number" id="ag-na" step="0.1" placeholder="140"></div>
+                    <div class="field"><label for="ag-cl">Cl⁻ (mEq/L)</label><input type="number" id="ag-cl" step="0.1" placeholder="104"></div>
+                    <div class="field"><label for="ag-hco3">HCO₃⁻ (mEq/L)</label><input type="number" id="ag-hco3" step="0.1" placeholder="24"></div>
+                    <div class="field"><label for="ag-alb">白蛋白 (g/dL)</label><input type="number" id="ag-alb" step="0.1" placeholder="選填"></div>
+                </div>
+                <div id="agResult" class="text-sm"></div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-xl p-5">
+                <h3 class="text-lg font-bold text-teal-700 mb-1">滲透壓間隙 (Osmolar Gap)</h3>
+                <p class="hint mb-3">計算值 = 2×Na + 血糖/18 + BUN/2.8 (+ 酒精/4.6)　｜　參考值 &lt; 10 mOsm/kg</p>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-3">
+                    <div class="field"><label for="og-meas">實測滲透壓</label><input type="number" id="og-meas" step="0.1" placeholder="必填"></div>
+                    <div class="field"><label for="og-na">Na⁺ (mEq/L)</label><input type="number" id="og-na" step="0.1" placeholder="140"></div>
+                    <div class="field"><label for="og-glu">血糖 (mg/dL)</label><input type="number" id="og-glu" step="1" placeholder="100"></div>
+                    <div class="field"><label for="og-bun">BUN (mg/dL)</label><input type="number" id="og-bun" step="0.1" placeholder="14"></div>
+                    <div class="field sm:col-span-2"><label for="og-etoh">血中酒精 (mg/dL)</label><input type="number" id="og-etoh" step="1" placeholder="選填，未驗留空"></div>
+                </div>
+                <div id="ogResult" class="text-sm"></div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-xl p-5">
+                <h3 class="text-lg font-bold text-sky-700 mb-1">飽和度間隙 (Saturation Gap)</h3>
+                <p class="hint mb-3">SaO₂（血氧分析儀計算值）− SpO₂（脈衝式血氧儀）　｜　差距 &gt; 5% 有意義</p>
+                <div class="grid grid-cols-2 gap-2 mb-3">
+                    <div class="field"><label for="sg-sao2">SaO₂ (%)</label><input type="number" id="sg-sao2" step="0.1" placeholder="98"></div>
+                    <div class="field"><label for="sg-spo2">SpO₂ (%)</label><input type="number" id="sg-spo2" step="0.1" placeholder="85"></div>
+                </div>
+                <div id="sgResult" class="text-sm"></div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-xl p-5">
+                <h3 class="text-lg font-bold text-indigo-700 mb-1">Delta Ratio（混合性酸鹼失衡）</h3>
+                <p class="hint mb-3">Δ ratio = (AG − 12) / (24 − HCO₃⁻)　｜　需先在左上方填入 AG 三項數值</p>
+                <div id="drResult" class="text-sm"></div>
+                <div class="pitfall-box">
+                    <p class="text-sm">水楊酸中毒的典型是<b>呼吸性鹼中毒 + 高陰離子間隙代謝性酸中毒併存</b>。若只看到 pH 接近正常就以為沒事，會漏掉重症。</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="bg-white rounded-lg shadow-xl p-5 mt-6">
+            <h3 class="text-lg font-bold text-[#d00000] mb-1">🚩 氰化物紅旗檢核</h3>
+            <p class="text-sm text-gray-700 mb-3">氰化物<b>沒有 toxidrome</b>，而且等檢驗確認就來不及了。以下每一項都勾選評估，符合越多越該直接給解毒劑。</p>
+            <div id="cyanideChecklist" class="grid grid-cols-1 md:grid-cols-2 gap-2"></div>
+            <div id="cyanideResult" class="mt-3"></div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-xl p-5 mt-6">
+            <h3 class="text-lg font-bold text-[#264653] mb-3">其他「查不到 toxidrome」的關鍵中毒</h3>
+            <div class="scroll-x">
+                <table class="matrix">
+                    <thead>
+                        <tr><th style="min-width:8rem">毒物</th><th style="min-width:14rem">關鍵線索</th><th style="min-width:12rem">確認檢驗</th><th style="min-width:10rem">處置重點</th></tr>
+                    </thead>
+                    <tbody id="silentTable"></tbody>
+                </table>
+            </div>
+            <p class="hint mt-3">點擊毒物名稱可跳至總覽頁的對應段落。</p>
+        </div>
+    </section>
+
+    <!-- ============================= 案例練習 ============================= -->
+    <section id="tab-cases" class="tab-panel hidden">
+        <div class="bg-white rounded-lg shadow-xl p-5 mb-6">
+            <h2 class="text-lg font-bold text-[#264653] mb-2">怎麼用這一頁教學</h2>
+            <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1">
+                <li>唸出情境，<b>先讓住院醫師說出他的鑑別診斷與理由</b>，不要先按按鈕。</li>
+                <li>按「載入到鑑別工具」，看比對結果與他的推理是否一致 —— <b>不一致的地方才是教學點</b>。</li>
+                <li>展開解答，對照「教學重點」。</li>
+            </ol>
+            <p class="hint mt-3">工具的排序只是依據理學檢查的機率權重，不是診斷。真實病人永遠以病史、用藥史與臨床病程為準。</p>
+        </div>
+        <div id="caseList" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+    </section>
+
+</main>
+
+<footer class="bg-[#264653] text-white mt-12 py-10 px-6">
+    <div class="container mx-auto max-w-3xl">
+        <div class="bg-[#1d3a47] rounded-lg p-5 mb-6">
+            <p class="font-bold text-[#e9c46a] mb-2">作者</p>
+            <p class="text-lg">潘麒亘 醫師</p>
+            <p class="text-sm text-gray-300 mt-1">中國醫藥大學附設醫院 急診部｜毒物及急診專科醫師</p>
+            <p class="text-sm text-gray-400 mt-3">最後更新：2026 年 8 月 31 日</p>
+        </div>
+        <div class="text-center text-sm">
+            <p class="font-bold text-[#e9c46a] mb-2">使用限制</p>
+            <p>本工具僅供醫療專業人員教育與參考使用，<b>不是醫療器材，不得作為診斷依據，亦不得取代臨床判斷</b>。</p>
+            <p class="mt-2">所有比對與計算均在使用者的瀏覽器內完成，不會傳送或儲存任何輸入資料。請勿輸入可識別病人身分的資訊。</p>
+            <p class="mt-2 text-gray-400">參考依據：Goldfrank's Toxicologic Emergencies、Micromedex、美國醫學毒物學會 (ACMT) 指引。所有劑量與處置細節請以最新文獻與院內指引為準。</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+'use strict';
+
+/* ==================================================================
+   參數定義
+   ================================================================== */
+const PARAMS = {
+    hr:        { n:'心跳',     v:{ brady:'過緩', normal:'正常', tachy:'過速', severe_tachy:'極速' } },
+    bp:        { n:'血壓',     v:{ hypo:'低血壓', normal:'正常', hyper:'高血壓' } },
+    rr:        { n:'呼吸',     v:{ depressed:'抑制', normal:'正常', tachypnea:'過速', severe_tachypnea:'極速' } },
+    temp:      { n:'體溫',     v:{ hypothermia:'低體溫', normal:'正常', fever:'發燒', hyperthermia:'高熱' } },
+    pupil:     { n:'瞳孔',     v:{ pinpoint:'針尖', miosis:'縮小', normal:'正常', mydriasis:'散大' } },
+    skin:      { n:'皮膚',     v:{ dry_flushed:'乾、潮紅', dry_normal:'乾、正常色', diaphoretic_warm:'多汗、溫熱', diaphoretic_cool:'多汗、濕冷', cyanotic:'發紺' } },
+    bowel:     { n:'腸蠕動',   v:{ absent:'消失', decreased:'減弱', normal:'正常', hyperactive:'亢進' } },
+    mental:    { n:'意識',     v:{ alert:'清醒', drowsy:'嗜睡', coma:'昏迷', agitated_delirium:'躁動譫妄', psychosis:'幻覺精神病' } },
+    urinary:   { n:'排尿',     v:{ retention:'尿滯留', normal:'正常', incontinence:'尿失禁' } },
+    tone:      { n:'肌張力',   v:{ normal:'正常', fasciculation:'肌束顫動', clonus_hyperreflexia:'陣攣、反射亢進', lead_pipe:'鉛管樣僵硬', flaccid:'鬆軟無力' } },
+    secretion: { n:'分泌物',   v:{ none:'無異常', increased:'流涎、流淚', bronchorrhea:'大量支氣管分泌物' } }
+};
+const PARAM_ORDER = Object.keys(PARAMS);
+const label = (p, v) => (PARAMS[p] && PARAMS[p].v[v]) || v;
+
+/* ==================================================================
+   症候群定義
+   p = 支持（w 3 = 決定性特徵，2 = 中度，1 = 弱／常見於多種中毒）
+   n = 不支持（出現該值時扣分；w 3 = 決定性反證）
+   ================================================================== */
+const TOXIDROMES = [
+{
+    id:'anticholinergic', name:'抗膽鹼症候群', en:'Anticholinergic', color:'#e76f51',
+    mnemonic:'熱、盲、紅、狂、乾',
+    agents:'大花曼陀羅／洋金花、TCA、抗組織胺、Quetiapine、Scopolamine、部分感冒藥',
+    key:'與交感神經症候群最像。決定性差異是<b>皮膚乾燥</b>、<b>腸蠕動消失</b>、<b>尿滯留</b>。',
+    treat:'支持性療法、BZD 控制躁動、積極降溫。Physostigmine 主要用於協助診斷；<b>TCA 過量禁用</b>。',
+    link:'../#toxidromes',
+    p:{ hr:{v:['tachy','severe_tachy'],w:2}, bp:{v:['normal','hyper'],w:1}, rr:{v:['normal'],w:1},
+        temp:{v:['fever','hyperthermia'],w:2}, pupil:{v:['mydriasis'],w:3},
+        skin:{v:['dry_flushed','dry_normal'],w:3}, bowel:{v:['absent','decreased'],w:3},
+        mental:{v:['agitated_delirium','psychosis'],w:2}, urinary:{v:['retention'],w:3},
+        tone:{v:['normal'],w:1}, secretion:{v:['none'],w:2} },
+    n:{ skin:{v:['diaphoretic_warm','diaphoretic_cool'],w:3}, bowel:{v:['hyperactive'],w:3},
+        pupil:{v:['pinpoint','miosis'],w:3}, secretion:{v:['bronchorrhea','increased'],w:3},
+        urinary:{v:['incontinence'],w:2}, mental:{v:['alert'],w:2} }
+},
+{
+    id:'sympathomimetic', name:'交感神經症候群', en:'Sympathomimetic', color:'#e63946',
+    mnemonic:'熱、狂、快、濕',
+    agents:'安非他命、甲基安非他命、古柯鹼、MDMA、新興毒品 (NPS)、偽麻黃鹼',
+    key:'與抗膽鹼幾乎一樣，但<b>皮膚是濕的</b>、<b>腸蠕動存在</b>、<b>沒有尿滯留</b>。',
+    treat:'第一線 <b>Benzodiazepines</b>、積極降溫、大量輸液。<b>勿單獨使用 β-blocker</b>（α 作用未被拮抗會惡化高血壓）。',
+    link:'../#abuse-drug-poisoning',
+    p:{ hr:{v:['tachy','severe_tachy'],w:2}, bp:{v:['hyper'],w:3}, rr:{v:['tachypnea','severe_tachypnea'],w:1},
+        temp:{v:['fever','hyperthermia'],w:2}, pupil:{v:['mydriasis'],w:2},
+        skin:{v:['diaphoretic_warm'],w:3}, bowel:{v:['normal','hyperactive'],w:2},
+        mental:{v:['agitated_delirium','psychosis'],w:2}, urinary:{v:['normal'],w:1},
+        tone:{v:['normal'],w:1}, secretion:{v:['none'],w:1} },
+    n:{ skin:{v:['dry_flushed'],w:3}, bowel:{v:['absent'],w:2}, urinary:{v:['retention'],w:2},
+        pupil:{v:['pinpoint','miosis'],w:3}, hr:{v:['brady'],w:2} }
+},
+{
+    id:'cholinergic', name:'膽鹼症候群', en:'Cholinergic', color:'#2a9d8f',
+    mnemonic:'DUMBBELS / SLUDGE',
+    agents:'有機磷、胺基甲酸鹽、神經毒劑 (Sarin, VX)、部分毒菇',
+    key:'<b>大量分泌物</b>與<b>腸蠕動亢進</b>是與鴉片區分的關鍵（兩者都會瞳孔縮小）。',
+    treat:'<b>Atropine 滴定至呼吸道分泌物減少</b>（不是看心跳）、<b>Pralidoxime (PAM)</b> 持續輸注。插管<b>禁用 Succinylcholine</b>。',
+    link:'../#pesticide-poisoning',
+    p:{ hr:{v:['brady'],w:2}, bp:{v:['hypo','normal'],w:1}, rr:{v:['tachypnea','severe_tachypnea'],w:1},
+        temp:{v:['normal'],w:1}, pupil:{v:['pinpoint','miosis'],w:3},
+        skin:{v:['diaphoretic_cool'],w:3}, bowel:{v:['hyperactive'],w:3},
+        mental:{v:['drowsy','coma','agitated_delirium'],w:1}, urinary:{v:['incontinence'],w:2},
+        tone:{v:['fasciculation','flaccid'],w:3}, secretion:{v:['bronchorrhea','increased'],w:3} },
+    n:{ pupil:{v:['mydriasis'],w:3}, skin:{v:['dry_flushed','dry_normal'],w:3},
+        bowel:{v:['absent'],w:2}, urinary:{v:['retention'],w:2}, secretion:{v:['none'],w:2} }
+},
+{
+    id:'opioid', name:'鴉片類症候群', en:'Opioid', color:'#f4a261',
+    mnemonic:'昏迷 + 呼吸抑制 + 針尖瞳孔',
+    agents:'海洛因、嗎啡、吩坦尼、美沙冬、Tramadol、可待因',
+    key:'<b>針尖瞳孔 + 呼吸次數顯著減少</b>。呼吸抑制常早於意識惡化。',
+    treat:'<b>Naloxone</b>（作用時間短於多數鴉片，需留觀 4–6 小時）、呼吸道支持。',
+    link:'../#abuse-drug-poisoning',
+    p:{ hr:{v:['brady','normal'],w:1}, bp:{v:['hypo','normal'],w:1}, rr:{v:['depressed'],w:3},
+        temp:{v:['hypothermia','normal'],w:1}, pupil:{v:['pinpoint'],w:3},
+        skin:{v:['dry_normal'],w:1}, bowel:{v:['absent','decreased'],w:2},
+        mental:{v:['coma','drowsy'],w:2}, urinary:{v:['normal','retention'],w:1},
+        tone:{v:['flaccid'],w:2}, secretion:{v:['none'],w:2} },
+    n:{ pupil:{v:['mydriasis'],w:3}, mental:{v:['agitated_delirium','psychosis','alert'],w:3},
+        bowel:{v:['hyperactive'],w:2}, rr:{v:['tachypnea','severe_tachypnea'],w:3},
+        secretion:{v:['bronchorrhea'],w:3}, temp:{v:['hyperthermia'],w:2} }
+},
+{
+    id:'sedative', name:'鎮靜安眠症候群', en:'Sedative-hypnotic', color:'#457b9d',
+    mnemonic:'慢、靜、呆',
+    agents:'Benzodiazepines、Zolpidem、Barbiturates、酒精、GHB',
+    key:'和鴉片一樣是中樞抑制，但<b>瞳孔通常不會到針尖</b>，<b>呼吸抑制相對輕微</b>。',
+    treat:'支持性療法為主。<b>Flumazenil 不建議常規使用</b>（慢性使用者或合併 TCA 時可能誘發癲癇）。',
+    link:'../#pharmaceutical-poisoning',
+    p:{ hr:{v:['brady','normal'],w:1}, bp:{v:['hypo','normal'],w:1}, rr:{v:['depressed','normal'],w:2},
+        temp:{v:['hypothermia','normal'],w:1}, pupil:{v:['normal','miosis'],w:2},
+        skin:{v:['dry_normal'],w:1}, bowel:{v:['decreased','normal'],w:1},
+        mental:{v:['drowsy','coma'],w:3}, urinary:{v:['normal'],w:1},
+        tone:{v:['flaccid'],w:2}, secretion:{v:['none'],w:1} },
+    n:{ pupil:{v:['pinpoint'],w:2}, temp:{v:['hyperthermia'],w:2},
+        mental:{v:['agitated_delirium','psychosis','alert'],w:3}, bowel:{v:['hyperactive'],w:2},
+        secretion:{v:['bronchorrhea'],w:3}, rr:{v:['tachypnea','severe_tachypnea'],w:3} }
+},
+{
+    id:'serotonin', name:'血清素症候群', en:'Serotonin syndrome', color:'#f77f00',
+    mnemonic:'意識改變 + 自主神經亢進 + 神經肌肉異常',
+    agents:'SSRI、SNRI、MAOI、Tramadol、Linezolid、MDMA、Dextromethorphan（常為交互作用）',
+    key:'<b>陣攣與反射亢進（下肢明顯）</b>是核心。發作<b>快</b>（數小時內），腸蠕動<b>亢進</b>。',
+    treat:'停用致病藥物、<b>BZD</b>、積極降溫、<b>Cyproheptadine</b>。嚴重僵直高熱需插管與肌肉鬆弛。',
+    link:'../#pharmaceutical-poisoning',
+    p:{ hr:{v:['tachy','severe_tachy'],w:2}, bp:{v:['hyper','normal'],w:1}, rr:{v:['tachypnea'],w:1},
+        temp:{v:['fever','hyperthermia'],w:2}, pupil:{v:['mydriasis'],w:2},
+        skin:{v:['diaphoretic_warm'],w:2}, bowel:{v:['hyperactive'],w:2},
+        mental:{v:['agitated_delirium'],w:2}, urinary:{v:['normal'],w:1},
+        tone:{v:['clonus_hyperreflexia'],w:3}, secretion:{v:['none','increased'],w:1} },
+    n:{ tone:{v:['lead_pipe'],w:2}, pupil:{v:['pinpoint'],w:2}, bowel:{v:['absent'],w:2} }
+},
+{
+    id:'nms', name:'抗精神病藥物惡性症候群', en:'NMS', color:'#6d597a',
+    mnemonic:'高熱 + 鉛管樣僵硬 + 木僵',
+    agents:'典型與非典型抗精神病藥物；亦見於突然停用多巴胺促效劑',
+    key:'<b>鉛管樣僵硬（全身、無陣攣）</b>、腸蠕動<b>減弱</b>、瞳孔<b>正常</b>。發作<b>慢</b>（數天）。',
+    treat:'停藥、積極降溫、輸液、<b>BZD</b>；嚴重者 Dantrolene 或 Bromocriptine。監測橫紋肌溶解與腎衰竭。',
+    link:'../#pharmaceutical-poisoning',
+    p:{ hr:{v:['tachy'],w:2}, bp:{v:['hyper','normal'],w:1}, rr:{v:['tachypnea'],w:1},
+        temp:{v:['hyperthermia','fever'],w:3}, pupil:{v:['normal'],w:1},
+        skin:{v:['diaphoretic_warm'],w:2}, bowel:{v:['decreased','normal'],w:2},
+        mental:{v:['coma','drowsy'],w:2}, urinary:{v:['normal','retention'],w:1},
+        tone:{v:['lead_pipe'],w:3}, secretion:{v:['increased','none'],w:1} },
+    n:{ tone:{v:['clonus_hyperreflexia'],w:2}, bowel:{v:['hyperactive'],w:2},
+        pupil:{v:['pinpoint'],w:2}, temp:{v:['hypothermia'],w:3}, mental:{v:['alert'],w:3} }
+},
+{
+    id:'salicylate', name:'水楊酸中毒', en:'Salicylate', color:'#0077b6',
+    mnemonic:'耳鳴 + 過度換氣 + 混合性酸鹼失衡',
+    agents:'阿斯匹靈、含水楊酸的外用製劑、冬綠油 (methyl salicylate)',
+    key:'<b>顯著過度換氣</b>合併<b>發燒與多汗</b>，瞳孔正常。診斷靠血中濃度與血氣，不是理學檢查。',
+    treat:'<b>碳酸氫鈉</b>（血液與尿液鹼化）、補鉀、大量輸液；嚴重者<b>血液透析</b>。<b>插管有風險</b>（會中斷代償性過度換氣）。',
+    link:'../#pharmaceutical-poisoning',
+    p:{ hr:{v:['tachy'],w:2}, bp:{v:['normal','hypo'],w:1}, rr:{v:['severe_tachypnea','tachypnea'],w:3},
+        temp:{v:['fever','hyperthermia'],w:2}, pupil:{v:['normal'],w:1},
+        skin:{v:['diaphoretic_warm'],w:2}, bowel:{v:['normal'],w:1},
+        mental:{v:['alert','agitated_delirium','drowsy'],w:1}, urinary:{v:['normal'],w:1},
+        tone:{v:['normal'],w:1}, secretion:{v:['none'],w:1} },
+    n:{ rr:{v:['depressed'],w:3}, pupil:{v:['pinpoint'],w:2}, tone:{v:['lead_pipe','clonus_hyperreflexia'],w:1},
+        mental:{v:['coma'],w:1} }
+}
+];
+
+/* ==================================================================
+   比對引擎
+   ================================================================== */
+function evaluate(findings, tox) {
+    let got = 0, max = 0;
+    const pros = [], cons = [];
+    let veto = false;
+
+    PARAM_ORDER.forEach(param => {
+        const val = findings[param];
+        if (!val) return;                         // 未評估 → 完全不計分
+        const pos = tox.p[param];
+        const neg = tox.n && tox.n[param];
+
+        if (pos) {
+            max += pos.w;
+            if (pos.v.indexOf(val) !== -1) {
+                got += pos.w;
+                pros.push({ param, val, w: pos.w });
+            }
+        }
+        if (neg && neg.v.indexOf(val) !== -1) {
+            got -= neg.w;
+            cons.push({ param, val, w: neg.w });
+            if (neg.w >= 3) veto = true;          // 決定性反證
+        }
+    });
+
+    if (max === 0) return null;
+    let pct = Math.round(Math.max(0, got) / max * 100);
+    // 出現決定性反證時，無論其他項多吻合都不應排在前面
+    if (veto) pct = Math.min(pct, 35);
+
+    // 每個 toxidrome 都由它的決定性特徵定義，一項都沒對上就不該給高分。
+    // 少了這道限制，一個生命徵象「每項都正常」的病人會因為累積大量低權重的
+    // 「正常」項目而被誤判成鎮靜安眠中毒 —— 那正是乙醯胺酚會被漏掉的方式。
+    const hallmarks = pros.filter(x => x.w >= 3).length;
+    if (hallmarks === 0) pct = Math.min(pct, 40);
+
+    return { tox, pct, pros, cons, veto, max, hallmarks };
+}
+
+/* ==================================================================
+   紅旗提示
+   ================================================================== */
+function redFlags(f, topPct) {
+    const out = [];
+    if (f.temp === 'hyperthermia')
+        out.push('<b>體溫 &gt; 40°C 是時效性急症。</b>降溫的優先度高於找出毒物 —— 核心體溫每多停留一分鐘，橫紋肌溶解與 DIC 的風險就上升。目標是快速物理降溫，退燒藥無效。');
+    if (f.rr === 'depressed' && (f.pupil === 'pinpoint' || f.pupil === 'miosis'))
+        out.push('<b>呼吸抑制 + 瞳孔縮小 → 立即考慮 Naloxone。</b>不需要等到符合完整三聯徵，也不需要等毒物篩檢。');
+    if (f.secretion === 'bronchorrhea')
+        out.push('<b>大量支氣管分泌物 → 立即 Atropine，劑量加倍遞增。</b>滴定終點是肺部聽診乾淨，不是心跳數字。有機磷病人死於分泌物，不是死於心律。');
+    if (f.mental === 'coma')
+        out.push('<b>昏迷病人第一件事永遠是驗血糖。</b>低血糖是最常被漏掉、也最容易矯正的可逆原因。');
+    if (f.skin === 'cyanotic')
+        out.push('<b>發紺 → 想變性血紅素血症 (MetHb) 與一氧化碳。</b>若給氧後發紺無改善、SpO₂ 卡在 85% 左右不動，高度懷疑 MetHb。查飽和度間隙。');
+    if (f.tone === 'lead_pipe' || f.tone === 'clonus_hyperreflexia')
+        out.push('<b>高熱合併肌肉僵直／陣攣 → 立即降溫並考慮插管與肌肉鬆弛。</b>持續的肌肉活動是產熱來源，不解決它就降不下來。');
+    if (topPct < 75 && f.mental === 'coma' && f.bp === 'hypo' && (f.rr === 'severe_tachypnea' || f.rr === 'tachypnea'))
+        out.push('<b>昏迷 + 低血壓 + 呼吸急促 → 想細胞窒息劑（氰化物、硫化氫）與嚴重代謝性酸中毒。</b>' +
+            '這個組合<b>沒有對應的 toxidrome</b>，理學檢查幫不上忙 —— 呼吸急促是代謝性酸中毒的代償，不是肺的問題。' +
+            '立刻查血氣與<b>乳酸</b>，並到「🧪 實驗室線索」分頁做氰化物紅旗檢核。');
+    if (f.hr === 'brady' && f.bp === 'hypo')
+        out.push('<b>心搏過緩 + 低血壓 → 想 CCB、B-blocker、Digoxin、有機磷。</b>緩釋劑型可能延遲 12–24 小時才惡化。');
+    return out;
+}
+
+const ALWAYS = [
+    '微量血糖 (POCT)',
+    '12 導程心電圖 — 看 QRS 寬度與 QTc',
+    '乙醯胺酚濃度 — 蓄意過量一律要驗，早期完全無症狀',
+    '血中酒精、電解質、腎功能、血氣與乳酸',
+    '懷孕檢驗（育齡女性）'
+];
+
+/* ==================================================================
+   鑑別分頁
+   ================================================================== */
+const selects = Array.from(document.querySelectorAll('select[data-param]'));
+const resultsArea = document.getElementById('resultsArea');
+const resultsEmpty = document.getElementById('resultsEmpty');
+const fillCountEl = document.getElementById('fillCount');
+
+function readFindings() {
+    const f = {};
+    selects.forEach(s => {
+        f[s.dataset.param] = s.value || null;
+        s.classList.toggle('filled', !!s.value);
+    });
+    return f;
+}
+
+function barColor(pct, veto) {
+    if (veto) return '#94a3b8';
+    if (pct >= 70) return '#16a34a';
+    if (pct >= 40) return '#d97706';
+    return '#94a3b8';
+}
+
+function chips(list, cls) {
+    return list.map(x =>
+        '<span class="chip ' + cls + '">' +
+        (x.w >= 3 ? '★ ' : '') + PARAMS[x.param].n + '：' + label(x.param, x.val) +
+        '</span>'
+    ).join('');
+}
+
+function render() {
+    const f = readFindings();
+    const filled = Object.values(f).filter(Boolean).length;
+    fillCountEl.textContent = filled;
+
+    if (filled < 3) {
+        resultsArea.classList.add('hidden');
+        resultsEmpty.classList.remove('hidden');
+        return;
+    }
+    resultsEmpty.classList.add('hidden');
+    resultsArea.classList.remove('hidden');
+
+    const scored = TOXIDROMES.map(t => evaluate(f, t)).filter(Boolean)
+                             .sort((a, b) => b.pct - a.pct);
+    const top = scored[0];
+
+    // 「每一項都正常」是一個獨立而且危險的狀態，值得單獨提示，
+    // 不要和「混合中毒／時間點不對」混為一談。
+    const NORMALISH = { hr:'normal', bp:'normal', rr:'normal', temp:'normal', pupil:'normal',
+        skin:'dry_normal', bowel:'normal', mental:'alert', urinary:'normal', tone:'normal', secretion:'none' };
+    const allNormal = filled >= 5 && PARAM_ORDER.every(p => !f[p] || f[p] === NORMALISH[p]);
+
+    let html = '';
+
+    if (allNormal) {
+        html += '<div class="bg-white rounded-lg shadow-md p-5 mb-4 border-l-4 border-red-500">' +
+            '<h3 class="font-bold text-lg text-[#d00000] mb-2">所有評估項目皆正常 —— 這不代表安全</h3>' +
+            '<p class="text-sm text-gray-700">沒有 toxidrome 只說明一件事：<b>這不是靠理學檢查就能抓到的中毒。</b>' +
+            '最危險的幾種中毒在早期正是這個樣子。</p>' +
+            '<div class="danger-box"><p class="text-sm">' +
+            '<b>乙醯胺酚</b>在最初 24 小時可以完全無症狀，等到出現黃疸時已是猛爆性肝衰竭，NAC 效果大打折扣。' +
+            '<b>任何蓄意藥物過量都應常規檢驗乙醯胺酚濃度</b>，不論病人看起來多好。</p></div>' +
+            '<div class="pitfall-box"><p class="text-sm">同樣會在早期「看起來沒事」的還有：' +
+            '鐵劑、毒性酒精、秋水仙鹼、鵝膏蕈毒、巴拉刈、Superwarfarin，以及<b>緩釋劑型的 CCB 與 B-blocker</b>' +
+            '（可延遲 12–24 小時才急速惡化）。</p></div>' +
+            '<p class="text-sm mt-2">→ 請改用「<b>🧪 實驗室線索</b>」分頁，並以<b>攝入物、劑量、時間</b>而非理學檢查來決定處置與留觀時間。</p>' +
+            '</div>';
+    }
+
+    /* 可信度提醒 */
+    if (filled < 6) {
+        html += '<div class="pitfall-box"><p class="text-sm"><b>目前只填了 ' + filled +
+                ' 項，鑑別結果僅供參考。</b>最有鑑別力的四項是：瞳孔、皮膚乾濕、腸蠕動、肌張力 —— ' +
+                '把這幾項補齊，結果會可靠很多。</p></div>';
+    }
+
+    /* 沒有明確吻合 */
+    if ((!top || top.pct < 40) && !allNormal) {
+        html += '<div class="bg-white rounded-lg shadow-md p-5 mb-4">' +
+                '<h3 class="font-bold text-lg text-[#264653] mb-2">沒有明確符合的 toxidrome</h3>' +
+                '<p class="text-sm text-gray-700">這在臨床上很常見，可能的原因有四個：</p>' +
+                '<ul class="list-disc list-inside text-sm text-gray-700 mt-2 space-y-1">' +
+                '<li><b>混合中毒</b> —— 多重服藥會讓症候群互相抵銷，這是急診最常見的情況。</li>' +
+                '<li><b>時間點不對</b> —— 太早（還沒發作）或太晚（已進入併發症期）。</li>' +
+                '<li><b>本來就沒有 toxidrome 的毒物</b> —— 乙醯胺酚、鐵劑、毒性酒精、氰化物、秋水仙鹼。' +
+                '請改看「<b>🧪 實驗室線索</b>」分頁。</li>' +
+                '<li><b>根本不是中毒</b> —— 敗血症、腦炎、顱內出血、甲狀腺風暴、低血糖都可以長得很像。</li>' +
+                '</ul>' +
+                '<div class="danger-box"><p class="text-sm"><b>生命徵象正常不等於安全。</b>' +
+                '乙醯胺酚過量在最初 24 小時可以完全無症狀，等到出現黃疸時已經是猛爆性肝衰竭。</p></div>' +
+                '</div>';
+    }
+
+    /* 紅旗 */
+    const flags = redFlags(f, top ? top.pct : 0);
+    if (flags.length) {
+        html += '<div class="bg-white rounded-lg shadow-md p-5 mb-4 border-l-4 border-red-500">' +
+                '<h3 class="font-bold text-lg text-[#d00000] mb-2">🚩 立即處置提示</h3>' +
+                flags.map(x => '<div class="danger-box"><p class="text-sm">' + x + '</p></div>').join('') +
+                '</div>';
+    }
+
+    /* 排序結果 */
+    html += '<div class="bg-white rounded-lg shadow-md p-5 mb-4">' +
+            '<h3 class="font-bold text-lg text-[#264653] mb-3">比對結果（依符合度排序）</h3>';
+
+    scored.forEach((r, i) => {
+        const open = i === 0 && r.pct >= 40 ? ' open' : '';
+        html += '<details class="border border-gray-200 rounded-lg mb-2"' + open + '>' +
+            '<summary class="cursor-pointer p-3 select-none">' +
+                '<div class="flex justify-between items-baseline gap-3">' +
+                    '<span class="font-bold" style="color:' + r.tox.color + '">' + r.tox.name + '</span>' +
+                    '<span class="text-sm font-mono text-gray-600">' + r.pct + '%</span>' +
+                '</div>' +
+                '<div class="bar-track mt-1.5"><div class="bar-fill" style="width:' + r.pct +
+                    '%;background-color:' + barColor(r.pct, r.veto) + '"></div></div>' +
+                (r.veto ? '<p class="text-xs text-red-700 mt-1.5">⚠ 存在決定性的不支持證據，已強制降權</p>' : '') +
+                '<div class="mt-2">' + chips(r.pros, 'chip-pro') + chips(r.cons, 'chip-con') + '</div>' +
+            '</summary>' +
+            '<div class="px-3 pb-3 pt-1 border-t border-gray-100 text-sm text-gray-700 space-y-2">' +
+                '<p><b>常見毒物：</b>' + r.tox.agents + '</p>' +
+                '<p><b>鑑別重點：</b>' + r.tox.key + '</p>' +
+                '<div class="teach-box"><p class="text-sm"><b>治療核心：</b>' + r.tox.treat + '</p></div>' +
+                '<p class="text-xs text-gray-500">★ 標記 = 決定性特徵（權重最高）。綠色為支持，紅色為不支持。</p>' +
+                '<a href="' + r.tox.link + '" class="inline-block text-blue-700 hover:underline text-sm">→ 到總覽頁查看詳細內容</a>' +
+            '</div></details>';
+    });
+    html += '</div>';
+
+    /* 永遠要做 */
+    html += '<div class="bg-white rounded-lg shadow-md p-5">' +
+            '<h3 class="font-bold text-lg text-[#264653] mb-2">不論鑑別結果為何，這些都要做</h3>' +
+            '<ul class="list-disc list-inside text-sm text-gray-700 space-y-1">' +
+            ALWAYS.map(x => '<li>' + x + '</li>').join('') +
+            '</ul></div>';
+
+    resultsArea.innerHTML = html;
+}
+
+selects.forEach(s => s.addEventListener('change', render));
+document.getElementById('resetBtn').addEventListener('click', () => {
+    selects.forEach(s => { s.value = ''; s.classList.remove('filled'); });
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/* ==================================================================
+   對照表
+   ================================================================== */
+(function buildMatrix() {
+    const t = document.getElementById('matrixTable');
+    let h = '<thead><tr><th style="min-width:8.5rem">臨床參數</th>';
+    TOXIDROMES.forEach(x => {
+        h += '<th style="min-width:9rem">' + x.name.replace('症候群', '') +
+             '<br><span style="font-weight:400;font-size:.72rem;opacity:.75">' + x.en + '</span></th>';
+    });
+    h += '</tr></thead><tbody>';
+    PARAM_ORDER.forEach(param => {
+        h += '<tr><th>' + PARAMS[param].n + '</th>';
+        TOXIDROMES.forEach(x => {
+            const pos = x.p[param];
+            if (!pos) { h += '<td class="text-gray-300">—</td>'; return; }
+            const txt = pos.v.map(v => label(param, v)).join('／');
+            h += '<td class="' + (pos.w >= 3 ? 'hallmark' : '') + '">' + txt + '</td>';
+        });
+        h += '</tr>';
+    });
+    h += '<tr><th>常見毒物</th>';
+    TOXIDROMES.forEach(x => {
+        h += '<td style="font-size:.72rem;text-align:left;color:#475569">' + x.agents + '</td>';
+    });
+    h += '</tr></tbody>';
+    t.innerHTML = h;
+})();
+
+/* ==================================================================
+   間隙計算
+   ================================================================== */
+const num = id => {
+    const v = parseFloat(document.getElementById(id).value);
+    return isNaN(v) ? null : v;
+};
+const box = (cls, html) => '<div class="' + cls + '">' + html + '</div>';
+
+const GOLDMARK = '<b>GOLDMARK：</b>G lycols（乙二醇、二甘醇）、O xoproline（長期 acetaminophen）、' +
+    'L -lactate、D -lactate、M ethanol、A spirin（水楊酸）、R enal failure、K etoacidosis';
+
+function calcAG() {
+    const na = num('ag-na'), cl = num('ag-cl'), hco3 = num('ag-hco3'), alb = num('ag-alb');
+    const el = document.getElementById('agResult');
+    if (na === null || cl === null || hco3 === null) {
+        el.innerHTML = '<p class="text-gray-500">請填入 Na⁺、Cl⁻、HCO₃⁻。</p>';
+        calcDelta(); return;
+    }
+    const ag = na - (cl + hco3);
+    let h = '<p class="text-lg"><b>陰離子間隙 = ' + ag.toFixed(1) + ' mEq/L</b></p>';
+    let effective = ag;
+    if (alb !== null) {
+        effective = ag + 2.5 * (4.0 - alb);
+        h += '<p class="mt-1">白蛋白校正後 = <b>' + effective.toFixed(1) + '</b> mEq/L' +
+             '<span class="hint">（低白蛋白會遮蔽真實的間隙升高，每低 1 g/dL 約低估 2.5）</span></p>';
+    }
+    if (effective > 12) {
+        h += box('danger-box', '<p class="text-sm"><b>高陰離子間隙代謝性酸中毒 (HAGMA)</b></p>' +
+            '<p class="text-sm mt-1">首要先排除臨床上最常見的<b>乳酸</b>與<b>酮體</b>，再往毒物想。</p>' +
+            '<p class="text-sm mt-1">' + GOLDMARK + '</p>');
+    } else if (effective >= 8) {
+        h += box('teach-box', '<p class="text-sm">陰離子間隙在正常範圍。<b>但這不能排除中毒</b> —— ' +
+            '鴉片、鎮靜安眠、CCB、B-blocker 都不會造成 HAGMA。</p>');
+    } else {
+        h += box('pitfall-box', '<p class="text-sm">陰離子間隙偏低。考慮低白蛋白（最常見）、鋰鹽、溴中毒、多發性骨髓瘤。' +
+            '<b>若未校正白蛋白，請補填。</b></p>');
+    }
+    el.innerHTML = h;
+    calcDelta();
+}
+
+function calcDelta() {
+    const na = num('ag-na'), cl = num('ag-cl'), hco3 = num('ag-hco3');
+    const el = document.getElementById('drResult');
+    if (na === null || cl === null || hco3 === null) {
+        el.innerHTML = '<p class="text-gray-500">請先在「陰離子間隙」填入 Na⁺、Cl⁻、HCO₃⁻。</p>'; return;
+    }
+    const ag = na - (cl + hco3);
+    if (ag <= 12) {
+        el.innerHTML = '<p class="text-gray-600">陰離子間隙未升高 (' + ag.toFixed(1) +
+            ')，Delta ratio 不適用。</p>'; return;
+    }
+    if (Math.abs(24 - hco3) < 0.5) {
+        el.innerHTML = '<p class="text-gray-600">HCO₃⁻ 接近 24，分母趨近於零，Delta ratio 不具意義。</p>'; return;
+    }
+    const dr = (ag - 12) / (24 - hco3);
+    let interp, cls;
+    if (dr < 0.4)      { interp = '純高血氯性（正常陰離子間隙）代謝性酸中毒'; cls = 'teach-box'; }
+    else if (dr < 0.8) { interp = 'HAGMA + 正常陰離子間隙代謝性酸中毒<b>併存</b>'; cls = 'pitfall-box'; }
+    else if (dr <= 2)  { interp = '純高陰離子間隙代謝性酸中毒'; cls = 'teach-box'; }
+    else               { interp = 'HAGMA + <b>代謝性鹼中毒</b>，或合併慢性呼吸性酸中毒的代償'; cls = 'pitfall-box'; }
+    el.innerHTML = '<p class="text-lg"><b>Delta ratio = ' + dr.toFixed(2) + '</b></p>' +
+        box(cls, '<p class="text-sm">' + interp + '</p>');
+}
+
+function calcOG() {
+    const meas = num('og-meas'), na = num('og-na'), glu = num('og-glu'),
+          bun = num('og-bun'), etoh = num('og-etoh');
+    const el = document.getElementById('ogResult');
+    if (meas === null || na === null || glu === null || bun === null) {
+        el.innerHTML = '<p class="text-gray-500">請填入實測滲透壓、Na⁺、血糖、BUN。</p>'; return;
+    }
+    let calc = 2 * na + glu / 18 + bun / 2.8;
+    let formula = '2×' + na + ' + ' + glu + '/18 + ' + bun + '/2.8';
+    if (etoh !== null) { calc += etoh / 4.6; formula += ' + ' + etoh + '/4.6'; }
+    const gap = meas - calc;
+
+    let h = '<p class="text-sm text-gray-600">計算值 = ' + formula + ' = <b>' + calc.toFixed(1) + '</b></p>' +
+            '<p class="text-lg mt-1"><b>滲透壓間隙 = ' + gap.toFixed(1) + ' mOsm/kg</b></p>';
+
+    if (etoh === null) {
+        h += box('pitfall-box', '<p class="text-sm"><b>未填入血中酒精。</b>乙醇是最常見的干擾因子 —— ' +
+            '單純喝酒就足以造成明顯的滲透壓間隙。未扣除酒精前，升高的間隙不能直接歸因於毒性酒精。</p>');
+    }
+    if (gap > 50) {
+        h += box('danger-box', '<p class="text-sm"><b>高度懷疑毒性酒精中毒（甲醇、乙二醇、二甘醇）。</b></p>' +
+            '<p class="text-sm mt-1">應立即考慮 <b>Fomepizole</b> 與<b>血液透析</b>，並聯絡毒物諮詢，不要等專一性檢驗回來。</p>');
+    } else if (gap > 10) {
+        h += box('pitfall-box', '<p class="text-sm">間隙升高，需進一步評估。除毒性酒精外，也見於酮酸中毒、乳酸中毒、休克、腎衰竭。</p>');
+    } else {
+        h += box('teach-box', '<p class="text-sm">間隙在正常範圍。</p>');
+    }
+    h += box('pitfall-box',
+        '<p class="text-sm"><b>最重要的陷阱：正常的滲透壓間隙無法排除毒性酒精中毒。</b></p>' +
+        '<p class="text-sm mt-1">母化合物會隨時間被代謝掉，滲透壓間隙隨之<b>下降</b>；同時毒性代謝物累積，' +
+        '陰離子間隙<b>上升</b>。兩條曲線會交叉 —— <b>就診較晚的病人可能滲透壓間隙正常，但病情更嚴重。</b>' +
+        '請務必同時判讀陰離子間隙與臨床病程。</p>' +
+        '<p class="text-sm mt-1"><a href="../#chemical-gas-poisoning" class="text-blue-700 underline">→ 甲醇 OG/AG 交叉說明</a></p>');
+    el.innerHTML = h;
+}
+
+function calcSG() {
+    const sao2 = num('sg-sao2'), spo2 = num('sg-spo2');
+    const el = document.getElementById('sgResult');
+    if (sao2 === null || spo2 === null) {
+        el.innerHTML = '<p class="text-gray-500">請填入 SaO₂ 與 SpO₂。</p>'; return;
+    }
+    const gap = sao2 - spo2;
+    let h = '<p class="text-lg"><b>飽和度間隙 = ' + gap.toFixed(1) + ' %</b></p>';
+    if (gap > 5) {
+        h += box('danger-box',
+            '<p class="text-sm"><b>間隙有意義（&gt; 5%）。</b></p>' +
+            '<ul class="list-disc list-inside text-sm mt-1 space-y-0.5">' +
+            '<li><b>優先懷疑變性血紅素血症 (MetHb)</b> —— 給氧無效的發紺、巧克力色血液。' +
+            'SpO₂ 在 MetHb 很高時會<b>固定在 85% 附近不動</b>。解毒劑 Methylene Blue（<b>G6PD 缺乏者禁用</b>）。</li>' +
+            '<li><b>其次為一氧化碳中毒 (COHb)</b> —— 標準血氧機讀數可能完全正常，需 co-oximetry 或血中 COHb。</li>' +
+            '</ul>' +
+            '<p class="text-sm mt-1"><a href="../#other-poisonings" class="text-blue-700 underline">→ 變性血紅素血症</a></p>');
+    } else {
+        h += box('teach-box', '<p class="text-sm">間隙不顯著。但若臨床強烈懷疑一氧化碳中毒，' +
+            '<b>仍須直接測血中 COHb</b> —— 一般脈衝式血氧儀無法區分 COHb 與 O₂Hb。</p>');
+    }
+    el.innerHTML = h;
+}
+
+['ag-na','ag-cl','ag-hco3','ag-alb'].forEach(id => document.getElementById(id).addEventListener('input', calcAG));
+['og-meas','og-na','og-glu','og-bun','og-etoh'].forEach(id => document.getElementById(id).addEventListener('input', calcOG));
+['sg-sao2','sg-spo2'].forEach(id => document.getElementById(id).addEventListener('input', calcSG));
+calcAG(); calcOG(); calcSG();
+
+/* ==================================================================
+   氰化物紅旗
+   ================================================================== */
+const CN_ITEMS = [
+    { t:'火場濃煙或密閉空間吸入暴露', w:2 },
+    { t:'突發意識喪失或心跳停止，無明顯外傷可解釋', w:2 },
+    { t:'嚴重高陰離子間隙代謝性酸中毒', w:2 },
+    { t:'血中乳酸 ≥ 8–10 mmol/L', w:3 },
+    { t:'靜脈血氧飽和度異常偏高（動靜脈氧差縮小）', w:3 },
+    { t:'嚴重缺氧症狀卻無發紺', w:1 },
+    { t:'化工、電鍍、金屬提煉、實驗室或除漆劑暴露史', w:2 },
+    { t:'休克對高濃度氧氣與升壓劑反應不佳', w:2 }
+];
+(function buildCN() {
+    const wrap = document.getElementById('cyanideChecklist');
+    wrap.innerHTML = CN_ITEMS.map((it, i) =>
+        '<label class="flex items-start gap-2 p-2 rounded hover:bg-gray-50 cursor-pointer text-sm">' +
+        '<input type="checkbox" class="cn-item mt-0.5" data-w="' + it.w + '" id="cn' + i + '">' +
+        '<span>' + it.t + (it.w >= 3 ? ' <span class="chip chip-con">高權重</span>' : '') + '</span></label>'
+    ).join('');
+
+    const out = document.getElementById('cyanideResult');
+    const upd = () => {
+        let s = 0, n = 0;
+        document.querySelectorAll('.cn-item').forEach(c => {
+            if (c.checked) { s += parseInt(c.dataset.w, 10); n++; }
+        });
+        if (n === 0) { out.innerHTML = ''; return; }
+        if (s >= 5) {
+            out.innerHTML = box('danger-box',
+                '<p class="text-sm"><b>符合 ' + n + ' 項（權重 ' + s + '）—— 強烈建議立即經驗性給予解毒劑。</b></p>' +
+                '<p class="text-sm mt-1">首選 <b>Hydroxocobalamin</b>（安全性高，火場病人合併 CO 中毒時尤其適合，不會加重缺氧）。' +
+                '<b>等待血中氰化物檢驗結果是致命的延誤</b> —— 該檢驗通常數小時到數天才會回覆。</p>' +
+                '<p class="text-sm mt-1">注意：Hydroxocobalamin 會使皮膚與尿液呈紅色，並干擾多項比色法檢驗（含 co-oximetry），給藥前先抽血。</p>' +
+                '<p class="text-sm mt-1"><a href="../#chemical-gas-poisoning" class="text-blue-700 underline">→ 氰化物完整內容</a></p>');
+        } else if (s >= 3) {
+            out.innerHTML = box('pitfall-box', '<p class="text-sm"><b>符合 ' + n + ' 項（權重 ' + s +
+                '）—— 應列入鑑別診斷並儘速聯絡毒物諮詢。</b>同時評估一氧化碳與硫化氫（機轉相近，火場常併存）。</p>');
+        } else {
+            out.innerHTML = box('teach-box', '<p class="text-sm">符合 ' + n + ' 項（權重 ' + s +
+                '）。目前線索有限，但若病程惡化請重新評估 —— 氰化物中毒的惡化速度以分鐘計。</p>');
+        }
+    };
+    document.querySelectorAll('.cn-item').forEach(c => c.addEventListener('change', upd));
+})();
+
+/* ==================================================================
+   沒有 toxidrome 的關鍵中毒
+   ================================================================== */
+const SILENT = [
+    ['乙醯胺酚', '早期僅噁心嘔吐，甚至完全無症狀；出現黃疸時已是猛爆性肝衰竭', '血中濃度 + Rumack-Matthew nomogram、AST/ALT、INR', 'NAC', '../#pharmaceutical-poisoning'],
+    ['鐵劑', '腸胃道症狀後有一段<b>潛伏期</b>，容易誤判為好轉；來源含暖暖包', '腹部 X 光（不透光藥錠）、血清鐵、HAGMA', 'Deferoxamine', '../#other-poisonings'],
+    ['毒性酒精', '早期僅似酒醉；甲醇的視力模糊可能較晚出現', '滲透壓間隙 → 陰離子間隙<b>交叉</b>、眼底檢查', 'Fomepizole + 血液透析', '../#chemical-gas-poisoning'],
+    ['氰化物', '無 toxidrome；快速昏迷與休克', '嚴重 HAGMA、乳酸 ≥ 8–10、靜脈血氧偏高', 'Hydroxocobalamin（勿等檢驗）', '../#chemical-gas-poisoning'],
+    ['一氧化碳', '頭痛、噁心，易誤為感冒或腸胃炎；常為群聚發生', '血中 COHb、飽和度間隙', '100% 氧氣、高壓氧', '../#chemical-gas-poisoning'],
+    ['秋水仙鹼', '嚴重腸胃炎後，骨髓抑制與器官衰竭<b>延遲</b>出現', 'CBC 連續追蹤、肝腎功能', '支持性療法、G-CSF', '../#plant-animal-poisoning'],
+    ['鵝膏蕈毒', '延遲性腹瀉後有<b>假性恢復期</b>，此時肝損傷仍在進行', '肝功能連續追蹤、INR', 'Silibinin、NAC、PCN；評估肝移植', '../#plant-animal-poisoning'],
+    ['巴拉刈', '口腔潰瘍；早期胸部影像可正常', '尿液 dithionite 試驗、連續胸部影像', '避免高濃度氧、脈衝療法、血液灌流', '../#pesticide-poisoning'],
+    ['Superwarfarin', '出血可延遲數天才出現；半衰期數週至數月', 'INR（需追蹤數週）', '長期口服維他命 K；大出血用 PCC/FFP', '../#pharmaceutical-poisoning'],
+    ['緩釋型 CCB／B-blocker', '可延遲 12–24 小時才急速惡化', '連續 ECG 與血壓監測、血糖（CCB 高血糖、BB 低血糖）', 'HIDT、鈣鹽、Glucagon', '../#pharmaceutical-poisoning'],
+    ['鋰鹽（慢性）', '神經症狀與血中濃度<b>不平行</b>', '血中濃度 + 腎功能', '輸液、血液透析', '../#pharmaceutical-poisoning'],
+    ['Digoxin（慢性）', '血中濃度可落在「治療範圍」但已有嚴重毒性', 'K⁺、ECG（雙向性心室頻脈）', 'Digoxin-Fab', '../#pharmaceutical-poisoning']
+];
+(function buildSilent() {
+    document.getElementById('silentTable').innerHTML = SILENT.map(r =>
+        '<tr>' +
+        '<td style="text-align:left"><a href="' + r[4] + '" class="text-blue-700 hover:underline font-semibold">' + r[0] + '</a></td>' +
+        '<td style="text-align:left">' + r[1] + '</td>' +
+        '<td style="text-align:left">' + r[2] + '</td>' +
+        '<td style="text-align:left">' + r[3] + '</td>' +
+        '</tr>').join('');
+})();
+
+/* ==================================================================
+   案例
+   ================================================================== */
+const CASES = [
+{
+    title:'案例一｜派對後的躁動年輕人',
+    vignette:'18 歲男性，友人稱在山區聚會時喝了自採植物泡的茶，兩小時後開始胡言亂語，說看到牆上有蟲在爬。到院時無法配合問診。',
+    vitals:'HR 132、BP 148/88、RR 18、T 39.2°C',
+    exam:'瞳孔 7mm 雙側對稱、皮膚乾燥潮紅、腸蠕動音消失、導尿引流出 600 mL、肌張力正常、無異常分泌物',
+    f:{ hr:'tachy', bp:'normal', rr:'normal', temp:'fever', pupil:'mydriasis', skin:'dry_flushed',
+        bowel:'absent', mental:'psychosis', urinary:'retention', tone:'normal', secretion:'none' },
+    answer:'抗膽鹼症候群 —— 大花曼陀羅／洋金花',
+    teach:'和交感神經症候群的鑑別全在<b>皮膚乾燥、腸蠕動消失、尿滯留</b>這三項。' +
+          '<b>導尿量 600 mL 是最客觀的一項證據</b> —— 譫妄病人的主訴不可靠，但膀胱不會說謊。' +
+          '譫妄可能持續數天，需要的是耐心的支持性療法，不是不斷加抗精神病藥。'
+},
+{
+    title:'案例二｜田間昏倒的農民',
+    vignette:'62 歲男性，家屬在噴藥的果園中發現他倒臥，身旁有打翻的農藥桶。救護車上已有大量口鼻分泌物。',
+    vitals:'HR 48、BP 92/60、RR 26、T 36.5°C',
+    exam:'瞳孔 1.5mm、全身濕冷大汗、腸蠕動音亢進、尿失禁、四肢可見肌束顫動、大量支氣管分泌物需反覆抽吸',
+    f:{ hr:'brady', bp:'hypo', rr:'tachypnea', temp:'normal', pupil:'pinpoint', skin:'diaphoretic_cool',
+        bowel:'hyperactive', mental:'coma', urinary:'incontinence', tone:'fasciculation', secretion:'bronchorrhea' },
+    answer:'膽鹼症候群 —— 有機磷中毒',
+    teach:'<b>Atropine 的滴定終點是肺部聽診乾淨，不是心跳數字。</b>劑量不足是臨床最常見的錯誤 —— ' +
+          '無效就把劑量加倍、每 5 分鐘重複，總量可能需要數百毫克。同時給 <b>PAM</b> 對抗菸鹼樣症狀。' +
+          '需要插管時<b>絕對避免 Succinylcholine</b>（作用會被顯著延長）。' +
+          '危象緩解後仍須監測 24–96 小時，警覺<b>間期症候群</b>。'
+},
+{
+    title:'案例三｜公廁內被發現的年輕人',
+    vignette:'24 歲男性，被清潔人員發現倒臥於公廁隔間，身旁有注射器具。',
+    vitals:'HR 56、BP 96/58、RR 6、T 36.0°C',
+    exam:'瞳孔 1mm 雙側、皮膚乾燥顏色正常、腸蠕動音減弱、四肢鬆軟、無分泌物',
+    f:{ hr:'brady', bp:'normal', rr:'depressed', temp:'normal', pupil:'pinpoint', skin:'dry_normal',
+        bowel:'decreased', mental:'coma', urinary:'normal', tone:'flaccid', secretion:'none' },
+    answer:'鴉片類症候群',
+    teach:'<b>呼吸次數是最早出現也最致命的指標</b>，通常早於意識惡化。' +
+          '和膽鹼症候群的關鍵區別在於<b>沒有分泌物、腸蠕動不亢進、沒有肌束顫動</b> —— ' +
+          '兩者都會瞳孔縮小與心搏過緩，弄錯方向會致命。' +
+          '<b>Naloxone 的作用時間短於多數鴉片類</b>，清醒後仍須留觀至少 4–6 小時，長效製劑更久。'
+},
+{
+    title:'案例四｜夜店送來的躁動年輕人（請與案例一對照）',
+    vignette:'22 歲男性，在夜店與人衝突後被送醫，極度躁動需多人壓制，反覆喊熱並自行脫去衣物。',
+    vitals:'HR 150、BP 190/110、RR 26、T 39.5°C',
+    exam:'瞳孔 6mm、全身大汗且皮膚溫熱、腸蠕動音正常、排尿正常、肌張力正常',
+    f:{ hr:'severe_tachy', bp:'hyper', rr:'tachypnea', temp:'fever', pupil:'mydriasis', skin:'diaphoretic_warm',
+        bowel:'normal', mental:'agitated_delirium', urinary:'normal', tone:'normal', secretion:'none' },
+    answer:'交感神經症候群 —— 安非他命類',
+    teach:'<b>請直接和案例一並排比較。</b>心跳、體溫、瞳孔、意識狀態幾乎一模一樣，' +
+          '真正把兩者分開的只有<b>皮膚（濕 vs 乾）</b>與<b>腸蠕動（正常 vs 消失）</b>。' +
+          '這就是為什麼理學檢查不能只做生命徵象。' +
+          '治療上第一線是 <b>BZD</b>；<b>不要單獨使用 β-blocker</b>，未被拮抗的 α 作用會讓血壓更高。'
+},
+{
+    title:'案例五｜換藥後高燒的憂鬱症病人',
+    vignette:'45 歲女性，長期服用 SSRI，一週前因下背痛開始加用 Tramadol。今日家屬發現她坐立不安、講話顛三倒四、全身發抖。',
+    vitals:'HR 124、BP 156/92、RR 24、T 40.1°C',
+    exam:'瞳孔 5.5mm、大汗溫熱、腸蠕動音亢進、<b>下肢陣攣明顯、深部肌腱反射亢進</b>、上肢相對輕微',
+    f:{ hr:'tachy', bp:'hyper', rr:'tachypnea', temp:'hyperthermia', pupil:'mydriasis', skin:'diaphoretic_warm',
+        bowel:'hyperactive', mental:'agitated_delirium', urinary:'normal', tone:'clonus_hyperreflexia', secretion:'none' },
+    answer:'血清素症候群',
+    teach:'<b>陣攣是核心診斷特徵，而且下肢比上肢明顯</b> —— 這是與 NMS 最可靠的區分點。' +
+          '另外兩個差異：血清素症候群<b>發作快</b>（數小時內）且<b>腸蠕動亢進</b>；' +
+          'NMS <b>發作慢</b>（數天）、<b>鉛管樣僵硬</b>、<b>腸蠕動減弱</b>。' +
+          '本例的用藥史（SSRI + Tramadol）比任何理學檢查都更快指向答案 —— ' +
+          '<b>永遠先問最近加了什麼藥。</b>'
+},
+{
+    title:'案例六｜生命徵象完全正常的過量',
+    vignette:'19 歲女性，與男友爭吵後吞下「一整排止痛藥」，約 8 小時前發生。目前意識清楚、對答如流，只抱怨有點噁心想吐。',
+    vitals:'HR 84、BP 112/70、RR 16、T 36.8°C',
+    exam:'瞳孔 4mm、皮膚乾燥顏色正常、腸蠕動音正常、排尿正常、肌張力正常、無分泌物',
+    f:{ hr:'normal', bp:'normal', rr:'normal', temp:'normal', pupil:'normal', skin:'dry_normal',
+        bowel:'normal', mental:'alert', urinary:'normal', tone:'normal', secretion:'none' },
+    answer:'乙醯胺酚過量 —— 這個工具查不出來，而且本來就查不出來',
+    teach:'<b>這是整份教材最重要的一個案例。</b>鑑別工具會回報「沒有明確符合」，' +
+          '因為乙醯胺酚<b>根本不產生 toxidrome</b>。' +
+          '若你因為「生命徵象都正常、看起來好好的」而讓她出院，48–72 小時後她會因猛爆性肝衰竭回來，' +
+          '而那時 NAC 的效果已大打折扣。' +
+          '<b>對任何蓄意藥物過量，乙醯胺酚濃度都是常規檢驗</b>，' +
+          '並依攝入時間與 Rumack-Matthew nomogram 判讀。' +
+          '請記住：<b>工具查不到，不代表病人沒事 —— 只代表要換一種找法。</b>'
+},
+{
+    title:'案例七｜火場救出的傷患',
+    vignette:'41 歲男性，工廠火警中被消防隊自濃煙密閉空間救出。現場已無自主意識。無明顯燒燙傷面積，臉部有煤灰。',
+    vitals:'HR 118、BP 78/45、RR 32、T 36.2°C',
+    exam:'瞳孔 4mm、<b>無發紺</b>、腸蠕動音正常、肌張力正常。血氣：pH 6.98、HCO₃⁻ 8、<b>乳酸 14 mmol/L</b>、靜脈血氧飽和度偏高。給予高濃度氧氣與升壓劑後血壓改善有限。',
+    f:{ hr:'tachy', bp:'hypo', rr:'severe_tachypnea', temp:'normal', pupil:'normal', skin:'dry_normal',
+        bowel:'normal', mental:'coma', urinary:'normal', tone:'normal', secretion:'none' },
+    answer:'氰化物中毒（合併一氧化碳）',
+    teach:'氰化物<b>沒有 toxidrome</b>，鑑別工具幫不上忙 —— 這題要用「🧪 實驗室線索」分頁的紅旗檢核。' +
+          '<b>火場 + 乳酸 ≥ 8–10 mmol/L + 對氧氣與升壓劑反應不佳 + 無發紺</b>，這組合就足以行動。' +
+          '<b>等血中氰化物檢驗是致命的延誤</b>（通常數小時到數天才回覆）。' +
+          '首選 <b>Hydroxocobalamin</b>：火場病人幾乎必然合併 CO 中毒，' +
+          '而亞硝酸鹽會製造變性血紅素、進一步減損攜氧能力，在此情境下並不適合。' +
+          '給藥前記得先抽血 —— 它會干擾多項比色法檢驗。'
+}
+];
+
+(function buildCases() {
+    document.getElementById('caseList').innerHTML = CASES.map((c, i) =>
+        '<div class="bg-white rounded-lg shadow-xl p-5 flex flex-col justify-between">' +
+        '<div>' +
+            '<h3 class="font-bold text-lg text-[#264653] mb-2">' + c.title + '</h3>' +
+            '<p class="text-sm text-gray-700 mb-3">' + c.vignette + '</p>' +
+            '<p class="text-sm"><span class="font-semibold text-gray-600">生命徵象：</span>' + c.vitals + '</p>' +
+            '<p class="text-sm mt-1"><span class="font-semibold text-gray-600">理學檢查：</span>' + c.exam + '</p>' +
+        '</div>' +
+        '<div class="mt-4">' +
+            '<button class="load-case w-full px-4 py-2 bg-[#2a9d8f] text-white rounded-md hover:bg-[#207c70] font-semibold text-sm" data-i="' + i + '">載入到鑑別工具</button>' +
+            '<details class="mt-2 border border-gray-200 rounded-lg">' +
+                '<summary class="cursor-pointer p-3 font-semibold text-sm text-[#264653] select-none">展開解答與教學重點</summary>' +
+                '<div class="px-3 pb-3">' +
+                    '<p class="text-sm"><b>答案：</b>' + c.answer + '</p>' +
+                    '<div class="teach-box"><p class="text-sm">' + c.teach + '</p></div>' +
+                '</div>' +
+            '</details>' +
+        '</div></div>'
+    ).join('');
+
+    document.querySelectorAll('.load-case').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const c = CASES[parseInt(btn.dataset.i, 10)];
+            selects.forEach(s => { s.value = c.f[s.dataset.param] || ''; });
+            render();
+            switchTab('differential');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+})();
+
+/* ==================================================================
+   分頁切換
+   ================================================================== */
+function switchTab(name) {
+    document.querySelectorAll('.tab-btn').forEach(b =>
+        b.classList.toggle('active', b.dataset.tab === name));
+    document.querySelectorAll('.tab-panel').forEach(p =>
+        p.classList.toggle('hidden', p.id !== 'tab-' + name));
+}
+document.getElementById('tabNav').addEventListener('click', e => {
+    const btn = e.target.closest('.tab-btn');
+    if (btn) switchTab(btn.dataset.tab);
+});
+
+render();
+});
+</script>
+</body>
+</html>

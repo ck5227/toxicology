@@ -8,6 +8,13 @@
     <priority>1.0</priority>
   </url>
 
+  <url>
+    <loc>https://ck5227.github.io/toxicology/toxidrome/</loc>
+    <lastmod>2026-09-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!--
     Phase 2：每搬好一個子頁，就把對應的區塊取消註解並更新 lastmod。
     切勿列出尚未上線的網址 —— 送出 404 的 sitemap 會傷害索引評價。
