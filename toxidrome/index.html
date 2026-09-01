@@ -458,9 +458,10 @@
             <div class="bg-white rounded-lg shadow-xl p-5">
                 <h3 class="text-lg font-bold text-sky-700 mb-1">飽和度間隙 (Saturation Gap)</h3>
                 <p class="hint mb-3">SaO₂（血氧分析儀計算值）− SpO₂（脈衝式血氧儀）　｜　差距 &gt; 5% 有意義</p>
-                <div class="grid grid-cols-2 gap-2 mb-3">
-                    <div class="field"><label for="sg-sao2">SaO₂ (%)</label><input type="number" id="sg-sao2" step="0.1" placeholder="98"></div>
-                    <div class="field"><label for="sg-spo2">SpO₂ (%)</label><input type="number" id="sg-spo2" step="0.1" placeholder="85"></div>
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <div class="field"><label for="sg-sao2">SaO₂ (%)</label><input type="number" id="sg-sao2" step="0.1" placeholder="100"></div>
+                    <div class="field"><label for="sg-spo2">SpO₂ (%)</label><input type="number" id="sg-spo2" step="0.1" placeholder="86"></div>
+                    <div class="field"><label for="sg-methb">MetHb (%)</label><input type="number" id="sg-methb" step="0.1" placeholder="選填"></div>
                 </div>
                 <div id="sgResult" class="text-sm"></div>
             </div>
@@ -474,6 +475,39 @@
                 </div>
             </div>
 
+        </div>
+
+        <div class="bg-white rounded-lg shadow-xl p-5 mt-6">
+            <h3 class="text-lg font-bold text-[#023e8a] mb-1">變性血紅素血症：常見誘發物與高危險群</h3>
+            <p class="text-sm text-gray-700 mb-3">找到飽和度間隙之後，下一個問題永遠是「<b>是什麼造成的</b>」。以下多數是日常處方藥，不是罕見毒物。</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <h4 class="font-bold text-[#264653] mb-1 text-sm">藥物</h4>
+                    <ul class="list-disc list-inside text-sm text-gray-700 space-y-0.5">
+                        <li><b>Metoclopramide（止吐藥）</b> —— 少見但有個案報導，容易被忽略</li>
+                        <li>局部麻醉劑：<b>Prilocaine</b>、Benzocaine</li>
+                        <li><b>Dapsone</b>（皮膚科用藥）</li>
+                        <li>磺胺類 (Sulfonamides)</li>
+                        <li>抗瘧疾藥物</li>
+                        <li>硝化物類（Nitroglycerin、Nitroprusside）</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-[#264653] mb-1 text-sm">化學物質與農藥</h4>
+                    <ul class="list-disc list-inside text-sm text-gray-700 space-y-0.5">
+                        <li>苯胺 (Aniline)、硝基苯 (Nitrobenzene)</li>
+                        <li>亞硝酸鹽、硝酸鹽（含井水、醃漬食品）</li>
+                        <li><a href="../#pesticide-poisoning" class="text-blue-700 underline">因得克 (Indoxacarb)</a></li>
+                        <li>染料、除鏽劑、部分工業溶劑</li>
+                    </ul>
+                    <h4 class="font-bold text-[#264653] mb-1 mt-3 text-sm">高危險群</h4>
+                    <p class="text-sm text-gray-700">老年人與嬰兒、貧血、COPD、冠狀動脈疾病、<b>蠶豆症 (G6PD 缺乏)</b>、先天性酵素缺乏、血色素 M 疾病。同樣的暴露量，這些人風險明顯較高。</p>
+                </div>
+            </div>
+            <div class="pitfall-box">
+                <p class="text-sm"><b>臨床提醒：</b>病史要問到「最近幾個月新加的藥」，而不只是急性服藥 —— 本頁引用的個案即為長期服用 metoclopramide 5mg TID 後逐漸發生。</p>
+            </div>
+            <p class="text-xs text-gray-500 mt-3">參考：陳俊宏。A dyspnea woman with the "saturation gap"。台灣急診醫學通訊 2023;6(5):e2023060513。（中國醫藥大學附設醫院急診部、毒物科）</p>
         </div>
 
         <div class="bg-white rounded-lg shadow-xl p-5 mt-6">
@@ -573,7 +607,7 @@ const TOXIDROMES = [
         tone:{v:['normal'],w:1}, secretion:{v:['none'],w:2} },
     n:{ skin:{v:['diaphoretic_warm','diaphoretic_cool'],w:3}, bowel:{v:['hyperactive'],w:3},
         pupil:{v:['pinpoint','miosis'],w:3}, secretion:{v:['bronchorrhea','increased'],w:3},
-        urinary:{v:['incontinence'],w:2}, mental:{v:['alert'],w:2} }
+        urinary:{v:['incontinence'],w:2}, mental:{v:['alert'],w:2}, skin:{v:['cyanotic'],w:3} }
 },
 {
     id:'sympathomimetic', name:'交感神經症候群', en:'Sympathomimetic', color:'#e63946',
@@ -587,7 +621,7 @@ const TOXIDROMES = [
         skin:{v:['diaphoretic_warm'],w:3}, bowel:{v:['normal','hyperactive'],w:2},
         mental:{v:['agitated_delirium','psychosis'],w:2}, urinary:{v:['normal'],w:1},
         tone:{v:['normal'],w:1}, secretion:{v:['none'],w:1} },
-    n:{ skin:{v:['dry_flushed'],w:3}, bowel:{v:['absent'],w:2}, urinary:{v:['retention'],w:2},
+    n:{ skin:{v:['dry_flushed','cyanotic'],w:3}, bowel:{v:['absent'],w:2}, urinary:{v:['retention'],w:2},
         pupil:{v:['pinpoint','miosis'],w:3}, hr:{v:['brady'],w:2} }
 },
 {
@@ -649,7 +683,7 @@ const TOXIDROMES = [
         skin:{v:['diaphoretic_warm'],w:2}, bowel:{v:['hyperactive'],w:2},
         mental:{v:['agitated_delirium'],w:2}, urinary:{v:['normal'],w:1},
         tone:{v:['clonus_hyperreflexia'],w:3}, secretion:{v:['none','increased'],w:1} },
-    n:{ tone:{v:['lead_pipe'],w:2}, pupil:{v:['pinpoint'],w:2}, bowel:{v:['absent'],w:2} }
+    n:{ tone:{v:['lead_pipe'],w:2}, pupil:{v:['pinpoint'],w:2}, bowel:{v:['absent'],w:2}, skin:{v:['cyanotic'],w:3} }
 },
 {
     id:'nms', name:'抗精神病藥物惡性症候群', en:'NMS', color:'#6d597a',
@@ -664,7 +698,7 @@ const TOXIDROMES = [
         mental:{v:['coma','drowsy'],w:2}, urinary:{v:['normal','retention'],w:1},
         tone:{v:['lead_pipe'],w:3}, secretion:{v:['increased','none'],w:1} },
     n:{ tone:{v:['clonus_hyperreflexia'],w:2}, bowel:{v:['hyperactive'],w:2},
-        pupil:{v:['pinpoint'],w:2}, temp:{v:['hypothermia'],w:3}, mental:{v:['alert'],w:3} }
+        pupil:{v:['pinpoint'],w:2}, temp:{v:['hypothermia'],w:3}, mental:{v:['alert'],w:3}, skin:{v:['cyanotic'],w:3} }
 },
 {
     id:'salicylate', name:'水楊酸中毒', en:'Salicylate', color:'#0077b6',
@@ -679,7 +713,7 @@ const TOXIDROMES = [
         mental:{v:['alert','agitated_delirium','drowsy'],w:1}, urinary:{v:['normal'],w:1},
         tone:{v:['normal'],w:1}, secretion:{v:['none'],w:1} },
     n:{ rr:{v:['depressed'],w:3}, pupil:{v:['pinpoint'],w:2}, tone:{v:['lead_pipe','clonus_hyperreflexia'],w:1},
-        mental:{v:['coma'],w:1} }
+        mental:{v:['coma'],w:1}, skin:{v:['cyanotic'],w:3} }
 }
 ];
 
@@ -1040,32 +1074,66 @@ function calcOG() {
 }
 
 function calcSG() {
-    const sao2 = num('sg-sao2'), spo2 = num('sg-spo2');
+    const sao2 = num('sg-sao2'), spo2 = num('sg-spo2'), methb = num('sg-methb');
     const el = document.getElementById('sgResult');
-    if (sao2 === null || spo2 === null) {
-        el.innerHTML = '<p class="text-gray-500">請填入 SaO₂ 與 SpO₂。</p>'; return;
-    }
-    const gap = sao2 - spo2;
-    let h = '<p class="text-lg"><b>飽和度間隙 = ' + gap.toFixed(1) + ' %</b></p>';
-    if (gap > 5) {
-        h += box('danger-box',
-            '<p class="text-sm"><b>間隙有意義（&gt; 5%）。</b></p>' +
-            '<ul class="list-disc list-inside text-sm mt-1 space-y-0.5">' +
-            '<li><b>優先懷疑變性血紅素血症 (MetHb)</b> —— 給氧無效的發紺、巧克力色血液。' +
-            'SpO₂ 在 MetHb 很高時會<b>固定在 85% 附近不動</b>。解毒劑 Methylene Blue（<b>G6PD 缺乏者禁用</b>）。</li>' +
-            '<li><b>其次為一氧化碳中毒 (COHb)</b> —— 標準血氧機讀數可能完全正常，需 co-oximetry 或血中 COHb。</li>' +
-            '</ul>' +
-            '<p class="text-sm mt-1"><a href="../#other-poisonings" class="text-blue-700 underline">→ 變性血紅素血症</a></p>');
+    let h = '';
+
+    if (sao2 !== null && spo2 !== null) {
+        const gap = sao2 - spo2;
+        h += '<p class="text-lg"><b>飽和度間隙 = ' + gap.toFixed(1) + ' %</b></p>';
+        if (gap > 5) {
+            h += box('danger-box',
+                '<p class="text-sm"><b>間隙有意義（&gt; 5%）—— 血中存在異常形式的血紅素。</b></p>' +
+                '<ul class="list-disc list-inside text-sm mt-1 space-y-0.5">' +
+                '<li><b>優先懷疑變性血紅素血症 (MetHb)</b>：給氧後發紺與 SpO₂ 皆無改善、抽出的血呈<b>巧克力褐色</b>。</li>' +
+                '<li><b>其次為一氧化碳中毒 (COHb)</b>：SpO₂ 讀數可能完全正常，必須直接測血中 COHb。</li>' +
+                '</ul>' +
+                '<p class="text-sm mt-2"><b>下一步：直接開立 co-oximetry（血氧定量分析）或 MetHb／COHb 濃度。</b>' +
+                '一般血氣機報告上的 SaO₂ 幫不上忙 —— 原因見下方。</p>');
+            h += box('pitfall-box',
+                '<p class="text-sm"><b>為什麼 ABG 的 SaO₂ 不會下降？這是整個概念的關鍵。</b></p>' +
+                '<p class="text-sm mt-1">血氣報告上的 SaO₂ 多數是<b>由 PaO₂ 依解離曲線換算出來的，不是實際測量值</b>。' +
+                'MetHb 不影響溶解在血漿中的氧分壓，所以 PaO₂ 正常甚至偏高，換算出來的 SaO₂ 就是 100%。</p>' +
+                '<p class="text-sm mt-1">而脈衝式血氧儀只認得氧合血紅素與去氧血紅素兩種，遇到 MetHb 會誤判，讀數往下掉。' +
+                '<b>一高一低，差距就是這樣來的。</b>MetHb 很高時 SpO₂ 會<b>停在 85% 附近不再變動</b>。</p>');
+        } else {
+            h += box('teach-box', '<p class="text-sm">間隙不顯著。但若臨床強烈懷疑一氧化碳中毒，' +
+                '<b>仍須直接測血中 COHb</b> —— 一般脈衝式血氧儀無法區分 COHb 與 O₂Hb，' +
+                'SpO₂ 正常完全不能排除 CO 中毒。</p>');
+        }
     } else {
-        h += box('teach-box', '<p class="text-sm">間隙不顯著。但若臨床強烈懷疑一氧化碳中毒，' +
-            '<b>仍須直接測血中 COHb</b> —— 一般脈衝式血氧儀無法區分 COHb 與 O₂Hb。</p>');
+        h += '<p class="text-gray-500">請填入 SaO₂ 與 SpO₂（MetHb 為選填）。</p>';
     }
+
+    if (methb !== null) {
+        let sev, cls;
+        if (methb < 1)       { sev = '正常範圍（健康成人約 1% 以下）。'; cls = 'teach-box'; }
+        else if (methb < 20) { sev = '輕度。通常無症狀，或僅有輕微發紺。多數只需移除誘發物並觀察。'; cls = 'teach-box'; }
+        else if (methb < 40) { sev = '<b>中度</b>：頭暈、疲勞、心悸、頭痛。<b>符合治療適應症。</b>'; cls = 'pitfall-box'; }
+        else if (methb < 50) { sev = '<b>重度</b>：心律不整、呼吸困難、癲癇發作。<b>立即治療。</b>'; cls = 'danger-box'; }
+        else                 { sev = '<b>極重度</b>：意識改變、休克、死亡風險高。<b>立即治療，並考慮換血或高壓氧。</b>'; cls = 'danger-box'; }
+        h += '<p class="text-lg mt-3"><b>MetHb = ' + methb.toFixed(1) + ' %</b></p>' + box(cls, '<p class="text-sm">' + sev + '</p>');
+
+        if (methb >= 20) {
+            h += box('teach-box',
+                '<p class="text-sm"><b>Methylene Blue（甲基藍）1–2 mg/kg IV，數分鐘內緩慢推注。</b></p>' +
+                '<p class="text-sm mt-1"><b>⚠ 劑量的弔詭之處：只有低濃度有效。</b>' +
+                '低濃度甲基藍把 Fe³⁺ 還原回 Fe²⁺；<b>高濃度反而會把 Fe²⁺ 氧化成 Fe³⁺，製造出更多 MetHb</b>。' +
+                '所以「沒效就再加量」在這裡是錯的 —— 反應不佳時應重新檢視診斷與禁忌症，而不是盲目加量。</p>' +
+                '<p class="text-sm mt-1"><b>禁忌症：</b>絕對 —— 對甲基藍過敏、嚴重腎功能不全。' +
+                '相對 —— <b>G6PD 缺乏（蠶豆症）</b>，可能導致嚴重溶血與 Heinz body anemia；' +
+                '重度蠶豆症患者應權衡利弊，或改用<b>輸血、換血、高壓氧</b>。</p>' +
+                '<p class="text-sm mt-1">給藥後尿液與體液會呈藍綠色，是暫時性的正常現象，先跟家屬說明可避免不必要的驚慌。</p>');
+        }
+    }
+
+    h += '<p class="text-sm mt-3"><a href="../#other-poisonings" class="text-blue-700 underline">→ 總覽頁：變性血紅素血症</a></p>';
     el.innerHTML = h;
 }
 
 ['ag-na','ag-cl','ag-hco3','ag-alb'].forEach(id => document.getElementById(id).addEventListener('input', calcAG));
 ['og-meas','og-na','og-glu','og-bun','og-etoh'].forEach(id => document.getElementById(id).addEventListener('input', calcOG));
-['sg-sao2','sg-spo2'].forEach(id => document.getElementById(id).addEventListener('input', calcSG));
+['sg-sao2','sg-spo2','sg-methb'].forEach(id => document.getElementById(id).addEventListener('input', calcSG));
 calcAG(); calcOG(); calcSG();
 
 /* ==================================================================
@@ -1240,6 +1308,28 @@ const CASES = [
           '首選 <b>Hydroxocobalamin</b>：火場病人幾乎必然合併 CO 中毒，' +
           '而亞硝酸鹽會製造變性血紅素、進一步減損攜氧能力，在此情境下並不適合。' +
           '給藥前記得先抽血 —— 它會干擾多項比色法檢驗。'
+},
+{
+    title:'案例八｜給氧無效的發紺（真實個案）',
+    vignette:'74 歲女性，因中風長期臥床，過去 12 小時出現呼吸急促。到院時明顯發紺、有呼吸輔助肌使用。' +
+             '給予非再吸入型面罩 15 L/min 高濃度氧氣後，監視器上的血氧仍只有 85–88%。' +
+             '聽診無 stridor 或 wheezing，胸部 X 光無明顯病灶。',
+    vitals:'HR 113、BP 114/71、RR 30、T 37.5°C、SpO₂ 79%（room air）',
+    exam:'發紺、呼吸輔助肌使用、意識清楚。ABG：pH 7.55、PaO₂ 336 mmHg（給氧下）、PCO₂ 36、HCO₃⁻ 31.5、<b>SaO₂ 100%</b>。<b>抽血時發現血液呈褐色。</b>',
+    f:{ hr:'tachy', bp:'normal', rr:'severe_tachypnea', temp:'normal', pupil:'', skin:'cyanotic',
+        bowel:'', mental:'alert', urinary:'', tone:'', secretion:'' },
+    answer:'變性血紅素血症 (MetHb 31.9%) —— metoclopramide 誘發',
+    teach:'鑑別工具在這一題同樣給不出答案，但它會觸發<b>「發紺 → 想 MetHb 與一氧化碳」</b>的紅旗，' +
+          '把你導到正確的方向。真正的診斷線索有三個，全都不在 toxidrome 的定義裡：' +
+          '<b>給高濃度氧氣後 SpO₂ 完全不動</b>、<b>ABG 的 SaO₂ 100% 與 SpO₂ 86% 差了 14%</b>、' +
+          '<b>抽出來的血是褐色的</b>。' +
+          '<br><br>關鍵在於理解為什麼 ABG 沒抓到：報告上的 SaO₂ 是<b>從 PaO₂ 換算</b>的，不是量出來的，' +
+          '而 MetHb 不影響 PaO₂ —— 所以要診斷就必須<b>特別開立 co-oximetry 或 MetHb 濃度</b>。' +
+          '<br><br>病因是長期服用的<b>止吐藥 metoclopramide (5mg TID)</b>，不是什麼罕見毒物。' +
+          '問病史時要問「最近幾個月新加了什麼藥」。' +
+          '本例給予甲基藍後 10–20 分鐘 SpO₂ 即回升至 98–100%，6 小時後 MetHb 降至 0.4%。' +
+          '<br><br><span class="text-xs text-gray-600">個案來源：陳俊宏。台灣急診醫學通訊 2023;6(5):e2023060513。' +
+          '（中國醫藥大學附設醫院急診部、毒物科）</span>'
 }
 ];
 
