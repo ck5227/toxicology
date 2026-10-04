@@ -1,0 +1,7 @@
+/* Rebuild from repository root:
+   npx --yes tailwindcss@3.4.17 -i ./assets/input.css -o ./assets/style.css --content "./*.html,./toxidrome/*.html" --minify
+   Commit regenerated style.css whenever utility classes change.
+*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
