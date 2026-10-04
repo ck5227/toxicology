@@ -40,7 +40,7 @@
 ## 已知待辦
 
 - [ ] 把 26 個仍指向 Google Sites 的外連逐步改成站內頁面
-- [ ] Tailwind 目前使用 Play CDN，內容穩定後改為預先編譯的 `assets/style.css`
+- [x] 首頁與互動工具改用預先編譯的 `assets/style.css`（Tailwind 3.4.17）。
 - [ ] Google Search Console 驗證並提交 sitemap
 
 ## Toxidrome 工具的設計約束（修改前務必閱讀）
@@ -54,3 +54,13 @@
   2. `hallmarks === 0` —— 一項決定性特徵都沒對上就封頂 40%。
      少了這道限制，生命徵象全正常的病人會被誤判成鎮靜安眠中毒，
      那正是乙醯胺酚被漏掉的方式。
+
+## 更新樣式
+
+新增或變更 Tailwind class 後，請在專案根目錄執行，並提交產生的 CSS：
+
+```sh
+npx --yes tailwindcss@3.4.17 -i ./assets/input.css -o ./assets/style.css --content "./*.html,./toxidrome/*.html" --minify
+```
+
+新增其他子頁時，請把其資料夾加入 `--content` 清單。`template.html` 的樣式路徑以複製至一層子資料夾為準。
