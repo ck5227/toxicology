@@ -25,7 +25,7 @@
   "url": "https://ck5227.github.io/toxicology/toxidrome/",
   "inLanguage": "zh-Hant",
   "description": "互動式中毒症候群鑑別與教學工具，含間隙計算與紅旗檢核。",
-  "dateModified": "2026-08-31",
+  "dateModified": "2026-10-04",
   "isPartOf": {
     "@type": "WebSite",
     "name": "臨床毒物學精要",
@@ -434,10 +434,10 @@
                 <h3 class="text-lg font-bold text-purple-700 mb-1">陰離子間隙 (Anion Gap)</h3>
                 <p class="hint mb-3">AG = Na⁺ − (Cl⁻ + HCO₃⁻)　｜　參考值 8–12 mEq/L（依各院檢驗方法而異）</p>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
-                    <div class="field"><label for="ag-na">Na⁺ (mEq/L)</label><input type="number" id="ag-na" step="0.1" placeholder="140"></div>
-                    <div class="field"><label for="ag-cl">Cl⁻ (mEq/L)</label><input type="number" id="ag-cl" step="0.1" placeholder="104"></div>
-                    <div class="field"><label for="ag-hco3">HCO₃⁻ (mEq/L)</label><input type="number" id="ag-hco3" step="0.1" placeholder="24"></div>
-                    <div class="field"><label for="ag-alb">白蛋白 (g/dL)</label><input type="number" id="ag-alb" step="0.1" placeholder="選填"></div>
+                    <div class="field"><label for="ag-na">Na⁺ (mEq/L)</label><input type="number" id="ag-na" min="0" step="0.1" placeholder="140"></div>
+                    <div class="field"><label for="ag-cl">Cl⁻ (mEq/L)</label><input type="number" id="ag-cl" min="0" step="0.1" placeholder="104"></div>
+                    <div class="field"><label for="ag-hco3">HCO₃⁻ (mEq/L)</label><input type="number" id="ag-hco3" min="0" step="0.1" placeholder="24"></div>
+                    <div class="field"><label for="ag-alb">白蛋白 (g/dL)</label><input type="number" id="ag-alb" min="0" step="0.1" placeholder="選填"></div>
                 </div>
                 <div id="agResult" class="text-sm"></div>
             </div>
@@ -446,11 +446,11 @@
                 <h3 class="text-lg font-bold text-teal-700 mb-1">滲透壓間隙 (Osmolar Gap)</h3>
                 <p class="hint mb-3">計算值 = 2×Na + 血糖/18 + BUN/2.8 (+ 酒精/4.6)　｜　參考值 &lt; 10 mOsm/kg</p>
                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-3">
-                    <div class="field"><label for="og-meas">實測滲透壓</label><input type="number" id="og-meas" step="0.1" placeholder="必填"></div>
-                    <div class="field"><label for="og-na">Na⁺ (mEq/L)</label><input type="number" id="og-na" step="0.1" placeholder="140"></div>
-                    <div class="field"><label for="og-glu">血糖 (mg/dL)</label><input type="number" id="og-glu" step="1" placeholder="100"></div>
-                    <div class="field"><label for="og-bun">BUN (mg/dL)</label><input type="number" id="og-bun" step="0.1" placeholder="14"></div>
-                    <div class="field sm:col-span-2"><label for="og-etoh">血中酒精 (mg/dL)</label><input type="number" id="og-etoh" step="1" placeholder="選填，未驗留空"></div>
+                    <div class="field"><label for="og-meas">實測滲透壓</label><input type="number" id="og-meas" min="0" step="0.1" placeholder="必填"></div>
+                    <div class="field"><label for="og-na">Na⁺ (mEq/L)</label><input type="number" id="og-na" min="0" step="0.1" placeholder="140"></div>
+                    <div class="field"><label for="og-glu">血糖 (mg/dL)</label><input type="number" id="og-glu" min="0" step="1" placeholder="100"></div>
+                    <div class="field"><label for="og-bun">BUN (mg/dL)</label><input type="number" id="og-bun" min="0" step="0.1" placeholder="14"></div>
+                    <div class="field sm:col-span-2"><label for="og-etoh">血中酒精 (mg/dL)</label><input type="number" id="og-etoh" min="0" step="1" placeholder="選填，未驗留空"></div>
                 </div>
                 <div id="ogResult" class="text-sm"></div>
             </div>
@@ -459,9 +459,9 @@
                 <h3 class="text-lg font-bold text-sky-700 mb-1">飽和度間隙 (Saturation Gap)</h3>
                 <p class="hint mb-3">SaO₂（血氧分析儀計算值）− SpO₂（脈衝式血氧儀）　｜　差距 &gt; 5% 有意義</p>
                 <div class="grid grid-cols-3 gap-2 mb-3">
-                    <div class="field"><label for="sg-sao2">SaO₂ (%)</label><input type="number" id="sg-sao2" step="0.1" placeholder="100"></div>
-                    <div class="field"><label for="sg-spo2">SpO₂ (%)</label><input type="number" id="sg-spo2" step="0.1" placeholder="86"></div>
-                    <div class="field"><label for="sg-methb">MetHb (%)</label><input type="number" id="sg-methb" step="0.1" placeholder="選填"></div>
+                    <div class="field"><label for="sg-sao2">SaO₂ (%)</label><input type="number" id="sg-sao2" min="0" max="100" step="0.1" placeholder="100"></div>
+                    <div class="field"><label for="sg-spo2">SpO₂ (%)</label><input type="number" id="sg-spo2" min="0" max="100" step="0.1" placeholder="86"></div>
+                    <div class="field"><label for="sg-methb">MetHb (%)</label><input type="number" id="sg-methb" min="0" max="100" step="0.1" placeholder="選填"></div>
                 </div>
                 <div id="sgResult" class="text-sm"></div>
             </div>
@@ -553,7 +553,7 @@
             <p class="font-bold text-[#e9c46a] mb-2">作者</p>
             <p class="text-lg">潘麒亘 醫師</p>
             <p class="text-sm text-gray-300 mt-1">中國醫藥大學附設醫院 急診部｜毒物及急診專科醫師</p>
-            <p class="text-sm text-gray-400 mt-3">最後更新：2026 年 8 月 31 日</p>
+            <p class="text-sm text-gray-400 mt-3">最後更新：2026 年 10 月 4 日</p>
         </div>
         <div class="text-center text-sm">
             <p class="font-bold text-[#e9c46a] mb-2">使用限制</p>
@@ -900,7 +900,7 @@ function render() {
 
     /* 排序結果 */
     html += '<div class="bg-white rounded-lg shadow-md p-5 mb-4">' +
-            '<h3 class="font-bold text-lg text-[#264653] mb-3">比對結果（依符合度排序）</h3>';
+            '<h3 class="font-bold text-lg text-[#264653] mb-3">比對結果（依特徵符合度排序）</h3><p class="text-sm text-gray-700 mb-3"><b>特徵符合度，非診斷機率。</b>100% 只表示已填項目與本站規則吻合，不能確診或排除其他中毒。這是本站教學用加權規則，未提供臨床診斷效能驗證。</p><details class="text-sm mb-3"><summary class="cursor-pointer">計分方法與限制</summary><p>未評估項目不計分；支持項依設定權重加分，不支持項扣分，再除以已評估項目的可得權重。權重至少 3 的反證使分數封頂 35%；沒有任何決定性支持特徵則封頂 40%。這些權重與上限是教學規則，不是經驗證的風險模型。</p></details>';
 
     scored.forEach((r, i) => {
         const open = i === 0 && r.pct >= 40 ? ' open' : '';
@@ -908,7 +908,7 @@ function render() {
             '<summary class="cursor-pointer p-3 select-none">' +
                 '<div class="flex justify-between items-baseline gap-3">' +
                     '<span class="font-bold" style="color:' + r.tox.color + '">' + r.tox.name + '</span>' +
-                    '<span class="text-sm font-mono text-gray-600">' + r.pct + '%</span>' +
+                    '<span class="text-sm font-mono text-gray-600">' + r.pct + '% 符合度</span>' +
                 '</div>' +
                 '<div class="bar-track mt-1.5"><div class="bar-fill" style="width:' + r.pct +
                     '%;background-color:' + barColor(r.pct, r.veto) + '"></div></div>' +
@@ -975,15 +975,44 @@ document.getElementById('resetBtn').addEventListener('click', () => {
    間隙計算
    ================================================================== */
 const num = id => {
-    const v = parseFloat(document.getElementById(id).value);
-    return isNaN(v) ? null : v;
+    const raw = document.getElementById(id).value.trim();
+    if (raw === '') return null;
+    const v = Number(raw);
+    return Number.isFinite(v) ? v : null;
 };
+function validateInputs(ids, resultId) {
+    const invalid = [];
+    ids.forEach(id => {
+        const input = document.getElementById(id);
+        const raw = input.value.trim();
+        const value = Number(raw);
+        const isPercent = id.startsWith('sg-');
+        const bad = input.validity.badInput || (raw !== '' &&
+            (!Number.isFinite(value) || value < 0 || (isPercent && value > 100)));
+        input.setAttribute('aria-invalid', String(bad));
+        input.setAttribute('aria-describedby', resultId);
+        if (bad) invalid.push(input.labels[0].textContent +
+            (isPercent ? '：請輸入 0–100 的百分比。' : '：請輸入大於或等於 0 的有限數值。'));
+    });
+    const result = document.getElementById(resultId);
+    result.setAttribute('aria-live', 'polite');
+    if (invalid.length) {
+        result.innerHTML = '<div class="danger-box" role="alert"><b>輸入數值有誤，已停止計算與判讀。</b><p>' +
+            invalid.join('</p><p>') + '</p></div>';
+        return false;
+    }
+    return true;
+}
 const box = (cls, html) => '<div class="' + cls + '">' + html + '</div>';
 
 const GOLDMARK = '<b>GOLDMARK：</b>G lycols（乙二醇、二甘醇）、O xoproline（長期 acetaminophen）、' +
     'L -lactate、D -lactate、M ethanol、A spirin（水楊酸）、R enal failure、K etoacidosis';
 
 function calcAG() {
+    if (!validateInputs(['ag-na','ag-cl','ag-hco3','ag-alb'], 'agResult')) {
+        document.getElementById('drResult').innerHTML = '<p>請先修正陰離子間隙欄位的輸入。</p>';
+        return;
+    }
     const na = num('ag-na'), cl = num('ag-cl'), hco3 = num('ag-hco3'), alb = num('ag-alb');
     const el = document.getElementById('agResult');
     if (na === null || cl === null || hco3 === null) {
@@ -1038,6 +1067,7 @@ function calcDelta() {
 }
 
 function calcOG() {
+    if (!validateInputs(['og-meas','og-na','og-glu','og-bun','og-etoh'], 'ogResult')) return;
     const meas = num('og-meas'), na = num('og-na'), glu = num('og-glu'),
           bun = num('og-bun'), etoh = num('og-etoh');
     const el = document.getElementById('ogResult');
@@ -1059,7 +1089,7 @@ function calcOG() {
     if (gap > 50) {
         h += box('danger-box', '<p class="text-sm"><b>高度懷疑毒性酒精中毒（甲醇、乙二醇、二甘醇）。</b></p>' +
             '<p class="text-sm mt-1">應立即考慮 <b>Fomepizole</b> 與<b>血液透析</b>，並聯絡毒物諮詢，不要等專一性檢驗回來。</p>');
-    } else if (gap > 10) {
+    } else if (gap >= 10) {
         h += box('pitfall-box', '<p class="text-sm">間隙升高，需進一步評估。除毒性酒精外，也見於酮酸中毒、乳酸中毒、休克、腎衰竭。</p>');
     } else {
         h += box('teach-box', '<p class="text-sm">間隙在正常範圍。</p>');
@@ -1074,6 +1104,7 @@ function calcOG() {
 }
 
 function calcSG() {
+    if (!validateInputs(['sg-sao2','sg-spo2','sg-methb'], 'sgResult')) return;
     const sao2 = num('sg-sao2'), spo2 = num('sg-spo2'), methb = num('sg-methb');
     const el = document.getElementById('sgResult');
     let h = '';
@@ -1083,17 +1114,17 @@ function calcSG() {
         h += '<p class="text-lg"><b>飽和度間隙 = ' + gap.toFixed(1) + ' %</b></p>';
         if (gap > 5) {
             h += box('danger-box',
-                '<p class="text-sm"><b>間隙有意義（&gt; 5%）—— 血中存在異常形式的血紅素。</b></p>' +
+                '<p class="text-sm"><b>間隙增加（&gt; 5%）—— 應評估異常血紅素與量測誤差，不能僅憑間隙確診。</b></p>' +
                 '<ul class="list-disc list-inside text-sm mt-1 space-y-0.5">' +
                 '<li><b>優先懷疑變性血紅素血症 (MetHb)</b>：給氧後發紺與 SpO₂ 皆無改善、抽出的血呈<b>巧克力褐色</b>。</li>' +
-                '<li><b>其次為一氧化碳中毒 (COHb)</b>：SpO₂ 讀數可能完全正常，必須直接測血中 COHb。</li>' +
+                '<li><b>一氧化碳中毒另須注意</b>：SpO₂ 與此間隙都可能正常；若暴露史可疑，必須直接測血中 COHb，不能用此間隙排除。</li>' +
                 '</ul>' +
                 '<p class="text-sm mt-2"><b>下一步：直接開立 co-oximetry（血氧定量分析）或 MetHb／COHb 濃度。</b>' +
                 '一般血氣機報告上的 SaO₂ 幫不上忙 —— 原因見下方。</p>');
             h += box('pitfall-box',
                 '<p class="text-sm"><b>為什麼 ABG 的 SaO₂ 不會下降？這是整個概念的關鍵。</b></p>' +
                 '<p class="text-sm mt-1">血氣報告上的 SaO₂ 多數是<b>由 PaO₂ 依解離曲線換算出來的，不是實際測量值</b>。' +
-                'MetHb 不影響溶解在血漿中的氧分壓，所以 PaO₂ 正常甚至偏高，換算出來的 SaO₂ 就是 100%。</p>' +
+                'MetHb 升高時 PaO₂ 仍可能正常或偏高，依 PaO₂ 換算的 SaO₂ 因而可能接近正常，但不能反映異常血紅素比例。請區分計算值與 co-oximetry 實測值。</p>' +
                 '<p class="text-sm mt-1">而脈衝式血氧儀只認得氧合血紅素與去氧血紅素兩種，遇到 MetHb 會誤判，讀數往下掉。' +
                 '<b>一高一低，差距就是這樣來的。</b>MetHb 很高時 SpO₂ 會<b>停在 85% 附近不再變動</b>。</p>');
         } else {
@@ -1127,7 +1158,7 @@ function calcSG() {
         }
     }
 
-    h += '<p class="text-sm mt-3"><a href="../#other-poisonings" class="text-blue-700 underline">→ 總覽頁：變性血紅素血症</a></p>';
+    h += '<p class="text-sm mt-3"><a href="../#other-poisonings" class="text-blue-700 underline">→ 總覽頁：變性血紅素血症</a> · <a href="https://www.accessdata.fda.gov/cdrh_docs/pdf7/K073024.pdf" target="_blank" rel="noopener" class="text-blue-700 underline">血氧量測限制參考（FDA 收錄資料）</a></p>';
     el.innerHTML = h;
 }
 
@@ -1190,7 +1221,7 @@ const SILENT = [
     ['鐵劑', '腸胃道症狀後有一段<b>潛伏期</b>，容易誤判為好轉；來源含暖暖包', '腹部 X 光（不透光藥錠）、血清鐵、HAGMA', 'Deferoxamine', '../#other-poisonings'],
     ['毒性酒精', '早期僅似酒醉；甲醇的視力模糊可能較晚出現', '滲透壓間隙 → 陰離子間隙<b>交叉</b>、眼底檢查', 'Fomepizole + 血液透析', '../#chemical-gas-poisoning'],
     ['氰化物', '無 toxidrome；快速昏迷與休克', '嚴重 HAGMA、乳酸 ≥ 8–10、靜脈血氧偏高', 'Hydroxocobalamin（勿等檢驗）', '../#chemical-gas-poisoning'],
-    ['一氧化碳', '頭痛、噁心，易誤為感冒或腸胃炎；常為群聚發生', '血中 COHb、飽和度間隙', '100% 氧氣、高壓氧', '../#chemical-gas-poisoning'],
+    ['一氧化碳', '頭痛、噁心，易誤為感冒或腸胃炎；常為群聚發生', 'co-oximetry 測血中 COHb；正常 SpO₂ 或間隙不能排除', '100% 氧氣、高壓氧', '../#chemical-gas-poisoning'],
     ['秋水仙鹼', '嚴重腸胃炎後，骨髓抑制與器官衰竭<b>延遲</b>出現', 'CBC 連續追蹤、肝腎功能', '支持性療法、G-CSF', '../#plant-animal-poisoning'],
     ['鵝膏蕈毒', '延遲性腹瀉後有<b>假性恢復期</b>，此時肝損傷仍在進行', '肝功能連續追蹤、INR', 'Silibinin、NAC、PCN；評估肝移植', '../#plant-animal-poisoning'],
     ['巴拉刈', '口腔潰瘍；早期胸部影像可正常', '尿液 dithionite 試驗、連續胸部影像', '避免高濃度氧、脈衝療法、血液灌流', '../#pesticide-poisoning'],
