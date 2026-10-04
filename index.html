@@ -186,15 +186,36 @@
         <button id="searchButton" class="ml-4 p-3 bg-[#2a9d8f] text-white rounded-md hover:bg-[#207c70] transition duration-200">搜尋</button>
     </div>
 
-    <a href="toxidrome/" class="block mb-8 bg-[#264653] hover:bg-[#1d3a47] transition-colors rounded-lg shadow-xl p-5 text-white">
-        <div class="flex flex-wrap items-center justify-between gap-3">
-            <div>
-                <h2 class="text-xl font-bold text-[#e9c46a]">🔍 Toxidrome 互動式鑑別工具</h2>
-                <p class="text-sm text-gray-300 mt-1">輸入生命徵象、瞳孔、皮膚、腸蠕動與肌張力。另含陰離子／滲透壓／飽和度間隙計算。</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <a href="toxidrome/" class="block bg-[#264653] hover:bg-[#1d3a47] transition-colors rounded-lg shadow-xl p-5 text-white border-l-4 border-[#2a9d8f]">
+            <div class="flex flex-col justify-between h-full gap-3">
+                <div>
+                    <h2 class="text-xl font-bold text-[#e9c46a] flex items-center gap-2">
+                        <span>🔍 Toxidrome 互動式鑑別工具</span>
+                    </h2>
+                    <p class="text-sm text-gray-300 mt-1">輸入生命徵象、瞳孔、皮膚、腸蠕動與肌張力。另含陰離子／滲透壓／飽和度間隙計算。</p>
+                </div>
+                <div class="flex justify-end">
+                    <span class="bg-[#2a9d8f] hover:bg-[#207c70] px-4 py-2 rounded-md font-bold text-sm whitespace-nowrap">開始鑑別 →</span>
+                </div>
             </div>
-            <span class="bg-[#2a9d8f] px-4 py-2 rounded-md font-bold whitespace-nowrap">開始鑑別 →</span>
-        </div>
-    </a>
+        </a>
+
+        <a href="antidote/" class="block bg-[#1d3a47] hover:bg-[#152a34] transition-colors rounded-lg shadow-xl p-5 text-white border-l-4 border-red-500">
+            <div class="flex flex-col justify-between h-full gap-3">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="bg-red-600 text-white text-[10px] px-2 py-0.5 rounded font-black tracking-wider uppercase">NEW CDSS</span>
+                        <h2 class="text-xl font-bold text-[#e9c46a]">🚨 全國解毒劑儲備 ＆ 罕見中毒決策副駕</h2>
+                    </div>
+                    <p class="text-sm text-gray-300 mt-1">對標衛福部儲備網 (北榮 24H: 02-2871-7121)、Micromedex 體重劑量與 EXTRIP 緊急血液透析門檻。</p>
+                </div>
+                <div class="flex justify-end">
+                    <span class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md font-bold text-sm whitespace-nowrap text-white">啟動副駕 →</span>
+                </div>
+            </div>
+        </a>
+    </div>
 
     <div id="noResults" class="hidden text-center py-16 text-gray-500">
         <p class="text-lg">找不到符合「<span id="noResultsQuery" class="font-semibold text-gray-700"></span>」的資料</p>
