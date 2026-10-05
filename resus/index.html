@@ -131,6 +131,10 @@
                 <kbd class="bg-slate-950 text-purple-300 px-1.5 py-0.5 rounded font-bold border border-purple-800">Alt+E</kbd>
                 <span>床邊實證教學小抄 (EBM)</span>
             </button>
+            <button onclick="copyHISCodeBlueLog()" class="bg-amber-900/80 hover:bg-amber-800 text-amber-100 px-2.5 py-1 rounded-md border border-amber-700/60 transition flex items-center gap-1.5 shadow-xs">
+                <kbd class="bg-slate-950 text-amber-300 px-1.5 py-0.5 rounded font-bold border border-amber-800">Alt+L</kbd>
+                <span>秒貼 HIS 急救紀錄</span>
+            </button>
             <span class="text-slate-400 hidden lg:inline">|</span>
             <a href="../antidote/" class="bg-teal-900/80 hover:bg-teal-800 text-teal-100 px-2.5 py-1 rounded-md border border-teal-700/60 transition flex items-center gap-1.5 shadow-xs">
                 <kbd class="bg-slate-950 text-teal-300 px-1.5 py-0.5 rounded font-bold border border-teal-800">Alt+T</kbd>
@@ -157,6 +161,139 @@
             <button onclick="loadScenario('borderline')" class="px-3 py-1.5 bg-amber-50 text-amber-800 hover:bg-amber-100 rounded-lg border border-amber-300 font-semibold transition">
                 🟡 邊界案例 (PEA + 總急救 45分)
             </button>
+        </div>
+    </div>
+
+    <!-- ⚡ 2025 ACLS 急救即時循環計時器與 HIS 事件紀錄器 (Live Resus Timer & Event Logger) -->
+    <div class="bg-gradient-to-r from-slate-900 via-slate-950 to-slate-900 text-white p-5 rounded-2xl shadow-xl border-2 border-red-500/50 space-y-4">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 border-b border-slate-800 pb-3">
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="bg-red-600 text-white text-[10px] px-2 py-0.5 rounded font-black tracking-wider uppercase animate-pulse">2025 ACLS LIVE</span>
+                    <h2 class="text-base font-bold text-white flex items-center gap-2">
+                        <span>⚡ 急救室即時循環計時 ＆ HIS 事件紀錄器</span>
+                    </h2>
+                </div>
+                <p class="text-xs text-slate-300 mt-1">
+                    2 分鐘 CPR 循環換人倒數 ｜ Epinephrine 依心律時機提醒 ｜ 一鍵打點生成標準 HIS 急救病歷文字
+                </p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+                <button id="btnStartTimer" onclick="toggleResusTimer()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg font-bold text-xs flex items-center gap-1.5 transition shadow">
+                    <span id="startIcon">▶</span> <span id="startText">啟動急救計時</span>
+                </button>
+                <button onclick="resetResusTimer()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-lg text-xs font-semibold border border-slate-700 transition">
+                    🔄 重設
+                </button>
+                <button onclick="copyHISCodeBlueLog()" class="bg-red-600 hover:bg-red-500 text-white px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow">
+                    <kbd class="bg-slate-950 text-amber-300 px-1 py-0.2 rounded font-mono text-[10px]">Alt+L</kbd>
+                    <span>複製 HIS 急救紀錄</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Timer Displays & Dynamic Guideline Alerts -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- 2-min CPR Cycle -->
+            <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-800 flex flex-col justify-between">
+                <div class="flex justify-between items-center text-xs text-slate-400 mb-1">
+                    <span class="font-bold flex items-center gap-1">🔄 CPR 循環倒數 (換人/節律)</span>
+                    <span id="cprCycleBadge" class="text-[10px] bg-indigo-900/80 text-indigo-200 px-2 py-0.5 rounded font-mono">第 1 循環</span>
+                </div>
+                <div class="flex items-baseline gap-2">
+                    <div id="cprTimerDisplay" class="text-3xl font-mono font-black text-amber-400">02:00</div>
+                    <span id="cprStatusText" class="text-xs text-slate-400">尚未啟動</span>
+                </div>
+                <div class="w-full bg-slate-800 h-1.5 rounded-full mt-2 overflow-hidden">
+                    <div id="cprProgressBar" class="bg-amber-400 h-full transition-all duration-1000" style="width: 100%"></div>
+                </div>
+            </div>
+
+            <!-- Epinephrine Guideline Alarm -->
+            <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-800 flex flex-col justify-between">
+                <div class="flex justify-between items-center text-xs text-slate-400 mb-1">
+                    <span class="font-bold flex items-center gap-1">💉 Epinephrine (3-5分)</span>
+                    <span id="epiCountBadge" class="text-[10px] bg-red-900/80 text-red-200 px-2 py-0.5 rounded font-mono">已給 0 劑</span>
+                </div>
+                <div class="flex items-baseline gap-2">
+                    <div id="epiTimerDisplay" class="text-3xl font-mono font-black text-red-400">03:00</div>
+                    <span id="epiStatusText" class="text-xs text-red-300 font-semibold">首劑時機提示</span>
+                </div>
+                <p id="epiGuidelineHint" class="text-[11px] text-slate-300 mt-2 leading-tight">
+                    <span class="text-amber-300 font-bold">【2025 AHA 可電擊心律】</span>初次電擊失敗後給予首劑 Epinephrine 1mg；之後每 3–5 分鐘給藥一次。
+                </p>
+            </div>
+
+            <!-- Total Arrest Elapsed Time -->
+            <div class="bg-slate-900/90 p-4 rounded-xl border border-slate-800 flex flex-col justify-between">
+                <div class="flex justify-between items-center text-xs text-slate-400 mb-1">
+                    <span class="font-bold">⏱️ 總急救進行時長</span>
+                    <span id="totalShocksBadge" class="text-[10px] bg-purple-900/80 text-purple-200 px-2 py-0.5 rounded font-mono">電擊 0 次</span>
+                </div>
+                <div class="flex items-baseline gap-2">
+                    <div id="totalTimerDisplay" class="text-3xl font-mono font-black text-emerald-400">00:00</div>
+                    <span class="text-xs text-slate-400">高品質按壓 (中斷 ≤ 10秒)</span>
+                </div>
+                <div class="text-[11px] text-slate-400 mt-2 flex justify-between">
+                    <span>給藥途徑指引:</span>
+                    <span class="text-emerald-400 font-bold">IV 首選 (失敗再用 IO)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rapid Action Event Stamp Buttons -->
+        <div class="space-y-2">
+            <div class="text-xs font-bold text-slate-300 flex items-center justify-between">
+                <span>⚡ 急救現場一鍵事件打點 (One-Click Event Stamps)：</span>
+                <span class="text-[11px] text-slate-400">點擊即記錄時間戳記並更新 HIS 紀錄</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+                <button onclick="recordShockEvent()" class="bg-red-800/90 hover:bg-red-700 text-white p-2.5 rounded-xl border border-red-600 font-bold text-xs flex flex-col items-center justify-center gap-1 transition shadow-xs">
+                    <span class="text-base">⚡</span>
+                    <span>去顫電擊 (200J)</span>
+                </button>
+                <button onclick="recordEpiEvent()" class="bg-amber-700/90 hover:bg-amber-600 text-white p-2.5 rounded-xl border border-amber-500 font-bold text-xs flex flex-col items-center justify-center gap-1 transition shadow-xs">
+                    <span class="text-base">💉</span>
+                    <span>Epinephrine 1mg</span>
+                </button>
+                <button onclick="recordAmiodaroneEvent()" class="bg-purple-800/90 hover:bg-purple-700 text-white p-2.5 rounded-xl border border-purple-600 font-bold text-xs flex flex-col items-center justify-center gap-1 transition shadow-xs">
+                    <span class="text-base">💊</span>
+                    <span id="btnAmioLabel">Amiodarone 300mg</span>
+                </button>
+                <button onclick="recordIntubationEvent()" class="bg-blue-800/90 hover:bg-blue-700 text-white p-2.5 rounded-xl border border-blue-600 font-bold text-xs flex flex-col items-center justify-center gap-1 transition shadow-xs">
+                    <span class="text-base">🫁</span>
+                    <span>高級氣道/插管</span>
+                </button>
+                <button onclick="recordIOEvent()" class="bg-slate-800 hover:bg-slate-700 text-white p-2.5 rounded-xl border border-slate-600 font-bold text-xs flex flex-col items-center justify-center gap-1 transition shadow-xs">
+                    <span class="text-base">🩸</span>
+                    <span>IV失敗轉骨內(IO)</span>
+                </button>
+                <button onclick="recordROSCEvent()" class="bg-emerald-700 hover:bg-emerald-600 text-white p-2.5 rounded-xl border border-emerald-500 font-bold text-xs flex flex-col items-center justify-center gap-1 transition shadow-xs">
+                    <span class="text-base">❤️</span>
+                    <span>ROSC (自主循環)</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Live Events Log Timeline & Output Container -->
+        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-2">
+            <div class="flex items-center justify-between text-xs border-b border-slate-800 pb-2">
+                <span class="font-bold text-slate-300 flex items-center gap-1.5">
+                    <span>📜 即時急救事件時間軸 (Live Log)</span>
+                    <span id="logCountBadge" class="bg-slate-800 text-slate-300 text-[10px] px-1.5 py-0.2 rounded font-mono">0 筆</span>
+                </span>
+                <div class="flex items-center gap-2">
+                    <button onclick="undoLastEvent()" class="text-[11px] text-slate-400 hover:text-slate-200 transition">
+                        ↩️ 撤銷上一筆
+                    </button>
+                    <button onclick="clearAllEvents()" class="text-[11px] text-red-400 hover:text-red-300 transition">
+                        🗑️ 清空
+                    </button>
+                </div>
+            </div>
+            <div id="resusEventList" class="max-h-28 overflow-y-auto font-mono text-xs text-slate-300 space-y-1">
+                <div class="text-slate-500 italic py-1">尚未記錄任何事件。點擊「啟動急救計時」或上方打點按鈕開始紀錄。</div>
+            </div>
         </div>
     </div>
 
@@ -216,7 +353,7 @@
 
                 <div>
                     <label class="block text-xs font-semibold text-slate-600 mb-1">初始或急救中心律 <span class="text-red-500">*</span></label>
-                    <select id="initialRhythm" class="w-full border-2 border-red-300 rounded-lg p-2.5 text-sm font-bold text-red-950 bg-red-50/40 focus:ring-2 focus:ring-red-500 focus:outline-none" onchange="evalECPR()">
+                    <select id="initialRhythm" class="w-full border-2 border-red-300 rounded-lg p-2.5 text-sm font-bold text-red-950 bg-red-50/40 focus:ring-2 focus:ring-red-500 focus:outline-none" onchange="evalECPR(); updateEpiHint();">
                         <option value="VF">可去顫心律 (VF / Pulseless VT) — 首選</option>
                         <option value="PEA">無脈搏電氣活動 (PEA - 可逆病因)</option>
                         <option value="Asystole">心搏停止 (Asystole - 門檻未達)</option>
@@ -249,7 +386,7 @@
             <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-3">
                 <div class="flex items-center justify-between border-b border-slate-100 pb-2">
                     <h3 class="text-xs font-bold text-[#264653] uppercase tracking-wider flex items-center gap-1.5">
-                        <span>🔍 2025 ACLS 5H5T 秒級病因排查 ＆ 致命防呆</span>
+                        <span>🔍 2025 ACLS 5H5T 病因排查 ＆ 實證防呆</span>
                     </h3>
                     <span class="text-[10px] text-slate-400">床邊指引</span>
                 </div>
@@ -257,26 +394,28 @@
                     <div class="p-2.5 bg-red-50 rounded-lg border border-red-200">
                         <span class="font-bold text-red-950">1. Hydrogen ion (嚴重酸血症)：</span>
                         <p class="text-red-900 mt-0.5 leading-relaxed">
-                            依 2026 BICAR-ICU 實證，動脈血 <strong>pH &le; 7.10</strong> 建議給予 Sodium Bicarbonate 1-2 amp 嘗試逆轉心肌抑制；陰離子間隙 &gt; 24 評估急透析。
+                            <strong>2025 AHA 不建議心跳停止常規給予 Bicarbonate</strong>。僅在特定情況（如已知既往重度代酸、高血鉀、或 TCA 中毒寬 QRS）考慮給予。BICAR-ICU 補鹼實證 (pH &le; 7.10) 係針對 ICU 非心跳停止病患，不可直接套用於急救常規。
                         </p>
                     </div>
                     <div class="p-2.5 bg-amber-50 rounded-lg border border-amber-200">
                         <span class="font-bold text-amber-950">2. Hyperkalemia (致命高血鉀)：</span>
                         <p class="text-amber-900 mt-0.5 leading-relaxed">
-                            心律異常時硬性防呆：<strong>優先給予 Calcium gluconate 1-2g IV 穩定細胞膜</strong>，次行 RI + D50W。
-                            <span class="text-red-700 font-bold block mt-0.5">⚠️ 毛地黃中毒高血鉀嚴禁給鈣（防不可逆石心 Stone Heart）！</span>
+                            <strong>2025 AHA 指引指出：心跳停止時靜脈注射鈣劑之療效尚未確立</strong>；切勿因給鈣耽誤高品質 CPR、早期去顫與 Epinephrine 給藥！僅在確認高血鉀或 CCB 中毒時考慮給予；毛地黃中毒避免常規給鈣。
                         </p>
                     </div>
                     <div class="p-2.5 bg-purple-50 rounded-lg border border-purple-200">
-                        <span class="font-bold text-purple-950">3. Toxins (急性心毒性藥物)：</span>
+                        <span class="font-bold text-purple-950">3. Toxins (急性中毒 ＆ 難治 VF)：</span>
                         <p class="text-purple-900 mt-0.5 leading-relaxed">
-                            CCB/BB 難治性休克考慮高劑量胰島素 (HIET 1 U/kg)；心肌可逆藥物過量為 E-CPR / VA-ECMO 最強適應症！
+                            CCB/BB 難治休克考慮高劑量胰島素 (HIET 1 U/kg)；心肌可逆藥物為 E-CPR / VA-ECMO 最強適應症！難治性 VF/pVT 經 &ge; 3 次電擊無效，可考慮向量改變去顫 (DVL) 或雙序列去顫 (DSED)，但 2025 AHA 註明其效益尚未證實。
                         </p>
                     </div>
                     <div class="p-2.5 bg-blue-50 rounded-lg border border-blue-200">
-                        <span class="font-bold text-blue-950">4. POCUS 床邊超音波排除 (Tamponade / Tension PTX / PE)：</span>
+                        <span class="font-bold text-blue-950">4. 給藥途徑 ＆ 特殊情況 (2025 AHA 核心提示)：</span>
                         <p class="text-blue-900 mt-0.5 leading-relaxed">
-                            壓胸暫停 5 秒內快速掃描心包積液、右心擴大 (RV strain) 與肺滑窗 (Lung sliding)。
+                            • <strong>通路</strong>：IV 為首選，IV 失敗或不可行再用 IO（IO 持續 ROSC 率低於 IV）。<br>
+                            • <strong>孕婦</strong>：5 分鐘內施行復甦性分娩 (Resuscitative Hysterotomy)，難治者考慮 E-CPR。<br>
+                            • <strong>鴉片類</strong>：給予 Naloxone，但不可干擾高品質 CPR 等標準急救。<br>
+                            • <strong>POCUS</strong>：壓胸暫停 5 秒內排除心包填塞、張力性氣胸與大片肺栓塞。
                         </p>
                     </div>
                 </div>
@@ -394,19 +533,24 @@
 
                     <div class="p-3 bg-blue-50/80 rounded-lg border border-blue-200 space-y-1">
                         <div class="font-bold text-blue-950 flex items-center gap-1">
-                            <span>💉 3. 復甦後早期多元升壓劑 (Frontiers 2026)</span>
+                            <span>💉 3. 升壓劑給藥時機與休克指引 (2025 AHA / Sepsis)</span>
                         </div>
                         <p class="text-blue-900 leading-relaxed">
-                            2026 重症指引主張 Norepinephrine 應早期併用固定劑量 <strong>Vasopressin (0.03 U/min)</strong>。其機轉在於收縮內臟血管、保護血管內皮，避免單一大劑量 Norepinephrine 造成腎臟血管劇烈痙攣，可顯著減少急性腎衰竭與肺水腫。
+                            <strong>急救期間</strong>：2025 AHA 更新指出，單用升壓劑或與腎上腺素並用均不優於單用 Epinephrine；<strong>不建議常規使用 Vasopressin 急救</strong>。<br>
+                            <strong>Post-ROSC 難治性休克</strong>：依敗血症/休克指引，當 Norepinephrine 劑量偏高時，可考慮次線併用固定劑量 <strong>Vasopressin (0.03 U/min)</strong> 避免單一大劑量 Norepinephrine 造成腎臟血管劇烈痙攣。
                         </p>
                     </div>
 
                     <div class="p-3 bg-purple-50/80 rounded-lg border border-purple-200 space-y-1">
                         <div class="font-bold text-purple-950 flex items-center gap-1">
-                            <span>❄️ 4. 目標溫度管理 (TTM 2025/2026 演進)</span>
+                            <span>❄️ 4. Post-ROSC 目標照護五大支柱 (2025 AHA 指引)</span>
                         </div>
                         <p class="text-purple-900 leading-relaxed">
-                            心跳停止復甦後核心體溫嚴格維持 <strong>32–37.5°C</strong>。重點在於<strong>「積極預防任何發燒 (> 37.7°C)」</strong>，發燒每上升 1°C 腦代謝耗氧量增加 10%，會嚴重惡化二次腦缺氧損傷。
+                            • <strong>血壓</strong>：避免低血壓，維持最低 MAP &ge; 65 mmHg。<br>
+                            • <strong>氧合通氣</strong>：SpO₂ 90–98% (PaO₂ 60–105 mmHg)，PaCO₂ 35–45 mmHg（無重度代酸時）。<br>
+                            • <strong>體溫調控 (TTM)</strong>：昏迷病患以 32–37.5°C 維持<strong>至少 36 小時</strong>，嚴格防發燒。<br>
+                            • <strong>延遲神經預後評估</strong>：延後至 <strong>&ge; 72 小時</strong> 採多模式 (EEG、NfL 標記、反射) 綜合判斷。<br>
+                            • <strong>早期心導管</strong>：疑似缺血病因（ST段上升、心因性休克、重度缺血）才考慮早期心導管。
                         </p>
                     </div>
                 </div>
@@ -429,7 +573,7 @@
             <div class="space-y-1.5">
                 <p>
                     <strong class="text-slate-800">1. 2025 AHA Guidelines for CPR and ECC</strong><br>
-                    American Heart Association. Focused Updates on Adult Advanced Cardiovascular Life Support and Post-Cardiac Arrest Care. Circulation, 2025.
+                    American Heart Association. Focused Updates on Adult Advanced Cardiovascular Life Support (Circulation 2025;152).
                 </p>
                 <p>
                     <strong class="text-slate-800">2. AHA JAHA 2026 E-CPR Time-to-Cannulation Criteria</strong><br>
@@ -443,8 +587,8 @@
                     Extracorporeal Life Support Organization (ELSO). Clinical Practice Guideline for Adult Cardiac Arrest E-CPR Indication and Cannulation Protocols, 2026.
                 </p>
                 <p>
-                    <strong class="text-slate-800">4. BICAR-ICU & EXTRIP Recommendations</strong><br>
-                    Sodium bicarbonate infusion in severe metabolic acidaemia and extracorporeal treatment thresholds in toxic shock. The Lancet / Crit Care Med.
+                    <strong class="text-slate-800">4. BICAR-ICU & Surviving Sepsis Campaign</strong><br>
+                    Sodium bicarbonate in severe metabolic acidemia in ICU (non-cardiac arrest RCT, The Lancet); Vasopressin indications in septic and vasodilatory shock.
                 </p>
             </div>
         </div>
@@ -602,6 +746,7 @@
 
       updateResusOrders(wt, age, totalArrestTime, projectedCannulationTime, rhythm, etco2, lactate);
       updateResusSBAR(wt, age, totalArrestTime, projectedCannulationTime, rhythm, etco2, lactate, toxic);
+      updateEpiHint();
     }
 
     function updateResusOrders(wt, age, totalTime, projectedTime, rhythm, etco2, lactate) {
@@ -628,20 +773,29 @@
 • 抗凝劑備用：Heparin 5,000 U/vial (待 ECMO 醫師評估有無活動性出血後決定是否 IV loading)
 
 [3. ACLS 急救藥物與 RSI 插管防呆組套]
-• Epinephrine (1mg/1mL) 1 mg IV push q3-5min
-• Amiodarone 300 mg IV push (VF/pVT 首劑), 次劑 150 mg IV (若持續難治性心律)
+• Epinephrine (1mg/1mL) 1 mg IV push q3-5min (2025 AHA: 不可電擊心律盡早給予；可電擊心律初次電擊失敗後給予)
+• 給藥途徑提醒: 2025 AHA 建議首選 IV，初試失敗或不可行再建立 IO 管路
+• Amiodarone 300 mg IV push (VF/pVT 首劑), 次劑 150 mg IV (若持續難治心律；或選用 Lidocaine 1-1.5 mg/kg)
+• 難治性 VF 提示: &ge; 3 次電擊無效，可考慮向量改變去顫 (DVL) 或雙序列去顫 (DSED)，效益尚未證實
+• 碳酸氫鈉/鈣劑提醒: 2025 AHA 不建議常規給予 Bicarbonate 或 Calcium，僅在確認嚴重高血鉀、TCA 中毒或既往重度代酸時特定考慮
 • RSI 插管與 Poka-Yoke 鎮靜雙鎖 (依病患體重 ${wt} kg 精算):
   - 誘導：Etomidate ${etomidateDose} mg (0.3 mg/kg) 或 Ketamine ${ketamineDose} mg (1.5 mg/kg, 血壓偏低時)
   - 長效肌鬆：Rocuronium ${rocuroniumDose} mg (1.2 mg/kg)
   - ⚠️【強制配對防呆】：Midazolam 50 mg in 0.9% NS 50 mL pump，起始 3-5 mL/h 滴注 (防範清醒癱瘓創傷)
   - 呼吸器初始參數：VC mode, Tidal Volume ${tidalVolume} mL (7 mL/kg PBW), PEEP 5, FiO2 100%, RR 18/min (若為嚴重代酸需維持過度通氣)
 
-[4. Post-ROSC 復甦後加護處置 (2025 AHA 目標導向照護)]
-• 血流動力學穩定 (目標 MAP ≥ 65 mmHg):
+[4. Post-ROSC 復甦後加護處置 (2025 AHA 最新目標導向指引)]
+• 血流動力學管理 (2025 AHA 更新: 避免低血壓，最低 MAP ≥ 65 mmHg):
   - Norepinephrine (4mg/4mL) 2 amp in D5W 50 mL pump, 起始 5-10 mcg/min 依血壓滴定
-  - 早期多元升壓劑 (血管麻痺防呆): Vasopressin 20 U in 0.9% NS 50 mL, 固定速率 0.03 U/min (0.75 mL/h) 滴注
-• 目標溫度管理 (TTM):
-  - 目標核心溫度 32-37.5°C，嚴格防範發燒 (> 37.7°C) 誘發二次腦缺氧
+  - 難治性血管麻痺休克 (依敗血症/休克指引): 若 Norepinephrine 劑量偏高，考慮次線併用固定速率 Vasopressin 0.03 U/min (急救期間禁用，僅用於復甦後難治休克)
+• 氧合與通氣目標 (2025 AHA 更新):
+  - SpO2 90-98% (PaO2 60-105 mmHg), PaCO2 35-45 mmHg (除非存在重度代酸需代償，避免過度通氣造成腦血管收縮)
+• 目標體溫管理 (TTM 2025 AHA 關鍵更新):
+  - 對 ROSC 後仍無言語反應/昏迷病人，維持體溫調控 32-37.5°C 至少 36 小時！嚴格防範發燒 (> 37.7°C)
+• 延遲多模式神經功能預後評估 (2025 AHA 更新):
+  - 評估時機延後至 ROSC 或恢復正常體溫後 ≥ 72 小時！採多模態 (EEG、NfL 標記、反射) 綜合評估
+• 早期冠狀動脈血管攝影 (CAG):
+  - 疑似缺血病因（心電圖 ST 段上升、心因性休克、重度心肌缺血）建議出院前或儘早進行心導管檢查
 • 緊急追蹤檢驗 (Stat Orders):
   - 動脈血氣分析 (ABG)、高敏肌鈣蛋白 (hs-cTn)、心電圖 (12-lead ECG)、Lactate、CBC、PT/APTT、生化全套 (Na/K/Cl/BUN/Cr/Glu/Ca/Mg)
 • ICU 動向：聯絡內科/心臟血管加護病房 (ICU) 預約緊急重症床位
@@ -703,6 +857,270 @@
       setTimeout(() => el.classList.remove('ring-4', 'ring-purple-400'), 1500);
     }
 
+    // ==========================================
+    // 2025 ACLS Live Timer & Event Logger Engine
+    // ==========================================
+    let resusRunning = false;
+    let resusTimerInterval = null;
+    let totalSeconds = 0;
+    let cprSecondsRemaining = 120; // 2 min cycle
+    let epiSecondsRemaining = 180; // 3 min initial / resets to 240 (4 min)
+    let cprCycleCount = 1;
+    let epiCount = 0;
+    let shockCount = 0;
+    let resusEvents = [];
+
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60).toString().padStart(2, '0');
+      const s = (sec % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    function getNowTimeString() {
+      const now = new Date();
+      return now.toTimeString().substring(0, 8);
+    }
+
+    function toggleResusTimer() {
+      if (!resusRunning) {
+        startResusTimer();
+      } else {
+        pauseResusTimer();
+      }
+    }
+
+    function startResusTimer() {
+      resusRunning = true;
+      document.getElementById('startIcon').innerText = '⏸';
+      document.getElementById('startText').innerText = '暫停計時';
+      document.getElementById('btnStartTimer').classList.remove('bg-emerald-600', 'hover:bg-emerald-500');
+      document.getElementById('btnStartTimer').classList.add('bg-amber-600', 'hover:bg-amber-500');
+      document.getElementById('cprStatusText').innerText = '壓胸循環中';
+
+      if (resusEvents.length === 0) {
+        addResusEvent('🚨 急救開始，啟動高品質 CPR (30:2 / 連續壓胸 110 bpm)');
+      }
+
+      resusTimerInterval = setInterval(() => {
+        totalSeconds++;
+        document.getElementById('totalTimerDisplay').innerText = formatTime(totalSeconds);
+
+        // CPR 2-min cycle
+        if (cprSecondsRemaining > 0) {
+          cprSecondsRemaining--;
+        } else {
+          cprCycleCount++;
+          document.getElementById('cprCycleBadge').innerText = `第 ${cprCycleCount} 循環`;
+          addResusEvent(`⚠️ 滿 2 分鐘循環結束！請更換壓胸人員，暫停按壓 ≤ 10秒 進行節律檢查。`);
+          cprSecondsRemaining = 120;
+          triggerAudioBeep(600, 300);
+        }
+        document.getElementById('cprTimerDisplay').innerText = formatTime(cprSecondsRemaining);
+        const cprPct = (cprSecondsRemaining / 120) * 100;
+        document.getElementById('cprProgressBar').style.width = `${cprPct}%`;
+
+        // Epinephrine timer
+        if (epiSecondsRemaining > 0) {
+          epiSecondsRemaining--;
+        } else {
+          document.getElementById('epiStatusText').innerText = '⚠️ 給藥時間已到！';
+          document.getElementById('epiStatusText').classList.add('animate-pulse');
+        }
+        document.getElementById('epiTimerDisplay').innerText = formatTime(epiSecondsRemaining);
+
+      }, 1000);
+    }
+
+    function pauseResusTimer() {
+      resusRunning = false;
+      clearInterval(resusTimerInterval);
+      document.getElementById('startIcon').innerText = '▶';
+      document.getElementById('startText').innerText = '繼續計時';
+      document.getElementById('btnStartTimer').classList.remove('bg-amber-600', 'hover:bg-amber-500');
+      document.getElementById('btnStartTimer').classList.add('bg-emerald-600', 'hover:bg-emerald-500');
+      document.getElementById('cprStatusText').innerText = '已暫停';
+    }
+
+    function resetResusTimer() {
+      if (confirm('確定重設急救計時器與事件記錄？')) {
+        clearInterval(resusTimerInterval);
+        resusRunning = false;
+        totalSeconds = 0;
+        cprSecondsRemaining = 120;
+        epiSecondsRemaining = 180;
+        cprCycleCount = 1;
+        epiCount = 0;
+        shockCount = 0;
+        resusEvents = [];
+        document.getElementById('startIcon').innerText = '▶';
+        document.getElementById('startText').innerText = '啟動急救計時';
+        document.getElementById('btnStartTimer').classList.remove('bg-amber-600', 'hover:bg-amber-500');
+        document.getElementById('btnStartTimer').classList.add('bg-emerald-600', 'hover:bg-emerald-500');
+        document.getElementById('cprTimerDisplay').innerText = '02:00';
+        document.getElementById('cprStatusText').innerText = '尚未啟動';
+        document.getElementById('cprProgressBar').style.width = '100%';
+        document.getElementById('cprCycleBadge').innerText = '第 1 循環';
+        document.getElementById('epiTimerDisplay').innerText = '03:00';
+        document.getElementById('epiStatusText').innerText = '首劑時機提示';
+        document.getElementById('epiStatusText').classList.remove('animate-pulse');
+        document.getElementById('epiCountBadge').innerText = '已給 0 劑';
+        document.getElementById('totalTimerDisplay').innerText = '00:00';
+        document.getElementById('totalShocksBadge').innerText = '電擊 0 次';
+        renderResusEvents();
+        updateEpiHint();
+      }
+    }
+
+    function addResusEvent(desc) {
+      if (!resusRunning && totalSeconds === 0) {
+        startResusTimer();
+      }
+      const ev = {
+        timestamp: getNowTimeString(),
+        elapsed: formatTime(totalSeconds),
+        description: desc
+      };
+      resusEvents.push(ev);
+      renderResusEvents();
+    }
+
+    function recordShockEvent() {
+      shockCount++;
+      document.getElementById('totalShocksBadge').innerText = `電擊 ${shockCount} 次`;
+      let note = `⚡ 第 ${shockCount} 次雙相波去顫電擊 (200 J)`;
+      if (shockCount >= 3) {
+        note += ` (⚠️ 難治性 VF/pVT 經 ≥ 3 次電擊：2025 AHA 提示可考慮向量改變去顫 DVL 或雙序列去顫 DSED，效益尚未證實；並確認 Amiodarone 300mg / Lidocaine 給藥)`;
+      }
+      addResusEvent(note);
+      cprSecondsRemaining = 120;
+      document.getElementById('cprTimerDisplay').innerText = '02:00';
+    }
+
+    function recordEpiEvent() {
+      epiCount++;
+      document.getElementById('epiCountBadge').innerText = `已給 ${epiCount} 劑`;
+      addResusEvent(`💉 給予 Epinephrine 1 mg IV/IO (#${epiCount})`);
+      epiSecondsRemaining = 240;
+      document.getElementById('epiStatusText').innerText = '下次給藥倒數';
+      document.getElementById('epiStatusText').classList.remove('animate-pulse');
+    }
+
+    function recordAmiodaroneEvent() {
+      const isFirst = !resusEvents.some(e => e.description.includes('Amiodarone'));
+      const dose = isFirst ? '300 mg' : '150 mg';
+      addResusEvent(`💊 給予 Amiodarone ${dose} IV/IO (${isFirst ? '首劑' : '第二劑'})`);
+      document.getElementById('btnAmioLabel').innerText = isFirst ? 'Amiodarone 150mg' : 'Amiodarone 已給完';
+    }
+
+    function recordIntubationEvent() {
+      addResusEvent(`🫁 高級氣道處置完成：氣管內管 (ET-tube) 建立，連接波形二氧化碳 (ETCO2)，改為連續不中斷壓胸與每 6 秒通氣一次`);
+    }
+
+    function recordIOEvent() {
+      addResusEvent(`🩸 靜脈管路初試未成功，依 2025 AHA 指引建立骨內通路 (IO Access) 確保急救給藥時效`);
+    }
+
+    function recordROSCEvent() {
+      addResusEvent(`❤️ 取得 ROSC (自主循環恢復)！橈/股動脈可捫及脈搏，立即轉入 2025 AHA Post-ROSC 加護目標照護 (MAP ≥ 65, TTM 32-37.5°C 至少36h)`);
+      pauseResusTimer();
+      copyResusOrders();
+    }
+
+    function undoLastEvent() {
+      if (resusEvents.length > 0) {
+        const popped = resusEvents.pop();
+        if (popped.description.includes('電擊') && shockCount > 0) shockCount--;
+        if (popped.description.includes('Epinephrine') && epiCount > 0) epiCount--;
+        document.getElementById('totalShocksBadge').innerText = `電擊 ${shockCount} 次`;
+        document.getElementById('epiCountBadge').innerText = `已給 ${epiCount} 劑`;
+        renderResusEvents();
+      }
+    }
+
+    function clearAllEvents() {
+      if (confirm('確定清空所有事件紀錄？')) {
+        resusEvents = [];
+        shockCount = 0;
+        epiCount = 0;
+        document.getElementById('totalShocksBadge').innerText = `電擊 0 次`;
+        document.getElementById('epiCountBadge').innerText = `已給 0 劑`;
+        renderResusEvents();
+      }
+    }
+
+    function renderResusEvents() {
+      const container = document.getElementById('resusEventList');
+      document.getElementById('logCountBadge').innerText = `${resusEvents.length} 筆`;
+      if (resusEvents.length === 0) {
+        container.innerHTML = '<div class="text-slate-500 italic py-1">尚未記錄任何事件。點擊「啟動急救計時」或上方打點按鈕開始紀錄。</div>';
+        return;
+      }
+      container.innerHTML = resusEvents.map(e => `
+        <div class="flex items-start gap-2 py-0.5 border-b border-slate-900 last:border-0 hover:bg-slate-900/60 rounded px-1 transition">
+          <span class="text-slate-400 font-mono text-[11px] shrink-0">${e.timestamp}</span>
+          <span class="text-teal-400 font-mono text-[11px] shrink-0">[+${e.elapsed}]</span>
+          <span class="text-slate-200 leading-tight">${e.description}</span>
+        </div>
+      `).join('');
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function updateEpiHint() {
+      const rhythm = document.getElementById('initialRhythm').value;
+      const el = document.getElementById('epiGuidelineHint');
+      if (!el) return;
+      if (rhythm === 'VF') {
+        el.innerHTML = '<span class="text-amber-300 font-bold">【2025 AHA 可電擊心律】</span>初次電擊失敗後給予首劑 Epinephrine 1mg；之後每 3–5 分鐘給藥一次。';
+      } else {
+        el.innerHTML = '<span class="text-red-300 font-bold">【2025 AHA 不可電擊心律】</span><strong>盡早給予首劑 Epinephrine 1mg IV！</strong> 之後每 3–5 分鐘給藥一次。';
+      }
+    }
+
+    function copyHISCodeBlueLog() {
+      if (resusEvents.length === 0) {
+        alert("尚未記錄任何急救事件，請先點擊打點按鈕或啟動計時！");
+        return;
+      }
+      const rhythm = document.getElementById('initialRhythm').value;
+      const wt = document.getElementById('weight').value;
+      let text = `================================================================================\n`;
+      text += `【急診急救室 Code Blue 急救事件與處置紀錄】(由 ResusPilot 自動生成)\n`;
+      text += `================================================================================\n`;
+      text += `病患體重: ${wt} kg ｜ 初始心律: ${rhythm} ｜ 總急救時間: ${document.getElementById('totalTimerDisplay').innerText}\n`;
+      text += `事件歷程 (時間戳記):\n`;
+      resusEvents.forEach(ev => {
+        text += `• ${ev.timestamp} [+${ev.elapsed}] ${ev.description}\n`;
+      });
+      text += `--------------------------------------------------------------------------------\n`;
+      text += `【急救處置總結】\n`;
+      text += `• 去顫電擊次數: ${shockCount} 次 (雙相波 200 J)\n`;
+      text += `• Epinephrine 給藥總劑量: ${epiCount} mg\n`;
+      text += `• 血管通路: 2025 AHA 首選 IV，失敗轉 IO\n`;
+      text += `================================================================================\n`;
+      text += `※ 備註: 依據 2025 AHA CPR & ECC 指引執行，請覆核後貼入院內 HIS 護理或急救病歷。`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        alert("✓ 已複製 HIS 急救病歷文字！可直接貼入院內系統。");
+      });
+    }
+
+    function triggerAudioBeep(freq = 440, durationMs = 200) {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.frequency.value = freq;
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        osc.start();
+        setTimeout(() => {
+          osc.stop();
+          audioCtx.close();
+        }, durationMs);
+      } catch (e) {}
+    }
+
     // Global Hotkeys Listener
     window.addEventListener('keydown', (e) => {
       if (e.altKey) {
@@ -715,6 +1133,9 @@
         } else if (e.key === 'e' || e.key === 'E') {
           e.preventDefault();
           toggleEBMModal();
+        } else if (e.key === 'l' || e.key === 'L') {
+          e.preventDefault();
+          copyHISCodeBlueLog();
         } else if (e.key === 't' || e.key === 'T') {
           e.preventDefault();
           window.location.href = '../antidote/';
@@ -724,6 +1145,7 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       evalECPR();
+      updateEpiHint();
     });
 </script>
 </body>
