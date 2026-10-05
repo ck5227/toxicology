@@ -186,32 +186,47 @@
         <button id="searchButton" class="ml-4 p-3 bg-[#2a9d8f] text-white rounded-md hover:bg-[#207c70] transition duration-200">搜尋</button>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        <a href="toxidrome/" class="block bg-[#264653] hover:bg-[#1d3a47] transition-colors rounded-lg shadow-xl p-5 text-white border-l-4 border-[#2a9d8f]">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <a href="toxidrome/" class="block bg-[#264653] hover:bg-[#1d3a47] transition-all duration-200 rounded-lg shadow-xl p-5 text-white border-l-4 border-[#2a9d8f] hover:-translate-y-1">
             <div class="flex flex-col justify-between h-full gap-3">
                 <div>
-                    <h2 class="text-xl font-bold text-[#e9c46a] flex items-center gap-2">
-                        <span>🔍 Toxidrome 互動式鑑別工具</span>
+                    <h2 class="text-lg font-bold text-[#e9c46a] flex items-center gap-2">
+                        <span>🔍 Toxidrome 互動鑑別</span>
                     </h2>
-                    <p class="text-sm text-gray-300 mt-1">輸入生命徵象、瞳孔、皮膚、腸蠕動與肌張力。另含陰離子／滲透壓／飽和度間隙計算。</p>
+                    <p class="text-xs text-gray-300 mt-1 leading-relaxed">輸入生命徵象、瞳孔、皮膚、腸蠕動與肌張力。含陰離子／滲透壓／飽和度間隙即時計算。</p>
                 </div>
                 <div class="flex justify-end">
-                    <span class="bg-[#2a9d8f] hover:bg-[#207c70] px-4 py-2 rounded-md font-bold text-sm whitespace-nowrap">開始鑑別 →</span>
+                    <span class="bg-[#2a9d8f] hover:bg-[#207c70] px-3 py-1.5 rounded-md font-bold text-xs whitespace-nowrap">開始鑑別 →</span>
                 </div>
             </div>
         </a>
 
-        <a href="antidote/" class="block bg-[#1d3a47] hover:bg-[#152a34] transition-colors rounded-lg shadow-xl p-5 text-white border-l-4 border-red-500">
+        <a href="antidote/" class="block bg-[#1d3a47] hover:bg-[#152a34] transition-all duration-200 rounded-lg shadow-xl p-5 text-white border-l-4 border-amber-500 hover:-translate-y-1">
             <div class="flex flex-col justify-between h-full gap-3">
                 <div>
                     <div class="flex items-center gap-2">
-                        <span class="bg-red-600 text-white text-[10px] px-2 py-0.5 rounded font-black tracking-wider uppercase">NEW CDSS</span>
-                        <h2 class="text-xl font-bold text-[#e9c46a]">🚨 全國解毒劑儲備 ＆ 罕見中毒決策副駕</h2>
+                        <span class="bg-amber-500 text-slate-900 text-[10px] px-1.5 py-0.5 rounded font-black tracking-wider uppercase">CDSS</span>
+                        <h2 class="text-lg font-bold text-[#e9c46a]">🚨 全國解毒劑儲備網</h2>
                     </div>
-                    <p class="text-sm text-gray-300 mt-1">對標衛福部儲備網 (北榮 24H: 02-2871-7121)、Micromedex 體重劑量與 EXTRIP 緊急血液透析門檻。</p>
+                    <p class="text-xs text-gray-300 mt-1 leading-relaxed">衛福部儲備網 (北榮 24H: 02-2871-7121)、Micromedex 體重劑量與 EXTRIP 透析門檻。</p>
                 </div>
                 <div class="flex justify-end">
-                    <span class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md font-bold text-sm whitespace-nowrap text-white">啟動副駕 →</span>
+                    <span class="bg-amber-500 hover:bg-amber-600 px-3 py-1.5 rounded-md font-bold text-xs whitespace-nowrap text-slate-950">調度試算 →</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="resus/" class="block bg-slate-900 hover:bg-slate-950 transition-all duration-200 rounded-lg shadow-xl p-5 text-white border-l-4 border-red-500 hover:-translate-y-1 ring-1 ring-red-500/30">
+            <div class="flex flex-col justify-between h-full gap-3">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="bg-red-600 text-white text-[10px] px-1.5 py-0.5 rounded font-black tracking-wider uppercase animate-pulse">2025 ACLS</span>
+                        <h2 class="text-lg font-bold text-red-400">⚡ E-CPR / 急救復甦副駕</h2>
+                    </div>
+                    <p class="text-xs text-gray-300 mt-1 leading-relaxed">2025 AHA 急救演算法、5H5T 排查、E-CPR / VA-ECMO 綠紅燈量化門檻、HIS 醫藥囑套裝 (Alt+O)。</p>
+                </div>
+                <div class="flex justify-end">
+                    <span class="bg-red-600 hover:bg-red-700 px-3 py-1.5 rounded-md font-bold text-xs whitespace-nowrap text-white">進入急救室 →</span>
                 </div>
             </div>
         </a>
@@ -1959,7 +1974,7 @@
             <p class="font-bold text-[#e9c46a] mb-2">作者</p>
             <p class="text-lg">潘麒亘 醫師</p>
             <p class="text-sm text-gray-300 mt-1">中國醫藥大學附設醫院 急診部｜毒物及急診專科醫師</p>
-            <p class="text-sm text-gray-400 mt-3">最後更新：2026 年 10 月 4 日</p>
+            <p class="text-sm text-gray-400 mt-3">最後更新：2026 年 10 月 5 日</p>
         </div>
         <div class="text-center text-sm">
             <p>本資訊圖表僅供學術教育參考，不得取代專業臨床判斷。所有臨床決策應基於最新文獻與治療指引。</p>

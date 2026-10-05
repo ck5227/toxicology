@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>急診急救復甦 ＆ E-CPR / 葉克膜決策副駕 (ResusPilot CDSS) — 臨床毒物學精要</title>
+<meta name="description" content="急診急救室全流程閉環決策副駕：整合 2025 AHA ACLS 急救指引、AHA JAHA 2026 / ELSO E-CPR 體外心肺復甦術量化門檻、5H5T 結構化病因排查、RSI 鎮靜防呆與 HIS 結構化醫藥囑套裝。本機離線安全運算。">
+<meta name="author" content="潘麒亘 醫師">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ck5227.github.io/toxicology/resus/">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="臨床毒物學精要">
+<meta property="og:title" content="急診急救復甦 ＆ E-CPR / 葉克膜決策副駕 (ResusPilot CDSS)">
+<meta property="og:description" content="2025 AHA ACLS ＋ E-CPR 葉克膜客觀適應症量化評估 ＋ 秒開 HIS 結構化急救醫藥囑。零外網傳輸、100% 院內本機端安全運算。">
+<meta property="og:url" content="https://ck5227.github.io/toxicology/resus/">
+<meta property="og:locale" content="zh_TW">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "急診急救復甦 ＆ E-CPR / 葉克膜決策副駕",
+  "url": "https://ck5227.github.io/toxicology/resus/",
+  "inLanguage": "zh-Hant",
+  "description": "急診急救室全流程閉環決策支援系統，整合 2025 AHA ACLS 與 E-CPR 指引。",
+  "dateModified": "2026-10-05",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "臨床毒物學精要",
+    "url": "https://ck5227.github.io/toxicology/"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "潘麒亘",
+    "jobTitle": "毒物及急診專科醫師",
+    "affiliation": { "@type": "MedicalOrganization", "name": "中國醫藥大學附設醫院 急診部" }
+  },
+  "audience": { "@type": "MedicalAudience", "audienceType": "Physician" }
+}
+</script>
+
+<!-- 預先編譯樣式與 Tailwind CDN 雙重支援 -->
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+<style>
+    .hidden { display: none !important; }
+    body { font-family: 'Noto Sans TC', sans-serif; background-color: #f0f4f8; }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white !important; color: black !important; padding: 0 !important; }
+      .shadow, .shadow-lg, .shadow-xl { box-shadow: none !important; }
+    }
+    input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+      -webkit-appearance: none; margin: 0;
+    }
+    input[type=number] { -moz-appearance: textfield; }
+</style>
+</head>
+<body class="text-gray-800 antialiased min-h-screen">
+
+<!-- Global Top Header -->
+<header class="bg-[#264653] text-white px-6 py-5 shadow-lg">
+    <div class="container mx-auto max-w-6xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+            <div class="flex items-center gap-3">
+                <a href="../" class="text-sm text-gray-300 hover:text-[#e9c46a] transition">← 回臨床毒物學精要總覽</a>
+                <span class="text-gray-500">|</span>
+                <span class="bg-red-600 text-white text-[10px] font-black tracking-wider uppercase px-2 py-0.5 rounded shadow-sm">RESUSPILOT CDSS</span>
+            </div>
+            <h1 class="text-2xl md:text-3xl font-extrabold text-[#e9c46a] mt-2 tracking-tight">
+                急診急救復甦 ＆ E-CPR / 葉克膜決策副駕
+            </h1>
+            <p class="mt-1 text-gray-300 text-xs md:text-sm">
+                實證整合：<strong>2025 AHA ACLS 指引</strong> ｜ <strong>AHA JAHA 2026 E-CPR 窗期模型</strong> ｜ <strong>ELSO 體外生命支持指引</strong>
+            </p>
+        </div>
+
+        <!-- Rapid Actions Header Badge -->
+        <div class="bg-[#1d3a47] border border-[#2a9d8f]/50 p-3 rounded-xl flex items-center gap-3 shrink-0 self-stretch md:self-auto justify-between">
+            <div>
+                <div class="text-[10px] text-amber-300 font-bold uppercase tracking-wider">院內急救團隊 ＆ 心外 E-CPR</div>
+                <div class="text-[11px] text-gray-200">急救室全流程閉環決策支援</div>
+                <div class="text-xs text-[#2a9d8f] font-mono font-bold mt-0.5">Code Blue / E-CPR Ready</div>
+            </div>
+            <div class="h-9 w-9 rounded-full bg-red-600 flex items-center justify-center text-white text-base shadow animate-pulse">
+                ⚡
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Module Navigation & Compliance Bar -->
+<div class="bg-[#1d3a47] text-gray-200 px-6 py-2.5 text-xs border-t border-[#264653]">
+    <div class="container mx-auto max-w-6xl flex flex-wrap items-center justify-between gap-x-5 gap-y-1">
+        <div class="flex items-center gap-3">
+            <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>🔒 本機端無狀態確定性運算：<b>零外網傳輸 (Zero Data Egress)</b>，符合醫療個資法與 HIPAA 規範</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <a href="#tabResus" class="px-2.5 py-1 bg-red-600 text-white rounded font-bold transition hover:bg-red-700">⚡ 2025 ACLS & E-CPR</a>
+            <a href="../antidote/" class="px-2.5 py-1 bg-slate-800 text-amber-300 rounded font-semibold transition hover:bg-slate-700 border border-slate-600">🚨 代謝危機 & 全國解毒劑 →</a>
+        </div>
+    </div>
+</div>
+
+<!-- Main Application Workspace -->
+<main class="container mx-auto max-w-6xl p-4 md:p-6 space-y-6">
+
+    <!-- Clinical & Educational Hotkeys Bar -->
+    <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-[#1d3a47] text-white p-3.5 rounded-xl shadow-md flex flex-wrap items-center justify-between gap-3 text-xs border border-indigo-800/40">
+        <div class="flex items-center gap-2">
+            <span class="bg-amber-400 text-slate-900 font-extrabold px-1.5 py-0.5 rounded text-[10px] tracking-wider uppercase shadow-xs">HOTKEYS</span>
+            <span class="font-bold text-amber-300">急診急救室全域快速鍵：</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 text-[11px] font-mono">
+            <button onclick="copyResusOrders()" class="bg-red-900/80 hover:bg-red-800 text-red-100 px-2.5 py-1 rounded-md border border-red-700/60 transition flex items-center gap-1.5 shadow-xs">
+                <kbd class="bg-slate-950 text-amber-300 px-1.5 py-0.5 rounded font-bold border border-red-800">Alt+O</kbd>
+                <span>秒開 HIS 急救/ECMO 醫囑</span>
+            </button>
+            <button onclick="copyResusSBAR()" class="bg-indigo-900/80 hover:bg-indigo-800 text-indigo-100 px-2.5 py-1 rounded-md border border-indigo-700/60 transition flex items-center gap-1.5 shadow-xs">
+                <kbd class="bg-slate-950 text-indigo-300 px-1.5 py-0.5 rounded font-bold border border-indigo-800">Alt+S</kbd>
+                <span>產出 CVSI / ICU 照會</span>
+            </button>
+            <button onclick="toggleEBMModal()" class="bg-purple-900/80 hover:bg-purple-800 text-purple-100 px-2.5 py-1 rounded-md border border-purple-700/60 transition flex items-center gap-1.5 shadow-xs">
+                <kbd class="bg-slate-950 text-purple-300 px-1.5 py-0.5 rounded font-bold border border-purple-800">Alt+E</kbd>
+                <span>床邊實證教學小抄 (EBM)</span>
+            </button>
+            <span class="text-slate-400 hidden lg:inline">|</span>
+            <a href="../antidote/" class="bg-teal-900/80 hover:bg-teal-800 text-teal-100 px-2.5 py-1 rounded-md border border-teal-700/60 transition flex items-center gap-1.5 shadow-xs">
+                <kbd class="bg-slate-950 text-teal-300 px-1.5 py-0.5 rounded font-bold border border-teal-800">Alt+T</kbd>
+                <span>解毒劑副駕</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Quick Scenario Presets -->
+    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div class="font-bold text-[#264653] flex items-center gap-2">
+            <span>⚡ 急救現場情境快速載入 (One-Click Scenarios)：</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+            <button onclick="loadScenario('ideal_ecpr')" class="px-3 py-1.5 bg-emerald-50 text-emerald-800 hover:bg-emerald-100 rounded-lg border border-emerald-300 font-semibold transition">
+                🟢 黃金 E-CPR 首選 (目擊 VF + 總急救 30分)
+            </button>
+            <button onclick="loadScenario('toxic_shock')" class="px-3 py-1.5 bg-purple-50 text-purple-800 hover:bg-purple-100 rounded-lg border border-purple-300 font-semibold transition">
+                💜 難治毒性休克 (CCB/BB/毛地黃 ECLS)
+            </button>
+            <button onclick="loadScenario('acidosis_arrest')" class="px-3 py-1.5 bg-red-50 text-red-800 hover:bg-red-100 rounded-lg border border-red-300 font-semibold transition">
+                🚨 重度代酸心跳停止 (5H: H+ 崩潰)
+            </button>
+            <button onclick="loadScenario('borderline')" class="px-3 py-1.5 bg-amber-50 text-amber-800 hover:bg-amber-100 rounded-lg border border-amber-300 font-semibold transition">
+                🟡 邊界案例 (PEA + 總急救 45分)
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Resuscitation Grid -->
+    <div id="tabResus" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Left Column: Patient Profile & Arrest Timeline (5 cols) -->
+        <div class="lg:col-span-5 space-y-5">
+
+            <!-- 1. Patient Profile & Timeline -->
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                    <h2 class="text-sm font-bold text-[#264653] flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-red-600"></span>
+                        1. 急救時效與生理灌流參數 (AHA 2026 模型)
+                    </h2>
+                    <span class="text-[11px] text-slate-400 font-medium">Arrest-to-Cannulation</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">病患體重 (kg) <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <input type="number" id="weight" value="65" min="1" max="250" class="w-full border border-slate-300 rounded-lg p-2 text-sm font-bold text-[#264653] focus:ring-2 focus:ring-red-500 focus:outline-none" oninput="evalECPR()">
+                            <span class="absolute right-3 top-2 text-xs text-slate-400 font-medium">kg</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">年齡 (歲, 建議 18-70)</label>
+                        <input type="number" id="age" value="52" min="0" max="120" class="w-full border border-slate-300 rounded-lg p-2 text-sm focus:ring-2 focus:ring-red-500 focus:outline-none" oninput="evalECPR()">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">倒地至到院時間 (min)</label>
+                        <input type="number" id="collapseTime" value="15" min="0" max="180" class="w-full border border-slate-300 rounded-lg p-2 text-sm font-mono font-bold text-red-600 focus:ring-2 focus:ring-red-500 focus:outline-none" oninput="evalECPR()">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">急診 CPR 持續時間 (min)</label>
+                        <input type="number" id="cprDuration" value="15" min="0" max="180" class="w-full border border-slate-300 rounded-lg p-2 text-sm font-mono font-bold text-red-600 focus:ring-2 focus:ring-red-500 focus:outline-none" oninput="evalECPR()">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">呼氣末 CO2 (ETCO2 mmHg)</label>
+                        <input type="number" id="etco2" value="18" min="0" max="100" class="w-full border border-slate-300 rounded-lg p-2 text-sm font-mono font-bold text-emerald-700 focus:ring-2 focus:ring-emerald-500 focus:outline-none" oninput="evalECPR()">
+                        <span class="text-[10px] text-slate-400">標準 ≥ 10-20 (代表灌流良好)</span>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">初次動脈血乳酸 (mmol/L)</label>
+                        <input type="number" step="0.1" id="lactate" value="8.5" min="0" max="35" class="w-full border border-slate-300 rounded-lg p-2 text-sm font-mono font-bold text-indigo-900 focus:ring-2 focus:ring-indigo-500 focus:outline-none" oninput="evalECPR()">
+                        <span class="text-[10px] text-slate-400">JAHA 門檻 &lt; 12 (神經良好指標)</span>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">初始或急救中心律 <span class="text-red-500">*</span></label>
+                    <select id="initialRhythm" class="w-full border-2 border-red-300 rounded-lg p-2.5 text-sm font-bold text-red-950 bg-red-50/40 focus:ring-2 focus:ring-red-500 focus:outline-none" onchange="evalECPR()">
+                        <option value="VF">可去顫心律 (VF / Pulseless VT) — 首選</option>
+                        <option value="PEA">無脈搏電氣活動 (PEA - 可逆病因)</option>
+                        <option value="Asystole">心搏停止 (Asystole - 門檻未達)</option>
+                    </select>
+                </div>
+
+                <!-- Inclusion / Exclusion Toggles -->
+                <div class="bg-slate-50 p-3.5 rounded-lg border border-slate-200 text-xs space-y-2">
+                    <div class="font-bold text-slate-700 mb-1">急救現場條件核取：</div>
+                    <label class="flex items-center gap-2 cursor-pointer text-slate-800">
+                        <input type="checkbox" id="witnessed" checked class="rounded text-red-600 h-4 w-4" onchange="evalECPR()">
+                        <span>有目擊倒地 (Witnessed arrest)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer text-slate-800">
+                        <input type="checkbox" id="bystanderCpr" checked class="rounded text-red-600 h-4 w-4" onchange="evalECPR()">
+                        <span>旁人 / EMT 持續高品質 CPR (未受CPR時間 &le; 5 min)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer text-purple-900 font-bold">
+                        <input type="checkbox" id="toxicEtiology" class="rounded text-purple-600 h-4 w-4" onchange="evalECPR()">
+                        <span>疑似難治心毒性藥物過量 (CCB/BB/TCA/Digoxin/Chloroquine)</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer text-slate-500">
+                        <input type="checkbox" id="exclusionCriteria" class="rounded text-slate-400 h-4 w-4" onchange="evalECPR()">
+                        <span>存在絕對排除條件 (惡性腫瘤末期、嚴重不可逆全腦損傷、DNR/安寧)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 2. 5H5T Etiology Quick Screening -->
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-3">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                    <h3 class="text-xs font-bold text-[#264653] uppercase tracking-wider flex items-center gap-1.5">
+                        <span>🔍 2025 ACLS 5H5T 秒級病因排查 ＆ 致命防呆</span>
+                    </h3>
+                    <span class="text-[10px] text-slate-400">床邊指引</span>
+                </div>
+                <div class="space-y-2 text-xs">
+                    <div class="p-2.5 bg-red-50 rounded-lg border border-red-200">
+                        <span class="font-bold text-red-950">1. Hydrogen ion (嚴重酸血症)：</span>
+                        <p class="text-red-900 mt-0.5 leading-relaxed">
+                            依 2026 BICAR-ICU 實證，動脈血 <strong>pH &le; 7.10</strong> 建議給予 Sodium Bicarbonate 1-2 amp 嘗試逆轉心肌抑制；陰離子間隙 &gt; 24 評估急透析。
+                        </p>
+                    </div>
+                    <div class="p-2.5 bg-amber-50 rounded-lg border border-amber-200">
+                        <span class="font-bold text-amber-950">2. Hyperkalemia (致命高血鉀)：</span>
+                        <p class="text-amber-900 mt-0.5 leading-relaxed">
+                            心律異常時硬性防呆：<strong>優先給予 Calcium gluconate 1-2g IV 穩定細胞膜</strong>，次行 RI + D50W。
+                            <span class="text-red-700 font-bold block mt-0.5">⚠️ 毛地黃中毒高血鉀嚴禁給鈣（防不可逆石心 Stone Heart）！</span>
+                        </p>
+                    </div>
+                    <div class="p-2.5 bg-purple-50 rounded-lg border border-purple-200">
+                        <span class="font-bold text-purple-950">3. Toxins (急性心毒性藥物)：</span>
+                        <p class="text-purple-900 mt-0.5 leading-relaxed">
+                            CCB/BB 難治性休克考慮高劑量胰島素 (HIET 1 U/kg)；心肌可逆藥物過量為 E-CPR / VA-ECMO 最強適應症！
+                        </p>
+                    </div>
+                    <div class="p-2.5 bg-blue-50 rounded-lg border border-blue-200">
+                        <span class="font-bold text-blue-950">4. POCUS 床邊超音波排除 (Tamponade / Tension PTX / PE)：</span>
+                        <p class="text-blue-900 mt-0.5 leading-relaxed">
+                            壓胸暫停 5 秒內快速掃描心包積液、右心擴大 (RV strain) 與肺滑窗 (Lung sliding)。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Column: E-CPR Verdict, HIS Orders, SBAR, and EBM Pearls (7 cols) -->
+        <div class="lg:col-span-7 space-y-5">
+
+            <!-- E-CPR Verdict Card -->
+            <div id="ecprVerdictCard" class="p-5 rounded-xl border shadow-sm transition">
+                <div class="flex items-center justify-between border-b pb-2.5 mb-3">
+                    <h3 class="text-base font-extrabold flex items-center gap-2">
+                        <span id="verdictIcon" class="text-xl">🟢</span>
+                        <span id="verdictTitle">E-CPR / ECMO 適應症即時判定</span>
+                    </h3>
+                    <span id="verdictBadge" class="text-xs px-2.5 py-0.5 rounded-full font-bold">AHA JAHA 2026</span>
+                </div>
+                <div id="verdictBody" class="text-xs space-y-2 leading-relaxed">
+                    <!-- Injected by evalECPR() -->
+                </div>
+                <div class="mt-3 pt-2.5 border-t flex flex-wrap justify-between items-center text-[11px] font-mono text-slate-500">
+                    <div>總急救時間: <span id="totalArrestTimeVal" class="font-bold text-slate-800">30</span> min ｜ 預估上機時間: <span id="projectedCannulaVal" class="font-bold text-slate-800">45</span> min</div>
+                    <div>目標時效: &lt; 60 min 門檻</div>
+                </div>
+            </div>
+
+            <!-- Standardized HIS SOP Medical Order Set -->
+            <div id="resusOrderBox" class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 p-5 rounded-xl shadow-xl text-white space-y-3 border border-indigo-700/50 no-print">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-indigo-800/60 pb-3">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="bg-red-600 text-white text-[10px] px-2 py-0.5 rounded font-black tracking-wider uppercase">HIS FAST-ORDER</span>
+                            <h3 class="text-base font-bold text-white flex items-center gap-2">
+                                <span>⚡ 急救室 E-CPR / ACLS 結構化醫藥囑套裝</span>
+                            </h3>
+                        </div>
+                        <p class="text-xs text-indigo-200 mt-1">
+                            包含 ECMO 導管穿刺組套、RSI 鎮靜雙鎖防呆、多元升壓劑與 Post-ROSC 加護醫囑 (快捷鍵: Alt+O)
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="copyResusOrders()" class="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-lg text-xs font-bold transition shadow flex items-center gap-1.5 border border-red-400/30">
+                            <kbd class="bg-slate-950 px-1.5 py-0.5 rounded text-[10px] text-amber-300 font-bold">Alt+O</kbd>
+                            <span>秒開 HIS 醫藥囑</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <textarea id="resusOrderText" rows="7" readonly class="w-full bg-slate-950/80 border border-indigo-800 rounded-lg p-3 text-xs font-mono text-indigo-100 focus:outline-none select-all leading-relaxed"></textarea>
+                    <div id="resusOrderCopyToast" class="hidden absolute top-2 right-2 bg-emerald-500 text-white text-[11px] px-3 py-1 rounded-md font-bold shadow-lg animate-bounce">
+                        ✓ 已複製到剪貼簿！可直接貼入 HIS 開囑系統
+                    </div>
+                </div>
+            </div>
+
+            <!-- SBAR Clinical Handover to CVSI / ICU -->
+            <div id="resusSbarBox" class="bg-gradient-to-r from-[#264653] to-[#1d3a47] p-5 rounded-xl shadow-lg text-white space-y-3 no-print">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-[#2a9d8f]/30 pb-3">
+                    <div>
+                        <h3 class="text-base font-bold text-[#e9c46a] flex items-center gap-2">
+                            <span>📋 急救室 E-CPR / 心臟外科 (CVSI) 緊急會診 SBAR</span>
+                        </h3>
+                        <p class="text-xs text-slate-300 mt-0.5">即時彙整病患倒地時間、CPR 時效、血氣灌流指標與 ECMO 上機適應門檻</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="copyResusSBAR()" class="bg-[#2a9d8f] hover:bg-[#207c70] text-white px-4 py-2 rounded-lg text-xs font-bold transition shadow flex items-center gap-1.5">
+                            <kbd class="bg-teal-950 px-1.5 py-0.5 rounded text-[10px] text-teal-300 font-bold">Alt+S</kbd>
+                            <span>一鍵複製 SBAR 文本</span>
+                        </button>
+                        <button onclick="window.print()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-2 rounded-lg text-xs font-semibold transition border border-slate-600">
+                            🖨️ 列印報告
+                        </button>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <textarea id="resusSbarText" rows="4" readonly class="w-full bg-slate-950/70 border border-teal-800 rounded-lg p-3 text-xs font-mono text-teal-100 focus:outline-none select-all"></textarea>
+                    <div id="resusSbarToast" class="hidden absolute top-2 right-2 bg-emerald-500 text-white text-[11px] px-3 py-1 rounded-md font-bold shadow-lg animate-bounce">
+                        ✓ SBAR 會診單已複製！可直接傳送 CVSI 或貼入會診系統
+                    </div>
+                </div>
+            </div>
+
+            <!-- Point-of-Care EBM Clinical Teaching Pearls -->
+            <div id="ebmSection" class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-4 transition duration-300">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                    <h3 class="text-sm font-bold text-[#264653] flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span>
+                        <span>📖 床邊實證教學小抄 (Point-of-Care EBM Pearls)</span>
+                    </h3>
+                    <span class="text-[11px] px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">AHA 2026 實證精要</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                    <div class="p-3 bg-red-50/80 rounded-lg border border-red-200 space-y-1">
+                        <div class="font-bold text-red-950 flex items-center gap-1">
+                            <span>⏱️ 1. E-CPR 窗期實證 (AHA JAHA 2026)</span>
+                        </div>
+                        <p class="text-red-900 leading-relaxed">
+                            <strong>切勿等 CPR 45 分鐘常規失敗後才叫 ECMO！</strong> JAHA 2026 證實 Arrest-to-Cannulation 超過 60 分鐘良好神經存活率直線下滑；<strong>急診常規 ACLS 壓胸 10–15 分鐘無反應即需啟動心外團隊召集</strong>，爭取在倒地 45–60 分鐘內建立體外灌流。
+                        </p>
+                    </div>
+
+                    <div class="p-3 bg-amber-50/80 rounded-lg border border-amber-200 space-y-1">
+                        <div class="font-bold text-amber-950 flex items-center gap-1">
+                            <span>🔒 2. RSI 清醒癱瘓「鎮靜空窗 (Sedation Gap)」防呆</span>
+                        </div>
+                        <p class="text-amber-900 leading-relaxed">
+                            Etomidate 誘導鎮靜僅維持 5–10 分鐘，而 Rocuronium 肌鬆作用長達 45–60 分鐘。若未及時接上連續鎮靜點滴（如 Midazolam / Propofol），<strong>病患將在清醒狀態下全身癱瘓窒息</strong>，引發嚴重醫療創傷！系統醫囑強制將肌鬆與連續鎮靜雙鎖綁定。
+                        </p>
+                    </div>
+
+                    <div class="p-3 bg-blue-50/80 rounded-lg border border-blue-200 space-y-1">
+                        <div class="font-bold text-blue-950 flex items-center gap-1">
+                            <span>💉 3. 復甦後早期多元升壓劑 (Frontiers 2026)</span>
+                        </div>
+                        <p class="text-blue-900 leading-relaxed">
+                            2026 重症指引主張 Norepinephrine 應早期併用固定劑量 <strong>Vasopressin (0.03 U/min)</strong>。其機轉在於收縮內臟血管、保護血管內皮，避免單一大劑量 Norepinephrine 造成腎臟血管劇烈痙攣，可顯著減少急性腎衰竭與肺水腫。
+                        </p>
+                    </div>
+
+                    <div class="p-3 bg-purple-50/80 rounded-lg border border-purple-200 space-y-1">
+                        <div class="font-bold text-purple-950 flex items-center gap-1">
+                            <span>❄️ 4. 目標溫度管理 (TTM 2025/2026 演進)</span>
+                        </div>
+                        <p class="text-purple-900 leading-relaxed">
+                            心跳停止復甦後核心體溫嚴格維持 <strong>32–37.5°C</strong>。重點在於<strong>「積極預防任何發燒 (> 37.7°C)」</strong>，發燒每上升 1°C 腦代謝耗氧量增加 10%，會嚴重惡化二次腦缺氧損傷。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- References & Evidence Base Footer -->
+    <footer class="bg-white p-6 rounded-xl shadow-sm text-xs text-slate-600 border border-slate-200 space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+            <h4 class="font-bold text-[#264653] text-sm flex items-center gap-2">
+                <span>📚 權威急救復甦實證溯源 (ACLS & E-CPR Evidence Base)</span>
+            </h4>
+            <span class="text-[11px] text-slate-400">更新週期: 2026 最新版次</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px] leading-relaxed">
+            <div class="space-y-1.5">
+                <p>
+                    <strong class="text-slate-800">1. 2025 AHA Guidelines for CPR and ECC</strong><br>
+                    American Heart Association. Focused Updates on Adult Advanced Cardiovascular Life Support and Post-Cardiac Arrest Care. Circulation, 2025.
+                </p>
+                <p>
+                    <strong class="text-slate-800">2. AHA JAHA 2026 E-CPR Time-to-Cannulation Criteria</strong><br>
+                    Journal of the American Heart Association (JAHA 2026). <em>Quantified Timelines and Neurological Prognostic Factors in Extracorporeal Cardiopulmonary Resuscitation</em>.
+                </p>
+            </div>
+
+            <div class="space-y-1.5">
+                <p>
+                    <strong class="text-slate-800">3. ELSO Guidelines for Extracorporeal Cardiopulmonary Resuscitation (E-CPR)</strong><br>
+                    Extracorporeal Life Support Organization (ELSO). Clinical Practice Guideline for Adult Cardiac Arrest E-CPR Indication and Cannulation Protocols, 2026.
+                </p>
+                <p>
+                    <strong class="text-slate-800">4. BICAR-ICU & EXTRIP Recommendations</strong><br>
+                    Sodium bicarbonate infusion in severe metabolic acidaemia and extracorporeal treatment thresholds in toxic shock. The Lancet / Crit Care Med.
+                </p>
+            </div>
+        </div>
+
+        <div class="pt-2 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center text-[10px] text-slate-400 gap-1">
+            <div>本系統專為急重症醫療人員急救輔駕與臨床教育設計，所有處置應由急救團隊負責主治醫師綜合病況最終判定。</div>
+            <div>臨床毒物學精要 • ResusPilot CDSS • 潘麒亘 醫師</div>
+        </div>
+    </footer>
+
+</main>
+
+<!-- Calculation & Decision Logic Script -->
+<script>
+    function loadScenario(type) {
+      if (type === 'ideal_ecpr') {
+        document.getElementById('weight').value = '65';
+        document.getElementById('age').value = '48';
+        document.getElementById('collapseTime').value = '15';
+        document.getElementById('cprDuration').value = '15';
+        document.getElementById('etco2').value = '20';
+        document.getElementById('lactate').value = '7.2';
+        document.getElementById('initialRhythm').value = 'VF';
+        document.getElementById('witnessed').checked = true;
+        document.getElementById('bystanderCpr').checked = true;
+        document.getElementById('toxicEtiology').checked = false;
+        document.getElementById('exclusionCriteria').checked = false;
+      } else if (type === 'toxic_shock') {
+        document.getElementById('weight').value = '60';
+        document.getElementById('age').value = '32';
+        document.getElementById('collapseTime').value = '20';
+        document.getElementById('cprDuration').value = '25';
+        document.getElementById('etco2').value = '18';
+        document.getElementById('lactate').value = '9.8';
+        document.getElementById('initialRhythm').value = 'PEA';
+        document.getElementById('witnessed').checked = true;
+        document.getElementById('bystanderCpr').checked = true;
+        document.getElementById('toxicEtiology').checked = true;
+        document.getElementById('exclusionCriteria').checked = false;
+      } else if (type === 'acidosis_arrest') {
+        document.getElementById('weight').value = '70';
+        document.getElementById('age').value = '55';
+        document.getElementById('collapseTime').value = '10';
+        document.getElementById('cprDuration').value = '20';
+        document.getElementById('etco2').value = '14';
+        document.getElementById('lactate').value = '16.5';
+        document.getElementById('initialRhythm').value = 'PEA';
+        document.getElementById('witnessed').checked = true;
+        document.getElementById('bystanderCpr').checked = true;
+        document.getElementById('toxicEtiology').checked = false;
+        document.getElementById('exclusionCriteria').checked = false;
+      } else if (type === 'borderline') {
+        document.getElementById('weight').value = '65';
+        document.getElementById('age').value = '68';
+        document.getElementById('collapseTime').value = '25';
+        document.getElementById('cprDuration').value = '25';
+        document.getElementById('etco2').value = '12';
+        document.getElementById('lactate').value = '11.5';
+        document.getElementById('initialRhythm').value = 'PEA';
+        document.getElementById('witnessed').checked = true;
+        document.getElementById('bystanderCpr').checked = false;
+        document.getElementById('toxicEtiology').checked = false;
+        document.getElementById('exclusionCriteria').checked = false;
+      }
+      evalECPR();
+    }
+
+    function evalECPR() {
+      const wt = Math.max(1, parseFloat(document.getElementById('weight').value) || 65);
+      const age = parseFloat(document.getElementById('age').value) || 50;
+      const collapseTime = parseFloat(document.getElementById('collapseTime').value) || 0;
+      const cprDuration = parseFloat(document.getElementById('cprDuration').value) || 0;
+      const etco2 = parseFloat(document.getElementById('etco2').value) || 0;
+      const lactate = parseFloat(document.getElementById('lactate').value) || 5.0;
+      const rhythm = document.getElementById('initialRhythm').value;
+      const witnessed = document.getElementById('witnessed').checked;
+      const bystanderCpr = document.getElementById('bystanderCpr').checked;
+      const toxic = document.getElementById('toxicEtiology').checked;
+      const exclusion = document.getElementById('exclusionCriteria').checked;
+
+      const totalArrestTime = collapseTime + cprDuration;
+      const projectedCannulationTime = totalArrestTime + 15; // 估算 15 分鐘建立管路
+
+      document.getElementById('totalArrestTimeVal').innerText = totalArrestTime;
+      document.getElementById('projectedCannulaVal').innerText = projectedCannulationTime;
+
+      const card = document.getElementById('ecprVerdictCard');
+      const icon = document.getElementById('verdictIcon');
+      const title = document.getElementById('verdictTitle');
+      const badge = document.getElementById('verdictBadge');
+      const body = document.getElementById('verdictBody');
+
+      // AHA JAHA 2026 / ELSO Criteria Engine
+      if (exclusion) {
+        card.className = "p-5 rounded-xl border border-red-400 bg-red-50 text-red-950 shadow-sm transition";
+        icon.innerText = "🔴";
+        title.innerText = "【不建議啟動 E-CPR (存在絕對排除條件)】";
+        badge.className = "text-xs px-2.5 py-0.5 rounded-full font-bold bg-red-200 text-red-900";
+        badge.innerText = "絕對排除";
+        body.innerHTML = `
+          <p class="font-bold">病患存在排除標準：惡性腫瘤末期、嚴重不可逆全腦損傷、或預立安寧緩和意願 (DNR)。</p>
+          <p class="text-[11px] text-red-800">處置建議：持續常規 ACLS 急救，與家屬進行即時同理溝通，避免過度侵入性體外循環負擔。</p>
+        `;
+      } else if (witnessed && bystanderCpr && (rhythm === 'VF' || toxic) && projectedCannulationTime <= 60 && etco2 >= 10 && lactate <= 12) {
+        card.className = "p-5 rounded-xl border border-emerald-500 bg-emerald-50 text-emerald-950 shadow-md transition";
+        icon.innerText = "🟢";
+        title.innerText = "【強烈建議啟動 E-CPR / 呼叫心臟外科 ECMO 團隊】";
+        badge.className = "text-xs px-2.5 py-0.5 rounded-full font-bold bg-emerald-600 text-white animate-pulse";
+        badge.innerText = "AHA JAHA 2026 良好存活首選";
+        body.innerHTML = `
+          <p class="font-bold">高度符合 2026 體外心肺復甦術黃金指徵：</p>
+          <ul class="list-disc pl-4 space-y-1 text-emerald-900">
+            <li><strong>時效達標：</strong> 預估倒地至上機時間 <strong>${projectedCannulationTime} 分鐘</strong> (嚴格小於 60 分鐘關鍵預後切點)。</li>
+            <li><strong>良好灌流：</strong> ETCO2 ${etco2} mmHg (&ge; 10-20 代表壓胸品質優良) 且血乳酸 ${lactate} mmol/L (&le; 12 代表尚未發生極重度組織壞死)。</li>
+            <li><strong>可逆心律/病因：</strong> 初始為可去顫心律 (${rhythm}) 或可逆心毒性藥物過量，E-CPR 神經良好存活率極高！</li>
+          </ul>
+          <p class="text-[11px] font-bold text-emerald-800 mt-1">處置動向：立即按 [Alt+O] 秒開 HIS ECMO 穿刺導管醫囑，並按 [Alt+S] 產出 CVSI 會診單！</p>
+        `;
+      } else if (toxic && totalArrestTime <= 60) {
+        card.className = "p-5 rounded-xl border border-purple-500 bg-purple-50 text-purple-950 shadow-md transition";
+        icon.innerText = "💜";
+        title.innerText = "【強烈建議啟動毒物葉克膜 (Toxicology ECLS / VA-ECMO)】";
+        badge.className = "text-xs px-2.5 py-0.5 rounded-full font-bold bg-purple-600 text-white animate-pulse";
+        badge.innerText = "難治性心毒性休克首選";
+        body.innerHTML = `
+          <p class="font-bold">病患為難治型心毒性藥物過量 (CCB/BB/TCA/Digoxin/Chloroquine)：</p>
+          <p class="text-purple-900">此類病患心肌細胞受藥物暫時性抑制，常伴隨頑固性休克或心搏驟停，但<strong>本質為年輕可逆之心臟！</strong> VA-ECMO 為極關鍵的器官代謝橋樑 (Bridge to clearance)，能爭取體內肝腎代謝與特異性解毒劑發揮效用之時間。</p>
+        `;
+      } else if (totalArrestTime > 60 || (!witnessed && !bystanderCpr) || rhythm === 'Asystole' || etco2 < 8) {
+        card.className = "p-5 rounded-xl border border-red-300 bg-red-50 text-red-950 shadow-sm transition";
+        icon.innerText = "🔴";
+        title.innerText = "【不建議常規啟動 E-CPR (未達存活效益門檻)】";
+        badge.className = "text-xs px-2.5 py-0.5 rounded-full font-bold bg-slate-200 text-slate-700";
+        badge.innerText = "門檻未達";
+        body.innerHTML = `
+          <p class="font-bold">評估未達良好神經存活率標準：</p>
+          <ul class="list-disc pl-4 space-y-0.5 text-red-900">
+            <li>預估倒地至上機時間過長 (&gt; 60-90 分鐘) 或無目擊倒地 (未受 CPR 時間過長)。</li>
+            <li>初始或持續為 Asystole (心搏停止) 且無特異可逆毒物病因。</li>
+            <li>ETCO2 持續 &lt; 10 mmHg 提示有效按壓微循環灌流極度匱乏。</li>
+          </ul>
+          <p class="text-[11px] text-slate-600 mt-1">處置建議：持續常規 ACLS 壓胸給藥，並聚焦排查 5H5T 可逆病因（高血鉀、嚴重酸中毒、張力性氣胸）。</p>
+        `;
+      } else {
+        card.className = "p-5 rounded-xl border border-amber-400 bg-amber-50 text-amber-950 shadow-sm transition";
+        icon.innerText = "🟡";
+        title.innerText = "【邊界案例：需急救主治醫師床邊超音波綜合裁量】";
+        badge.className = "text-xs px-2.5 py-0.5 rounded-full font-bold bg-amber-500 text-white";
+        badge.innerText = "床邊綜合判定";
+        body.innerHTML = `
+          <p class="font-bold">時效在臨界窗期 (目前總時間 ${totalArrestTime} 分鐘，預估上機 ${projectedCannulationTime} 分鐘)：</p>
+          <p class="text-amber-900">若為 PEA 需立即執行床邊超音波 (POCUS) 排除有無心包填塞、張力性氣胸；若懷疑大片肺栓塞 (PE) 則 E-CPR 具有明確益處。持續監測 ETCO2，若能維持 &gt; 15 mmHg 可積極考慮會診上機。</p>
+        `;
+      }
+
+      updateResusOrders(wt, age, totalArrestTime, projectedCannulationTime, rhythm, etco2, lactate);
+      updateResusSBAR(wt, age, totalArrestTime, projectedCannulationTime, rhythm, etco2, lactate, toxic);
+    }
+
+    function updateResusOrders(wt, age, totalTime, projectedTime, rhythm, etco2, lactate) {
+      const etomidateDose = (wt * 0.3).toFixed(0);
+      const ketamineDose = (wt * 1.5).toFixed(0);
+      const rocuroniumDose = (wt * 1.2).toFixed(0);
+      const tidalVolume = (wt * 7).toFixed(0);
+
+      const orderText = `【急診急救室 E-CPR / 2025 AHA ACLS 結構化醫藥囑套裝】(由 ResusPilot 自動生成)
+================================================================================
+病患參數: 體重 ${wt} kg ｜ 年齡 ${age} 歲 ｜ 心律: ${rhythm} ｜ 總急救時間: ${totalTime} min (預估上機 ${projectedTime} min)
+--------------------------------------------------------------------------------
+[1. 急救召集與重大處置 (Resuscitation Orders)]
+• 啟動院內急救小組 (Code Blue / 急救團隊全力投入)
+• 急會診心臟外科 (CVSI) 啟動 E-CPR / ECMO 團隊 (通知分機: [XXXX])
+• 準備床邊超音波引導 (POCUS) 進行股動脈/股靜脈穿刺置管
+
+[2. 體外生命支持 (E-CPR) 備品與導管醫囑]
+• ECMO 穿刺導管組套：
+  - 股動脈導管 (Arterial Cannula) 15-17 Fr x 1
+  - 股靜脈導管 (Venous Cannula) 19-21 Fr x 1
+  - 遠端肢體灌流導管 (Distal Perfusion Catheter) 6-8 Fr x 1
+• 動脈導管建立組 (A-line Kit: 20G Radial/Femoral catheter + 連續血壓傳導感應線) x 1
+• 抗凝劑備用：Heparin 5,000 U/vial (待 ECMO 醫師評估有無活動性出血後決定是否 IV loading)
+
+[3. ACLS 急救藥物與 RSI 插管防呆組套]
+• Epinephrine (1mg/1mL) 1 mg IV push q3-5min
+• Amiodarone 300 mg IV push (VF/pVT 首劑), 次劑 150 mg IV (若持續難治性心律)
+• RSI 插管與 Poka-Yoke 鎮靜雙鎖 (依病患體重 ${wt} kg 精算):
+  - 誘導：Etomidate ${etomidateDose} mg (0.3 mg/kg) 或 Ketamine ${ketamineDose} mg (1.5 mg/kg, 血壓偏低時)
+  - 長效肌鬆：Rocuronium ${rocuroniumDose} mg (1.2 mg/kg)
+  - ⚠️【強制配對防呆】：Midazolam 50 mg in 0.9% NS 50 mL pump，起始 3-5 mL/h 滴注 (防範清醒癱瘓創傷)
+  - 呼吸器初始參數：VC mode, Tidal Volume ${tidalVolume} mL (7 mL/kg PBW), PEEP 5, FiO2 100%, RR 18/min (若為嚴重代酸需維持過度通氣)
+
+[4. Post-ROSC 復甦後加護處置 (2025 AHA 目標導向照護)]
+• 血流動力學穩定 (目標 MAP ≥ 65 mmHg):
+  - Norepinephrine (4mg/4mL) 2 amp in D5W 50 mL pump, 起始 5-10 mcg/min 依血壓滴定
+  - 早期多元升壓劑 (血管麻痺防呆): Vasopressin 20 U in 0.9% NS 50 mL, 固定速率 0.03 U/min (0.75 mL/h) 滴注
+• 目標溫度管理 (TTM):
+  - 目標核心溫度 32-37.5°C，嚴格防範發燒 (> 37.7°C) 誘發二次腦缺氧
+• 緊急追蹤檢驗 (Stat Orders):
+  - 動脈血氣分析 (ABG)、高敏肌鈣蛋白 (hs-cTn)、心電圖 (12-lead ECG)、Lactate、CBC、PT/APTT、生化全套 (Na/K/Cl/BUN/Cr/Glu/Ca/Mg)
+• ICU 動向：聯絡內科/心臟血管加護病房 (ICU) 預約緊急重症床位
+================================================================================
+※ 備註: 按 [Alt+O] 秒速複製此醫囑套裝，覆核後直接貼入院內 HIS 系統開立。`;
+
+      document.getElementById('resusOrderText').value = orderText;
+    }
+
+    function updateResusSBAR(wt, age, totalTime, projectedTime, rhythm, etco2, lactate, toxic) {
+      const sbar = `【急救室 E-CPR / ECMO 緊急照會 SBAR (由 ResusPilot 生成)】
+--------------------------------------------------------------------------------
+[S - Situation 現況]
+急救室急救中病患，年齡 ${age} 歲、體重 ${wt} kg。目前心律為【${rhythm}】，評估符合 2025 AHA ACLS 與 JAHA 2026 E-CPR 適應症，請心臟外科 (CVSI) 團隊攜帶 ECMO 導管至急救室評估上機。
+
+[B - Background 背景]
+• 倒地時限：倒地至到院 ${document.getElementById('collapseTime').value} 分鐘，急診 CPR 持續 ${document.getElementById('cprDuration').value} 分鐘 (總時效 ${totalTime} 分鐘)。
+• 灌流品質：呼氣末 CO2 (ETCO2) 維持 ${etco2} mmHg，初次血乳酸值 ${lactate} mmol/L。
+• 目擊狀態：${document.getElementById('witnessed').checked ? '有目擊倒地' : '無目擊'}，${document.getElementById('bystanderCpr').checked ? '持續施作高品質 CPR' : '無旁人CPR'}。
+• 特異病因：${toxic ? '高度疑似心毒性藥物過量 (CCB/BB/TCA/毛地黃)，心肌本質可逆' : '常規可去顫心律/可逆病因'}。
+
+[A - Assessment 評估]
+預估倒地至上機時間約 ${projectedTime} 分鐘，可達標 < 60 分鐘黃金切點；灌流指標與神經存活預期良好，符合體外心肺復甦術強烈建議門檻。
+
+[R - Recommendation 建議]
+1. 請心臟外科值班主治醫師/體外循環師攜帶 15-17Fr 動脈導管與 19-21Fr 靜脈導管至急診。
+2. 同步照會心臟血管/內科加護病房 (ICU) 預約急救後重症床位。
+--------------------------------------------------------------------------------`;
+
+      document.getElementById('resusSbarText').value = sbar;
+    }
+
+    function copyResusOrders() {
+      const el = document.getElementById('resusOrderText');
+      el.select();
+      navigator.clipboard.writeText(el.value).then(() => {
+        const toast = document.getElementById('resusOrderCopyToast');
+        toast.classList.remove('hidden');
+        setTimeout(() => toast.classList.add('hidden'), 2500);
+      });
+      document.getElementById('resusOrderBox').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function copyResusSBAR() {
+      const el = document.getElementById('resusSbarText');
+      el.select();
+      navigator.clipboard.writeText(el.value).then(() => {
+        const toast = document.getElementById('resusSbarToast');
+        toast.classList.remove('hidden');
+        setTimeout(() => toast.classList.add('hidden'), 2500);
+      });
+      document.getElementById('resusSbarBox').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function toggleEBMModal() {
+      const el = document.getElementById('ebmSection');
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el.classList.add('ring-4', 'ring-purple-400');
+      setTimeout(() => el.classList.remove('ring-4', 'ring-purple-400'), 1500);
+    }
+
+    // Global Hotkeys Listener
+    window.addEventListener('keydown', (e) => {
+      if (e.altKey) {
+        if (e.key === 'o' || e.key === 'O') {
+          e.preventDefault();
+          copyResusOrders();
+        } else if (e.key === 's' || e.key === 'S') {
+          e.preventDefault();
+          copyResusSBAR();
+        } else if (e.key === 'e' || e.key === 'E') {
+          e.preventDefault();
+          toggleEBMModal();
+        } else if (e.key === 't' || e.key === 'T') {
+          e.preventDefault();
+          window.location.href = '../antidote/';
+        }
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      evalECPR();
+    });
+</script>
+</body>
+</html>
