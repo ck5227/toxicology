@@ -111,6 +111,32 @@
 <!-- Main Application Workspace -->
 <main class="container mx-auto max-w-6xl p-4 md:p-6 space-y-6">
 
+    <!-- Clinical & Educational Hotkeys Bar -->
+    <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-[#1d3a47] text-white p-3.5 rounded-xl shadow-md flex flex-wrap items-center justify-between gap-3 text-xs border border-indigo-800/40">
+        <div class="flex items-center gap-2">
+            <span class="bg-amber-400 text-slate-900 font-extrabold px-1.5 py-0.5 rounded text-[10px] tracking-wider uppercase shadow-xs">HOTKEYS</span>
+            <span class="font-bold text-amber-300">急診臨床 ＆ 重症教育快速鍵：</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 text-[11px] font-mono">
+            <button onclick="copyOrderSet()" class="bg-indigo-900/80 hover:bg-indigo-800 text-indigo-100 px-2.5 py-1 rounded-md border border-indigo-700/60 transition flex items-center gap-1.5 shadow-xs">
+                <kbd class="bg-slate-950 text-amber-300 px-1.5 py-0.5 rounded font-bold border border-indigo-800">Alt+O</kbd>
+                <span>秒開 HIS SOP 醫藥囑</span>
+            </button>
+            <button onclick="copySBAR()" class="bg-teal-900/80 hover:bg-teal-800 text-teal-100 px-2.5 py-1 rounded-md border border-teal-700/60 transition flex items-center gap-1.5 shadow-xs">
+                <kbd class="bg-slate-950 text-teal-300 px-1.5 py-0.5 rounded font-bold border border-teal-800">Alt+S</kbd>
+                <span>一鍵複製 SBAR 會診</span>
+            </button>
+            <button onclick="toggleEduSection()" class="bg-purple-900/80 hover:bg-purple-800 text-purple-100 px-2.5 py-1 rounded-md border border-purple-700/60 transition flex items-center gap-1.5 shadow-xs">
+                <kbd class="bg-slate-950 text-purple-300 px-1.5 py-0.5 rounded font-bold border border-purple-800">Alt+E</kbd>
+                <span>急診重症教學精要</span>
+            </button>
+            <span class="text-slate-400 hidden lg:inline">|</span>
+            <span class="text-slate-300 hidden lg:inline text-[11px]">
+                <kbd class="bg-slate-800 px-1.5 py-0.5 rounded text-amber-300 border border-slate-700">Alt+1~6</kbd> 切換 6 大高危毒物
+            </span>
+        </div>
+    </div>
+
     <!-- Quick Case Presets -->
     <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-3 text-xs">
         <div class="font-bold text-[#264653] flex items-center gap-2">
@@ -397,18 +423,49 @@
                 </div>
             </div>
 
-            <!-- SBAR Clinical Handover & Actions Bar -->
-            <div class="bg-gradient-to-r from-[#264653] to-[#1d3a47] p-5 rounded-xl shadow-lg text-white space-y-3 no-print">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+            <!-- 6. HIS SOP Medical Order Set (Ready-to-Paste Order Sets) -->
+            <div id="orderSetBox" class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 p-5 rounded-xl shadow-xl text-white space-y-3 border border-indigo-700/50 no-print">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-indigo-800/60 pb-3">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="bg-amber-400 text-slate-950 text-[10px] px-2 py-0.5 rounded font-black tracking-wider uppercase">HIS FAST-ORDER</span>
+                            <h3 class="text-base font-bold text-white flex items-center gap-2">
+                                <span>⚡ 6. 急診重症 SOP 醫藥囑套裝 (Ready-to-Paste Order Sets)</span>
+                            </h3>
+                        </div>
+                        <p class="text-xs text-indigo-200 mt-1">
+                            包含精算解毒劑輸注、追蹤檢驗、急診重症監測、A-line/洗腎導管備品與加護病房收治動向，減少急診繁瑣開囑浪費時間
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="copyOrderSet()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-xs font-bold transition shadow flex items-center gap-1.5 border border-indigo-400/30">
+                            <kbd class="bg-indigo-950 px-1.5 py-0.5 rounded text-[10px] text-amber-300 font-bold">Alt+O</kbd>
+                            <span>一鍵複製 HIS 醫藥囑</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <textarea id="orderSetText" rows="6" readonly class="w-full bg-slate-950/80 border border-indigo-800 rounded-lg p-3 text-xs font-mono text-indigo-100 focus:outline-none select-all leading-relaxed"></textarea>
+                    <div id="orderCopyToast" class="hidden absolute top-2 right-2 bg-emerald-500 text-white text-[11px] px-3 py-1 rounded-md font-bold shadow-lg animate-bounce">
+                        ✓ 醫藥囑套裝已複製！可直接貼入 HIS 開囑系統
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. SBAR Clinical Handover & Actions Bar -->
+            <div id="sbarBox" class="bg-gradient-to-r from-[#264653] to-[#1d3a47] p-5 rounded-xl shadow-lg text-white space-y-3 no-print">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-[#2a9d8f]/30 pb-3">
                     <div>
                         <h3 class="text-base font-bold text-[#e9c46a] flex items-center gap-2">
-                            <span>📋 急診標準 SBAR 急會診單 (跨專科/毒物科/腎臟科)</span>
+                            <span>📋 7. 急診標準 SBAR 急會診單 (跨專科/毒物科/腎臟科)</span>
                         </h3>
                         <p class="text-xs text-slate-300 mt-0.5">即時彙整病患生理數據、確定性代碼運算、解毒劑劑量與透析決策</p>
                     </div>
                     <div class="flex items-center gap-2">
                         <button onclick="copySBAR()" class="bg-[#2a9d8f] hover:bg-[#207c70] text-white px-4 py-2 rounded-lg text-xs font-bold transition shadow flex items-center gap-1.5">
-                            <span>📑 一鍵複製 SBAR 文本</span>
+                            <kbd class="bg-teal-950 px-1.5 py-0.5 rounded text-[10px] text-teal-300 font-bold">Alt+S</kbd>
+                            <span>一鍵複製 SBAR 文本</span>
                         </button>
                         <button onclick="window.print()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 px-3 py-2 rounded-lg text-xs font-semibold transition border border-slate-600">
                             🖨️ 列印報告
@@ -420,6 +477,57 @@
                     <textarea id="sbarText" rows="4" readonly class="w-full bg-slate-950/70 border border-teal-800 rounded-lg p-3 text-xs font-mono text-teal-100 focus:outline-none select-all"></textarea>
                     <div id="copyToast" class="hidden absolute top-2 right-2 bg-emerald-500 text-white text-[11px] px-3 py-1 rounded-md font-bold shadow-lg animate-bounce">
                         ✓ 已複製到剪貼簿！可直接貼入 HIS / 會診單
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. Critical Care Toxicology & Clinical Educational Pearls -->
+            <div id="eduSection" class="bg-white p-5 rounded-xl shadow-sm border border-slate-200 space-y-4 transition duration-300">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-2.5">
+                    <h3 class="text-sm font-bold text-[#264653] flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span>
+                        <span>🎓 8. 急診重症臨床教育精要 ＆ 致命陷阱 (Educational Pearls & Pitfalls)</span>
+                    </h3>
+                    <span class="text-[11px] px-2 py-0.5 rounded bg-purple-100 text-purple-800 font-bold">教學 ＆ 重症雙軸</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                    <div class="p-3 bg-red-50/80 rounded-lg border border-red-200 space-y-1">
+                        <div class="font-bold text-red-950 flex items-center gap-1">
+                            <span>🫁 氣道與通氣代償陷阱 (RSI in Severe Acidosis)</span>
+                        </div>
+                        <p class="text-red-900 leading-relaxed">
+                            <strong>重度代酸患者過度通氣是救命代償！</strong> 若急於插管造成短暫呼吸中止 (Apnea) 或機械通氣量不足，PaCO2 驟升將使 pH 驟降至 6.8 以下，<strong>瞬間誘發心跳停止</strong>！插管前須維持手動高通氣，插管後機器設定需匹配病患原本之高分鐘通氣量 (High Minute Ventilation)。
+                        </p>
+                    </div>
+
+                    <div class="p-3 bg-amber-50/80 rounded-lg border border-amber-200 space-y-1">
+                        <div class="font-bold text-amber-950 flex items-center gap-1">
+                            <span>🫀 毒性休克與毒物葉克膜 (Toxicology ECLS / VA-ECMO)</span>
+                        </div>
+                        <p class="text-amber-900 leading-relaxed">
+                            對於致命性心肌毒性藥物（如毛地黃、CCB、Beta-blockers、Chloroquine、TCA）引起難治性心因性休克或嚴重心律不整，<strong>VA-ECMO 為極關鍵的過渡橋樑 (Bridge to clearance)</strong>。及早啟動 ECLS 評估能爭取解毒劑生效與肝腎代謝時間，挽救原本年輕可逆之心臟。
+                        </p>
+                    </div>
+
+                    <div class="p-3 bg-blue-50/80 rounded-lg border border-blue-200 space-y-1">
+                        <div class="font-bold text-blue-950 flex items-center gap-1">
+                            <span>🩸 體外血液清除原則 (EXTRIP & Antidote Clearance)</span>
+                        </div>
+                        <p class="text-blue-900 leading-relaxed">
+                            <strong>小分子、低蛋白結合率、小分佈體積 (Vd &lt; 1-2 L/kg)</strong> 之毒物（如甲醇、乙二醇、鋰鹽）首選高廓清率 IHD；血液透析會洗去毒素，但同時也會清除水溶性解毒劑（如 Fomepizole、NAC），<strong>透析期間解毒劑給藥頻率需加密（如 Fomepizole 改為 q4h）</strong>。
+                        </p>
+                    </div>
+
+                    <div class="p-3 bg-purple-50/80 rounded-lg border border-purple-200 space-y-1">
+                        <div class="font-bold text-purple-950 flex items-center gap-1">
+                            <span>🛡️ Poka-Yoke 藥理禁忌機轉 (Mechanism Defense)</span>
+                        </div>
+                        <p class="text-purple-900 leading-relaxed">
+                            • <strong>G6PD 缺乏禁用甲烯藍：</strong> 缺乏 NADPH 無法還原甲烯藍，反誘發急性溶血危象。<br>
+                            • <strong>毛地黃高血鉀禁用靜注鈣劑：</strong> 細胞內高鈣環境下給鈣可誘發心肌不可逆攣縮（Stone Heart）。<br>
+                            • <strong>火場濃煙合併 CO 禁用亞硝酸鈉：</strong> 誘發 Met-Hb 會使全身血氧攜帶能力徹底崩潰。
+                        </p>
                     </div>
                 </div>
             </div>
@@ -602,6 +710,7 @@
       renderToxinSpecificInputs(toxin);
       renderClinicalDecision(toxin, wt, age, ph, hco3, ag, osmGap, lactate, flagVisual, flagComa, flagShock, flagAKI);
       updateSBAR(toxin, wt, age, ph, hco3, ag, osmGap, lactate, flagVisual, flagComa, flagShock, flagAKI);
+      updateOrderSet(toxin, wt, age, ph, hco3, ag, osmGap, lactate, flagVisual, flagComa, flagShock, flagAKI);
     }
 
     function renderGapsUI(ag, agCorr, calcOsm, osmGap, deltaRatio) {
@@ -1111,7 +1220,187 @@ ${planToxin}
         toast.classList.remove('hidden');
         setTimeout(() => toast.classList.add('hidden'), 2500);
       });
+      document.getElementById('sbarBox').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
+
+    function updateOrderSet(toxin, wt, age, ph, hco3, ag, osmGap, lactate, flagVisual, flagComa, flagShock, flagAKI) {
+      const toxinMap = {
+        'methanol': '甲醇 / 乙二醇 (Methanol / Ethylene Glycol)',
+        'cyanide': '急性氰化物 / 火災濃煙毒氣 (Cyanide / Fire Smoke)',
+        'methemoglobin': '變性血紅素血症 (Methemoglobinemia)',
+        'digoxin': '毛地黃 / 夾竹桃強心苷中毒 (Digoxin Toxicity)',
+        'organophosphate': '有機磷 / 胺基甲酸鹽農藥 (Organophosphate Poisoning)',
+        'apap': '乙醯胺酚急性過量 (APAP Toxicity)'
+      };
+
+      let meds = '';
+      let labs = '';
+      let nursing = '';
+      let procedures = '';
+
+      if (toxin === 'methanol') {
+        const loadingFome = (wt * 15).toFixed(0);
+        const maintFome = (wt * 10).toFixed(0);
+        meds = `1. [處方藥囑 - 首選解毒劑] Fomepizole (Fomeject 1500mg/支) ${loadingFome} mg (15 mg/kg) in 100 mL D5W 或 0.9% NS IV drip run 30 min STAT
+2. [處方藥囑 - 維持劑量] Fomepizole ${maintFome} mg (10 mg/kg) IV drip run 30 min q12h (⚠️血液透析期間改為 q4h 給藥一次!)
+3. [處方藥囑 - 輔助代謝] Leucovorin 50 mg IV push STAT & q4h (加速甲酸分解)
+4. [處方藥囑 - 維持輸液] 0.9% Normal Saline 500 mL IV drip at 100 mL/hr`;
+
+        labs = `1. [急件檢驗 STAT] Stat ABG, Lactate, 實測血清滲透壓 (Serum Osmolality), Na, K, Cl, Glucose, BUN, Cr, AST, ALT, 尿液常規 (草酸鈣結晶)
+2. [追蹤檢驗] 負荷劑量結束後 2 小時追蹤 ABG, AG, Osm Gap; 之後每 2-4 小時追蹤一次
+3. [檢驗送驗] 抽血甲醇/乙二醇檢體送外檢/毒物實驗室`;
+
+        nursing = `1. [重症護理監測] 每 15 分鐘連續監測 ECG, SpO2, NIBP, 體溫
+2. [器官功能監測] 留置 Foley 導尿管，每小時記錄尿量 (Hourly Urine Output)
+3. [特異毒性評估] 每 1 小時評估瞳孔大小、對光反應及有無視野模糊/暴風雪視野 (若視力改變立即回報醫師)`;
+
+        procedures = `1. [管路建立] 準備動脈導管 (A-line) 與中心靜脈導管 (CVC) 置放套件
+2. [透析備戰] 急照會腎臟科 (Nephrology) 評估緊急血液透析 (IHD/CRRT) 及置放 Double Lumen 透析導管
+3. [床位動向] 聯絡加護病房 (ICU) 預約重症收治床位
+4. [儲備調度] 聯絡急診藥局 / 致電北榮毒藥物中心 (02-2871-7121) 啟動全國解毒劑儲備網跨院調撥`;
+
+      } else if (toxin === 'cyanide') {
+        meds = `1. [處方藥囑 - 首選解毒劑] Hydroxocobalamin (Cyanokit 5g 凍晶靜脈注射劑) 5 g (2瓶各2.5g溶於100mL 0.9% NS) IV infusion run 15 min STAT
+2. [處方藥囑 - 輔助硫代供體] 25% Sodium Thiosulfate (硫代硫酸鈉) 12.5 g (50 mL) IV infusion over 10-30 min
+3. [處方藥囑 - 呼吸支持] 100% 高濃度氧氣 (Non-rebreather mask 15 L/min 或插管純氧)
+4. [致命防呆攔截] ⛔合併火場濃煙/CO中毒者，嚴禁開立 Sodium Nitrite (亞硝酸鈉)!`;
+
+        labs = `1. [急件檢驗 STAT] Stat ABG, Lactate, CO-Hb (碳氧血紅素), Met-Hb, Na, K, Cl, Troponin-I, ECG, 胸部 X 光
+2. [追蹤檢驗] 給藥後 1 小時與 2 小時追蹤 Lactate 與動脈血氣分析`;
+
+        nursing = `1. [重症護理監測] 連續心電圖、血壓、血氧監測 (注意: Cyanokit 給藥後皮膚及尿液會變暗紅色，脈搏血氧儀可能失真)
+2. [氣道警戒] 留置氣管插管配備於床邊，嚴密監控吸入性肺損傷/喉頭水腫之吸氣喘鳴 (Stridor)`;
+
+        procedures = `1. [急救準備] 備妥氣管插管、呼吸器與升壓劑 (Norepinephrine)
+2. [床位動向] 照會加護病房 (ICU) 收治；火災重大傷病通報
+3. [儲備回報] 於 24 小時內登錄衛福部儲備網庫存異動回報`;
+
+      } else if (toxin === 'apap') {
+        const cappedWt = Math.min(wt, 100);
+        meds = `1. [處方藥囑 - 第1階段 Loading] N-acetylcysteine (NAC) ${(cappedWt*150).toFixed(0)} mg (150 mg/kg, 鎖定100kg上限) in 200 mL D5W IV drip run 1 hr STAT
+2. [處方藥囑 - 第2階段] NAC ${(cappedWt*50).toFixed(0)} mg (50 mg/kg) in 500 mL D5W IV drip run 4 hr
+3. [處方藥囑 - 第3階段] NAC ${(cappedWt*100).toFixed(0)} mg (100 mg/kg) in 1000 mL D5W IV drip run 16 hr
+4. [防呆劑量提示] 🛡️體重以 ${cappedWt} kg 計算 (防範過量輸液與類過敏性休克反應)`;
+
+        labs = `1. [急件檢驗 STAT] Stat APAP 血清濃度, AST, ALT, Total Bilirubin, PT/INR, BUN, Cr, Glucose, ABG, Lactate
+2. [關鍵時間點檢驗] 第 20 小時 (第3階段結束前 1-2hr) 必須抽血追蹤: APAP level, AST/ALT, PT/INR, Cr`;
+
+        nursing = `1. [類過敏反應監控] 輸注第 1 階段時密切觀察有無皮疹、臉部潮紅、支氣管痙攣或低血壓
+2. [連續性給藥] 確保三階段藥物無縫交接，勿因等待檢驗中斷 NAC 輸注`;
+
+        procedures = `1. [器官評估] 若 APAP 濃度極高 (>900 mg/L) 合併酸中毒昏迷，評估 EXTRIP 透析 (透析中 NAC 速率加倍)
+2. [肝衰竭照會] 若 ALT/AST 翻倍且 INR > 2.0，急照會胃腸肝膽科與器官移植團隊評估急性肝衰竭 (ALF)`;
+
+      } else if (toxin === 'methemoglobin') {
+        const mbDose = (wt * 1.5).toFixed(0);
+        meds = `1. [處方藥囑 - 首選解毒劑] 1% Methylene Blue (甲烯藍) ${mbDose} mg (1.5 mg/kg) in 50 mL D5W 緩慢靜脈輸注 5-10 min STAT
+2. [致命防呆攔截] ⛔若病人為 G6PD 缺乏症 (蠶豆症) 嚴禁使用 Methylene Blue! 改開立 Ascorbic acid (Vit C) 2g IV q6h
+3. [氧氣處方] 100% 高濃度氧氣支持 (NRM 15 L/min)`;
+
+        labs = `1. [急件檢驗 STAT] Stat Co-oximetry (Met-Hb%), ABG, CBC, G6PD 活性篩檢, Reticulocyte, 溶血相關檢驗
+2. [追蹤檢驗] 給藥後 1 小時複查 Co-oximetry Met-Hb%`;
+
+        nursing = `1. [重症護理監測] 連續心電圖與神經學檢查；告知病患/家屬尿液與皮膚將暫時呈現藍綠色屬正常現象
+2. [發紺評估] 觀察中樞性發紺是否隨 Met-Hb% 下降而改善`;
+
+        procedures = `1. [換血備戰] 若 Met-Hb > 50% 伴隨休克或確認蠶豆症無法降解，急照會血液科與血庫準備換血療法 (Exchange Transfusion)
+2. [床位動向] 照會加護病房 (ICU) 收治`;
+
+      } else if (toxin === 'digoxin') {
+        const digLevel = parseFloat(document.getElementById('digoxinLevel') ? document.getElementById('digoxinLevel').value : 4.5) || 4.5;
+        const calcVials = Math.ceil((digLevel * wt) / 100);
+        meds = `1. [處方藥囑 - 首選解毒劑] Digoxin-specific Fab (DigiFab 40mg/支) ${calcVials} 支 (心跳停止/未知劑量經驗給予 10-20 支) in 100 mL 0.9% NS IV drip 30 min STAT (心搏驟停時 IV push)
+2. [致命防呆攔截] ⛔高血鉀嚴禁給予 Calcium (葡萄糖酸鈣/氯化鈣)，防止心肌石心攣縮 (Stone Heart) 猝死!
+3. [降鉀處方] RI 10U + 50% Glucose 50 mL IV push; Sodium Bicarbonate 50 mEq IV; Lokelma 10g PO`;
+
+        labs = `1. [急件檢驗 STAT] Stat Digoxin level, K+, Na+, Mg2+, Ca2+, BUN, Cr, 12-lead ECG STAT
+2. [檢驗追蹤觀念] 給予 DigiFab 後血中測得之 Digoxin 濃度為無效結合態，無法反映真實游離毒性，改以血鉀與心電圖為指標`;
+
+        nursing = `1. [心律重症監控] 連續心電圖監控嚴防室性心律不整 (VT/VF/雙向性室速 Bidirectional VT) 或高房室傳導阻滯
+2. [急救配備] 貼附體外心臟節律器電擊貼片 (Pacer pads) 於床邊備用`;
+
+        procedures = `1. [心臟科急會診] 急照會心臟科 (Cardiology) 準備放置經靜脈心臟節律器 (TPM)
+2. [毒物葉克膜 ECLS] 若藥物難治性休克或心搏停止，立即啟動體外心肺循環 (VA-ECMO) 評估，爭取心肌恢復時間
+3. [儲備調度] 撥打北榮毒藥物中心 (02-2871-7121) 緊急調度 DigiFab`;
+
+      } else if (toxin === 'organophosphate') {
+        meds = `1. [處方藥囑 - 阿托品化首劑] Atropine 2 mg to 5 mg IV push STAT; 每 3-5 分鐘劑量加倍 (2mg->4mg->8mg) 直至氣管分泌物乾燥
+2. [處方藥囑 - 乙醯膽鹼酯酶重活化] Pralidoxime (PAM) 1 g to 2 g in 100 mL 0.9% NS IV drip run 30 min STAT; 續以 500 mg/hr 連續靜脈滴注維持
+3. [處方藥囑 - 鎮靜與抗癲癇] Midazolam 5 mg IV push prn (控制抽搐並保護中樞受體)`;
+
+        labs = `1. [急件檢驗 STAT] Stat RBC-AChE, 血清假性膽鹼酯酶 (PChE), ABG, Lactate, 胸部 X 光 (評估吸入性肺炎與肺水腫)
+2. [追蹤檢驗] 每 2-4 小時追蹤動脈血氧與酸鹼平衡`;
+
+        nursing = `1. [氣道呼吸評估] 每 15 分鐘聽診肺音與抽吸氣道分泌物；停藥依據為「支氣管分泌物乾燥」，切勿單以心跳或瞳孔停藥!
+2. [接觸防護] 護理人員著防水隔離衣與雙層手套，執行徹底洗胃與皮膚除污，防範二次中毒`;
+
+        procedures = `1. [插管處置防呆] 若呼吸衰竭需插管，神經肌肉阻斷劑嚴禁優先使用 Succinylcholine (麻痺時間將延長數小時)!
+2. [動向與調度] 照會加護病房 (ICU) 收治；若遇群聚中毒致 Atropine/PAM 短缺，進線衛福部儲備網調撥`;
+      }
+
+      const orderSet = `【急診重症毒物 SOP 醫藥囑套裝 — ${toxinMap[toxin]}】
+==================================================
+病患參數: 體重 ${wt} kg ｜ 年齡 ${age} 歲 ｜ pH ${ph.toFixed(2)} ｜ AG ${ag.toFixed(1)} ｜ OsmGap ${osmGap.toFixed(1)}
+--------------------------------------------------
+[一、 處方藥囑 (Stat & Maintenance Medications)]
+${meds}
+
+[二、 急件追蹤檢驗 (Stat Lab & Serial Monitoring)]
+${labs}
+
+[三、 重症護理與連續監測 (Critical Care Nursing Orders)]
+${nursing}
+
+[四、 處置備品與重症動向 (Procedures, Dialysis, ECMO & ICU Orders)]
+${procedures}
+==================================================
+※ 備註: 點擊 [Alt+O] 秒速複製直接貼入院內 HIS 處方/醫囑系統`;
+
+      document.getElementById('orderSetText').value = orderSet;
+    }
+
+    function copyOrderSet() {
+      const orderEl = document.getElementById('orderSetText');
+      orderEl.select();
+      navigator.clipboard.writeText(orderEl.value).then(() => {
+        const toast = document.getElementById('orderCopyToast');
+        toast.classList.remove('hidden');
+        setTimeout(() => toast.classList.add('hidden'), 2500);
+      });
+      document.getElementById('orderSetBox').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function toggleEduSection() {
+      const el = document.getElementById('eduSection');
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el.classList.add('ring-4', 'ring-purple-400');
+      setTimeout(() => el.classList.remove('ring-4', 'ring-purple-400'), 1500);
+    }
+
+    // Global Keyboard Hotkeys
+    window.addEventListener('keydown', (e) => {
+      if (e.altKey) {
+        if (e.key === 'o' || e.key === 'O') {
+          e.preventDefault();
+          copyOrderSet();
+        } else if (e.key === 's' || e.key === 'S') {
+          e.preventDefault();
+          copySBAR();
+        } else if (e.key === 'e' || e.key === 'E') {
+          e.preventDefault();
+          toggleEduSection();
+        } else if (e.key >= '1' && e.key <= '6') {
+          e.preventDefault();
+          const toxinSelect = document.getElementById('toxin');
+          const toxins = ['methanol', 'cyanide', 'methemoglobin', 'digoxin', 'organophosphate', 'apap'];
+          const idx = parseInt(e.key) - 1;
+          if (toxins[idx]) {
+            toxinSelect.value = toxins[idx];
+            calculate();
+          }
+        }
+      }
+    });
 
     window.addEventListener('DOMContentLoaded', () => {
       calculate();
