@@ -157,6 +157,7 @@
         transition: background-color 0.2s;
     }
     .detail-btn:hover { background-color: #1d3a47; }
+    @media (max-width: 640px) { .edddx-desc { display: none; } }
     #backToTopBtn {
         position: fixed;
         bottom: 20px;
@@ -231,6 +232,15 @@
             </div>
         </a>
     </div>
+
+    <a href="https://ck5227.github.io/EDDDX/" target="_blank" rel="noopener"
+       class="flex items-center flex-wrap gap-2 mb-8 px-4 bg-white rounded-lg shadow-md border-l-4 border-[#2a9d8f] text-sm transition-shadow"
+       style="padding-top:.7rem;padding-bottom:.7rem;margin-top:-1rem">
+        <span class="bg-[#2a9d8f] text-white text-xs font-bold px-2 rounded" style="padding-top:2px;padding-bottom:2px">新工具</span>
+        <span class="font-bold text-[#264653]">🩺 急診鑑別診斷 EDDDX</span>
+        <span class="text-gray-600 edddx-desc">頭暈・腹痛・喘・酸中毒與中毒・發燒｜最常見與不能漏的診斷＋住院／返家建議</span>
+        <span class="font-bold text-[#2a9d8f] whitespace-nowrap" style="margin-left:auto">開啟 →</span>
+    </a>
 
     <div id="noResults" class="hidden text-center py-16 text-gray-500">
         <p class="text-lg">找不到符合「<span id="noResultsQuery" class="font-semibold text-gray-700"></span>」的資料</p>
@@ -1979,7 +1989,6 @@
         <div class="text-center text-sm">
             <p>本資訊圖表僅供學術教育參考，不得取代專業臨床判斷。所有臨床決策應基於最新文獻與治療指引。</p>
             <p class="mt-2 text-gray-400">資料來源參考：Goldfrank's Toxicologic Emergencies、Micromedex、美國醫學毒物學會 (ACMT) 指引、台灣急診醫學會、解毒劑儲備網。</p>
-            <p class="mt-2 text-gray-400">相關工具：<a href="https://ck5227.github.io/EDDDX/" target="_blank" rel="noopener" class="underline">急診鑑別診斷 EDDDX</a></p>
         </div>
     </div>
 </footer>
