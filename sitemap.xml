@@ -36,35 +36,138 @@
     <priority>0.8</priority>
   </url>
 
-  <!--
-    Phase 2：每搬好一個子頁，就把對應的區塊取消註解並更新 lastmod。
-    切勿列出尚未上線的網址 —— 送出 404 的 sitemap 會傷害索引評價。
 
   <url>
     <loc>https://ck5227.github.io/toxicology/acetaminophen/</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ck5227.github.io/toxicology/methanol/</loc>
-    <lastmod>2026-08-31</lastmod>
+    <loc>https://ck5227.github.io/toxicology/bupropion/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/ccb-betablocker/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/chlorfenapyr/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/ciguatera/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ck5227.github.io/toxicology/cyanide/</loc>
-    <lastmod>2026-08-31</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://ck5227.github.io/toxicology/lithium/</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://ck5227.github.io/toxicology/digoxin/</loc>
-    <lastmod>2026-08-31</lastmod>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  -->
+  <url>
+    <loc>https://ck5227.github.io/toxicology/ethylene-glycol/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/glyphosate/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/h2s/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/indoxacarb/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/lithium/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/local-anesthetics/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/methanol/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/methotrexate/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/phenytoin/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/pyrethrin/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/salicylates/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/ssri/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/tca/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/theophylline/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ck5227.github.io/toxicology/valproic-acid/</loc>
+    <lastmod>2026-11-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 
 </urlset>
