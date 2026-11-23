@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>外院轉診預警檢核表 — 中毒病人到院前備藥與 SBAR 交班 | ToxWeb 臨床毒物學精要</title>
+<meta name="description" content="供急診專科護理師 (NP) 接聽外院中毒轉診電話時使用：2 分鐘收斂毒物名稱、攝入量 mg/kg 換算、暴露時間、外院處置與預計到院時間，自動列出需預先調撥的解毒劑與體外移除準備，並產生 SBAR 預警摘要。">
+<meta name="author" content="潘麒亘 醫師">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ck5227.github.io/toxicology/referral/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToxWeb 臨床毒物學精要">
+<meta property="og:title" content="外院轉診預警檢核表（中毒病人到院前）">
+<meta property="og:description" content="2 分鐘收斂轉診資訊、換算 mg/kg、列出需預備的解毒劑，並產生 SBAR 預警摘要。">
+<meta property="og:url" content="https://ck5227.github.io/toxicology/referral/">
+<meta property="og:locale" content="zh_TW">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "外院轉診預警檢核表（中毒病人到院前）",
+  "url": "https://ck5227.github.io/toxicology/referral/",
+  "inLanguage": "zh-Hant",
+  "description": "急診專科護理師接聽外院中毒轉診時使用之檢核表：收斂毒物、攝入量、暴露時間與外院處置，列出到院前需預備之解毒劑，並產生 SBAR 預警摘要。",
+  "dateModified": "2026-11-23",
+  "isPartOf": { "@type": "WebSite", "name": "ToxWeb 臨床毒物學精要", "url": "https://ck5227.github.io/toxicology/" },
+  "author": {
+    "@type": "Person", "name": "潘麒亘", "jobTitle": "毒物及急診專科醫師",
+    "affiliation": { "@type": "MedicalOrganization", "name": "中國醫藥大學附設醫院 急診部" }
+  },
+  "audience": { "@type": "MedicalAudience", "audienceType": "Clinician" }
+}
+</script>
+
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+    .hidden { display: none !important; }
+    body { font-family: 'Noto Sans TC', sans-serif; background-color: #f0f4f8; color: #1f2937; }
+
+    .rf-layout { display: grid; gap: 1.25rem; }
+    @media (min-width: 1024px) {
+        .rf-layout { grid-template-columns: minmax(0, 1fr) 400px; align-items: start; }
+        .rf-side { position: sticky; top: 1rem; }
+    }
+
+    .rf-card {
+        background: #fff; border: 1px solid #e2e8ec; border-radius: 14px;
+        padding: 1.15rem 1.25rem; margin-bottom: 1rem;
+        box-shadow: 0 1px 2px rgba(16, 42, 52, .05), 0 4px 14px rgba(16, 42, 52, .04);
+    }
+    .rf-card > h2 {
+        font-size: 1.02rem; font-weight: 700; color: #264653;
+        display: flex; align-items: center; gap: .55rem; margin-bottom: .85rem;
+    }
+    .rf-step {
+        flex: none; display: inline-flex; align-items: center; justify-content: center;
+        width: 1.6rem; height: 1.6rem; border-radius: 999px;
+        background: #2a9d8f; color: #fff; font-size: .82rem; font-weight: 700;
+    }
+    .rf-hint { font-size: .8rem; color: #64748b; font-weight: 400; margin-left: auto; }
+
+    .rf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: .75rem; }
+    .rf-grid.wide { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .rf-field label { display: block; font-size: .8rem; color: #475569; margin-bottom: .3rem; font-weight: 500; }
+    .rf-field input, .rf-field select, .rf-field textarea {
+        width: 100%; border: 1px solid #cbd5e1; border-radius: 10px;
+        padding: .6rem .7rem; font-size: 1rem; background: #fff; color: #1f2937;
+    }
+    .rf-field textarea { min-height: 3.2rem; resize: vertical; }
+    .rf-field input:focus, .rf-field select:focus, .rf-field textarea:focus {
+        outline: 2px solid #2a9d8f; outline-offset: 0; border-color: transparent;
+    }
+
+    .rf-chips { display: flex; flex-wrap: wrap; gap: .45rem; }
+    .rf-chip { position: relative; }
+    .rf-chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+    .rf-chip span {
+        display: inline-block; padding: .45rem .8rem; border: 1px solid #cbd5e1;
+        border-radius: 999px; font-size: .9rem; cursor: pointer; background: #fff;
+        transition: background-color .15s, color .15s, border-color .15s;
+    }
+    .rf-chip span:hover { border-color: #2a9d8f; }
+    .rf-chip input:checked + span { background: #264653; color: #fff; border-color: #264653; }
+    .rf-chip input:focus-visible + span { outline: 2px solid #2a9d8f; outline-offset: 2px; }
+
+    .rf-calc {
+        margin-top: .75rem; padding: .65rem .85rem; border-radius: 10px;
+        background: #eef6f5; color: #1d3a47; font-size: .92rem; line-height: 1.6;
+    }
+    .rf-calc b { color: #0f5e56; }
+    .rf-flag {
+        margin-top: .6rem; padding: .6rem .85rem; border-radius: 10px;
+        background: #fef2f2; border-left: 4px solid #dc2626; color: #991b1b; font-size: .9rem;
+    }
+
+    .rf-out-head {
+        background: #264653; color: #fff; border-radius: 14px 14px 0 0;
+        padding: 1rem 1.25rem;
+    }
+    .rf-out-head .eta { font-size: 1.6rem; font-weight: 700; color: #e9c46a; line-height: 1.2; }
+    .rf-out-head .sub { font-size: .85rem; color: #cbd5e1; margin-top: .2rem; }
+    .rf-out-body {
+        background: #fff; border: 1px solid #e2e8ec; border-top: 0;
+        border-radius: 0 0 14px 14px; padding: 1rem 1.25rem;
+    }
+    .rf-out-body h3 { font-size: .9rem; font-weight: 700; color: #264653; margin: .9rem 0 .4rem; }
+    .rf-out-body h3:first-child { margin-top: 0; }
+    .rf-list { list-style: none; padding: 0; margin: 0; }
+    .rf-list li { position: relative; padding-left: 1.1rem; font-size: .92rem; margin-bottom: .3rem; line-height: 1.5; }
+    .rf-list li::before { content: ""; position: absolute; left: .2rem; top: .6rem; width: .4rem; height: .4rem; border-radius: 999px; background: #2a9d8f; }
+    .rf-list.prep li::before { background: #e76f51; }
+    .rf-empty { font-size: .88rem; color: #94a3b8; }
+    .rf-list li.rf-empty::before { display: none; }
+
+    .rf-sbar {
+        white-space: pre-wrap; font-size: .85rem; line-height: 1.6;
+        background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px;
+        padding: .75rem .85rem; max-height: 22rem; overflow: auto; color: #1f2937;
+    }
+    .rf-actions { display: flex; gap: .5rem; margin-top: .75rem; }
+    .rf-btn {
+        flex: 1; padding: .7rem 1rem; border-radius: 10px; font-weight: 700; font-size: .95rem;
+        transition: background-color .15s;
+    }
+    .rf-btn.primary { background: #2a9d8f; color: #fff; }
+    .rf-btn.primary:hover { background: #207c70; }
+    .rf-btn.ghost { background: #fff; color: #475569; border: 1px solid #cbd5e1; flex: 0 0 auto; }
+    .rf-btn.ghost:hover { background: #f1f5f9; }
+    .rf-copied { font-size: .85rem; color: #0f766e; margin-top: .5rem; }
+
+    .rf-privacy {
+        font-size: .82rem; color: #475569; background: #fffbeb; border-left: 4px solid #f59e0b;
+        border-radius: 0 10px 10px 0; padding: .6rem .85rem; margin-bottom: 1rem;
+    }
+    .rf-jump {
+        position: fixed; right: 16px; bottom: 16px; z-index: 50;
+        background: #264653; color: #e9c46a; font-weight: 700; font-size: .92rem;
+        padding: .7rem 1.1rem; border-radius: 999px; box-shadow: 0 6px 18px rgba(16, 42, 52, .25);
+        transition: opacity .2s;
+    }
+    .rf-jump.off { opacity: 0; pointer-events: none; }
+    @media (min-width: 1024px) { .rf-jump { display: none; } }
+    .rf-links a { color: #0f766e; text-decoration: underline; text-underline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<header class="bg-[#264653] text-white p-6 shadow-lg">
+    <div class="container mx-auto max-w-6xl">
+        <a href="../" class="text-sm text-gray-300 hover:text-[#e9c46a]">← ToxWeb｜臨床毒物學精要總覽</a>
+        <h1 class="text-3xl md:text-4xl font-bold text-[#e9c46a] mt-2">外院轉診預警檢核表</h1>
+        <p class="mt-2 text-gray-300">供急診專科護理師 (NP) 接聽外院中毒轉診電話時使用 —— <b class="text-[#e9c46a]">病人未到，解毒劑與知識先到位</b>。</p>
+    </div>
+</header>
+
+<main class="container mx-auto max-w-6xl p-4 md:p-8">
+
+    <p class="rf-privacy"><b>本表不傳送、不儲存任何資料</b>，關閉或重新整理頁面即清空。請勿輸入病人姓名、身分證號或病歷號。</p>
+
+    <div class="rf-layout">
+        <form id="rf" autocomplete="off" onsubmit="return false">
+
+            <section class="rf-card">
+                <h2><span class="rf-step">1</span>轉診資訊</h2>
+                <div class="rf-grid">
+                    <div class="rf-field"><label for="hosp">轉出醫院</label><input id="hosp" type="text" placeholder="例：○○醫院"></div>
+                    <div class="rf-field"><label for="eta">預計幾分鐘後到院</label><input id="eta" type="number" min="0" inputmode="numeric" placeholder="分鐘"></div>
+                    <div class="rf-field"><label for="tel">外院聯絡窗口</label><input id="tel" type="text" placeholder="科別／分機"></div>
+                </div>
+            </section>
+
+            <section class="rf-card">
+                <h2><span class="rf-step">2</span>病人</h2>
+                <div class="rf-grid">
+                    <div class="rf-field"><label for="age">年齡（歲）</label><input id="age" type="number" min="0" inputmode="numeric"></div>
+                    <div class="rf-field"><label for="wt">體重（kg）</label><input id="wt" type="number" min="0" step="0.1" inputmode="decimal"></div>
+                    <div class="rf-field"><label>&nbsp;</label>
+                        <label class="rf-chip"><input id="preg" type="checkbox"><span>懷孕</span></label>
+                    </div>
+                </div>
+            </section>
+
+            <section class="rf-card">
+                <h2><span class="rf-step">3</span>毒物與暴露 <span class="rf-hint">可複選（混合中毒）</span></h2>
+                <div class="rf-chips" id="cats"></div>
+
+                <div class="rf-grid wide" style="margin-top:1rem">
+                    <div class="rf-field"><label for="sub">物質名稱／商品名</label><input id="sub" type="text" placeholder="請盡量問到商品名"></div>
+                    <div class="rf-field"><label for="conc">濃度／規格</label><input id="conc" type="text" placeholder="例：24%、500 mg/顆、緩釋劑型"></div>
+                </div>
+                <div class="rf-grid" style="margin-top:.75rem">
+                    <div class="rf-field"><label for="route">途徑</label>
+                        <select id="route"><option value="">—</option><option>口服</option><option>吸入</option><option>皮膚接觸</option><option>注射</option><option>其他</option></select></div>
+                    <div class="rf-field"><label for="intent">意圖</label>
+                        <select id="intent"><option value="">—</option><option>蓄意</option><option>意外</option><option>不明</option></select></div>
+                    <div class="rf-field"><label for="extime">暴露時間</label><input id="extime" type="time"></div>
+                    <div class="rf-field"><label>&nbsp;</label>
+                        <label class="rf-chip"><input id="extimeUnk" type="checkbox"><span>時間不明</span></label>
+                    </div>
+                </div>
+
+                <div class="rf-grid" style="margin-top:.75rem">
+                    <div class="rf-field"><label for="amtMode">攝入量換算方式</label>
+                        <select id="amtMode">
+                            <option value="mg">直接輸入總量 (mg)</option>
+                            <option value="tab">顆數 × 每顆 mg</option>
+                            <option value="liq">液體 mL × 濃度 %</option>
+                        </select></div>
+                    <div class="rf-field" data-mode="mg"><label for="amtMg">總量 (mg)</label><input id="amtMg" type="number" min="0" inputmode="decimal"></div>
+                    <div class="rf-field hidden" data-mode="tab"><label for="amtN">顆數</label><input id="amtN" type="number" min="0" inputmode="decimal"></div>
+                    <div class="rf-field hidden" data-mode="tab"><label for="amtPer">每顆 (mg)</label><input id="amtPer" type="number" min="0" inputmode="decimal"></div>
+                    <div class="rf-field hidden" data-mode="liq"><label for="amtMl">體積 (mL)</label><input id="amtMl" type="number" min="0" inputmode="decimal"></div>
+                    <div class="rf-field hidden" data-mode="liq"><label for="amtPct">濃度 (%，w/v)</label><input id="amtPct" type="number" min="0" step="0.1" inputmode="decimal"></div>
+                </div>
+                <div class="rf-calc" id="calc">輸入攝入量與體重後，自動換算 mg/kg。</div>
+                <div id="flags"></div>
+            </section>
+
+            <section class="rf-card">
+                <h2><span class="rf-step">4</span>外院已給處置</h2>
+                <div class="rf-chips" id="tx">
+                    <label class="rf-chip"><input type="checkbox" value="洗胃"><span>洗胃</span></label>
+                    <label class="rf-chip"><input type="checkbox" value="活性碳"><span>活性碳</span></label>
+                    <label class="rf-chip"><input type="checkbox" value="催吐"><span>催吐</span></label>
+                    <label class="rf-chip"><input type="checkbox" value="已插管"><span>已插管</span></label>
+                    <label class="rf-chip"><input type="checkbox" value="升壓劑"><span>升壓劑</span></label>
+                </div>
+                <div class="rf-grid wide" style="margin-top:.85rem">
+                    <div class="rf-field"><label for="txAnti">已給解毒劑（名稱、劑量、時間）</label><input id="txAnti" type="text" placeholder="例：Atropine 共 10 mg，最後一劑 14:20"></div>
+                    <div class="rf-field"><label for="txOther">其他處置／轉送途中變化</label><input id="txOther" type="text"></div>
+                </div>
+            </section>
+
+            <section class="rf-card">
+                <h2><span class="rf-step">5</span>目前狀態</h2>
+                <div class="rf-grid">
+                    <div class="rf-field"><label for="gcs">GCS</label><input id="gcs" type="text" placeholder="E_V_M_"></div>
+                    <div class="rf-field"><label for="bp">血壓</label><input id="bp" type="text" placeholder="___/___"></div>
+                    <div class="rf-field"><label for="hr">心跳</label><input id="hr" type="number" inputmode="numeric"></div>
+                    <div class="rf-field"><label for="rr">呼吸</label><input id="rr" type="number" inputmode="numeric"></div>
+                    <div class="rf-field"><label for="spo2">SpO₂ (%)</label><input id="spo2" type="number" inputmode="numeric"></div>
+                    <div class="rf-field"><label for="bt">體溫 (°C)</label><input id="bt" type="number" step="0.1" inputmode="decimal"></div>
+                </div>
+            </section>
+        </form>
+
+        <aside class="rf-side" id="rfOut" aria-live="polite">
+            <div class="rf-out-head">
+                <div class="eta" id="oEta">預計到院 —</div>
+                <div class="sub" id="oCat">尚未選擇毒物類別</div>
+            </div>
+            <div class="rf-out-body">
+                <h3>到院前請預備</h3>
+                <ul class="rf-list prep" id="oPrep"><li class="rf-empty" style="padding:0">選擇毒物類別後列出</li></ul>
+
+                <h3>體外移除／特殊處置</h3>
+                <ul class="rf-list" id="oEcr"><li class="rf-empty" style="padding:0">—</li></ul>
+
+                <h3>提醒一線醫師</h3>
+                <ul class="rf-list" id="oNote"><li class="rf-empty" style="padding:0">—</li></ul>
+
+                <p class="rf-links text-sm mt-3" id="oLinks"></p>
+
+                <h3>SBAR 預警摘要</h3>
+                <div class="rf-sbar" id="oSbar"></div>
+                <div class="rf-actions">
+                    <button type="button" class="rf-btn primary" id="btnCopy">複製 SBAR 預警</button>
+                    <button type="button" class="rf-btn ghost" id="btnClear">清除</button>
+                </div>
+                <p class="rf-copied hidden" id="copied">✓ 已複製，可貼到院內通訊系統通知一線醫師。</p>
+
+                <p class="text-xs text-gray-500 mt-4" style="line-height:1.6">解毒劑庫存請 NP 致電藥庫確認；院內不足時，依<b>衛福部全國解毒劑儲備網</b>調度（北榮毒藥物防治諮詢中心 02-2871-7121）。本表所列為各毒物在本站專頁之重點，<b>劑量與處置以專頁內容、院內規範及主治醫師判斷為準</b>。</p>
+            </div>
+        </aside>
+    </div>
+</main>
+
+<a href="#rfOut" class="rf-jump" id="rfJump">看預警摘要 ↓</a>
+
+<footer class="bg-[#264653] text-white mt-12 py-10 px-6">
+    <div class="container mx-auto max-w-3xl">
+        <div class="bg-[#1d3a47] rounded-lg p-5 mb-6">
+            <p class="font-bold text-[#e9c46a] mb-2">作者</p>
+            <p class="text-lg">潘麒亘 醫師</p>
+            <p class="text-sm text-gray-300 mt-1">中國醫藥大學附設醫院 急診部｜毒物及急診專科醫師</p>
+            <p class="text-sm text-gray-400 mt-3">最後更新：2026 年 11 月 23 日</p>
+        </div>
+        <div class="text-center text-sm">
+            <p>本頁僅供醫療專業人員學術教育參考，不得取代專業臨床判斷。所有臨床決策應基於最新文獻與治療指引。</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+(function () {
+    // 每一類的內容均摘自本站對應專頁或總覽卡片，請勿在此加入專頁沒有的內容。
+    const CATS = [
+        { id: 'op',   name: '有機磷／氨基甲酸鹽', link: '../organophosphate/',
+          prep: ['Atropine（可能需大量，總量可達數百毫克）', 'Pralidoxime (PAM)'],
+          ecr:  [],
+          note: ['到院前備妥 PPE，先移除衣物、皮膚除污再進急救室', '插管勿用 Succinylcholine，選 Rocuronium 等非去極化肌鬆劑'] },
+        { id: 'pq',   name: '巴拉刈', link: '../#pesticide-poisoning',
+          prep: [],
+          ecr:  ['血液灌流'],
+          note: ['勿常規給高濃度氧：維持可接受之最低血氧（SpO₂ 88–92%）', '本身具腐蝕性，注意口腔與腸胃道黏膜損傷', '所有個案皆需加護病房'] },
+        { id: 'glu',  name: '固殺草', link: '../#pesticide-poisoning',
+          prep: [],
+          ecr:  [],
+          note: ['無特定解毒劑；癲癇時給 BZD', '神經學症狀（癲癇、昏迷）可延遲 24–48 小時才出現 —— 所有個案皆應住院'] },
+        { id: 'apap', name: '乙醯胺酚', link: '../acetaminophen/',
+          prep: ['N-Acetylcysteine (NAC)'],
+          ecr:  [],
+          note: ['4 小時後才抽 APAP 濃度；小於 4 小時的濃度沒有判讀價值', '絕不能因為要給活性碳而延誤 NAC'] },
+        { id: 'sal',  name: '水楊酸', link: '../salicylates/',
+          prep: ['Sodium bicarbonate（尿液鹼化）', 'KCl（鹼化易低血鉀）', '葡萄糖'],
+          ecr:  ['可能需血液透析'],
+          note: ['意識改變者無論血糖值為何都應給葡萄糖', '若需插管：插管前 2 mEq/kg Bicarbonate，呼吸器每分鐘通氣量比照插管前'] },
+        { id: 'tca',  name: '三環抗鬱劑', link: '../tca/',
+          prep: ['Sodium bicarbonate'],
+          ecr:  ['血液透析無效；藥物治療無效時考慮 ECMO'],
+          note: ['到院立即 ECG：QRS > 100 ms、aVR 末端 R 波 > 3 mm', '絕對避免 Flumazenil 與 Physostigmine'] },
+        { id: 'ccb',  name: '鈣離子阻斷劑／β 阻斷劑', link: '../ccb-betablocker/',
+          prep: ['10% Calcium chloride 或 Calcium gluconate', 'Glucagon（β 阻斷劑首選）', '高劑量胰島素 (HIE) 與葡萄糖'],
+          ecr:  ['頑固性休克考慮 ECMO；血液透析僅對 Atenolol、Sotalol 有幫助'],
+          note: ['嚴重中毒的心搏過緩，Atropine 通常無效'] },
+        { id: 'dig',  name: '毛地黃', link: '../digoxin/',
+          prep: ['Digoxin immune Fab (DigiFab)'],
+          ecr:  ['血液透析無效'],
+          note: ['DigiFab 由毒藥物防治諮詢中心專案採購、配置於特定醫院 —— 及早聯絡調度', '血鉀 > 5.5 mmol/L 為關鍵指標'] },
+        { id: 'li',   name: '鋰鹽', link: '../lithium/',
+          prep: ['生理食鹽水（加強腎臟排泄）'],
+          ecr:  ['血液透析（治療首選，依 EXTRIP）—— 預先聯絡'],
+          note: ['活性碳無效', '意識下降、癲癇或致命性心律不整：不論濃度皆為透析絕對適應症'] },
+        { id: 'meth', name: '甲醇／乙二醇', link: '../methanol/',
+          prep: ['Fomepizole（首選）或 Ethanol', 'Folic acid／Leucovorin（甲醇）', 'Sodium bicarbonate'],
+          ecr:  ['血液透析 —— 預先聯絡'],
+          note: ['到院立即抽甲醇濃度、生化、血氣，計算 OG／AG，並檢查視力', '計算 OG 必須納入乙醇濃度'] },
+        { id: 'co',   name: '一氧化碳', link: '../#chemical-gas-poisoning',
+          prep: ['100% 氧氣（非再吸入型面罩）'],
+          ecr:  ['評估高壓氧：先與高壓氧中心討論，並權衡轉送風險'],
+          note: ['追問有無短暫失去意識（含昏厥）', '火場病人同時考慮氰化物', '同住者是否也暴露？'] },
+        { id: 'cn',   name: '氰化物', link: '../cyanide/',
+          prep: ['Hydroxocobalamin（成人 5 g）', '100% 氧氣'],
+          ecr:  [],
+          note: ['給解毒劑前先抽血（綠頭管）留存', '火場病人避免亞硝酸鹽療法', '不要等待氰化物濃度報告'] },
+        { id: 'la',   name: '局部麻醉劑', link: '../local-anesthetics/',
+          prep: ['20% 脂肪乳劑 (IVLE)'],
+          ecr:  [],
+          note: ['IVLE bolus 1.5 mL/kg，2–3 分鐘內推注（上限 100 mL）'] },
+        { id: 'theo', name: '茶鹼', link: '../theophylline/',
+          prep: ['多劑量活性碳 (MDAC)'],
+          ecr:  ['血液透析（首選治療）—— 預先聯絡'],
+          note: ['癲癇風險高：多數應先插管保護呼吸道再給活性碳'] },
+        { id: 'vpa',  name: 'Valproic acid', link: '../valproic-acid/',
+          prep: ['L-Carnitine'],
+          ecr:  ['嚴重中毒及早考慮血液透析'],
+          note: ['注意高血氨症'] },
+        { id: 'unk',  name: '其他／不明', link: '../toxidrome/',
+          prep: [], ecr: [],
+          note: ['到院後以 Toxidrome 鑑別工具逐項比對'] }
+    ];
+
+    const $ = id => document.getElementById(id);
+    const catBox = $('cats');
+    CATS.forEach(c => {
+        const l = document.createElement('label');
+        l.className = 'rf-chip';
+        l.innerHTML = '<input type="checkbox" value="' + c.id + '"><span>' + c.name + '</span>';
+        catBox.appendChild(l);
+    });
+
+    const num = id => { const v = parseFloat($(id).value); return isFinite(v) && v >= 0 ? v : null; };
+    const txt = id => $(id).value.trim();
+    const fmt = n => n >= 100 ? Math.round(n).toLocaleString('en-US') : (Math.round(n * 10) / 10).toString();
+    const pad = n => String(n).padStart(2, '0');
+    const esc = s => s.replace(/[&<>"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
+
+    // 攝入量換算方式切換
+    $('amtMode').addEventListener('change', () => {
+        document.querySelectorAll('[data-mode]').forEach(el => {
+            el.classList.toggle('hidden', el.dataset.mode !== $('amtMode').value);
+        });
+        render();
+    });
+
+    function totalMg() {
+        const m = $('amtMode').value;
+        if (m === 'mg') return num('amtMg');
+        if (m === 'tab') { const n = num('amtN'), p = num('amtPer'); return n !== null && p !== null ? n * p : null; }
+        const ml = num('amtMl'), pct = num('amtPct');           // 1% (w/v) = 10 mg/mL
+        return ml !== null && pct !== null ? ml * pct * 10 : null;
+    }
+
+    function elapsed() {
+        if ($('extimeUnk').checked) return '不明';
+        const v = $('extime').value;
+        if (!v) return '';
+        const [h, mi] = v.split(':').map(Number);
+        const now = new Date();
+        const t = new Date(now); t.setHours(h, mi, 0, 0);
+        if (t > now) t.setDate(t.getDate() - 1);               // 晚於現在 → 視為前一天
+        const min = Math.round((now - t) / 60000);
+        return v + '（距今約 ' + Math.floor(min / 60) + ' 小時 ' + (min % 60) + ' 分）';
+    }
+
+    function render() {
+        const sel = CATS.filter(c => catBox.querySelector('input[value="' + c.id + '"]').checked);
+        const wt = num('wt'), mg = totalMg(), age = num('age');
+        const perKg = mg !== null && wt ? mg / wt : null;
+
+        // 換算
+        let calc = '輸入攝入量與體重後，自動換算 mg/kg。';
+        if (mg !== null) {
+            calc = '估計攝入總量 <b>' + fmt(mg) + ' mg</b>';
+            if ($('amtMode').value === 'tab') calc += '（' + fmt(num('amtN')) + ' 顆 × ' + fmt(num('amtPer')) + ' mg）';
+            if ($('amtMode').value === 'liq') calc += '（' + fmt(num('amtMl')) + ' mL × ' + num('amtPct') + '% × 10 mg/mL）';
+            calc += perKg !== null ? '，約 <b>' + fmt(perKg) + ' mg/kg</b>（體重 ' + wt + ' kg）' : '；請輸入體重以換算 mg/kg';
+            calc += '。<span style="color:#64748b">病史攝入量常不可靠，僅供估計。</span>';
+        }
+        $('calc').innerHTML = calc;
+
+        // 以本站專頁所載門檻提示
+        // 攝入量只有一欄：複選（混合中毒）時無法分辨是哪一種物質的量，不自動判讀門檻
+        const single = sel.length === 1;
+        const flags = [];
+        if (!single && sel.length > 1 && mg !== null) {
+            flags.push('混合中毒：攝入量無法對應到單一物質，<b>不自動判讀劑量門檻</b>，請分別詢問各物質的量。');
+        }
+        if (single && sel[0].id === 'apap' && mg !== null && (mg >= 10000 || (perKg !== null && perKg >= 200))) {
+            flags.push('乙醯胺酚：攝入 ≥ 10 g 或 ≥ 200 mg/kg（以較少者為準）—— 若濃度測不到或服用時間不明，<b>符合直接給 NAC 的條件</b>。');
+        }
+        if (single && sel[0].id === 'dig' && mg !== null && mg > 4) {
+            flags.push(mg > 10
+                ? '毛地黃：急性攝入 > 10 mg（成人高風險心跳停止門檻）—— <b>及早聯絡 DigiFab 調度</b>。'
+                : '毛地黃：急性攝入 > 4 mg —— 若為<b>兒童</b>即屬高風險心跳停止門檻。');
+        }
+        $('flags').innerHTML = flags.map(f => '<div class="rf-flag">' + f + '</div>').join('');
+
+        // 預警卡
+        const eta = num('eta');
+        if (eta !== null) {
+            const t = new Date(Date.now() + eta * 60000);
+            $('oEta').textContent = '預計 ' + pad(t.getHours()) + ':' + pad(t.getMinutes()) + ' 到院（約 ' + eta + ' 分鐘）';
+        } else {
+            $('oEta').textContent = '預計到院 —';
+        }
+        $('oCat').textContent = sel.length ? sel.map(c => c.name).join('＋') + '中毒' : '尚未選擇毒物類別';
+
+        const uniq = arr => Array.from(new Set(arr));
+        const list = (id, items, empty) => {
+            $(id).innerHTML = items.length
+                ? items.map(s => '<li>' + esc(s) + '</li>').join('')
+                : '<li class="rf-empty" style="padding:0">' + empty + '</li>';
+        };
+        const prep = uniq(sel.flatMap(c => c.prep));
+        const ecr  = uniq(sel.flatMap(c => c.ecr));
+        const note = uniq(sel.flatMap(c => c.note));
+        list('oPrep', prep, sel.length ? '本類無特定解毒劑 —— 以支持性療法為主' : '選擇毒物類別後列出');
+        list('oEcr', ecr, '—');
+        list('oNote', note, '—');
+        $('oLinks').innerHTML = sel.length
+            ? '一線醫師請開：' + sel.map(c => '<a href="' + c.link + '" target="_blank" rel="noopener">' + c.name + '</a>').join('、')
+            : '';
+
+        // SBAR
+        const tx = Array.from(document.querySelectorAll('#tx input:checked')).map(i => i.value);
+        if (txt('txAnti')) tx.push('解毒劑：' + txt('txAnti'));
+        if (txt('txOther')) tx.push(txt('txOther'));
+        const vit = [['GCS', txt('gcs')], ['BP', txt('bp')], ['HR', txt('hr')], ['RR', txt('rr')],
+                     ['SpO₂', txt('spo2') && txt('spo2') + '%'], ['BT', txt('bt') && txt('bt') + '°C']]
+                    .filter(v => v[1]).map(v => v[0] + ' ' + v[1]).join('，');
+        const pt = [age !== null ? age + ' 歲' : '', wt ? wt + ' kg' : '', $('preg').checked ? '懷孕' : ''].filter(Boolean).join('，');
+        const subst = [txt('sub'), txt('conc')].filter(Boolean).join('，');
+        const amt = mg !== null ? fmt(mg) + ' mg' + (perKg !== null ? '（約 ' + fmt(perKg) + ' mg/kg）' : '') : '';
+
+        const S = '【S】' + (txt('hosp') || '外院') + '轉診' + (eta !== null ? '，' + $('oEta').textContent : '') +
+                  '。疑似' + (sel.length ? sel.map(c => c.name).join('＋') : '（類別未定）') + '中毒' +
+                  (subst ? '：' + subst : '') + '。';
+        const B = '【B】' + [pt && '病人 ' + pt, $('route').value && '途徑 ' + $('route').value, $('intent').value && $('intent').value,
+                  elapsed() && '暴露時間' + (elapsed() === '不明' ? '不明' : ' ' + elapsed()), amt && '估計攝入 ' + amt,
+                  '外院處置：' + (tx.length ? tx.join('、') : '未提供')].filter(Boolean).join('；') + '。';
+        const A = '【A】' + (vit ? '目前 ' + vit + '。' : '生命徵象未提供。') +
+                  (flags.length ? flags.map(f => f.replace(/<[^>]+>/g, '')).join('') : '');
+        const R = '【R】到院前預備：' + (prep.length ? prep.join('、') : '無特定解毒劑') + '。' +
+                  (ecr.length ? '體外移除／特殊處置：' + ecr.join('；') + '。' : '') +
+                  (note.length ? '注意：' + note.join('；') + '。' : '') +
+                  (txt('tel') ? '外院窗口：' + txt('tel') + '。' : '');
+        $('oSbar').textContent = [S, B, A, R].join('\n');
+    }
+
+    document.getElementById('rf').addEventListener('input', render);
+    document.getElementById('rf').addEventListener('change', render);
+
+    // 複製：只有在真的成功時才顯示「已複製」；失敗時改為選取文字讓使用者手動複製
+    function showMsg(ok) {
+        const el = $('copied');
+        el.textContent = ok ? '✓ 已複製，可貼到院內通訊系統通知一線醫師。'
+                            : '⚠ 此瀏覽器不允許自動複製，已幫你選取摘要文字，請長按或按 Ctrl+C 手動複製。';
+        el.style.color = ok ? '#0f766e' : '#b45309';
+        el.classList.remove('hidden');
+        clearTimeout(showMsg.t);
+        showMsg.t = setTimeout(() => el.classList.add('hidden'), ok ? 2500 : 6000);
+    }
+    function selectSbar() {
+        const r = document.createRange();
+        r.selectNodeContents($('oSbar'));
+        const s = window.getSelection();
+        s.removeAllRanges(); s.addRange(r);
+    }
+    function fallback(t) {
+        const ta = document.createElement('textarea');
+        ta.value = t; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        let ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+        document.body.removeChild(ta);
+        if (!ok) selectSbar();
+        showMsg(ok);
+    }
+    $('btnCopy').addEventListener('click', () => {
+        const t = $('oSbar').textContent;
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(t).then(() => showMsg(true), () => fallback(t));
+        } else {
+            fallback(t);
+        }
+    });
+    $('btnClear').addEventListener('click', () => {
+        $('rf').reset();
+        document.querySelectorAll('[data-mode]').forEach(el => el.classList.toggle('hidden', el.dataset.mode !== 'mg'));
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 手機版：預警摘要進入畫面時隱藏浮動按鈕
+    if ('IntersectionObserver' in window) {
+        new IntersectionObserver(es => {
+            $('rfJump').classList.toggle('off', es[0].isIntersecting);
+        }).observe($('rfOut'));
+    }
+
+    // 依時間顯示的「距今」與預計到院時刻需隨時間更新
+    setInterval(render, 30000);
+    render();
+})();
+</script>
+
+</body>
+</html>
