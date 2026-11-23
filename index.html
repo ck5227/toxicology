@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>臨床毒物學精要 — 中毒症候群、解毒劑與臨床陷阱快速查詢</title>
+<title>臨床毒物學精要 ToxWeb — 中毒症候群、解毒劑與臨床陷阱快速查詢</title>
 <meta name="description" content="臨床毒物學快速參考：中毒症候群辨識、農藥／藥物／毒品／工業氣體／腐蝕性物質中毒之機轉、臨床表現、解毒劑、處置動向與臨床陷阱，附解毒劑對照、腸胃道除污流程與血液透析適應症。">
 <meta name="author" content="潘麒亘 醫師">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://ck5227.github.io/toxicology/">
 
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="臨床毒物學精要">
-<meta property="og:title" content="臨床毒物學精要">
+<meta property="og:site_name" content="臨床毒物學精要 ToxWeb">
+<meta property="og:title" content="臨床毒物學精要 ToxWeb">
 <meta property="og:description" content="中毒症候群、解毒劑、處置動向與臨床陷阱快速查詢。">
 <meta property="og:url" content="https://ck5227.github.io/toxicology/">
 <meta property="og:locale" content="zh_TW">
@@ -23,10 +23,11 @@
   "@context": "https://schema.org",
   "@type": "MedicalWebPage",
   "name": "臨床毒物學精要",
+  "alternateName": "ToxWeb",
   "url": "https://ck5227.github.io/toxicology/",
   "inLanguage": "zh-Hant",
   "description": "臨床毒物學快速參考：中毒症候群辨識、各類中毒之機轉、臨床表現、解毒劑、處置動向與臨床陷阱。",
-  "dateModified": "2026-10-04",
+  "dateModified": "2026-11-23",
   "author": {
     "@type": "Person",
     "name": "潘麒亘",
@@ -173,6 +174,112 @@
     .px-1\.5 { padding-left: .375rem; padding-right: .375rem; }
     .py-0\.5 { padding-top: .125rem; padding-bottom: .125rem; }
     .py-1\.5 { padding-top: .375rem; padding-bottom: .375rem; }
+
+    /* ===== 2026-11 質感改版（ToxWeb） ===== */
+    :root {
+        --tx-ink: #1d3a47; --tx-deep: #264653; --tx-teal: #2a9d8f; --tx-gold: #e9c46a;
+        --tx-line: #e2e8ec; --tx-bg: #f3f6f8; --tx-stick: 118px;
+    }
+    body { background-color: var(--tx-bg); }
+
+    .tx-hero {
+        background: radial-gradient(120% 140% at 50% 0%, #2f5868 0%, var(--tx-deep) 55%, #1b3540 100%);
+        color: #fff; text-align: center; padding: 2.4rem 1rem 2.1rem;
+    }
+    .tx-brand {
+        display: inline-flex; align-items: center; gap: .6rem;
+        font-size: .78rem; letter-spacing: .08em; color: #b9cdd4;
+        border: 1px solid rgba(233, 196, 106, .35); border-radius: 999px; padding: .28rem .85rem .28rem .7rem;
+    }
+    .tx-logo { font-weight: 900; letter-spacing: .02em; font-size: .95rem; color: #fff; }
+    .tx-logo b { color: var(--tx-gold); font-weight: 900; }
+    .tx-brand i { width: 1px; height: .9rem; background: rgba(255, 255, 255, .25); }
+    .tx-hero h1 {
+        margin-top: .9rem; font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 700;
+        color: var(--tx-gold); letter-spacing: .04em; line-height: 1.2;
+    }
+    .tx-sub { margin-top: .55rem; font-size: 1.02rem; color: #d7e3e7; }
+    .tx-quote { margin-top: .9rem; font-size: .86rem; color: #93aeb7; font-style: italic; }
+    .tx-affil { margin-top: .35rem; font-size: .8rem; color: #93aeb7; }
+
+    .tx-sticky {
+        position: sticky; top: 0; z-index: 40;
+        background: rgba(255, 255, 255, .94);
+        -webkit-backdrop-filter: saturate(160%) blur(8px); backdrop-filter: saturate(160%) blur(8px);
+        border-bottom: 1px solid var(--tx-line);
+        box-shadow: 0 6px 18px -12px rgba(16, 42, 52, .35);
+    }
+    .tx-sticky-inner { max-width: 1280px; margin: 0 auto; padding: .65rem 1rem .4rem; }
+    .tx-search {
+        display: flex; align-items: center; gap: .5rem;
+        background: #fff; border: 1px solid #cbd5e1; border-radius: 12px; padding: .2rem .25rem .2rem .75rem;
+        transition: border-color .15s, box-shadow .15s;
+    }
+    .tx-search:focus-within { border-color: var(--tx-teal); box-shadow: 0 0 0 3px rgba(42, 157, 143, .18); }
+    .tx-search svg { flex: none; width: 1.15rem; height: 1.15rem; color: #64748b; }
+    .tx-search input {
+        flex: 1; min-width: 0; border: 0; outline: 0; background: transparent;
+        font-size: 1.05rem; padding: .55rem .1rem; color: #1f2937;
+    }
+    .tx-search input::-webkit-search-cancel-button { cursor: pointer; }
+    .tx-search button {
+        flex: none; background: var(--tx-teal); color: #fff; font-weight: 700; font-size: .95rem;
+        border-radius: 9px; padding: .55rem 1.05rem; transition: background-color .15s;
+    }
+    .tx-search button:hover { background: #207c70; }
+
+    .tx-chips {
+        display: flex; gap: .4rem; overflow-x: auto; padding: .5rem 0 .2rem;
+        scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    }
+    .tx-chips::-webkit-scrollbar { display: none; }
+    .tx-chips a {
+        flex: none; font-size: .84rem; color: #475569; background: #f1f5f7;
+        border: 1px solid transparent; border-radius: 999px; padding: .3rem .75rem; white-space: nowrap;
+        transition: background-color .15s, color .15s, border-color .15s;
+    }
+    .tx-chips a:hover { background: #e6efef; color: var(--tx-ink); }
+    .tx-chips a.is-active { background: var(--tx-deep); color: #fff; }
+    .tx-chips a.is-dim { opacity: .38; }
+
+    .tx-eyebrow {
+        font-size: .78rem; font-weight: 700; letter-spacing: .12em; color: #64748b;
+        margin: .25rem 0 .65rem; text-transform: uppercase;
+    }
+    main > .grid > a { border-radius: 14px; }
+
+    .main-content-section { scroll-margin-top: var(--tx-stick); }
+    .main-content-section > h2 { letter-spacing: .02em; }
+    .main-content-section > h2::after {
+        content: ""; display: block; width: 44px; height: 3px; border-radius: 2px;
+        background: var(--tx-teal); margin: .65rem auto 0;
+    }
+
+    .content-card {
+        border-radius: 14px !important;
+        border-top: 1px solid var(--tx-line); border-right: 1px solid var(--tx-line); border-bottom: 1px solid var(--tx-line);
+        box-shadow: 0 1px 2px rgba(16, 42, 52, .05), 0 6px 18px -6px rgba(16, 42, 52, .10) !important;
+        transition: box-shadow .2s;
+    }
+    .content-card:not([class*="border-l-"]) { border-left: 1px solid var(--tx-line); }
+    .content-card:hover { box-shadow: 0 2px 4px rgba(16, 42, 52, .06), 0 14px 30px -10px rgba(16, 42, 52, .18) !important; }
+    .disposition-box, .pitfall-box, .corrosive-note { border-radius: 0 10px 10px 0; }
+
+    .tx-foot-brand { font-weight: 900; font-size: 1.15rem; letter-spacing: .02em; }
+    .tx-foot-brand b { color: var(--tx-gold); }
+    .tx-foot-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem 1.1rem; margin: .8rem 0 1.4rem; font-size: .9rem; }
+    .tx-foot-links a { color: #cfe0e5; }
+    .tx-foot-links a:hover { color: var(--tx-gold); }
+
+    @media (max-width: 640px) {
+        :root { --tx-stick: 112px; }
+        .tx-hero { padding: 1.8rem 1rem 1.6rem; }
+        .tx-sub { font-size: .95rem; }
+        .tx-sticky-inner { padding: .55rem .75rem .35rem; }
+        .tx-search input { font-size: 1rem; }
+        .tx-search button { padding: .5rem .85rem; }
+    }
+    @media print { .tx-sticky { position: static; } }
     #backToTopBtn {
         position: fixed;
         bottom: 20px;
@@ -184,25 +291,50 @@
 </head>
 <body class="text-gray-800">
 
-<header class="bg-[#264653] text-white p-6 shadow-lg">
-    <div class="container mx-auto text-center">
-        <h1 class="text-3xl md:text-4xl font-bold text-[#e9c46a]">臨床毒物學精要</h1>
-        <p class="mt-2 text-lg text-gray-300">萬物皆有毒，毒視乎劑量 — Paracelsus</p>
-    </div>
+<header class="tx-hero">
+    <p class="tx-brand"><span class="tx-logo">Tox<b>Web</b></span><i aria-hidden="true"></i><span>臨床毒物微學習平台</span></p>
+    <h1>臨床毒物學精要</h1>
+    <p class="tx-sub">床邊秒查中毒處置、解毒劑與臨床陷阱</p>
+    <p class="tx-quote">萬物皆有毒，毒視乎劑量 — Paracelsus</p>
+    <p class="tx-affil">中國醫藥大學附設醫院 急診部｜潘麒亘 醫師</p>
 </header>
+
+<div class="tx-sticky" id="txSticky">
+    <div class="tx-sticky-inner">
+        <div class="tx-search" role="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            <label for="searchInput" class="sr-only">搜尋毒藥物或症狀</label>
+            <input type="search" id="searchInput" autocomplete="off" enterkeyhint="search"
+                   placeholder="搜尋毒物、藥名或症狀，如：有機磷、QRS寬"
+                   aria-label="搜尋毒藥物或症狀">
+            <button id="searchButton" type="button">搜尋</button>
+        </div>
+        <nav class="tx-chips" id="txChips" aria-label="章節導覽">
+            <a href="#toxidromes">中毒症候群</a>
+            <a href="#important-gaps">間隙</a>
+            <a href="#pesticide-poisoning">農藥</a>
+            <a href="#pharmaceutical-poisoning">藥物</a>
+            <a href="#abuse-drug-poisoning">毒品</a>
+            <a href="#chemical-gas-poisoning">化學氣體</a>
+            <a href="#caustic-poisoning">腐蝕性</a>
+            <a href="#plant-animal-poisoning">動植物</a>
+            <a href="#marine-injuries">海洋生物</a>
+            <a href="#pediatric-poisoning">兒童</a>
+            <a href="#other-poisonings">其他中毒</a>
+            <a href="#case-studies">案例</a>
+            <a href="#antidotes-summary">解毒劑總表</a>
+            <a href="#decontamination">除污</a>
+            <a href="#dialysis">透析</a>
+            <a href="#ecmo-role">ECMO</a>
+            <a href="#recommended-resources">資源</a>
+        </nav>
+    </div>
+</div>
 
 <main class="container mx-auto p-4 md:p-8">
 
-    <div class="mb-8 p-4 bg-white rounded-lg shadow-md flex items-center">
-        <label for="searchInput" class="sr-only">搜尋毒藥物或症狀</label>
-        <input type="search" id="searchInput" autocomplete="off"
-               placeholder="搜尋毒藥物或症狀，例如：有機磷、心搏過緩、QRS寬、QTc延長、解毒劑"
-               aria-label="搜尋毒藥物或症狀"
-               class="flex-grow p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#2a9d8f] focus:border-transparent text-lg">
-        <button id="searchButton" class="ml-4 p-3 bg-[#2a9d8f] text-white rounded-md hover:bg-[#207c70] transition duration-200">搜尋</button>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+    <p class="tx-eyebrow">床邊決策工具</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
         <a href="toxidrome/" class="block bg-[#264653] hover:bg-[#1d3a47] transition-all duration-200 rounded-lg shadow-xl p-5 text-white border-l-4 border-[#2a9d8f] hover:-translate-y-1">
             <div class="flex flex-col justify-between h-full gap-3">
                 <div>
@@ -579,7 +711,7 @@
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-xl lg:col-span-2 content-card" data-keywords="三環抗憂鬱劑 TCA tricyclic 心臟 QRS QRS寬 寬QRS QRS波變寬 QRS變寬 QTc QTc延長 aVR 鈉離子通道 碳酸氫鈉 心搏過速 癲癇">
+            <div class="bg-white p-6 rounded-lg shadow-xl lg:col-span-2 content-card" data-keywords="三環抗憂鬱劑 TCA tricyclic 心臟 QRS QRS寬 寬QRS QRS波變寬 QRS變寬 QTc QTc延長 aVR 鈉離子通道 碳酸氫鈉 心搏過速 癲癇 Norepinephrine IVLE">
                 <h3 class="text-xl font-bold text-[#264653] mb-4"><a href="tca/" class="hover:underline">三環抗憂鬱劑 (TCA)</a></h3>
                 <ul class="list-none text-gray-700 space-y-2 mb-4">
                     <li><span class="list-item-label">機轉:</span>阻斷鈉離子通道，具高度心臟毒性。</li>
@@ -593,7 +725,7 @@
                 <div class="pitfall-box"><h5 class="font-bold">臨床陷阱</h5><p class="text-sm">不應只依賴血中藥物濃度，ECG 的 QRS 波寬度是更即時的毒性指標。</p></div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="SSRI 血清素症候群 Serotonin Syndrome Cyproheptadine NMS">
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="SSRI 血清素症候群 Serotonin Syndrome Cyproheptadine NMS Chlorpromazine Propofol Norepinephrine IVLE">
                 <div>
                     <h3 class="text-xl font-bold text-[#f77f00] mb-4"><a href="ssri/" class="hover:underline">SSRI</a></h3>
                     <ul class="list-none text-gray-700 space-y-2 mb-4">
@@ -610,7 +742,7 @@
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="Bupropion 威博雋 NDRI 癲癇 seizure QRS QRS寬 QRS變寬 緩釋">
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="Bupropion 威博雋 NDRI 癲癇 seizure QRS QRS寬 QRS變寬 緩釋 Propofol IVLE">
                 <div>
                     <h3 class="text-xl font-bold text-[#e63946] mb-4"><a href="bupropion/" class="hover:underline">Bupropion</a></h3>
                     <ul class="list-none text-gray-700 space-y-2 mb-4">
@@ -679,7 +811,7 @@
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="Methotrexate MTX 葉酸 Leucovorin 骨髓抑制 黏膜炎 TEN 尿液鹼化">
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="Methotrexate MTX 葉酸 Leucovorin 骨髓抑制 黏膜炎 TEN 尿液鹼化 Glucarpidase Voraxaze Filgrastim Sargramostim">
                 <div>
                     <h3 class="text-xl font-bold text-[#fb8500] mb-4"><a href="methotrexate/" class="hover:underline">Methotrexate (MTX)</a></h3>
                     <ul class="list-none text-gray-700 space-y-2 mb-4">
@@ -702,7 +834,7 @@
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="Phenytoin 癲能停 Dilantin 抗癲癇 眼球震顫 運動失調 零級動力學">
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="Phenytoin 癲能停 Dilantin 抗癲癇 眼球震顫 運動失調 零級動力學 IVLE ECTR">
                 <div>
                     <h3 class="text-xl font-bold text-[#8338ec] mb-4"><a href="phenytoin/" class="hover:underline">Phenytoin</a></h3>
                     <ul class="list-none text-gray-700 space-y-2 mb-4">
@@ -736,7 +868,7 @@
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="Theophylline 茶鹼 PDE 低血鉀 癲癇 MDAC 血液透析 頑固性嘔吐">
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="Theophylline 茶鹼 PDE 低血鉀 癲癇 MDAC 血液透析 頑固性嘔吐 Esmolol">
                 <div>
                     <h3 class="text-xl font-bold text-[#006d77] mb-4"><a href="theophylline/" class="hover:underline">茶鹼 (Theophylline)</a></h3>
                     <ul class="list-none text-gray-700 space-y-2 mb-4">
@@ -799,7 +931,7 @@
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="鋰鹽 Lithium 腎臟 神經 顫抖 共濟失調 血液透析">
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="鋰鹽 Lithium 腎臟 神經 顫抖 共濟失調 血液透析 Propofol Norepinephrine ECTR">
                 <div>
                     <h3 class="text-xl font-bold text-[#2a9d8f] mb-4"><a href="lithium/" class="hover:underline">鋰鹽 (Lithium)</a></h3>
                     <ul class="list-none text-gray-700 space-y-2 mb-4">
@@ -816,7 +948,7 @@
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="Digoxin 毛地黃 夾竹桃 海檬果 高血鉀 Fab 雙向性心室頻脈 心律不整">
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="Digoxin 毛地黃 夾竹桃 海檬果 高血鉀 Fab 雙向性心室頻脈 心律不整 DigiFab">
                 <div>
                     <h3 class="text-xl font-bold text-[#e76f51] mb-4"><a href="digoxin/" class="hover:underline">Digoxin</a></h3>
                     <ul class="list-none text-gray-700 space-y-2 mb-4">
@@ -835,7 +967,7 @@
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="鈣離子通道阻斷劑 CCB calcium channel blocker 低血壓 心搏過緩 高血糖 HIDT 高劑量胰島素 緩釋">
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="鈣離子通道阻斷劑 CCB calcium channel blocker 低血壓 心搏過緩 高血糖 HIDT 高劑量胰島素 緩釋 Norepinephrine IVLE HIE">
                 <div>
                     <h3 class="text-xl font-bold text-[#2a9d8f] mb-4"><a href="ccb-betablocker/" class="hover:underline">鈣離子通道阻斷劑 (CCB)</a></h3>
                     <ul class="list-none text-gray-700 space-y-2 mb-4">
@@ -875,7 +1007,7 @@
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="局部麻醉劑 Lidocaine LAST 脂肪乳劑 ILE 口周麻木 癲癇 心律不整">
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="局部麻醉劑 Lidocaine LAST 脂肪乳劑 ILE 口周麻木 癲癇 心律不整 IVLE">
                 <div>
                     <h3 class="text-xl font-bold text-[#0077b6] mb-4"><a href="local-anesthetics/" class="hover:underline">局部麻醉劑 (Lidocaine)</a></h3>
                     <ul class="list-none text-gray-700 space-y-2 mb-4">
@@ -1307,7 +1439,7 @@
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="氰化物 Cyanide 缺氧 細胞色素氧化酶 乳酸中毒 Hydroxocobalamin 千面人">
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="氰化物 Cyanide 缺氧 細胞色素氧化酶 乳酸中毒 Hydroxocobalamin 千面人 PEEP">
                 <div>
                     <h3 class="text-xl font-bold text-[#b8860b] mb-4"><a href="cyanide/" class="hover:underline">氰化物 (Cyanide)</a></h3>
                     <ul class="list-none text-gray-700 space-y-2 mb-4">
@@ -1325,7 +1457,7 @@
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="硫化氫 H2S rotten egg 臭雞蛋 knockdown 嗅覺疲勞 亞硝酸鈉">
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="硫化氫 H2S rotten egg 臭雞蛋 knockdown 嗅覺疲勞 亞硝酸鈉 Norepinephrine PEEP">
                 <div>
                     <h3 class="text-xl font-bold text-[#6c757d] mb-4"><a href="h2s/" class="hover:underline">硫化氫 (H₂S)</a></h3>
                     <ul class="list-none text-gray-700 space-y-2 mb-4">
@@ -1359,7 +1491,7 @@
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="甲醇 Methanol 毒性酒精 甲酸 視網膜 假酒 Fomepizole 血液透析 滲透壓間隙">
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="甲醇 Methanol 毒性酒精 甲酸 視網膜 假酒 Fomepizole 血液透析 滲透壓間隙 ECTR">
                 <div>
                     <h3 class="text-xl font-bold text-[#e76f51] mb-4"><a href="methanol/" class="hover:underline">甲醇 (Methanol)</a></h3>
                     <ul class="list-none text-gray-700 space-y-2 mb-4">
@@ -1380,7 +1512,7 @@
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="乙二醇 Ethylene Glycol 毒性酒精 草酸鈣 抗凍劑 煞車油 腎衰竭 Fomepizole">
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="乙二醇 Ethylene Glycol 毒性酒精 草酸鈣 抗凍劑 煞車油 腎衰竭 Fomepizole Pyridoxine">
                 <div>
                     <h3 class="text-xl font-bold text-[#f4a261] mb-4"><a href="ethylene-glycol/" class="hover:underline">乙二醇 (Ethylene Glycol)</a></h3>
                     <ul class="list-none text-gray-700 space-y-2 mb-4">
@@ -1722,7 +1854,7 @@
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="烏頭鹼 Aconitine 草烏 附子 心律不整 VT VF Amiodarone">
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="烏頭鹼 Aconitine 草烏 附子 心律不整 VT VF Amiodarone Flecainide Procainamide">
                 <div>
                     <h3 class="text-xl font-bold text-[#585123] mb-4"><a href="aconitine/" class="hover:underline">烏頭鹼 (Aconitine)</a></h3>
                     <ul class="list-none text-gray-700 space-y-2 mb-4">
@@ -1774,7 +1906,7 @@
                 </div>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="雪卡毒 Ciguatera Ciguatoxin 冷熱感覺顛倒 珊瑚礁魚">
+            <div class="bg-white p-6 rounded-lg shadow-xl content-card flex flex-col justify-between" data-keywords="雪卡毒 Ciguatera Ciguatoxin 冷熱感覺顛倒 珊瑚礁魚 Propofol Norepinephrine">
                 <div>
                     <h3 class="text-xl font-bold text-[#0096b7] mb-4"><a href="ciguatera/" class="hover:underline">雪卡毒 (Ciguatera)</a></h3>
                     <ul class="list-none text-gray-700 space-y-2 mb-4">
@@ -2603,6 +2735,15 @@
 
 <footer class="bg-[#264653] text-white mt-12 py-10 px-6">
     <div class="container mx-auto max-w-3xl">
+        <div class="text-center">
+            <p class="tx-foot-brand">臨床毒物學精要 <span class="text-gray-400 font-normal">｜</span> Tox<b>Web</b></p>
+            <nav class="tx-foot-links" aria-label="床邊工具">
+                <a href="toxidrome/">Toxidrome 互動鑑別</a>
+                <a href="antidote/">全國解毒劑儲備網</a>
+                <a href="referral/">外院轉診預警檢核表</a>
+                <a href="#antidotes-summary">解毒劑總表</a>
+            </nav>
+        </div>
         <div class="bg-[#1d3a47] rounded-lg p-5 mb-6">
             <p class="font-bold text-[#e9c46a] mb-2">作者</p>
             <p class="text-lg">潘麒亘 醫師</p>
@@ -2832,7 +2973,17 @@ document.addEventListener('DOMContentLoaded', () => {
         card.dataset.searchText += norm(tmp.textContent);
     });
 
-    const performSearch = (shouldScroll) => {
+    // 平滑捲動；若瀏覽器沒有執行（例如關閉動畫），0.35 秒後改為直接跳到定位
+    const jumpTo = (el, block) => {
+        const y0 = window.scrollY;
+        el.scrollIntoView({ behavior: 'smooth', block: block });
+        setTimeout(() => {
+            if (Math.abs(window.scrollY - y0) < 2) el.scrollIntoView({ block: block });
+        }, 350);
+    };
+
+    // keepPosition：清空搜尋時不要捲回頂端（由呼叫端自行定位）
+    const performSearch = (shouldScroll, keepPosition) => {
         const q = norm(searchInput.value);
         let firstMatch = null;
         let anyVisible = false;
@@ -2865,16 +3016,82 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!anyVisible) noResultsQ.textContent = searchInput.value.trim();
 
         if (q === '') {
+            if (keepPosition) return;
+            const y0 = window.scrollY;
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => { if (Math.abs(window.scrollY - y0) < 2) window.scrollTo(0, 0); }, 350);
             return;
         }
         // 只在按下 Enter 或搜尋鈕時捲動，避免打字過程中畫面一直跳。
         if (shouldScroll && firstMatch) {
-            firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            jumpTo(firstMatch, 'center');
         }
     };
 
     searchInput.addEventListener('input', () => performSearch(false));
+
+    /* ------------------------------------------------------------------
+       章節導覽（固定搜尋列下方的章節按鈕）
+       ------------------------------------------------------------------ */
+    const chipBar = document.getElementById('txChips');
+    const chipLinks = Array.from(chipBar.querySelectorAll('a'));
+    const chipFor = id => chipLinks.find(a => a.getAttribute('href') === '#' + id);
+
+    chipLinks.forEach(a => a.addEventListener('click', e => {
+        const target = document.getElementById(a.getAttribute('href').slice(1));
+        if (!target) return;
+        e.preventDefault();
+        if (searchInput.value) {           // 搜尋中點章節：先清除搜尋，讓所有卡片回來
+            searchInput.value = '';
+            performSearch(false, true);
+            chipLinks.forEach(c => c.classList.remove('is-dim'));
+        }
+        setTimeout(() => {
+            jumpTo(target, 'start');
+            history.replaceState(null, '', '#' + target.id);
+        }, 0);
+    }));
+
+    const setActive = id => {
+        chipLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + id));
+        const c = chipFor(id);
+        if (c) chipBar.scrollTo({ left: c.offsetLeft - chipBar.clientWidth / 2 + c.clientWidth / 2, behavior: 'smooth' });
+    };
+    // 目前章節 = 頂端已捲過固定搜尋列的最後一個（未被搜尋隱藏的）章節
+    let activeId = null, spyTimer = null;
+    const spy = () => {
+        const line = document.getElementById('txSticky').offsetHeight + 24;
+        let cur = null;
+        sections.forEach(s => {
+            if (s.id && chipFor(s.id) && !s.classList.contains('hidden') && s.getBoundingClientRect().top <= line) cur = s.id;
+        });
+        if (cur !== activeId) {
+            activeId = cur;
+            if (cur) setActive(cur);
+            else chipLinks.forEach(a => a.classList.remove('is-active'));
+        }
+    };
+    window.addEventListener('scroll', () => {
+        if (spyTimer) return;
+        spyTimer = setTimeout(() => { spyTimer = null; spy(); }, 100);
+    }, { passive: true });
+    spy();
+
+    // 搜尋時，沒有符合結果的章節按鈕變淡
+    searchInput.addEventListener('input', () => {
+        sections.forEach(s => {
+            const c = s.id && chipFor(s.id);
+            if (c) c.classList.toggle('is-dim', s.classList.contains('hidden'));
+        });
+    });
+
+    // 固定搜尋列的實際高度 → 章節錨點的上方留白
+    const syncStick = () => document.documentElement.style.setProperty('--tx-stick', (document.getElementById('txSticky').offsetHeight + 12) + 'px');
+    // 手機寬度放不下範例，改用短版提示文字
+    const longPh = searchInput.getAttribute('placeholder');
+    const syncPh = () => searchInput.setAttribute('placeholder', window.innerWidth < 640 ? '搜尋毒物、藥名或症狀' : longPh);
+    syncStick(); syncPh();
+    window.addEventListener('resize', () => { syncStick(); syncPh(); });
     searchButton.addEventListener('click', () => performSearch(true));
     searchInput.addEventListener('keydown', e => {
         if (e.key === 'Enter') { e.preventDefault(); performSearch(true); }
