@@ -157,7 +157,7 @@
         transition: background-color 0.2s;
     }
     .detail-btn:hover { background-color: #1d3a47; }
-    /* 補上預先編譯 CSS 缺漏之 Tailwind 樣式（解毒劑儲備網、E-CPR 卡片），數值依 Tailwind 預設 */
+    /* 補上預先編譯 CSS 缺漏之 Tailwind 樣式（解毒劑儲備網卡片），數值依 Tailwind 預設 */
     .ring-1.ring-red-500\/30 { box-shadow: 0 0 0 1px rgb(239 68 68 / .3), 0 20px 25px -5px rgb(0 0 0 / .1), 0 8px 10px -6px rgb(0 0 0 / .1); }
     .text-red-400 { color: rgb(248 113 113); }
     .bg-red-600 { background-color: rgb(220 38 38); }
@@ -202,7 +202,7 @@
         <button id="searchButton" class="ml-4 p-3 bg-[#2a9d8f] text-white rounded-md hover:bg-[#207c70] transition duration-200">搜尋</button>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
         <a href="toxidrome/" class="block bg-[#264653] hover:bg-[#1d3a47] transition-all duration-200 rounded-lg shadow-xl p-5 text-white border-l-4 border-[#2a9d8f] hover:-translate-y-1">
             <div class="flex flex-col justify-between h-full gap-3">
                 <div>
@@ -232,20 +232,6 @@
             </div>
         </a>
 
-        <a href="resus/" class="block bg-[#264653] hover:bg-[#1d3a47] transition-all duration-200 rounded-lg shadow-xl p-5 text-white border-l-4 border-red-500 hover:-translate-y-1 ring-1 ring-red-500/30">
-            <div class="flex flex-col justify-between h-full gap-3">
-                <div>
-                    <div class="flex items-center gap-2">
-                        <span class="bg-red-600 text-white text-[10px] px-1.5 py-0.5 rounded font-black tracking-wider uppercase">2025 ACLS</span>
-                        <h2 class="text-lg font-bold text-red-400">⚡ E-CPR / 急救復甦副駕</h2>
-                    </div>
-                    <p class="text-xs text-gray-300 mt-1 leading-relaxed">2025 AHA 急救演算法、5H5T 排查、E-CPR / VA-ECMO 綠紅燈量化門檻、HIS 醫藥囑套裝 (Alt+O)。</p>
-                </div>
-                <div class="flex justify-end">
-                    <span class="bg-red-600 hover:bg-red-700 px-3 py-1.5 rounded-md font-bold text-xs whitespace-nowrap text-white">進入急救室 →</span>
-                </div>
-            </div>
-        </a>
     </div>
 
     <div id="noResults" class="hidden text-center py-16 text-gray-500">
