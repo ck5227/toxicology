@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>急診急重症毒物三階協同翻轉學習標準作業指引（NP-PGY/R-VS SBAR Protocol） | 臨床毒物學精要 ToxWeb</title>
+<meta name="description" content="急診急重症毒物三階協同翻轉學習標準作業指引：專科護理師 (NP) 前哨預警、一線 PGY／住院醫師查證提案、主治醫師 60–90 秒提問修正之 SBAR 協同流程，含學員主動處置方案四要素、輕重分流查證準則與心理安全原則。">
+<meta name="author" content="潘麒亘 醫師">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ck5227.github.io/toxicology/sop/">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="臨床毒物學精要 ToxWeb">
+<meta property="og:title" content="急診急重症毒物三階協同翻轉學習標準作業指引">
+<meta property="og:description" content="NP 前哨預警 → 一線查證提案 → 主治醫師討論修正：急性中毒的工作場所翻轉學習 SBAR 流程。">
+<meta property="og:url" content="https://ck5227.github.io/toxicology/sop/">
+<meta property="og:locale" content="zh_TW">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "急診急重症毒物三階協同翻轉學習標準作業指引（NP-PGY/R-VS SBAR Protocol）",
+  "url": "https://ck5227.github.io/toxicology/sop/",
+  "inLanguage": "zh-Hant",
+  "description": "急性中毒之工作場所翻轉學習標準作業指引：NP 前哨預警、一線學員查證提案、主治醫師提問修正之三階 SBAR 協同流程。",
+  "dateModified": "2026-11-24",
+  "isPartOf": { "@type": "WebSite", "name": "臨床毒物學精要", "alternateName": "ToxWeb", "url": "https://ck5227.github.io/toxicology/" },
+  "author": {
+    "@type": "Person", "name": "潘麒亘", "jobTitle": "毒物及急診專科醫師",
+    "affiliation": { "@type": "MedicalOrganization", "name": "中國醫藥大學附設醫院 急診部" }
+  },
+  "audience": { "@type": "MedicalAudience", "audienceType": "Clinician" }
+}
+</script>
+
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+    body { font-family: 'Noto Sans TC', sans-serif; background-color: #f3f6f8; color: #1f2937; }
+
+    .sp-card {
+        background: #fff; border: 1px solid #e2e8ec; border-radius: 14px;
+        padding: 1.4rem 1.5rem; margin-bottom: 1.25rem;
+        box-shadow: 0 1px 2px rgba(16, 42, 52, .05), 0 6px 18px -6px rgba(16, 42, 52, .08);
+    }
+    .sp-card h2 { font-size: 1.2rem; font-weight: 700; color: #264653; margin-bottom: .8rem; }
+    .sp-card h3 { font-size: 1rem; font-weight: 700; color: #264653; margin: 1.1rem 0 .4rem; }
+    .sp-card p { line-height: 1.75; margin-bottom: .6rem; }
+    .sp-card ul { list-style: disc; padding-left: 1.3rem; margin-bottom: .6rem; }
+    .sp-card li { line-height: 1.7; margin-bottom: .25rem; }
+    .sp-card a { color: #0f766e; text-decoration: underline; text-underline-offset: 2px; }
+    .sp-meta { font-size: .85rem; color: #64748b; }
+
+    /* 三階流程 */
+    .sp-flow { display: grid; gap: .9rem; }
+    @media (min-width: 860px) { .sp-flow { grid-template-columns: repeat(3, 1fr); } }
+    .sp-stage {
+        position: relative; border-radius: 14px; padding: 1.15rem 1.2rem 1.2rem;
+        background: #fff; border: 1px solid #e2e8ec; border-top: 5px solid var(--c);
+        box-shadow: 0 1px 2px rgba(16, 42, 52, .05), 0 6px 18px -6px rgba(16, 42, 52, .08);
+    }
+    .sp-stage .no { font-size: .75rem; font-weight: 700; letter-spacing: .1em; color: var(--c); }
+    .sp-stage .who { font-size: 1.15rem; font-weight: 700; color: #264653; margin-top: .15rem; }
+    .sp-stage .when {
+        display: inline-block; margin-top: .45rem; font-size: .8rem; font-weight: 700;
+        background: #f1f5f7; color: #334155; border-radius: 999px; padding: .2rem .7rem;
+    }
+    .sp-stage ul { list-style: disc; padding-left: 1.2rem; margin-top: .7rem; font-size: .93rem; }
+    .sp-stage li { line-height: 1.65; margin-bottom: .25rem; }
+    .sp-stage .tool { margin-top: .7rem; font-size: .88rem; }
+    .sp-stage .tool a { color: #0f766e; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+    @media (min-width: 860px) {
+        .sp-stage:not(:last-child)::after {
+            content: "→"; position: absolute; right: -0.85rem; top: 50%; transform: translateY(-50%);
+            font-size: 1.3rem; color: #94a3b8; font-weight: 700; z-index: 1;
+        }
+    }
+
+    .sp-table { width: 100%; border-collapse: collapse; font-size: .93rem; }
+    .sp-table th, .sp-table td { border: 1px solid #e2e8ec; padding: .6rem .75rem; text-align: left; vertical-align: top; line-height: 1.65; }
+    .sp-table thead th { background: #264653; color: #fff; font-weight: 700; }
+    .sp-table tbody th { background: #f8fafc; color: #264653; white-space: nowrap; width: 7.5rem; }
+    .sp-scroll { overflow-x: auto; }
+
+    .sp-four { display: grid; gap: .7rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-top: .6rem; }
+    .sp-four div { background: #f1f7f6; border-radius: 12px; padding: .8rem .95rem; }
+    .sp-four b { display: block; color: #0f5e56; margin-bottom: .15rem; }
+    .sp-four span { font-size: .9rem; color: #334155; line-height: 1.6; }
+
+    .sp-rule { border-left: 4px solid #e76f51; background: #fff7f4; border-radius: 0 10px 10px 0; padding: .75rem 1rem; margin: .7rem 0; }
+    .sp-safe { border-left: 4px solid #2a9d8f; background: #f1f7f6; border-radius: 0 10px 10px 0; padding: .75rem 1rem; margin: .7rem 0; }
+    .sp-quote { font-style: italic; color: #334155; }
+
+    @media print {
+        header a, footer, .sp-noprint { display: none !important; }
+        body { background: #fff; }
+        .sp-card, .sp-stage { box-shadow: none; break-inside: avoid; }
+    }
+</style>
+</head>
+<body>
+
+<header class="bg-[#264653] text-white p-6 shadow-lg">
+    <div class="container mx-auto max-w-5xl">
+        <a href="../" class="text-sm text-gray-300 hover:text-[#e9c46a]">← 回臨床毒物學精要 ToxWeb 總覽</a>
+        <h1 class="text-2xl md:text-3xl font-bold text-[#e9c46a] mt-2">急診急重症毒物三階協同翻轉學習標準作業指引</h1>
+        <p class="mt-2 text-gray-300">NP-PGY/R-VS SBAR Protocol —— <b class="text-[#e9c46a]">學員查證提案，主治醫師討論修正</b></p>
+    </div>
+</header>
+
+<main class="container mx-auto max-w-5xl p-4 md:p-8">
+
+    <section class="sp-card">
+        <h2>一、目的與適用範圍</h2>
+        <p>急性中毒具有<b>突發、高致死風險、時間急迫與高度不確定</b>的特性。傳統上主治醫師為求時效直接口頭下達所有處方，第一線學員只負責輸入醫囑，跳過了辨識中毒症候群、劑量換算與禁忌症評估的臨床推理歷程。</p>
+        <p>本指引建立「<b>專科護理師 (NP) － 一線 PGY／住院醫師 － 主治醫師 (VS)</b>」三階 SBAR 協同流程，把翻轉學習由教室移到急重症第一線：<b>學員先用數位工具查證並提出完整處置方案，主治醫師以提問引導、修正並把關安全</b>。</p>
+        <ul>
+            <li><b>適用對象：</b>急診部與毒物科主治醫師、急診住院醫師與輪值 PGY、急診專科護理師。</li>
+            <li><b>適用情境：</b>急診急性中毒病人（含外院轉診）、毒物科住院病人與全院中毒會診。</li>
+            <li><b>數位工具：</b>ToxWeb（床邊即時查詢與試算）與 Micromedex（深入藥理與毒物動力學）。</li>
+        </ul>
+        <p class="sp-meta">版本 1.0｜制定日期：2026 年 11 月 24 日｜制定：中國醫藥大學附設醫院 急診部 潘麒亘 醫師</p>
+    </section>
+
+    <h2 class="text-xl font-bold text-[#264653] mb-3 mt-8">二、三階協同流程總覽</h2>
+    <div class="sp-flow">
+        <div class="sp-stage" style="--c:#e76f51">
+            <div class="no">第一階</div>
+            <div class="who">NP 前哨預警與藥品預備</div>
+            <span class="when">病人到院前｜2 分鐘完成</span>
+            <ul>
+                <li>收斂物質名稱、換算攝入量、外院處置與預計到院時間</li>
+                <li>涉及罕見或高危解毒劑時，提前致電藥庫備藥</li>
+                <li>同步預警一線醫師</li>
+            </ul>
+            <p class="tool">工具：<a href="../referral/">外院轉診預警檢核表</a></p>
+        </div>
+        <div class="sp-stage" style="--c:#2a9d8f">
+            <div class="no">第二階</div>
+            <div class="who">一線學員查證與主動提案</div>
+            <span class="when">到院或會診啟動｜5 分鐘完成</span>
+            <ul>
+                <li>不等待指令，先用 ToxWeb 比對中毒症候群、試算劑量</li>
+                <li>再用 Micromedex 查核藥理細節</li>
+                <li>草擬含四要素的主動處置方案</li>
+            </ul>
+            <p class="tool">工具：<a href="../toxidrome/">Toxidrome 鑑別</a>、<a href="../antidote/">解毒劑試算</a>、<a href="../teach/">教學檢核卡</a></p>
+        </div>
+        <div class="sp-stage" style="--c:#264653">
+            <div class="no">第三階</div>
+            <div class="who">主治醫師提問、修正與微復盤</div>
+            <span class="when">學員匯報後｜60–90 秒</span>
+            <ul>
+                <li>聽取 SBAR 匯報，以提問引導而非直接改單</li>
+                <li>針對思考盲點修正，確認安全後核可醫囑</li>
+                <li>急救告一段落後進行微復盤</li>
+            </ul>
+            <p class="tool">工具：<a href="../teach/">一分鐘翻轉教學檢核卡</a></p>
+        </div>
+    </div>
+
+    <section class="sp-card" style="margin-top:1.5rem">
+        <h2>三、第一階：前哨轉診預警與藥品預備（NP）</h2>
+        <p><b>啟動時機：</b>外院轉診電話進線。</p>
+        <ul>
+            <li>開啟 <a href="../referral/">ToxWeb 外院轉診預警檢核表</a>，於 <b>2 分鐘內</b>收斂：物質名稱與商品名、攝入量換算、暴露時間、外院已給處置、目前生命徵象、預計到院時間。</li>
+            <li>若涉及<b>罕見或高危解毒劑</b>（例如 Fomepizole、高劑量胰島素療法、脂肪乳劑、特異抗毒血清）或可能需要<b>血液透析／灌流</b>，由 NP <b>提前致電藥庫確認庫存並預先備藥</b>，必要時聯絡相關單位預備機台。</li>
+            <li>以檢核表產生的 <b>SBAR 預警摘要</b>，透過院內通訊系統同步通知教學班一線醫師。</li>
+        </ul>
+        <p class="sp-safe"><b>目標：</b>病人未到，解毒劑與知識先到位。一線醫師不必等病人推進急救室才開始查資料。</p>
+    </section>
+
+    <section class="sp-card">
+        <h2>四、第二階：數位工具自主查證與主動提案（一線 PGY／住院醫師）</h2>
+        <p><b>啟動時機：</b>收到 NP 預警、病人抵達急救室，或會診啟動。</p>
+        <p class="sp-rule"><b>原則：不等待指令。</b>學員必須先自行查證，並提出完整的診斷與處置組合，才向主治醫師匯報。</p>
+        <h3>查證步驟（5 分鐘內）</h3>
+        <ul>
+            <li><b>手機開 ToxWeb：</b>比對中毒症候群 (Toxidrome)、代入體重試算解毒劑初始劑量與監測頻率。</li>
+            <li><b>電腦開 Micromedex：</b>查核半衰期、代謝途徑與藥物交互作用。</li>
+        </ul>
+        <h3>學員主動處置方案（Learner-Led Order Set）四要素</h3>
+        <div class="sp-four">
+            <div><b>① 腸胃道除污</b><span>是否有適應症？禁忌症？時間窗是否已過？</span></div>
+            <div><b>② 解毒劑</b><span>種類、初始劑量、滴定方式與終點</span></div>
+            <div><b>③ 體外移除</b><span>是否需要血液透析或灌流？啟動條件？</span></div>
+            <div><b>④ 監測排程</b><span>未來 6 小時要追蹤哪些檢驗、多久一次</span></div>
+        </div>
+        <h3>輕重分流查證準則</h3>
+        <div class="sp-scroll">
+        <table class="sp-table">
+            <thead><tr><th>時機</th><th>工具</th><th>目的</th></tr></thead>
+            <tbody>
+                <tr><th>危急的前 3 分鐘</th><td>ToxWeb 手機版</td><td>快速比對 Toxidrome 與初始劑量，完成救命提案</td></tr>
+                <tr><th>生命徵象穩定後</th><td>Micromedex 電腦版</td><td>深入查核半衰期、代謝途徑與透析指引</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <p class="sp-meta" style="margin-top:.6rem">Micromedex 內容龐雜，急救高壓下容易迷失於細節而延誤時效，因此先救命、後深究。</p>
+    </section>
+
+    <section class="sp-card">
+        <h2>五、第三階：提問引導、討論修正與微復盤（主治醫師）</h2>
+        <p><b>啟動時機：</b>學員以 SBAR 格式完成匯報。<b>時間：</b>60–90 秒。</p>
+        <p class="sp-rule"><b>原則：不直接代勞改單。</b>主治醫師以提問引導學員說出理由，針對思考盲點修正，確認安全後才核可醫囑。</p>
+        <h3>啟發式提問範例</h3>
+        <ul>
+            <li class="sp-quote">「這位病人 QTc 延長，你選這個解毒劑的理由是什麼？」</li>
+            <li class="sp-quote">「你的監測終點是什麼？什麼情況下你會改變計畫？」</li>
+            <li class="sp-quote">「如果這個處置無效，你的下一步是什麼？」</li>
+            <li class="sp-quote">「這個病人有沒有不能給這個藥的理由？」</li>
+        </ul>
+        <h3>急救後微復盤（Post-resuscitation Micro-Debriefing，約 90 秒）</h3>
+        <ul>
+            <li>這次提案裡，哪一項判斷最關鍵？</li>
+            <li>哪一項被修正了？為什麼？</li>
+            <li>下次遇到同類病人，你會先查什麼？</li>
+        </ul>
+        <p class="sp-meta">微復盤為師生雙向交流：學員查到的新知與新文獻，同樣是主治醫師更新知識的機會。</p>
+    </section>
+
+    <section class="sp-card">
+        <h2>六、SBAR 匯報格式</h2>
+        <div class="sp-scroll">
+        <table class="sp-table">
+            <thead><tr><th>項目</th><th>學員要說的內容</th></tr></thead>
+            <tbody>
+                <tr><th>S 現況</th><td>病人是誰、疑似什麼中毒、<b>目前最危急的問題</b>是什麼</td></tr>
+                <tr><th>B 背景</th><td>暴露時間、途徑、物質名稱與濃度、攝入量（換算 mg/kg）、外院已給處置、相關病史與用藥</td></tr>
+                <tr><th>A 評估</th><td>符合哪個中毒症候群、關鍵檢驗結果（如心電圖、陰離子與滲透壓間隙、血中濃度）、嚴重度判斷</td></tr>
+                <tr><th>R 建議</th><td><b>我的處置方案四要素</b>：除污、解毒劑與劑量、體外移除、監測排程 —— 請主治醫師確認或修正</td></tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <section class="sp-card">
+        <h2>七、角色與職責</h2>
+        <div class="sp-scroll">
+        <table class="sp-table">
+            <thead><tr><th>角色</th><th>職責</th><th>不做的事</th></tr></thead>
+            <tbody>
+                <tr><th>專科護理師</th><td>接聽轉診、填寫預警檢核表、聯絡藥庫備藥、通知一線醫師</td><td>不延後通知，不等病人到院才交班</td></tr>
+                <tr><th>PGY／住院醫師</th><td>自主查證、提出四要素處置方案、以 SBAR 匯報</td><td>不等待主治醫師下指令</td></tr>
+                <tr><th>主治醫師</th><td>提問引導、修正盲點、把關安全、核可醫囑、帶領微復盤</td><td>不直接代勞改單；病人安全有立即危險時除外</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <p class="sp-safe" style="margin-top:.8rem"><b>安全優先：</b>病人有立即生命危險、來不及等學員查證時，主治醫師應直接處置，待病人穩定後再以微復盤補上教學。教學流程不得延誤救治。</p>
+    </section>
+
+    <section class="sp-card">
+        <h2>八、心理安全與容錯原則</h2>
+        <ul>
+            <li><b>學員提案即使有瑕疵，也是最好的教學契機。</b></li>
+            <li>主治醫師的職責是<b>討論與修正，不是責備</b>。</li>
+            <li>鼓勵學員說出不確定的地方 —— 說「我不確定，所以查了這個」比猜測更值得肯定。</li>
+        </ul>
+    </section>
+
+    <section class="sp-card">
+        <h2>九、教學理論依據</h2>
+        <ul>
+            <li><b>工作場所翻轉學習（Flipped Workplace Learning）：</b>以實戰任務驅動自主求知，學員主動提案、師資修正把關。</li>
+            <li><b>勝任能力導向醫學教育（CBME／EPA）：</b>藉由真實臨床決策賦權，推動可信任專業活動之監督信任等級提升。</li>
+            <li><b>認知負荷理論（Cognitive Load Theory）：</b>以數位工具卸載劑量計算等外在認知負荷，讓學員專注於鑑別與推理。</li>
+            <li><b>團隊資源管理（TeamSTEPPS／TRM）：</b>以標準化 SBAR 串聯跨職類團隊，強化情境監控與閉環溝通。</li>
+        </ul>
+    </section>
+
+    <section class="sp-card sp-noprint">
+        <h2>十、相關工具</h2>
+        <ul>
+            <li><a href="../referral/">外院轉診預警檢核表</a>（第一階，NP）</li>
+            <li><a href="../toxidrome/">Toxidrome 互動鑑別工具</a>、<a href="../antidote/">全國解毒劑儲備網與劑量試算</a>（第二階，一線學員）</li>
+            <li><a href="../teach/">常見急性中毒一分鐘翻轉教學檢核卡（12 套）</a>（第二、三階）</li>
+            <li><a href="../">臨床毒物學精要 ToxWeb 總覽</a></li>
+        </ul>
+    </section>
+
+</main>
+
+<footer class="bg-[#264653] text-white mt-12 py-10 px-6">
+    <div class="container mx-auto max-w-3xl">
+        <div class="bg-[#1d3a47] rounded-lg p-5 mb-6">
+            <p class="font-bold text-[#e9c46a] mb-2">作者</p>
+            <p class="text-lg">潘麒亘 醫師</p>
+            <p class="text-sm text-gray-300 mt-1">中國醫藥大學附設醫院 急診部｜毒物及急診專科醫師</p>
+            <p class="text-sm text-gray-400 mt-3">最後更新：2026 年 11 月 24 日</p>
+        </div>
+        <div class="text-center text-sm">
+            <p>本指引為教學流程之標準作業說明，不得取代專業臨床判斷。所有臨床決策應基於最新文獻、治療指引與院內規範。</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
